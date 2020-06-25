@@ -20,7 +20,7 @@ seealso:
   - name: Failover IP documentation
     description: Hetzner's documentation on failover IPs.
     link: https://wiki.hetzner.de/index.php/Failover/en
-  - module: failover_ip_info
+  - module: community.hrobot.robot_failover_ip_info
     description: Retrieve information on failover IPs.
 extends_documentation_fragment:
 - community.hrobot.robot
