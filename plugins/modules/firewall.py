@@ -142,7 +142,7 @@ options:
 
 EXAMPLES = r'''
 - name: Configure firewall for server with main IP 1.2.3.4
-  firewall:
+  community.hrobot.robot_firewall:
     hetzner_user: foo
     hetzner_password: bar
     server_ip: 1.2.3.4

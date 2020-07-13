@@ -56,14 +56,14 @@ options:
 
 EXAMPLES = r'''
 - name: Set value of failover IP 1.2.3.4 to 5.6.7.8
-  failover_ip:
+  community.hrobot.robot_failover_ip:
     hetzner_user: foo
     hetzner_password: bar
     failover_ip: 1.2.3.4
     value: 5.6.7.8
 
 - name: Set value of failover IP 1.2.3.4 to unrouted
-  failover_ip:
+  community.hrobot.robot_failover_ip:
     hetzner_user: foo
     hetzner_password: bar
     failover_ip: 1.2.3.4
