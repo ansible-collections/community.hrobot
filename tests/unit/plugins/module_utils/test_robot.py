@@ -170,7 +170,7 @@ GET_FAILOVER_FAIL = [
         (None, dict(
             body='{"foo": "bar"}'.encode('utf-8'),
         )),
-        "Cannot interpret result: {'foo': 'bar'}"
+        'Cannot interpret result: {"foo": "bar"}'
     ),
 ]
 
