@@ -20,7 +20,7 @@ seealso:
   - name: Firewall documentation
     description: Hetzner's documentation on the stateless firewall for dedicated servers
     link: https://wiki.hetzner.de/index.php/Robot_Firewall/en
-  - module: community.hrobot.robot_firewall
+  - module: community.hrobot.firewall
     description: Configure firewall.
 extends_documentation_fragment:
 - community.hrobot.robot
@@ -39,7 +39,7 @@ options:
         the status changes to C(active) or C(disabled).
       - Please note that there is a request limit. If you have to do multiple
         updates, it can be better to disable waiting, and regularly use
-        M(community.hrobot.robot_firewall_info) to query status.
+        M(community.hrobot.firewall_info) to query status.
     type: bool
     default: yes
   wait_delay:
@@ -57,7 +57,7 @@ options:
 
 EXAMPLES = r'''
 - name: Get firewall configuration for server with main IP 1.2.3.4
-  community.hrobot.robot_firewall_info:
+  community.hrobot.firewall_info:
     hetzner_user: foo
     hetzner_password: bar
     server_ip: 1.2.3.4

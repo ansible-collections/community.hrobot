@@ -20,7 +20,7 @@ seealso:
   - name: Failover IP documentation
     description: Hetzner's documentation on failover IPs.
     link: https://wiki.hetzner.de/index.php/Failover/en
-  - module: community.hrobot.robot_failover_ip
+  - module: community.hrobot.failover_ip
     description: Manage failover IPs.
 extends_documentation_fragment:
 - community.hrobot.robot
@@ -34,7 +34,7 @@ options:
 
 EXAMPLES = r'''
 - name: Get value of failover IP 1.2.3.4
-  community.hrobot.robot_failover_ip_info:
+  community.hrobot.failover_ip_info:
     hetzner_user: foo
     hetzner_password: bar
     failover_ip: 1.2.3.4

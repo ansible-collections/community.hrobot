@@ -20,7 +20,7 @@ seealso:
   - name: Failover IP documentation
     description: Hetzner's documentation on failover IPs.
     link: https://wiki.hetzner.de/index.php/Failover/en
-  - module: community.hrobot.robot_failover_ip_info
+  - module: community.hrobot.failover_ip_info
     description: Retrieve information on failover IPs.
 extends_documentation_fragment:
 - community.hrobot.robot
@@ -56,14 +56,14 @@ options:
 
 EXAMPLES = r'''
 - name: Set value of failover IP 1.2.3.4 to 5.6.7.8
-  community.hrobot.robot_failover_ip:
+  community.hrobot.failover_ip:
     hetzner_user: foo
     hetzner_password: bar
     failover_ip: 1.2.3.4
     value: 5.6.7.8
 
 - name: Set value of failover IP 1.2.3.4 to unrouted
-  community.hrobot.robot_failover_ip:
+  community.hrobot.failover_ip:
     hetzner_user: foo
     hetzner_password: bar
     failover_ip: 1.2.3.4
