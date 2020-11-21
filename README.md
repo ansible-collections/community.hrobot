@@ -3,6 +3,8 @@
 
 This repository contains the `community.hrobot` Ansible Collection. The collection includes modules to work with [Hetzner's Robot](https://docs.hetzner.com/robot/).
 
+You can find [documentation for the modules and plugins in this collection here](https://ansible.fontein.de/collections/community/hrobot/).
+
 ## Tested with Ansible
 
 Tested with the current Ansible 2.9 and 2.10 releases and the current development version of Ansible. Ansible versions before 2.9.10 are not supported.
@@ -13,10 +15,12 @@ None.
 
 ## Included content
 
-- firewall module
-- firewall_info module
-- failover_ip module
-- failover_ip_info module
+- `community.hrobot.firewall module`
+- `community.hrobot.firewall_info module`
+- `community.hrobot.failover_ip module`
+- `community.hrobot.failover_ip_info module`
+
+You can find [documentation for the modules and plugins in this collection here](https://ansible.fontein.de/collections/community/hrobot/).
 
 ## Using this collection
 
