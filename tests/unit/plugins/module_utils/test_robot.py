@@ -94,6 +94,16 @@ FETCH_URL_JSON_FAIL = [
         ['bar'],
         'Request failed: 400 foo (bar)'
     ),
+    (
+        (None, dict(body='{this is not json}'.encode('utf-8'))),
+        [],
+        'Cannot decode content retrieved from https://foo/bar'
+    ),
+    (
+        (None, dict()),
+        [],
+        'Cannot retrieve content from https://foo/bar'
+    ),
 ]
 
 
@@ -154,6 +164,13 @@ GET_FAILOVER_FAIL = [
             )).encode('utf-8'),
         )),
         'Request failed: 400 foo (bar)'
+    ),
+    (
+        '1.2.3.4',
+        (None, dict(
+            body='{"foo": "bar"}'.encode('utf-8'),
+        )),
+        "Cannot interpret result: {'foo': 'bar'}"
     ),
 ]
 

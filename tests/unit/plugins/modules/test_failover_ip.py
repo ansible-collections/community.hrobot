@@ -105,6 +105,31 @@ class TestHetznerFailoverIP(BaseTestModule):
         assert result['value'] == '4.3.2.1'
         assert result['state'] == 'routed'
 
+    def test_unrouted_to_routed_check_mode(self, mocker):
+        result = self.run_module_success(mocker, failover_ip, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'failover_ip': '1.2.3.4',
+            'state': 'routed',
+            'value': '4.3.2.1',
+            '_ansible_check_mode': True,
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json({
+                'failover': {
+                    'ip': '1.2.3.4',
+                    'netmask': '255.255.255.255',
+                    'server_ip': '2.3.4.5',
+                    'server_number': 2345,
+                    'active_server_ip': None,
+                },
+            })
+            .expect_url('{0}/failover/1.2.3.4'.format(BASE_URL)),
+        ])
+        assert result['changed'] is True
+        assert result['value'] == '4.3.2.1'
+        assert result['state'] == 'routed'
+
     def test_routed_to_unrouted(self, mocker):
         result = self.run_module_success(mocker, failover_ip, {
             'hetzner_user': '',
