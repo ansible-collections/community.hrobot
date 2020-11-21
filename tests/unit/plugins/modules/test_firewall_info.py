@@ -46,6 +46,32 @@ class TestHetznerFirewallInfo(BaseTestModule):
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1
 
+    def test_absent_no_rules(self, mocker):
+        result = self.run_module_success(mocker, firewall_info, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_ip': '1.2.3.4',
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json({
+                'firewall': {
+                    'server_ip': '1.2.3.4',
+                    'server_number': 1,
+                    'status': 'disabled',
+                    'whitelist_hos': False,
+                    'port': 'main',
+                },
+            })
+            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+        ])
+        assert result['changed'] is False
+        assert result['firewall']['status'] == 'disabled'
+        assert result['firewall']['server_ip'] == '1.2.3.4'
+        assert result['firewall']['server_number'] == 1
+        assert 'rules' in result['firewall']
+        assert 'input' in result['firewall']['rules']
+        assert len(result['firewall']['rules']['input']) == 0
+
     def test_present(self, mocker):
         result = self.run_module_success(mocker, firewall_info, {
             'hetzner_user': '',

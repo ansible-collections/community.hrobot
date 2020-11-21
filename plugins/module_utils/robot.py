@@ -17,6 +17,7 @@ __metaclass__ = type
 from ansible.module_utils.urls import fetch_url
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
+import json
 import time
 
 
@@ -106,7 +107,7 @@ def get_failover_record(module, ip):
     url = "{0}/failover/{1}".format(BASE_URL, ip)
     result, error = fetch_url_json(module, url)
     if 'failover' not in result:
-        module.fail_json(msg='Cannot interpret result: {0}'.format(result))
+        module.fail_json(msg='Cannot interpret result: {0}'.format(json.dumps(result, sort_keys=True)))
     return result['failover']
 
 

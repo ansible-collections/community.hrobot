@@ -66,6 +66,38 @@ class TestHetznerFirewall(BaseTestModule):
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1
 
+    def test_absent_idempotency_no_rules(self, mocker):
+        result = self.run_module_success(mocker, firewall, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_ip': '1.2.3.4',
+            'state': 'absent',
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json({
+                'firewall': {
+                    'server_ip': '1.2.3.4',
+                    'server_number': 1,
+                    'status': 'disabled',
+                    'whitelist_hos': False,
+                    'port': 'main',
+                    'rules': {
+                        'input': [],
+                    },
+                },
+            })
+            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+        ])
+        assert result['changed'] is False
+        assert result['diff']['before']['status'] == 'disabled'
+        assert result['diff']['after']['status'] == 'disabled'
+        assert result['firewall']['status'] == 'disabled'
+        assert result['firewall']['server_ip'] == '1.2.3.4'
+        assert result['firewall']['server_number'] == 1
+        assert 'rules' in result['firewall']
+        assert 'input' in result['firewall']['rules']
+        assert len(result['firewall']['rules']['input']) == 0
+
     def test_absent_changed(self, mocker):
         result = self.run_module_success(mocker, firewall, {
             'hetzner_user': '',
@@ -109,6 +141,47 @@ class TestHetznerFirewall(BaseTestModule):
         assert result['firewall']['status'] == 'disabled'
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1
+
+    def test_absent_changed_no_rules(self, mocker):
+        result = self.run_module_success(mocker, firewall, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_ip': '1.2.3.4',
+            'state': 'absent',
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json({
+                'firewall': {
+                    'server_ip': '1.2.3.4',
+                    'server_number': 1,
+                    'status': 'active',
+                    'whitelist_hos': True,
+                    'port': 'main',
+                },
+            })
+            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+            FetchUrlCall('POST', 200)
+            .result_json({
+                'firewall': {
+                    'server_ip': '1.2.3.4',
+                    'server_number': 1,
+                    'status': 'disabled',
+                    'whitelist_hos': False,
+                    'port': 'main',
+                },
+            })
+            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL))
+            .expect_form_value('status', 'disabled'),
+        ])
+        assert result['changed'] is True
+        assert result['diff']['before']['status'] == 'active'
+        assert len(result['diff']['before']['rules']['input']) == 0
+        assert result['diff']['after']['status'] == 'disabled'
+        assert len(result['diff']['after']['rules']['input']) == 0
+        assert result['firewall']['status'] == 'disabled'
+        assert result['firewall']['server_ip'] == '1.2.3.4'
+        assert result['firewall']['server_number'] == 1
+        assert len(result['firewall']['rules']['input']) == 0
 
     def test_present_idempotency(self, mocker):
         result = self.run_module_success(mocker, firewall, {
@@ -1095,6 +1168,7 @@ class TestHetznerFirewall(BaseTestModule):
         ('ipv6', 'src_ip', '1:2:3::4/128', '1:2:3::4/128', '1:2:3::4'),
         ('ipv6', 'dst_ip', '1:2:3::4/128', '1:2:3::4/128', '1:2:3:0::4'),
         ('ipv6', 'dst_ip', '::/0', '::/0', '0:0::0/0'),
+        ('ipv6', 'dst_ip', '::/0', '::1/0', '0:0::0:1/0'),
     ])
     def test_input_rule_ip_normalization(self, mocker, ip_version, parameter, before_normalized, after_normalized, after):
         assert ip_version in ('ipv4', 'ipv6')
