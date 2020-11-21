@@ -1,0 +1,3 @@
+release_summary: >
+  The ``community.hrobot`` continues the work on the Hetzner Robot modules from their state in ``community.general`` 1.2.0.
+  The changes listed here are thus relative to the modules ``community.general.hetzner_*``.
