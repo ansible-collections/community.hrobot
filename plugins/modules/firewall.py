@@ -18,6 +18,8 @@ description:
   - Manage Hetzner's dedicated server firewall.
   - Note that idempotency check for TCP flags simply compares strings and doesn't
     try to interpret the rules. This might change in the future.
+requirements:
+  - ipaddress
 seealso:
   - name: Firewall documentation
     description: Hetzner's documentation on the stateless firewall for dedicated servers
@@ -264,8 +266,9 @@ firewall:
               sample: accept
 '''
 
-from ansible.module_utils.basic import AnsibleModule
-from ansible_collections.community.hrobot.plugins.module_utils.compat import ipaddress as compat_ipaddress
+import traceback
+
+from ansible.module_utils.basic import AnsibleModule, missing_required_lib
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     ROBOT_DEFAULT_ARGUMENT_SPEC,
     BASE_URL,
@@ -275,6 +278,13 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
 )
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 from ansible.module_utils._text import to_native, to_text
+
+try:
+    import ipaddress
+    HAS_IPADDRESS = True
+except ImportError as exc:
+    IPADDRESS_IMP_ERR = traceback.format_exc()
+    HAS_IPADDRESS = False
 
 
 RULE_OPTION_NAMES = [
@@ -323,7 +333,7 @@ def normalize_ip(ip, ip_version):
         ip, range = ip.split('/')
     else:
         ip, range = ip, ''
-    ip_addr = to_native(compat_ipaddress.ip_address(to_text(ip)).compressed)
+    ip_addr = to_native(ipaddress.ip_address(to_text(ip)).compressed)
     if range == '':
         range = '32' if ip_version.lower() == 'ipv4' else '128'
     return ip_addr + '/' + range
@@ -394,6 +404,9 @@ def main():
         argument_spec=argument_spec,
         supports_check_mode=True,
     )
+
+    if not HAS_IPADDRESS:
+        module.fail_json(msg=missing_required_lib('ipaddress'), exception=IPADDRESS_IMP_ERR)
 
     # Sanitize input
     module.params['status'] = 'active' if (module.params['state'] == 'present') else 'disabled'
