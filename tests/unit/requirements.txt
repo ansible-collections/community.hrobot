@@ -1,2 +1,5 @@
 unittest2 ; python_version < '2.7'
 importlib ; python_version < '2.7'
+
+# firewall module
+ipaddress ; python_version < '3.3'

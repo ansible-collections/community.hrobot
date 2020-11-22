@@ -1269,3 +1269,22 @@ class TestHetznerFirewall(BaseTestModule):
         assert result['firewall']['status'] == 'active'
         assert len(result['firewall']['rules']['input']) == 1
         assert result['firewall']['rules']['input'][0][parameter] == after_normalized
+
+    # Missing requirements
+
+    def test_fail_no_ipaddress(self, mocker):
+        try:
+            firewall.HAS_IPADDRESS = False
+            firewall.IPADDRESS_IMP_ERR = 'This is\na traceback'
+            result = self.run_module_failed(mocker, firewall, {
+                'hetzner_user': '',
+                'hetzner_password': '',
+                'server_ip': '1.2.3.4',
+                'state': 'present',
+                'wait_for_configured': True,
+                'timeout': 0,
+            }, [])
+            assert result['msg'].startswith('Failed to import the required Python library (ipaddress) on')
+            assert result['exception'] == 'This is\na traceback'
+        finally:
+            firewall.HAS_IPADDRESS = True
