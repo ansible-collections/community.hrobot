@@ -1169,6 +1169,7 @@ class TestHetznerFirewall(BaseTestModule):
         ('ipv6', 'dst_ip', '1:2:3::4/128', '1:2:3::4/128', '1:2:3:0::4'),
         ('ipv6', 'dst_ip', '::/0', '::/0', '0:0::0/0'),
         ('ipv6', 'dst_ip', '::/0', '::1/0', '0:0::0:1/0'),
+        ('ipv6', 'dst_ip', '::/0', None, None),
     ])
     def test_input_rule_ip_normalization(self, mocker, ip_version, parameter, before_normalized, after_normalized, after):
         assert ip_version in ('ipv4', 'ipv6')
@@ -1243,7 +1244,10 @@ class TestHetznerFirewall(BaseTestModule):
             )
             after_call.expect_form_value('rules[input][0][ip_version]', ip_version)
             after_call.expect_form_value('rules[input][0][action]', 'discard')
-            after_call.expect_form_value('rules[input][0][{0}]'.format(parameter), after_normalized)
+            if after_normalized is None:
+                after_call.expect_form_value_absent('rules[input][0][{0}]'.format(parameter))
+            else:
+                after_call.expect_form_value('rules[input][0][{0}]'.format(parameter), after_normalized)
             calls.append(after_call)
 
         result = self.run_module_success(mocker, firewall, {
