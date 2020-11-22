@@ -33,7 +33,7 @@ options:
   wait_for_configured:
     description:
       - Whether to wait until the firewall has been successfully configured before
-        determining what to do, and before returning from the module.
+        returning from the module.
       - The API returns status C(in progress) when the firewall is currently
         being configured. If this happens, the module will try again until
         the status changes to C(active) or C(disabled).
