@@ -183,6 +183,20 @@ class TestHetznerFirewallInfo(BaseTestModule):
                 'firewall': {
                     'server_ip': '1.2.3.4',
                     'server_number': 1,
+                    'status': 'in process',
+                    'whitelist_hos': False,
+                    'port': 'main',
+                    'rules': {
+                        'input': [],
+                    },
+                },
+            })
+            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+            FetchUrlCall('GET', 200)
+            .result_json({
+                'firewall': {
+                    'server_ip': '1.2.3.4',
+                    'server_number': 1,
                     'status': 'active',
                     'whitelist_hos': False,
                     'port': 'main',
