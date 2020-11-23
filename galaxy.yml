@@ -11,7 +11,8 @@ license_file: COPYING
 tags:
   - hetzner
   - robot
-  - failover ip
+  - failover
+  - failoverip
   - firewall
 repository: https://github.com/ansible-collections/community.hrobot
 documentation: https://ansible.fontein.de/collections/community/hrobot/
