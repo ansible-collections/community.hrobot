@@ -1,2 +1,0 @@
-breaking_changes:
-- "firewall - now requires the `ipaddress <https://pypi.org/project/ipaddress/>`_ library (https://github.com/ansible-collections/community.hrobot/pull/2)."

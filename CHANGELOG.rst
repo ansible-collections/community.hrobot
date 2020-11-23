@@ -1,5 +1,20 @@
-Will be updated by antsibull-changelog. Do not edit this manually!
+================================================
+Community Hetzner Robot Collection Release Notes
+================================================
 
-See https://github.com/ansible-community/antsibull-changelog/blob/main/docs/changelogs.rst for information on how to use antsibull-changelog.
+.. contents:: Topics
 
-Check out ``changelogs/config.yaml`` for its configuration. You need to change at least the ``title`` field in there.
+
+v1.0.0
+======
+
+Release Summary
+---------------
+
+The ``community.hrobot`` continues the work on the Hetzner Robot modules from their state in ``community.general`` 1.2.0. The changes listed here are thus relative to the modules ``community.general.hetzner_*``.
+
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- firewall - now requires the `ipaddress <https://pypi.org/project/ipaddress/>`_ library (https://github.com/ansible-collections/community.hrobot/pull/2).
