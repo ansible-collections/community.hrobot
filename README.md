@@ -19,6 +19,7 @@ None.
 - `community.hrobot.firewall_info module`
 - `community.hrobot.failover_ip module`
 - `community.hrobot.failover_ip_info module`
+- `community.hrobot.hrobot inventory`
 
 You can find [documentation for the modules and plugins in this collection here](https://ansible.fontein.de/collections/community/hrobot/).
 
