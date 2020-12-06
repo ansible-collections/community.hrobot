@@ -15,11 +15,11 @@ None.
 
 ## Included content
 
-- `community.hrobot.firewall module`
-- `community.hrobot.firewall_info module`
-- `community.hrobot.failover_ip module`
-- `community.hrobot.failover_ip_info module`
-- `community.hrobot.hrobot inventory`
+- `community.hrobot.failover_ip` module
+- `community.hrobot.failover_ip_info` module
+- `community.hrobot.firewall` module
+- `community.hrobot.firewall_info` module
+- `community.hrobot.hrobot` inventory plugin
 
 You can find [documentation for the modules and plugins in this collection here](https://ansible.fontein.de/collections/community/hrobot/).
 
