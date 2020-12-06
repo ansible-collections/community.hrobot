@@ -90,10 +90,10 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         valid = False
         if super(InventoryModule, self).verify_file(path):
             # base class verifies that file exists and is readable by current user
-            if path.endswith(('hrobot.yaml', 'hrobot.yml')):
+            if path.endswith(('robot.yaml', 'robot.yml')):
                 valid = True
             else:
-                display.debug("hrobot inventory filename must end with 'hrobot.yml' or 'hrobot.yaml'")
+                display.debug("robot inventory filename must end with 'robot.yml' or 'robot.yaml'")
         return valid
 
     def parse(self, inventory, loader, path, cache=True):
