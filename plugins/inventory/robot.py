@@ -154,8 +154,8 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
                     # Create groups based on variable values and add the corresponding hosts to it
                     self._add_host_to_keyed_groups(self.get_option('keyed_groups'), server, server_name, strict=strict)
                 else:
-                    display.warning("""There is a collision occured, it happens when two Hetzner Servers have the same name
-                                    Please, avoid have the same name for Hetzner server.
+                    display.warning("""{0} is alreeady in the inventory, it happens if another inventory plugin wrote item with the same key
+                                    or few Hetzner Server have the same name.
                                     {0} will be not add to existing inventory""".format(server_name))
 
     def filter(self, server, filters):
