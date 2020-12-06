@@ -136,24 +136,27 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         for server in servers:
             s = server['server']
             server_name = s.get('server_name') or s['server_ip']
-            server_name = '{0}-{1}'.format(server_name, s['server_number'])
-
             matched = self.filter(s, filters)
             if matched:
-                self.inventory.add_host(server_name)
-                self.inventory.set_variable(server_name, 'ansible_host', s['server_ip'])
-                for hostvar, hostval in s.items():
-                    self.inventory.set_variable(server_name, "{0}_{1}".format('hrobot', hostvar), hostval)
+                if self.inventory.get_host(server_name) is None:
+                    self.inventory.add_host(server_name)
+                    self.inventory.set_variable(server_name, 'ansible_host', s['server_ip'])
+                    for hostvar, hostval in s.items():
+                        self.inventory.set_variable(server_name, "{0}_{1}".format('hrobot', hostvar), hostval)
 
-                # Composed variables
-                server_vars = self.inventory.get_host(server_name).get_vars()
-                self._set_composite_vars(self.get_option('compose'), server_vars, server_name, strict=strict)
+                    # Composed variables
+                    server_vars = self.inventory.get_host(server_name).get_vars()
+                    self._set_composite_vars(self.get_option('compose'), server_vars, server_name, strict=strict)
 
-                # Complex groups based on jinja2 conditionals, hosts that meet the conditional are added to group
-                self._add_host_to_composed_groups(self.get_option('groups'), server, server_name, strict=strict)
+                    # Complex groups based on jinja2 conditionals, hosts that meet the conditional are added to group
+                    self._add_host_to_composed_groups(self.get_option('groups'), server, server_name, strict=strict)
 
-                # Create groups based on variable values and add the corresponding hosts to it
-                self._add_host_to_keyed_groups(self.get_option('keyed_groups'), server, server_name, strict=strict)
+                    # Create groups based on variable values and add the corresponding hosts to it
+                    self._add_host_to_keyed_groups(self.get_option('keyed_groups'), server, server_name, strict=strict)
+                else:
+                    display.warning("""There is a collision occured, it happens when two Hetzner Servers have the same name
+                                    Please, avoid have the same name for Hetzner server.
+                                    {0} will be not add to existing inventory""".format(server_name))
 
     def filter(self, server, filters):
         matched = True
