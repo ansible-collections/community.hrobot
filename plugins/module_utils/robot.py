@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# This code is part of Ansible, but is an independent component.
-# This particular file snippet, and this file snippet only, is BSD licensed.
-# Modules you write using this snippet, which is embedded dynamically by Ansible
-# still belong to the author of the module, and may assign their own license
-# to the complete work.
-#
 # Copyright (c), Felix Fontein <felix@fontein.de>, 2019
-#
 # Simplified BSD License (see licenses/simplified_bsd.txt or https://opensource.org/licenses/BSD-2-Clause)
 
 from __future__ import absolute_import, division, print_function
@@ -16,7 +9,6 @@ __metaclass__ = type
 
 from ansible.module_utils.urls import fetch_url, open_url
 from ansible.module_utils.six.moves.urllib.error import HTTPError
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 import json
 import time
@@ -144,80 +136,3 @@ def fetch_url_json_with_retries(module, url, check_done_callback, check_done_del
             return result, error
         if left_time < check_done_delay:
             raise CheckDoneTimeoutException(result, error)
-
-
-# #####################################################################################
-# ## FAILOVER IP ######################################################################
-
-def get_failover_record(module, ip):
-    '''
-    Get information record of failover IP.
-
-    See https://robot.your-server.de/doc/webservice/en.html#get-failover-failover-ip
-    '''
-    url = "{0}/failover/{1}".format(BASE_URL, ip)
-    result, error = fetch_url_json(module, url)
-    if 'failover' not in result:
-        module.fail_json(msg='Cannot interpret result: {0}'.format(json.dumps(result, sort_keys=True)))
-    return result['failover']
-
-
-def get_failover(module, ip):
-    '''
-    Get current routing target of failover IP.
-
-    The value ``None`` represents unrouted.
-
-    See https://robot.your-server.de/doc/webservice/en.html#get-failover-failover-ip
-    '''
-    return get_failover_record(module, ip)['active_server_ip']
-
-
-def set_failover(module, ip, value, timeout=180):
-    '''
-    Set current routing target of failover IP.
-
-    Return a pair ``(value, changed)``. The value ``None`` for ``value`` represents unrouted.
-
-    See https://robot.your-server.de/doc/webservice/en.html#post-failover-failover-ip
-    and https://robot.your-server.de/doc/webservice/en.html#delete-failover-failover-ip
-    '''
-    url = "{0}/failover/{1}".format(BASE_URL, ip)
-    if value is None:
-        result, error = fetch_url_json(
-            module,
-            url,
-            method='DELETE',
-            timeout=timeout,
-            accept_errors=['FAILOVER_ALREADY_ROUTED']
-        )
-    else:
-        headers = {"Content-type": "application/x-www-form-urlencoded"}
-        data = dict(
-            active_server_ip=value,
-        )
-        result, error = fetch_url_json(
-            module,
-            url,
-            method='POST',
-            timeout=timeout,
-            data=urlencode(data),
-            headers=headers,
-            accept_errors=['FAILOVER_ALREADY_ROUTED']
-        )
-    if error is not None:
-        return value, False
-    else:
-        return result['failover']['active_server_ip'], True
-
-
-def get_failover_state(value):
-    '''
-    Create result dictionary for failover IP's value.
-
-    The value ``None`` represents unrouted.
-    '''
-    return dict(
-        value=value,
-        state='routed' if value else 'unrouted'
-    )
