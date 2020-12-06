@@ -133,13 +133,15 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
     def populate(self, servers):
         filters = self.get_option('filters')
         strict = self.get_option('strict')
+        server_lists = []
         for server in servers:
             s = server['server']
             server_name = s.get('server_name') or s['server_ip']
             matched = self.filter(s, filters)
             if matched:
-                if self.inventory.get_host(server_name) is None:
+                if server_name not in server_lists:
                     self.inventory.add_host(server_name)
+                    server_lists.append(server_name)
                     self.inventory.set_variable(server_name, 'ansible_host', s['server_ip'])
                     for hostvar, hostval in s.items():
                         self.inventory.set_variable(server_name, "{0}_{1}".format('hrobot', hostvar), hostval)
@@ -154,8 +156,8 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
                     # Create groups based on variable values and add the corresponding hosts to it
                     self._add_host_to_keyed_groups(self.get_option('keyed_groups'), server, server_name, strict=strict)
                 else:
-                    display.warning("""{0} is alreeady in the inventory, it happens if another inventory plugin wrote item with the same key
-                                    or few Hetzner Server have the same name.
+                    display.warning("""There is a collision occured, it happens when two Hetzner Servers have the same name
+                                    Please, avoid have the same name for Hetzner server.
                                     {0} will be not add to existing inventory""".format(server_name))
 
     def filter(self, server, filters):
