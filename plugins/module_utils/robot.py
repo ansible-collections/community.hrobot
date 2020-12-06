@@ -14,7 +14,8 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-from ansible.module_utils.urls import fetch_url
+from ansible.module_utils.urls import fetch_url, open_url
+from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 import json
@@ -28,6 +29,56 @@ ROBOT_DEFAULT_ARGUMENT_SPEC = dict(
 
 # The API endpoint is fixed.
 BASE_URL = "https://robot-ws.your-server.de"
+
+
+class PluginException(Exception):
+    def __init__(self, message):
+        super(PluginException, self).__init__(message)
+        self.error_message = message
+
+
+def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, headers=None, accept_errors=None):
+    '''
+    Make general request to Hetzner's JSON robot API.
+    '''
+    user = plugin.get_option('hetzner_user')
+    password = plugin.get_option('hetzner_password')
+    try:
+        response = open_url(
+            url,
+            url_username=user,
+            url_password=password,
+            data=data,
+            headers=headers,
+            method=method,
+            timeout=timeout,
+        )
+        content = response.read()
+    except HTTPError as e:
+        try:
+            content = e.read()
+        except AttributeError:
+            content = ''
+    except Exception:
+        raise PluginException('Failed request to Hetzner Robot server endpoint')
+
+    if not content:
+        raise PluginException('Cannot retrieve content from {0}'.format(url))
+
+    try:
+        result = json.loads(content)
+        if 'error' in result:
+            if accept_errors:
+                if result['error']['code'] in accept_errors:
+                    return result, result['error']['code']
+            raise PluginException('Request failed: {0} {1} ({2})'.format(
+                result['error']['status'],
+                result['error']['code'],
+                result['error']['message']
+            ))
+        return result, None
+    except ValueError:
+        raise PluginException('Cannot decode content retrieved from {0}'.format(url))
 
 
 def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=None, accept_errors=None):
