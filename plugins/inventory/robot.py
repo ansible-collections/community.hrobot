@@ -171,4 +171,4 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         try:
             return plugin_open_url_json(self, '{0}/server'.format(BASE_URL))[0]
         except PluginException as e:
-            raise AnsibleError(msg=e.error_message)
+            raise AnsibleError(e.error_message)
