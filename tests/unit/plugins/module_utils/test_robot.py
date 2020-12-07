@@ -139,11 +139,8 @@ def test_plugin_open_url_json(monkeypatch, return_value, accept_errors, result):
 
 @pytest.mark.parametrize("return_value, accept_errors, result", FETCH_URL_JSON_FAIL)
 def test_plugin_open_url_json_fail(monkeypatch, return_value, accept_errors, result):
-    if 'body' in return_value[1]:
-        response = MagicMock()
-        response.read = MagicMock(return_value=return_value[1]['body'])
-    else:
-        response = object()
+    response = MagicMock()
+    response.read = MagicMock(return_value=return_value[1].get('body', ''))
     robot.open_url = MagicMock(side_effect=robot.HTTPError('https://foo/bar', 400, 'Error!', {}, response))
     plugin = MagicMock()
 

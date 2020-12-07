@@ -50,7 +50,7 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
         try:
             content = e.read()
         except AttributeError:
-            content = ''
+            content = b''
     except Exception:
         raise PluginException('Failed request to Hetzner Robot server endpoint')
 
@@ -58,7 +58,7 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
         raise PluginException('Cannot retrieve content from {0}'.format(url))
 
     try:
-        result = json.loads(content)
+        result = json.loads(content.decode('utf-8'))
         if 'error' in result:
             if accept_errors:
                 if result['error']['code'] in accept_errors:
