@@ -162,7 +162,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
     def filter(self, server, filters):
         matched = True
         for key, value in filters.items():
-            if server[key] != value:
+            if server.get(key) != value:
                 matched = False
                 break
         return matched
