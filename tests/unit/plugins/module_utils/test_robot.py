@@ -158,4 +158,4 @@ def test_plugin_open_url_json_fail_other(monkeypatch):
     with pytest.raises(robot.PluginException) as exc:
         robot.plugin_open_url_json(plugin, 'https://foo/bar')
 
-    assert exc.value.error_message == 'Failed request to Hetzner Robot server endpoint'
+    assert exc.value.error_message == 'Failed request to Hetzner Robot server endpoint https://foo/bar: buh!'
