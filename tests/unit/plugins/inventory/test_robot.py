@@ -147,7 +147,7 @@ def test_inventory_file_simple(mocker):
             status=400,
             message="bar",
         ),
-    )).encode('utf-8')
+    ), sort_keys=True).encode('utf-8')
 ])
 def test_inventory_file_fail(mocker, error_result):
     open_url = OpenUrlProxy([
