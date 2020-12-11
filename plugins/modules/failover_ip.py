@@ -87,6 +87,8 @@ state:
 from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     ROBOT_DEFAULT_ARGUMENT_SPEC,
+)
+from ansible_collections.community.hrobot.plugins.module_utils.failover import (
     get_failover,
     set_failover,
     get_failover_state,

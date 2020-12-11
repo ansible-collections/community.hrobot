@@ -68,14 +68,13 @@ compose:
 """
 
 from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
-from ansible.module_utils.urls import open_url
 from ansible.utils.display import Display
 from ansible.errors import AnsibleError
 
-import json
-
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
-    BASE_URL
+    BASE_URL,
+    PluginException,
+    plugin_open_url_json,
 )
 
 display = Display()
@@ -169,18 +168,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         return matched
 
     def get_servers(self):
-        user = self.get_option('hetzner_user')
-        password = self.get_option('hetzner_password')
         try:
-            response = open_url(
-                "{0}/server".format(BASE_URL),
-                url_username=user,
-                url_password=password,
-                headers={"Content-type": "application/x-www-form-urlencoded"}
-            )
-            servers = json.loads(response.read())
-            return servers
-        except ValueError:
-            raise AnsibleError(msg='Cannot decode content retrieved from to Hetzner Robot server endpoint')
-        except Exception as e:
-            raise AnsibleError(msg='Failed request to Hetzner Robot server endpoint')
+            return plugin_open_url_json(self, '{0}/server'.format(BASE_URL))[0]
+        except PluginException as e:
+            raise AnsibleError(e.error_message)
