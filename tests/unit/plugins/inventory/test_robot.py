@@ -89,12 +89,21 @@ def test_inventory_file_simple(mocker):
             {
                 'server': {
                     'server_ip': '1.2.3.4',
+                    'dc': 'foo',
                 },
             },
             {
                 'server': {
                     'server_ip': '1.2.3.5',
                     'server_name': 'test-server',
+                    'dc': 'foo',
+                },
+            },
+            {
+                'server': {
+                    'server_ip': '1.2.3.6',
+                    'server_name': 'test-server-2',
+                    'dc': 'bar',
                 },
             },
         ])
@@ -112,6 +121,8 @@ def test_inventory_file_simple(mocker):
     plugin: community.hrobot.robot
     hetzner_user: test
     hetzner_password: hunter2
+    filters:
+      dc: foo
     """)}
     im = InventoryManager(loader=DictDataLoader(inventory_file), sources=inventory_filename)
     open_url.assert_is_done()
@@ -119,6 +130,7 @@ def test_inventory_file_simple(mocker):
     assert im._inventory.hosts
     assert '1.2.3.4' in im._inventory.hosts
     assert 'test-server' in im._inventory.hosts
+    assert 'test-server-2' not in im._inventory.hosts
     assert im._inventory.get_host('1.2.3.4') in im._inventory.groups['ungrouped'].hosts
     assert im._inventory.get_host('test-server') in im._inventory.groups['ungrouped'].hosts
     assert len(im._inventory.groups['ungrouped'].hosts) == 2
