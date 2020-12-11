@@ -90,7 +90,7 @@ jobs:
       # Install them like this
       - name: Install collection dependencies
         #run: ansible-galaxy collection install community.internal_test_tools -p .
-        run: git clone https://github.com/felixfontein/community.internal_test_tools.git -b open-url-framework ansible_collections/community/internal_test_tools
+        run: git clone https://github.com/felixfontein/community.internal_test_tools.git ansible_collections/community/internal_test_tools
 
       # Run the unit tests
       - name: Run unit test
