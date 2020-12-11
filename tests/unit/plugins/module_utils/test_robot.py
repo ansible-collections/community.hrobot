@@ -1,4 +1,5 @@
 # Copyright: (c) 2017 Ansible Project
+# Copyright (c), Felix Fontein <felix@fontein.de>, 2019-2020
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
@@ -147,5 +148,14 @@ def test_plugin_open_url_json_fail(monkeypatch, return_value, accept_errors, res
     with pytest.raises(robot.PluginException) as exc:
         robot.plugin_open_url_json(plugin, 'https://foo/bar', accept_errors=accept_errors)
 
-    print((exc.value.error_message, result))
     assert exc.value.error_message == result
+
+
+def test_plugin_open_url_json_fail_other(monkeypatch):
+    robot.open_url = MagicMock(side_effect=Exception('buh!'))
+    plugin = MagicMock()
+
+    with pytest.raises(robot.PluginException) as exc:
+        robot.plugin_open_url_json(plugin, 'https://foo/bar')
+
+    assert exc.value.error_message == 'Failed request to Hetzner Robot server endpoint'
