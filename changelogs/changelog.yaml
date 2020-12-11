@@ -14,3 +14,14 @@ releases:
     - 1.0.0.yml
     - firewall-add-ipaddress.yml
     release_date: '2020-11-23'
+  1.1.0:
+    changes:
+      release_summary: Release with a new inventory plugin.
+    fragments:
+    - 1.1.0.yml
+    plugins:
+      inventory:
+      - description: Hetzner Robot inventory source
+        name: robot
+        namespace: null
+    release_date: '2020-12-11'

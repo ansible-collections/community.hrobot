@@ -5,6 +5,22 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.1.0
+======
+
+Release Summary
+---------------
+
+Release with a new inventory plugin.
+
+New Plugins
+-----------
+
+Inventory
+~~~~~~~~~
+
+- robot - Hetzner Robot inventory source
+
 v1.0.0
 ======
 
