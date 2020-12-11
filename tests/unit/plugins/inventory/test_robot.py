@@ -139,16 +139,20 @@ def test_inventory_file_simple(mocker):
     assert len(im._inventory.groups['all'].hosts) == 0
 
 
-def test_inventory_file_fail(mocker):
+@pytest.mark.parametrize("error_result", [
+    None,
+    json.dumps(dict(
+        error=dict(
+            code="foo",
+            status=400,
+            message="bar",
+        ),
+    )).encode('utf-8')
+])
+def test_inventory_file_fail(mocker, error_result):
     open_url = OpenUrlProxy([
         OpenUrlCall('GET', 200)
-        .result_error(json.dumps(dict(
-            error=dict(
-                code="foo",
-                status=400,
-                message="bar",
-            ),
-        )).encode('utf-8'))
+        .result_error(error_result)
         .expect_url('{0}/server'.format(BASE_URL)),
     ])
     mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
