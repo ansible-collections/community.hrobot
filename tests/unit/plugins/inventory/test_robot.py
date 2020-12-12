@@ -212,7 +212,6 @@ def test_inventory_no_file(mocker):
     mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
     mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
     mocker.patch('os.path.exists', lambda x: False)
-    mocker.patch('os.access', lambda x, y: False)
 
     inventory_filename = "test.robot.yml"
     C.INVENTORY_ENABLED = ['community.hrobot.robot']

@@ -161,7 +161,7 @@ def test_plugin_open_url_json_fail_other(monkeypatch):
     assert exc.value.error_message == 'Failed request to Hetzner Robot server endpoint https://foo/bar: buh!'
 
 
-def test_plugin_open_url_json_fail_other(monkeypatch):
+def test_plugin_open_url_json_fail_other_2(monkeypatch):
     response = MagicMock()
     response.read = MagicMock(side_effect=AttributeError('read'))
     robot.open_url = MagicMock(side_effect=robot.HTTPError('https://foo/bar', 400, 'Error!', {}, response))
