@@ -159,3 +159,15 @@ def test_plugin_open_url_json_fail_other(monkeypatch):
         robot.plugin_open_url_json(plugin, 'https://foo/bar')
 
     assert exc.value.error_message == 'Failed request to Hetzner Robot server endpoint https://foo/bar: buh!'
+
+
+def test_plugin_open_url_json_fail_other_2(monkeypatch):
+    response = MagicMock()
+    response.read = MagicMock(side_effect=AttributeError('read'))
+    robot.open_url = MagicMock(side_effect=robot.HTTPError('https://foo/bar', 400, 'Error!', {}, response))
+    plugin = MagicMock()
+
+    with pytest.raises(robot.PluginException) as exc:
+        robot.plugin_open_url_json(plugin, 'https://foo/bar')
+
+    assert exc.value.error_message == 'Cannot retrieve content from https://foo/bar'

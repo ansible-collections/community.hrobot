@@ -207,6 +207,19 @@ def test_inventory_wrong_file(mocker):
     assert len(im._inventory.groups['all'].hosts) == 0
 
 
+def test_inventory_no_file(mocker):
+    open_url = OpenUrlProxy([])
+    mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
+    mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
+    mocker.patch('os.path.exists', lambda x: False)
+
+    inventory_filename = "test.robot.yml"
+    C.INVENTORY_ENABLED = ['community.hrobot.robot']
+    with pytest.raises(AnsibleError):
+        im = InventoryManager(loader=DictDataLoader({}), sources='test.robot.yml')
+    open_url.assert_is_done()
+
+
 def test_inventory_file_collision(mocker):
     open_url = OpenUrlProxy([
         OpenUrlCall('GET', 200)
