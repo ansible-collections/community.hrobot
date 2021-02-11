@@ -11,7 +11,7 @@ Tested with the current Ansible 2.9 and 2.10 releases and the current developmen
 
 ## External requirements
 
-None.
+A Hetzner Robot account.
 
 ## Included content
 
