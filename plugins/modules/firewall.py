@@ -332,7 +332,7 @@ def normalize_ip(ip, ip_version):
     if '/' in ip:
         ip, range = ip.split('/')
     else:
-        ip, range = ip, ''
+        ip, range = ip, ''  # pylint: disable=self-assigning-variable
     ip_addr = to_native(ipaddress.ip_address(to_text(ip)).compressed)
     if range == '':
         range = '32' if ip_version.lower() == 'ipv4' else '128'
