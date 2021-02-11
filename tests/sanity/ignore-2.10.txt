@@ -1,0 +1,1 @@
+plugins/modules/firewall.py pylint:bad-option-value  # a pylint test that is disabled was modified over time
