@@ -1,0 +1,3 @@
+bugfixes:
+  - robot - force basic authentication against robot webservice
+  
