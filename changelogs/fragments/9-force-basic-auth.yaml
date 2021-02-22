@@ -1,0 +1,3 @@
+bugfixes:
+  - robot - force HTTP basic authentication to reduce number of HTTPS requests (https://github.com/ansible-collections/community.hrobot/pull/9).
+  
