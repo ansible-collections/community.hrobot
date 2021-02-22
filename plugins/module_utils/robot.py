@@ -40,6 +40,7 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
             url,
             url_username=user,
             url_password=password,
+            force_basic_auth=True,
             data=data,
             headers=headers,
             method=method,
@@ -79,6 +80,7 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
     '''
     module.params['url_username'] = module.params['hetzner_user']
     module.params['url_password'] = module.params['hetzner_password']
+    module.params['force_basic_auth'] = True
     resp, info = fetch_url(module, url, method=method, timeout=timeout, data=data, headers=headers)
     try:
         content = resp.read()
