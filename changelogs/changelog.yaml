@@ -25,3 +25,14 @@ releases:
         name: robot
         namespace: null
     release_date: '2020-12-11'
+  1.1.1:
+    changes:
+      bugfixes:
+      - robot - force HTTP basic authentication to reduce number of HTTPS requests
+        (https://github.com/ansible-collections/community.hrobot/pull/9).
+      release_summary: Bugfix release which reduces the number of HTTPS queries for
+        the modules and plugins.
+    fragments:
+    - 1.1.1.yml
+    - 9-force-basic-auth.yaml
+    release_date: '2021-02-24'

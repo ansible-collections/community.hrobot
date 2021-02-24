@@ -5,6 +5,19 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.1.1
+======
+
+Release Summary
+---------------
+
+Bugfix release which reduces the number of HTTPS queries for the modules and plugins.
+
+Bugfixes
+--------
+
+- robot - force HTTP basic authentication to reduce number of HTTPS requests (https://github.com/ansible-collections/community.hrobot/pull/9).
+
 v1.1.0
 ======
 
