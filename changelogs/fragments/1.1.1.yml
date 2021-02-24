@@ -1,0 +1,1 @@
+release_summary: Bugfix release which reduces the number of HTTPS queries for the modules and plugins.
