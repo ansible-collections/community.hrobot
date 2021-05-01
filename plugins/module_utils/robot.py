@@ -82,28 +82,35 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
     module.params['url_password'] = module.params['hetzner_password']
     module.params['force_basic_auth'] = True
     resp, info = fetch_url(module, url, method=method, timeout=timeout, data=data, headers=headers)
+    status_code = info["status"]
     try:
         content = resp.read()
     except AttributeError:
         content = info.pop('body', None)
 
-    if not content:
+    if not content and status_code != 200:
         module.fail_json(msg='Cannot retrieve content from {0}'.format(url))
 
-    try:
-        result = module.from_json(content.decode('utf8'))
-        if 'error' in result:
-            if accept_errors:
-                if result['error']['code'] in accept_errors:
-                    return result, result['error']['code']
-            module.fail_json(msg='Request failed: {0} {1} ({2})'.format(
-                result['error']['status'],
-                result['error']['code'],
-                result['error']['message']
-            ))
+    if content:
+        try:
+            print("lol=")
+            result = module.from_json(content.decode('utf8'))
+            if 'error' in result:
+                if accept_errors:
+                    if result['error']['code'] in accept_errors:
+                        return result, result['error']['code']
+                module.fail_json(msg='Request failed: {0} {1} ({2})'.format(
+                    result['error']['status'],
+                    result['error']['code'],
+                    result['error']['message']
+                ))
+            return result, None
+        except ValueError:
+            module.fail_json(msg='Cannot decode content retrieved from {0}'.format(url))
+    else:
+        # status code 200 and empty content
+        result = 'ok'
         return result, None
-    except ValueError:
-        module.fail_json(msg='Cannot decode content retrieved from {0}'.format(url))
 
 
 class CheckDoneTimeoutException(Exception):
