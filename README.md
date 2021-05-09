@@ -5,6 +5,8 @@ This repository contains the `community.hrobot` Ansible Collection. The collecti
 
 You can find [documentation for the modules and plugins in this collection here](https://ansible.fontein.de/collections/community/hrobot/).
 
+Please note that this collection does **not** support Windows targets.
+
 ## Tested with Ansible
 
 Tested with the current Ansible 2.9, ansible-base 2.10 and ansible-core 2.11 releases and the current development version of ansible-core. Ansible versions before 2.9.10 are not supported.
