@@ -457,15 +457,15 @@ class TestHetznerFirewall(BaseTestModule):
         assert result['firewall']['server_number'] == 1
         assert result['firewall']['port'] == 'main'
 
-    # Tests for whitelist_hos
+    # Tests for allowlist_hos
 
-    def test_whitelist_hos_idempotency(self, mocker):
+    def test_allowlist_hos_idempotency(self, mocker):
         result = self.run_module_success(mocker, firewall, {
             'hetzner_user': '',
             'hetzner_password': '',
             'server_ip': '1.2.3.4',
             'state': 'present',
-            'whitelist_hos': True,
+            'allowlist_hos': True,
         }, [
             FetchUrlCall('GET', 200)
             .result_json({
@@ -490,13 +490,13 @@ class TestHetznerFirewall(BaseTestModule):
         assert result['firewall']['server_number'] == 1
         assert result['firewall']['whitelist_hos'] is True
 
-    def test_whitelist_hos_changed(self, mocker):
+    def test_allowlist_hos_changed(self, mocker):
         result = self.run_module_success(mocker, firewall, {
             'hetzner_user': '',
             'hetzner_password': '',
             'server_ip': '1.2.3.4',
             'state': 'present',
-            'whitelist_hos': True,
+            'allowlist_hos': True,
         }, [
             FetchUrlCall('GET', 200)
             .result_json({

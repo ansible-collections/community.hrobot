@@ -47,10 +47,12 @@ options:
     type: str
     default: present
     choices: [ present, absent ]
-  whitelist_hos:
+  allowlist_hos:
     description:
       - Whether Hetzner services have access.
     type: bool
+    aliases:
+      - whitelist_hos
   rules:
     description:
       - Firewall rules.
@@ -148,7 +150,7 @@ EXAMPLES = r'''
     hetzner_password: bar
     server_ip: 1.2.3.4
     state: present
-    whitelist_hos: yes
+    allowlist_hos: yes
     rules:
       input:
         - name: Allow everything to ports 20-23 from 4.3.2.1/24
@@ -314,11 +316,11 @@ def restrict_firewall_config(config):
     return result
 
 
-def update(before, after, params, name):
+def update(before, after, params, name, param_name=None):
     bv = before.get(name)
     after[name] = bv
     changed = False
-    pv = params[name]
+    pv = params[param_name or name]
     if pv is not None:
         changed = pv != bv
         if changed:
@@ -380,7 +382,7 @@ def main():
         server_ip=dict(type='str', required=True),
         port=dict(type='str', default='main', choices=['main', 'kvm']),
         state=dict(type='str', default='present', choices=['present', 'absent']),
-        whitelist_hos=dict(type='bool'),
+        allowlist_hos=dict(type='bool', aliases=['whitelist_hos']),
         rules=dict(type='dict', options=dict(
             input=dict(type='list', elements='dict', options=dict(
                 name=dict(type='str'),
@@ -445,7 +447,7 @@ def main():
     changed = False
     changed |= update(before, after, module.params, 'port')
     changed |= update(before, after, module.params, 'status')
-    changed |= update(before, after, module.params, 'whitelist_hos')
+    changed |= update(before, after, module.params, 'whitelist_hos', 'allowlist_hos')
     after['rules'] = create_default_rules_object()
     if module.params['status'] == 'active':
         for ruleset in RULES:
