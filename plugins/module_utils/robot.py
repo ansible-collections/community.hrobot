@@ -29,7 +29,8 @@ class PluginException(Exception):
         self.error_message = message
 
 
-def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, headers=None, accept_errors=None):
+def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, headers=None,
+                         accept_errors=None, allow_empty_result=False):
     '''
     Make general request to Hetzner's JSON robot API.
     '''
@@ -46,8 +47,10 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
             method=method,
             timeout=timeout,
         )
+        status = response.code
         content = response.read()
     except HTTPError as e:
+        status = e.code
         try:
             content = e.read()
         except AttributeError:
@@ -56,7 +59,9 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
         raise PluginException('Failed request to Hetzner Robot server endpoint {0}: {1}'.format(url, e))
 
     if not content:
-        raise PluginException('Cannot retrieve content from {0}'.format(url))
+        if allow_empty_result and status in (200, 204):
+            return None, None
+        raise PluginException('Cannot retrieve content from {0}, HTTP status code {1}'.format(url, status))
 
     try:
         result = json.loads(content.decode('utf-8'))
@@ -74,7 +79,8 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
         raise PluginException('Cannot decode content retrieved from {0}'.format(url))
 
 
-def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=None, accept_errors=None):
+def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=None,
+                   accept_errors=None, allow_empty_result=False):
     '''
     Make general request to Hetzner's JSON robot API.
     '''
@@ -88,7 +94,9 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
         content = info.pop('body', None)
 
     if not content:
-        module.fail_json(msg='Cannot retrieve content from {0}'.format(url))
+        if allow_empty_result and info.get('status') in (200, 204):
+            return None, None
+        module.fail_json(msg='Cannot retrieve content from {0}, HTTP status code {1}'.format(url, info.get('status')))
 
     try:
         result = module.from_json(content.decode('utf8'))

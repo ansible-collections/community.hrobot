@@ -101,9 +101,9 @@ FETCH_URL_JSON_FAIL = [
         'Cannot decode content retrieved from https://foo/bar'
     ),
     (
-        (None, dict()),
+        (None, dict(status=400)),
         [],
-        'Cannot retrieve content from https://foo/bar'
+        'Cannot retrieve content from https://foo/bar, HTTP status code 400'
     ),
 ]
 
@@ -125,6 +125,21 @@ def test_fetch_url_json_fail(monkeypatch, return_value, accept_errors, result):
         robot.fetch_url_json(module, 'https://foo/bar', accept_errors=accept_errors)
 
     assert exc.value.fail_msg == result
+    assert exc.value.fail_kwargs == dict()
+
+
+def test_fetch_url_json_empty(monkeypatch):
+    module = get_module_mock()
+    robot.fetch_url = MagicMock(return_value=(None, dict(status=204, body='')))
+
+    assert robot.fetch_url_json(module, 'https://foo/bar', allow_empty_result=True) == (None, None)
+
+    robot.fetch_url = MagicMock(return_value=(None, dict(status=400, body='')))
+
+    with pytest.raises(ModuleFailException) as exc:
+        robot.fetch_url_json(module, 'https://foo/bar', allow_empty_result=True)
+
+    assert exc.value.fail_msg == 'Cannot retrieve content from https://foo/bar, HTTP status code 400'
     assert exc.value.fail_kwargs == dict()
 
 
@@ -170,4 +185,23 @@ def test_plugin_open_url_json_fail_other_2(monkeypatch):
     with pytest.raises(robot.PluginException) as exc:
         robot.plugin_open_url_json(plugin, 'https://foo/bar')
 
-    assert exc.value.error_message == 'Cannot retrieve content from https://foo/bar'
+    assert exc.value.error_message == 'Cannot retrieve content from https://foo/bar, HTTP status code 400'
+
+
+def test_plugin_open_url_json_empty_result(monkeypatch):
+    response = MagicMock()
+    response.read = MagicMock(return_value='')
+    response.code = 200
+    robot.open_url = MagicMock(return_value=response)
+    plugin = MagicMock()
+
+    assert robot.plugin_open_url_json(plugin, 'https://foo/bar', allow_empty_result=True) == (None, None)
+
+    response = MagicMock()
+    response.read = MagicMock(side_effect=AttributeError('read'))
+    robot.open_url = MagicMock(side_effect=robot.HTTPError('https://foo/bar', 400, 'Error!', {}, response))
+
+    with pytest.raises(robot.PluginException) as exc:
+        robot.plugin_open_url_json(plugin, 'https://foo/bar')
+
+    assert exc.value.error_message == 'Cannot retrieve content from https://foo/bar, HTTP status code 400'
