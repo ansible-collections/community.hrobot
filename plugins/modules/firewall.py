@@ -202,9 +202,16 @@ firewall:
           I(wait_for_configured) is set to C(no) or I(timeout) to a too small value.
       type: str
       sample: active
+    allowlist_hos:
+      description:
+        - Whether Hetzner services have access.
+      type: bool
+      sample: true
+      version_added: 1.2.0
     whitelist_hos:
       description:
         - Whether Hetzner services have access.
+        - Old name of return value C(allowlist_hos), will be removed eventually.
       type: bool
       sample: true
     rules:
@@ -373,6 +380,12 @@ def create_default_rules_object():
     return rules
 
 
+def fix_naming(firewall_result):
+    firewall_result = firewall_result.copy()
+    firewall_result['allowlist_hos'] = firewall_result.get('whitelist_hos', False)
+    return firewall_result
+
+
 def firewall_configured(result, error):
     return result['firewall']['status'] != 'in process'
 
@@ -512,10 +525,10 @@ def main():
     module.exit_json(
         changed=changed,
         diff=dict(
-            before=before,
-            after=after,
+            before=fix_naming(before),
+            after=fix_naming(after),
         ),
-        firewall=full_after,
+        firewall=fix_naming(full_after),
     )
 
 

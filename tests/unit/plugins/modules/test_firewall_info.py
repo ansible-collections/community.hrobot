@@ -42,6 +42,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
             .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
         ])
         assert result['changed'] is False
+        assert result['firewall']['allowlist_hos'] is False
         assert result['firewall']['status'] == 'disabled'
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1
@@ -111,7 +112,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
                     'server_ip': '1.2.3.4',
                     'server_number': 1,
                     'status': 'active',
-                    'whitelist_hos': False,
+                    'whitelist_hos': True,
                     'port': 'main',
                     'rules': {
                         'input': [
@@ -144,6 +145,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
             .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
         ])
         assert result['changed'] is False
+        assert result['firewall']['allowlist_hos'] is True
         assert result['firewall']['status'] == 'active'
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1

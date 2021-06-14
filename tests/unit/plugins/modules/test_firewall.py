@@ -483,11 +483,14 @@ class TestHetznerFirewall(BaseTestModule):
             .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
         ])
         assert result['changed'] is False
+        assert result['diff']['before']['allowlist_hos'] is True
         assert result['diff']['before']['whitelist_hos'] is True
+        assert result['diff']['after']['allowlist_hos'] is True
         assert result['diff']['after']['whitelist_hos'] is True
         assert result['firewall']['status'] == 'active'
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1
+        assert result['firewall']['allowlist_hos'] is True
         assert result['firewall']['whitelist_hos'] is True
 
     def test_allowlist_hos_changed(self, mocker):
@@ -529,11 +532,14 @@ class TestHetznerFirewall(BaseTestModule):
             .expect_form_value('whitelist_hos', 'true'),
         ])
         assert result['changed'] is True
+        assert result['diff']['before']['allowlist_hos'] is False
         assert result['diff']['before']['whitelist_hos'] is False
+        assert result['diff']['after']['allowlist_hos'] is True
         assert result['diff']['after']['whitelist_hos'] is True
         assert result['firewall']['status'] == 'active'
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1
+        assert result['firewall']['allowlist_hos'] is True
         assert result['firewall']['whitelist_hos'] is True
 
     # Tests for wait_for_configured in getting status
