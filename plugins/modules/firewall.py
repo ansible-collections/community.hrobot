@@ -47,10 +47,12 @@ options:
     type: str
     default: present
     choices: [ present, absent ]
-  whitelist_hos:
+  allowlist_hos:
     description:
       - Whether Hetzner services have access.
     type: bool
+    aliases:
+      - whitelist_hos
   rules:
     description:
       - Firewall rules.
@@ -148,7 +150,7 @@ EXAMPLES = r'''
     hetzner_password: bar
     server_ip: 1.2.3.4
     state: present
-    whitelist_hos: yes
+    allowlist_hos: yes
     rules:
       input:
         - name: Allow everything to ports 20-23 from 4.3.2.1/24
@@ -200,9 +202,16 @@ firewall:
           I(wait_for_configured) is set to C(no) or I(timeout) to a too small value.
       type: str
       sample: active
+    allowlist_hos:
+      description:
+        - Whether Hetzner services have access.
+      type: bool
+      sample: true
+      version_added: 1.2.0
     whitelist_hos:
       description:
         - Whether Hetzner services have access.
+        - Old name of return value C(allowlist_hos), will be removed eventually.
       type: bool
       sample: true
     rules:
@@ -314,11 +323,11 @@ def restrict_firewall_config(config):
     return result
 
 
-def update(before, after, params, name):
+def update(before, after, params, name, param_name=None):
     bv = before.get(name)
     after[name] = bv
     changed = False
-    pv = params[name]
+    pv = params[param_name or name]
     if pv is not None:
         changed = pv != bv
         if changed:
@@ -371,6 +380,12 @@ def create_default_rules_object():
     return rules
 
 
+def fix_naming(firewall_result):
+    firewall_result = firewall_result.copy()
+    firewall_result['allowlist_hos'] = firewall_result.get('whitelist_hos', False)
+    return firewall_result
+
+
 def firewall_configured(result, error):
     return result['firewall']['status'] != 'in process'
 
@@ -380,7 +395,7 @@ def main():
         server_ip=dict(type='str', required=True),
         port=dict(type='str', default='main', choices=['main', 'kvm']),
         state=dict(type='str', default='present', choices=['present', 'absent']),
-        whitelist_hos=dict(type='bool'),
+        allowlist_hos=dict(type='bool', aliases=['whitelist_hos']),
         rules=dict(type='dict', options=dict(
             input=dict(type='list', elements='dict', options=dict(
                 name=dict(type='str'),
@@ -445,7 +460,7 @@ def main():
     changed = False
     changed |= update(before, after, module.params, 'port')
     changed |= update(before, after, module.params, 'status')
-    changed |= update(before, after, module.params, 'whitelist_hos')
+    changed |= update(before, after, module.params, 'whitelist_hos', 'allowlist_hos')
     after['rules'] = create_default_rules_object()
     if module.params['status'] == 'active':
         for ruleset in RULES:
@@ -510,10 +525,10 @@ def main():
     module.exit_json(
         changed=changed,
         diff=dict(
-            before=before,
-            after=after,
+            before=fix_naming(before),
+            after=fix_naming(after),
         ),
-        firewall=full_after,
+        firewall=fix_naming(full_after),
     )
 
 
