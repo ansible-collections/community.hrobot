@@ -286,7 +286,7 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     CheckDoneTimeoutException,
 )
 from ansible.module_utils.six.moves.urllib.parse import urlencode
-from ansible.module_utils._text import to_native, to_text
+from ansible.module_utils.common.text.converters import to_native, to_text
 
 try:
     import ipaddress
