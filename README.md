@@ -3,7 +3,7 @@
 
 This repository contains the `community.hrobot` Ansible Collection. The collection includes modules to work with [Hetzner's Robot](https://docs.hetzner.com/robot/).
 
-You can find [documentation for the modules and plugins in this collection here](https://ansible.fontein.de/collections/community/hrobot/).
+You can find [documentation for the modules and plugins in this collection here](https://docs.ansible.com/ansible/devel/collections/community/hrobot/).
 
 Please note that this collection does **not** support Windows targets.
 
@@ -23,7 +23,7 @@ A Hetzner Robot account.
 - `community.hrobot.firewall_info` module
 - `community.hrobot.hrobot` inventory plugin
 
-You can find [documentation for the modules and plugins in this collection here](https://ansible.fontein.de/collections/community/hrobot/).
+You can find [documentation for the modules and plugins in this collection here](https://docs.ansible.com/ansible/devel/collections/community/hrobot/).
 
 ## Using this collection
 

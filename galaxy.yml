@@ -15,8 +15,7 @@ tags:
   - failoverip
   - firewall
 repository: https://github.com/ansible-collections/community.hrobot
-documentation: https://ansible.fontein.de/collections/community/hrobot/
-#documentation: https://github.com/ansible-collection-migration/community.hrobot/tree/main/docs
+documentation: https://docs.ansible.com/ansible/devel/collections/community/hrobot/
 homepage: https://github.com/ansible-collections/community.hrobot
 issues: https://github.com/ansible-collections/community.hrobot/issues
 build_ignore:
