@@ -6,6 +6,7 @@ __metaclass__ = type
 
 
 import json
+import os
 import textwrap
 
 import pytest
@@ -16,6 +17,7 @@ from ansible import constants as C
 from ansible.errors import AnsibleError
 from ansible.inventory.data import InventoryData
 from ansible.inventory.manager import InventoryManager
+from ansible.module_utils.common.text.converters import to_native
 
 from ansible_collections.community.internal_test_tools.tests.unit.mock.path import mock_unfrackpath_noop
 from ansible_collections.community.internal_test_tools.tests.unit.mock.loader import DictDataLoader
@@ -26,6 +28,28 @@ from ansible_collections.community.internal_test_tools.tests.unit.utils.open_url
 
 from ansible_collections.community.hrobot.plugins.inventory.robot import InventoryModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE_URL
+
+
+original_exists = os.path.exists
+original_access = os.access
+
+
+def exists_mock(path, exists=True):
+    def exists(f):
+        if to_native(f) == path:
+            return exists
+        return original_exists(f)
+
+    return exists
+
+
+def access_mock(path, can_access=True):
+    def access(f, m, *args, **kwargs):
+        if to_native(f) == path:
+            return can_access
+        return original_access(f, m, *args, **kwargs)
+
+    return access
 
 
 @pytest.fixture(scope="module")
@@ -111,12 +135,12 @@ def test_inventory_file_simple(mocker):
         ])
         .expect_url('{0}/server'.format(BASE_URL)),
     ])
+    inventory_filename = "test.robot.yaml"
     mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
     mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
-    mocker.patch('os.path.exists', lambda x: True)
-    mocker.patch('os.access', lambda x, y: True)
+    mocker.patch('os.path.exists', exists_mock(inventory_filename))
+    mocker.patch('os.access', access_mock(inventory_filename))
 
-    inventory_filename = "test.robot.yaml"
     C.INVENTORY_ENABLED = ['community.hrobot.robot']
     inventory_file = {inventory_filename: textwrap.dedent("""\
     ---
@@ -155,12 +179,12 @@ def test_inventory_file_fail(mocker, error_result):
         .result_error(error_result)
         .expect_url('{0}/server'.format(BASE_URL)),
     ])
+    inventory_filename = "test.robot.yml"
     mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
     mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
-    mocker.patch('os.path.exists', lambda x: True)
-    mocker.patch('os.access', lambda x, y: True)
+    mocker.patch('os.path.exists', exists_mock(inventory_filename))
+    mocker.patch('os.access', access_mock(inventory_filename))
 
-    inventory_filename = "test.robot.yml"
     C.INVENTORY_ENABLED = ['community.hrobot.robot']
     inventory_file = {inventory_filename: textwrap.dedent("""\
     ---
@@ -183,12 +207,12 @@ def test_inventory_file_fail(mocker, error_result):
 
 def test_inventory_wrong_file(mocker):
     open_url = OpenUrlProxy([])
+    inventory_filename = "test.bobot.yml"
     mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
     mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
-    mocker.patch('os.path.exists', lambda x: True)
-    mocker.patch('os.access', lambda x, y: True)
+    mocker.patch('os.path.exists', exists_mock(inventory_filename))
+    mocker.patch('os.access', access_mock(inventory_filename))
 
-    inventory_filename = "test.bobot.yml"
     C.INVENTORY_ENABLED = ['community.hrobot.robot']
     inventory_file = {inventory_filename: textwrap.dedent("""\
     ---
@@ -209,15 +233,19 @@ def test_inventory_wrong_file(mocker):
 
 def test_inventory_no_file(mocker):
     open_url = OpenUrlProxy([])
+    inventory_filename = "test.robot.yml"
     mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
     mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
-    mocker.patch('os.path.exists', lambda x: False)
+    mocker.patch('os.path.exists', exists_mock(inventory_filename, False))
+    mocker.patch('os.access', access_mock(inventory_filename, False))
 
-    inventory_filename = "test.robot.yml"
     C.INVENTORY_ENABLED = ['community.hrobot.robot']
-    with pytest.raises(AnsibleError):
-        im = InventoryManager(loader=DictDataLoader({}), sources='test.robot.yml')
+    im = InventoryManager(loader=DictDataLoader({}), sources=inventory_filename)
     open_url.assert_is_done()
+
+    assert not im._inventory.hosts
+    assert len(im._inventory.groups['ungrouped'].hosts) == 0
+    assert len(im._inventory.groups['all'].hosts) == 0
 
 
 def test_inventory_file_collision(mocker):
@@ -239,12 +267,12 @@ def test_inventory_file_collision(mocker):
         ])
         .expect_url('{0}/server'.format(BASE_URL)),
     ])
+    inventory_filename = "test.robot.yaml"
     mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
     mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
-    mocker.patch('os.path.exists', lambda x: True)
-    mocker.patch('os.access', lambda x, y: True)
+    mocker.patch('os.path.exists', exists_mock(inventory_filename))
+    mocker.patch('os.access', access_mock(inventory_filename))
 
-    inventory_filename = "test.robot.yaml"
     C.INVENTORY_ENABLED = ['community.hrobot.robot']
     inventory_file = {inventory_filename: textwrap.dedent("""\
     ---
