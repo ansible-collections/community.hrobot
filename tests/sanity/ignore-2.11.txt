@@ -1,0 +1,1 @@
+plugins/modules/server_info.py validate-modules:return-syntax-error  # only allowed in 2.13+
