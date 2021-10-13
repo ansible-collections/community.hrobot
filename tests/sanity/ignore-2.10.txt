@@ -1,1 +1,2 @@
 plugins/modules/firewall.py pylint:bad-option-value  # a pylint test that is disabled was modified over time
+plugins/modules/server_info.py validate-modules:return-syntax-error  # only allowed in 2.13+
