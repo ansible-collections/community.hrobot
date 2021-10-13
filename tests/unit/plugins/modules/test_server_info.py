@@ -152,6 +152,35 @@ class TestHetznerServerInfo(BaseTestModule):
         assert len(result['servers']) == 1
         assert result['servers'][0] == SERVER_DETAIL_DATA[23]['server']
 
+    def test_server_number_name_match(self, mocker):
+        result = self.run_module_success(mocker, server_info, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_number': 23,
+            'server_name': 'foo',
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(SERVER_DETAIL_DATA[23])
+            .expect_url('{0}/server/23'.format(BASE_URL)),
+        ])
+        assert result['changed'] is False
+        assert len(result['servers']) == 1
+        assert result['servers'][0] == SERVER_DETAIL_DATA[23]['server']
+
+    def test_server_number_name_mismatch(self, mocker):
+        result = self.run_module_success(mocker, server_info, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_number': 23,
+            'server_name': 'bar',
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(SERVER_DETAIL_DATA[23])
+            .expect_url('{0}/server/23'.format(BASE_URL)),
+        ])
+        assert result['changed'] is False
+        assert len(result['servers']) == 0
+
     def test_server_number_unknown(self, mocker):
         result = self.run_module_success(mocker, server_info, {
             'hetzner_user': '',
@@ -170,6 +199,20 @@ class TestHetznerServerInfo(BaseTestModule):
         ])
         assert result['changed'] is False
         assert len(result['servers']) == 0
+
+    def test_server_all(self, mocker):
+        result = self.run_module_success(mocker, server_info, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(SERVER_MINIMUM_DATA)
+            .expect_url('{0}/server'.format(BASE_URL)),
+        ])
+        assert result['changed'] is False
+        assert len(result['servers']) == 2
+        assert result['servers'][0] == SERVER_MINIMUM_DATA[0]['server']
+        assert result['servers'][1] == SERVER_MINIMUM_DATA[1]['server']
 
     def test_server_name(self, mocker):
         result = self.run_module_success(mocker, server_info, {
