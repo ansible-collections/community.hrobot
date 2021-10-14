@@ -33,9 +33,9 @@ class TestHetznerReset(BaseTestModule):
                     'server_ipv6_net': '2a01:4f8:111:4221::',
                     'server_number': 23,
                     'type': [
-                      'sw',
-                      'hw',
-                      'man'
+                        'sw',
+                        'hw',
+                        'man'
                     ],
                     'operating_status': 'not supported',
                 },
@@ -100,9 +100,9 @@ class TestHetznerReset(BaseTestModule):
                     'server_ipv6_net': '2a01:4f8:111:4221::',
                     'server_number': 23,
                     'type': [
-                      'sw',
-                      'hw',
-                      'man'
+                        'sw',
+                        'hw',
+                        'man'
                     ],
                     'operating_status': 'not supported',
                 },
@@ -150,7 +150,7 @@ class TestHetznerReset(BaseTestModule):
         ])
         assert result['msg'] == 'This server does not exist, or you do not have access rights for it'
 
-    def test_server_not_found(self, mocker):
+    def test_reset_not_available(self, mocker):
         result = self.run_module_failed(mocker, reset, {
             'hetzner_user': '',
             'hetzner_password': '',
@@ -169,7 +169,7 @@ class TestHetznerReset(BaseTestModule):
         ])
         assert result['msg'] == 'The server has no reset option available'
 
-    def test_check_server_not_found(self, mocker):
+    def test_check_reset_not_available(self, mocker):
         result = self.run_module_failed(mocker, reset, {
             'hetzner_user': '',
             'hetzner_password': '',

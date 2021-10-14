@@ -84,7 +84,7 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
 def main():
     argument_spec = dict(
         server_number=dict(type='int', required=True),
-        reset_type=dict(type='str', choices=['software', 'hardware', 'power', 'manual']),
+        reset_type=dict(type='str', required=True, choices=['software', 'hardware', 'power', 'manual']),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
     module = AnsibleModule(
