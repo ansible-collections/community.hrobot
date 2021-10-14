@@ -215,6 +215,7 @@ servers:
 '''
 
 from ansible.module_utils.basic import AnsibleModule
+
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
