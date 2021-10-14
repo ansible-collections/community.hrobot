@@ -10,61 +10,45 @@ __metaclass__ = type
 
 DOCUMENTATION = r'''
 ---
-module: server_info
-short_description: Query information on one or more servers
+module: server
+short_description: Update server information
 version_added: 1.2.0
 author:
   - Felix Fontein (@felixfontein)
 description:
-  - Query information on one or more servers.
+  - Allows to update server information.
+  - Right now the API only supports updating the server's name.
 extends_documentation_fragment:
   - community.hrobot.robot
 
 options:
   server_number:
     description:
-      - Limit result list to server with this number.
+      - The server number of the server to update.
     type: int
+    required: true
   server_name:
     description:
-      - Limit result list to servers of this name.
+      - The server's name.
+      - If this option is not provided, it will not be adjusted.
     type: str
-  full_info:
-    description:
-      - Whether to provide full information for every server.
-      - Setting this to C(true) requires one REST call per server,
-        which is slow and reduces your rate limit. Use with care.
-      - When I(server_number) is specified, this option is set to C(true).
-    type: bool
-    default: false
 '''
 
 EXAMPLES = r'''
-- name: Query a list of all servers
-  community.hrobot.server_info:
+- name: Set server's name to foo.example.com
+  community.hrobot.server:
     hetzner_user: foo
     hetzner_password: bar
-  register: result
-
-- name: Query a specific server
-  community.hrobot.server_info:
-    hetzner_user: foo
-    hetzner_password: bar
-    server_number: 23
-  register: result
-
-- name: Output data on specific server
-  ansible.builtin.debug:
-    msg: "Server name: {{ result.servers[0].server_name }}"
+    server_number: 123
+    server_name: foo.example.com
 '''
 
 RETURN = r'''
-servers:
+server:
   description:
-    - List of servers matching the provided options.
+    - Information on the server.
   returned: success
-  type: list
-  elements: dict
+  type: dict
   contains:
     server_ip:
       description:
@@ -163,58 +147,59 @@ servers:
         - Whether the server can be automatically reset.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: success
     rescue:
       description:
         - Whether the rescue system is available.
       type: bool
       sample: false
-      returned: when I(full_info=true)
+      returned: success
     vnc:
       description:
         - Flag of VNC installation availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: success
     windows:
       description:
         - Flag of Windows installation availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: success
     plesk:
       description:
         - Flag of Plesk installation availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: success
     cpanel:
       description:
         - Flag of cPanel installation availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: success
     wol:
       description:
         - Flag of Wake On Lan availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: success
     hot_swap:
       description:
         - Flag of Hot Swap availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: success
     linked_storagebox:
       description:
         - Linked Storage Box ID.
       type: int
       sample: 12345
-      returned: when I(full_info=true)
+      returned: success
 '''
 
 from ansible.module_utils.basic import AnsibleModule
+from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
@@ -225,9 +210,8 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
 
 def main():
     argument_spec = dict(
-        server_number=dict(type='int'),
+        server_number=dict(type='int', required=True),
         server_name=dict(type='str'),
-        full_info=dict(type='bool', default=False),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
     module = AnsibleModule(
@@ -237,38 +221,42 @@ def main():
 
     server_number = module.params['server_number']
     server_name = module.params['server_name']
-    full_info = module.params['full_info']
 
-    servers = []
-    if server_number is not None:
-        server_numbers = [server_number]
-    else:
-        url = "{0}/server".format(BASE_URL)
-        result, error = fetch_url_json(module, url, accept_errors=['SERVER_NOT_FOUND'])
-        server_numbers = []
-        if not error:
-            for entry in result:
-                if server_name is not None:
-                    if entry['server']['server_name'] != server_name:
-                        continue
-                if full_info:
-                    server_numbers.append(entry['server']['server_number'])
-                else:
-                    servers.append(entry['server'])
+    url = "{0}/server/{1}".format(BASE_URL, server_number)
+    server, error = fetch_url_json(module, url, accept_errors=['SERVER_NOT_FOUND'])
+    if error:
+        module.fail_json(msg='This server does not exist, or you do not have access rights for it')
 
-    for server_number in server_numbers:
-        url = "{0}/server/{1}".format(BASE_URL, server_number)
-        result, error = fetch_url_json(module, url, accept_errors=['SERVER_NOT_FOUND'])
-        if not error:
-            if server_name is not None:
-                if result['server']['server_name'] != server_name:
-                    continue
-            servers.append(result['server'])
+    result = {
+        'changed': False,
+        'server': server['server'],
+    }
 
-    module.exit_json(
-        changed=False,
-        servers=servers,
-    )
+    update = {}
+    if server_name is not None:
+        if server_name != result['server']['server_name']:
+            update['server_name'] = server_name
+
+    if update:
+        result['changed'] = True
+        if module.check_mode:
+            result['server'].update(update)
+        else:
+            headers = {"Content-type": "application/x-www-form-urlencoded"}
+            url = "{0}/server/{1}".format(BASE_URL, server_number)
+            server, error = fetch_url_json(
+                module,
+                url,
+                data=urlencode(update),
+                headers=headers,
+                method='POST',
+                accept_errors=['INVALID_INPUT'],
+            )
+            if error:
+                module.fail_json(msg='The values to update were invalid ({0})'.format(module.jsonify(update)))
+            result['server'] = server['server']
+
+    module.exit_json(**result)
 
 
 if __name__ == '__main__':
