@@ -52,6 +52,7 @@ class TestHetznerReset(BaseTestModule):
             'reset_type': 'manual',
         }, [
             FetchUrlCall('POST', 200)
+            .expect_form_value('type', 'man')
             .result_json({
                 'reset': {
                     'server_ip': '123.123.123.123',
@@ -74,6 +75,7 @@ class TestHetznerReset(BaseTestModule):
             'reset_type': 'power',
         }, [
             FetchUrlCall('POST', 400)
+            .expect_form_value('type', 'power')
             .result_json({
                 'error': {
                     'status': 400,
@@ -119,6 +121,7 @@ class TestHetznerReset(BaseTestModule):
             'reset_type': 'power',
         }, [
             FetchUrlCall('POST', 404)
+            .expect_form_value('type', 'power')
             .result_json({
                 'error': {
                     'status': 404,
@@ -158,6 +161,7 @@ class TestHetznerReset(BaseTestModule):
             'reset_type': 'power',
         }, [
             FetchUrlCall('POST', 404)
+            .expect_form_value('type', 'power')
             .result_json({
                 'error': {
                     'status': 404,
@@ -197,6 +201,7 @@ class TestHetznerReset(BaseTestModule):
             'reset_type': 'power',
         }, [
             FetchUrlCall('POST', 409)
+            .expect_form_value('type', 'power')
             .result_json({
                 'error': {
                     'status': 409,
@@ -216,6 +221,7 @@ class TestHetznerReset(BaseTestModule):
             'reset_type': 'power',
         }, [
             FetchUrlCall('POST', 500)
+            .expect_form_value('type', 'power')
             .result_json({
                 'error': {
                     'status': 500,
