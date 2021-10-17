@@ -130,7 +130,7 @@ def main():
             module.fail_json(msg='A manual reset is already running')
         if error == 'RESET_FAILED':
             module.fail_json(msg='The reset failed due to an internal error at Hetzner')
-        raise AssertionError('Unexpected error {0}'.format(error))
+        raise AssertionError('Unexpected error {0}'.format(error))  # pragma: no cover
 
     module.exit_json(changed=True)
 

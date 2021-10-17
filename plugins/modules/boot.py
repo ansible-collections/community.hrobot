@@ -292,7 +292,7 @@ def main():
             module.fail_json(msg='This server does not exist, or you do not have access rights for it')
         if error == 'BOOT_NOT_AVAILABLE':
             module.fail_json(msg='There is no boot configuration available for this server')
-        raise AssertionError('Unexpected error {0}'.format(error))
+        raise AssertionError('Unexpected error {0}'.format(error))  # pragma: no cover
 
     # Deactivate current boot configurations that are not requested
     for option_name, other_name in [
