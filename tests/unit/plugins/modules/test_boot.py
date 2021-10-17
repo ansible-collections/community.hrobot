@@ -210,7 +210,7 @@ class TestHetznerBoot(BaseTestModule):
             },
         }, [
             FetchUrlCall('GET', 200)
-            .result_json(_amend_boot({}))
+            .result_json(_amend_boot())
             .expect_url('{0}/boot/23'.format(BASE_URL)),
             FetchUrlCall('POST', 200)
             .expect_form_value('os', 'linux')
@@ -234,7 +234,7 @@ class TestHetznerBoot(BaseTestModule):
             '_ansible_check_mode': True,
         }, [
             FetchUrlCall('GET', 200)
-            .result_json(_amend_boot({}))
+            .result_json(_amend_boot())
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is True
@@ -355,7 +355,7 @@ class TestHetznerBoot(BaseTestModule):
             },
         }, [
             FetchUrlCall('GET', 200)
-            .result_json(_amend_boot({}))
+            .result_json(_amend_boot())
             .expect_url('{0}/boot/23'.format(BASE_URL)),
             FetchUrlCall('POST', 200)
             .expect_form_value('dist', 'Arch Linux latest minimal')
