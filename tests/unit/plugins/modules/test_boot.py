@@ -22,6 +22,7 @@ def _amend_server_data(data):
     })
     return data
 
+
 def create_rescue_inactive():
     return _amend_server_data({
         'active': False,
@@ -33,6 +34,7 @@ def create_rescue_inactive():
         'password': None,
     })
 
+
 def create_rescue_active(os='linux', arch=64, authorized_key=None, host_key=None):
     return _amend_server_data({
         'active': True,
@@ -43,6 +45,7 @@ def create_rescue_active(os='linux', arch=64, authorized_key=None, host_key=None
         'os': os,
         'password': 'aBcDeFgHiJ1234',
     })
+
 
 def create_linux_inactive():
     return {
@@ -65,6 +68,7 @@ def create_linux_inactive():
         'host_key': [],
     }
 
+
 def create_linux_active(dist='Arch Linux latest minimal', arch=64, lang='en', authorized_key=None, host_key=None):
     return {
         'dist': dist,
@@ -76,6 +80,7 @@ def create_linux_active(dist='Arch Linux latest minimal', arch=64, lang='en', au
         'host_key': host_key or [],
     }
 
+
 def create_vnc_inactive():
     return {
         'dist': ['CentOS-7.9', 'CentOS-8.4', 'Fedora-33', 'openSUSE-15.2'],
@@ -84,6 +89,7 @@ def create_vnc_inactive():
         'active': False,
         'password': None,
     }
+
 
 def _amend_boot(data=None):
     if data is None:

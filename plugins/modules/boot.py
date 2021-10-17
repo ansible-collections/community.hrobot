@@ -378,7 +378,7 @@ def main():
                         fetch_url_json(module, url, method='DELETE', allow_empty_result=True)
                     # Enable new boot configuration
                     headers = {"Content-type": "application/x-www-form-urlencoded"}
-                    result, _ = fetch_url_json(
+                    result, dummy = fetch_url_json(
                         module,
                         url,
                         data=urlencode(data),
