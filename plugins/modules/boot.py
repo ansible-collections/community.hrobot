@@ -241,6 +241,9 @@ configuration_type:
       - install_cpanel
 password:
     description:
+      - The root password for the active boot configuration, if available.
+      - For non-rescue boot configurations, it is avised to change the root password
+        as soon as possible.
     returned: success and if a boot configuration other than C(regular_boot) is active
     type: str
 '''
