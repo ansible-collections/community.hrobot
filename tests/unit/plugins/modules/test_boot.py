@@ -75,7 +75,7 @@ def create_linux_active(dist='Arch Linux latest minimal', arch=64, lang='en', au
         'arch': arch,
         'lang': lang,
         'active': True,
-        'password': None,
+        'password': 'aBcDeFgHiJ1234',
         'authorized_key': authorized_key or [],
         'host_key': host_key or [],
     }
@@ -126,6 +126,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is False
+        assert result['configuration_type'] == 'regular_boot'
+        assert result['password'] is None
 
     def test_rescue_idempotent(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -143,6 +145,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is False
+        assert result['configuration_type'] == 'rescue'
+        assert result['password'] == 'aBcDeFgHiJ1234'
 
     def test_rescue_idempotent_2(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -166,6 +170,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is False
+        assert result['configuration_type'] == 'rescue'
+        assert result['password'] == 'aBcDeFgHiJ1234'
 
     def test_rescue_deactivate(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -183,6 +189,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23/rescue'.format(BASE_URL)),
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'regular_boot'
+        assert result['password'] is None
 
     def test_rescue_deactivate_check_mode(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -199,6 +207,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'regular_boot'
+        assert result['password'] is None
 
     def test_rescue_activate(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -216,12 +226,14 @@ class TestHetznerBoot(BaseTestModule):
             .expect_form_value('os', 'linux')
             .expect_form_value_absent('arch')
             .expect_form_value_absent('authorized_key')
-            .result_json(_amend_boot({
+            .result_json({
                 'rescue': create_rescue_active(os='linux'),
-            }))
+            })
             .expect_url('{0}/boot/23/rescue'.format(BASE_URL)),
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'rescue'
+        assert result['password'] == 'aBcDeFgHiJ1234'
 
     def test_rescue_activate_check_mode(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -238,6 +250,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'rescue'
+        assert result['password'] is None
 
     def test_rescue_reactivate(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -260,12 +274,14 @@ class TestHetznerBoot(BaseTestModule):
             .expect_form_value('os', 'linuxold')
             .expect_form_value('arch', '32')
             .expect_form_value_absent('authorized_key')
-            .result_json(_amend_boot({
+            .result_json({
                 'rescue': create_rescue_active(os='linuxold', arch=32),
-            }))
+            })
             .expect_url('{0}/boot/23/rescue'.format(BASE_URL)),
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'rescue'
+        assert result['password'] == 'aBcDeFgHiJ1234'
 
     def test_rescue_reactivate_check_mode(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -284,6 +300,8 @@ class TestHetznerBoot(BaseTestModule):
             }))
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'rescue'
+        assert result['password'] is None
 
     def test_install_linux_idempotent(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -302,6 +320,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is False
+        assert result['configuration_type'] == 'install_linux'
+        assert result['password'] == 'aBcDeFgHiJ1234'
 
     def test_install_linux_idempotent_2(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -326,6 +346,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is False
+        assert result['configuration_type'] == 'install_linux'
+        assert result['password'] == 'aBcDeFgHiJ1234'
 
     def test_install_linux_deactivate(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -343,6 +365,8 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23/linux'.format(BASE_URL)),
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'regular_boot'
+        assert result['password'] is None
 
     def test_install_linux_activate(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -361,12 +385,14 @@ class TestHetznerBoot(BaseTestModule):
             .expect_form_value('dist', 'Arch Linux latest minimal')
             .expect_form_value_absent('arch')
             .expect_form_value_absent('authorized_key')
-            .result_json(_amend_boot({
+            .result_json({
                 'linux': create_linux_active(dist='Arch Linux latest minimal', lang='en'),
-            }))
+            })
             .expect_url('{0}/boot/23/linux'.format(BASE_URL)),
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'install_linux'
+        assert result['password'] == 'aBcDeFgHiJ1234'
 
     def test_install_linux_reactivate(self, mocker):
         result = self.run_module_success(mocker, boot, {
@@ -397,12 +423,14 @@ class TestHetznerBoot(BaseTestModule):
             .expect_form_present('authorized_key')
             # .expect_form_value('authorized_key', 'asdf')
             # .expect_form_value('authorized_key', 'foo bar')
-            .result_json(_amend_boot({
+            .result_json({
                 'linux': create_linux_active(dist='Debian 11 base', lang='fr', arch=32, authorized_key=['foo bar', 'asdf']),
-            }))
+            })
             .expect_url('{0}/boot/23/linux'.format(BASE_URL)),
         ])
         assert result['changed'] is True
+        assert result['configuration_type'] == 'install_linux'
+        assert result['password'] == 'aBcDeFgHiJ1234'
 
     def test_server_not_found(self, mocker):
         result = self.run_module_failed(mocker, boot, {

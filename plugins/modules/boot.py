@@ -225,7 +225,25 @@ EXAMPLES = r'''
         - 15:28:b0:03:95:f0:77:b3:10:56:15:6b:77:22:a5:bb
 '''
 
-RETURN = r''' # '''
+RETURN = r'''
+configuration_type:
+    description:
+      - Describes the active boot configuration.
+    returned: success
+    type: str
+    choices:
+      - regular_boot
+      - rescue
+      - install_linux
+      - install_vnc
+      - install_windows
+      - install_plesk
+      - install_cpanel
+password:
+    description:
+    returned: success and if a boot configuration other than C(regular_boot) is active
+    type: str
+'''
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import urlencode
@@ -235,6 +253,41 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     ROBOT_DEFAULT_ARGUMENT_SPEC,
     fetch_url_json,
 )
+
+
+BOOT_CONFIGURATION_DATA = [
+    ('rescue', 'rescue', {
+        'os': ('os', 'os'),
+        'arch': ('arch', 'arch'),
+        'authorized_keys': ('authorized_key', 'authorized_key'),
+    }),
+    ('install_linux', 'linux', {
+        'dist': ('dist', 'dist'),
+        'arch': ('arch', 'arch'),
+        'lang': ('lang', 'lang'),
+        'authorized_keys': ('authorized_key', 'authorized_key'),
+    }),
+    ('install_vnc', 'vnc', {
+        'dist': ('dist', 'dist'),
+        'arch': ('arch', 'arch'),
+        'lang': ('lang', 'lang'),
+    }),
+    ('install_windows', 'windows', {
+        'lang': ('lang', 'lang'),
+    }),
+    ('install_plesk', 'plesk', {
+        'dist': ('dist', 'dist'),
+        'arch': ('arch', 'arch'),
+        'lang': ('lang', 'lang'),
+        'hostname': ('hostname', 'hostname'),
+    }),
+    ('install_cpanel', 'cpanel', {
+        'dist': ('dist', 'dist'),
+        'arch': ('arch', 'arch'),
+        'lang': ('lang', 'lang'),
+        'hostname': ('hostname', 'hostname'),
+    }),
+]
 
 
 def main():
@@ -295,14 +348,7 @@ def main():
         raise AssertionError('Unexpected error {0}'.format(error))  # pragma: no cover
 
     # Deactivate current boot configurations that are not requested
-    for option_name, other_name in [
-        ('rescue', 'rescue'),
-        ('install_linux', 'linux'),
-        ('install_vnc', 'vnc'),
-        ('install_windows', 'windows'),
-        ('install_plesk', 'plesk'),
-        ('install_cpanel', 'cpanel'),
-    ]:
+    for option_name, other_name, dummy in BOOT_CONFIGURATION_DATA:
         if (result['boot'].get(other_name) or {}).get('active') and not module.params[option_name]:
             changed = True
             if not module.check_mode:
@@ -310,41 +356,15 @@ def main():
                 fetch_url_json(module, url, method='DELETE', allow_empty_result=True)
 
     # Enable/compare boot configuration
-    for option_name, other_name, options in [
-        ('rescue', 'rescue', {
-            'os': ('os', 'os'),
-            'arch': ('arch', 'arch'),
-            'authorized_keys': ('authorized_key', 'authorized_key'),
-        }),
-        ('install_linux', 'linux', {
-            'dist': ('dist', 'dist'),
-            'arch': ('arch', 'arch'),
-            'lang': ('lang', 'lang'),
-            'authorized_keys': ('authorized_key', 'authorized_key'),
-        }),
-        ('install_vnc', 'vnc', {
-            'dist': ('dist', 'dist'),
-            'arch': ('arch', 'arch'),
-            'lang': ('lang', 'lang'),
-        }),
-        ('install_windows', 'windows', {
-            'lang': ('lang', 'lang'),
-        }),
-        ('install_plesk', 'plesk', {
-            'dist': ('dist', 'dist'),
-            'arch': ('arch', 'arch'),
-            'lang': ('lang', 'lang'),
-            'hostname': ('hostname', 'hostname'),
-        }),
-        ('install_cpanel', 'cpanel', {
-            'dist': ('dist', 'dist'),
-            'arch': ('arch', 'arch'),
-            'lang': ('lang', 'lang'),
-            'hostname': ('hostname', 'hostname'),
-        }),
-    ]:
+    return_values = {
+        'configuration_type': 'regular_boot',
+        'password': None,
+    }
+    for option_name, other_name, options in BOOT_CONFIGURATION_DATA:
         if module.params[option_name]:
+            return_values['configuration_type'] = option_name
             existing = result['boot'].get(other_name) or {}
+            return_values['password'] = existing.get('password')
             data = {}
             for option_key, (result_key, data_key) in options.items():
                 option = module.params[option_name][option_key]
@@ -385,8 +405,11 @@ def main():
                         headers=headers,
                         method='POST',
                     )
+                    return_values['password'] = (result.get(other_name) or {}).get('password')
+                else:
+                    return_values['password'] = None
 
-    module.exit_json(changed=changed)
+    module.exit_json(changed=changed, **return_values)
 
 
 if __name__ == '__main__':
