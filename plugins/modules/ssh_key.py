@@ -133,7 +133,7 @@ def extract_fingerprint(public_key, alg='md5', size=16):
             'Error while extracting fingerprint from public key data: cannot split public key into at least two parts')
     try:
         public_key = base64.b64decode(public_key)
-    except binascii.Error as exc:
+    except (binascii.Error, TypeError) as exc:
         raise FingerprintError(
             'Error while extracting fingerprint from public key data: {0}'.format(exc))
     try:

@@ -422,9 +422,10 @@ def test_extract_fingerprint():
     with pytest.raises(ssh_key.FingerprintError) as exc:
         ssh_key.extract_fingerprint('a b')
     print(exc.value.args[0])
-    assert exc.value.args[0] == (
+    assert exc.value.args[0] in (
         'Error while extracting fingerprint from public key data: Invalid base64-encoded string:'
-        ' number of data characters (1) cannot be 1 more than a multiple of 4'
+        ' number of data characters (1) cannot be 1 more than a multiple of 4',
+        'Error while extracting fingerprint from public key data: Incorrect padding',
     )
     with pytest.raises(ssh_key.FingerprintError) as exc:
         ssh_key.extract_fingerprint('a ab=f')
