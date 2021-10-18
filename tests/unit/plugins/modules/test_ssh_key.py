@@ -359,6 +359,18 @@ class TestHetznerSSHKey(BaseTestModule):
         assert result['changed'] is True
         assert result['fingerprint'] == FINGERPRINT_1
 
+    # Error
+
+    def test_invalid_public_key(self, mocker):
+        result = self.run_module_failed(mocker, ssh_key, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'state': 'present',
+            'name': 'bar',
+            'public_key': 'asdf',
+        }, [])
+        assert result['msg'] == 'Error while extracting fingerprint from public key data: cannot split public key into at least two parts'
+
 
 def test_normalize_fingerprint():
     assert ssh_key.normalize_fingerprint(FINGERPRINT_1) == FINGERPRINT_1
