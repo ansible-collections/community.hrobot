@@ -50,7 +50,7 @@ options:
     public_key:
         description:
           - The public key data in OpenSSH format.
-          - Example: C(ssh-rsa AAAAB3NzaC1yc+...)
+          - "Example: C(ssh-rsa AAAAB3NzaC1yc+...)"
           - One of I(public_key) and I(fingerprint) are required if I(state=absent).
           - Required if I(state=present).
         type: str
