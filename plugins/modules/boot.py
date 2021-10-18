@@ -18,6 +18,8 @@ author:
 description:
   - Set the boot configuration for a dedicated server.
 seealso:
+  - module: community.hrobot.ssh_key
+    description: Add, remove or update SSH key
   - module: community.hrobot.ssh_key_info
     description: Query information on SSH keys
 extends_documentation_fragment:
@@ -67,7 +69,8 @@ options:
           - One or more SSH key fingerprints to equip the rescue system with.
           - Only fingerprints for SSH keys deposited in the Robot API can be used.
           - You can use the M(community.hrobot.ssh_key_info) module to query the
-            SSH keys you can use.
+            SSH keys you can use, and the M(community.hrobot.ssh_key) module to
+            add or update SSH keys.
         type: list
         elements: str
   install_linux:
@@ -101,7 +104,8 @@ options:
           - One or more SSH key fingerprints to equip the rescue system with.
           - Only fingerprints for SSH keys deposited in the Robot API can be used.
           - You can use the M(community.hrobot.ssh_key_info) module to query the
-            SSH keys you can use.
+            SSH keys you can use, and the M(community.hrobot.ssh_key) module to
+            add or update SSH keys.
         type: list
         elements: str
   install_vnc:
