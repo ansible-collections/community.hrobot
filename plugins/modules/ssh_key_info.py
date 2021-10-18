@@ -17,6 +17,9 @@ author:
   - Felix Fontein (@felixfontein)
 description:
   - List information on all your SSH keys stored in Hetzner's Robot.
+seealso:
+  - module: community.hrobot.ssh_key
+    description: Add, remove or update SSH key
 extends_documentation_fragment:
   - community.hrobot.robot
 '''
