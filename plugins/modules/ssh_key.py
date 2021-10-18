@@ -88,6 +88,7 @@ import binascii
 import re
 
 from ansible.module_utils.basic import AnsibleModule, AVAILABLE_HASH_ALGORITHMS
+from ansible.module_utils.common.text.converters import to_native
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
@@ -97,47 +98,52 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
 )
 
 
+class FingerprintError(Exception):
+    pass
+
+
+SPACE_RE = re.compile(' +')
 FINGERPRINT_PART = re.compile('^[0-9a-f]{2}$')
 
 
-def normalize_fingerprint(module, fingerprint):
+def normalize_fingerprint(fingerprint):
     if ':' in fingerprint:
         fingerprint = fingerprint.split(':')
     else:
         fingerprint = [fingerprint[i:i+2] for i in range(0, len(fingerprint), 2)]
     if len(fingerprint) != 16:
-        module.fail_json(
-            msg='Fingerprint must consist of 16 8-bit hex numbers: got {0} 8-bit hex numbers instead'.format(len(fingerprint)))
+        raise FingerprintError(
+            'Fingerprint must consist of 16 8-bit hex numbers: got {0} 8-bit hex numbers instead'.format(len(fingerprint)))
     for i, part in enumerate(fingerprint):
         part = part.lower()
         if len(part) < 2:
             part = '0{0}'.format(part)
         if not FINGERPRINT_PART.match(part):
-            module.fail_json(
-                msg='Fingerprint must consist of 16 8-bit hex numbers: number {0} is invalid: "{1}"'.format(i + 1, part))
+            raise FingerprintError(
+                'Fingerprint must consist of 16 8-bit hex numbers: number {0} is invalid: "{1}"'.format(i + 1, part))
         fingerprint[i] = part
     return ':'.join(fingerprint)
 
 
-def extract_fingerprint(module, public_key, alg='md5'):
+def extract_fingerprint(public_key, alg='md5'):
     try:
-        public_key = public_key.split(' ')[1]
+        public_key = SPACE_RE.split(public_key.strip())[1]
     except IndexError:
-        module.fail_json(
-            msg='Error while extracting fingerprint from public key data: cannot split public key into at least two parts')
+        raise FingerprintError(
+            'Error while extracting fingerprint from public key data: cannot split public key into at least two parts')
     try:
         public_key = base64.b64decode(public_key)
     except binascii.Error as exc:
-        module.fail_json(
-            msg='Error while extracting fingerprint from public key data: {0}'.format(exc))
+        raise FingerprintError(
+            'Error while extracting fingerprint from public key data: {0}'.format(exc))
     try:
         algorithm = AVAILABLE_HASH_ALGORITHMS[alg]
     except KeyError:
-        module.fail_json(
-            msg='Hash algorithm {0} is not available. Possibly running in FIPS mode.'.format(alg.upper()))
+        raise FingerprintError(
+            'Hash algorithm {0} is not available. Possibly running in FIPS mode.'.format(alg.upper()))
     digest = algorithm()
     digest.update(public_key)
-    return normalize_fingerprint(module, digest.hexdigest())
+    return normalize_fingerprint(digest.hexdigest())
 
 
 def main():
@@ -164,10 +170,14 @@ def main():
     name = module.params['name']
     fingerprint = module.params['fingerprint']
     public_key = module.params['public_key']
-    if fingerprint is not None:
-        fingerprint = normalize_fingerprint(module, fingerprint)
-    else:
-        fingerprint = extract_fingerprint(module, public_key)
+
+    try:
+        if fingerprint is not None:
+            fingerprint = normalize_fingerprint(fingerprint)
+        else:
+            fingerprint = extract_fingerprint(public_key)
+    except FingerprintError as exc:
+        module.fail_json(msg=to_native(exc))
 
     url = "{0}/key/{1}".format(BASE_URL, fingerprint)
 
@@ -205,7 +215,7 @@ def main():
         }
         if not exists:
             # Create key
-            data['data'] = ' '.join(public_key.split(' ')[:2])
+            data['data'] = ' '.join(SPACE_RE.split(public_key.strip())[:2])
             url = "{0}/key".format(BASE_URL)
         # Update or create key
         headers = {"Content-type": "application/x-www-form-urlencoded"}
