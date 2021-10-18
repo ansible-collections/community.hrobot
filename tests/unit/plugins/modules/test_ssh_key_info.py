@@ -48,7 +48,7 @@ class TestHetznerSSHKeyInfo(BaseTestModule):
         assert result['changed'] is False
         assert result['ssh_keys'] == []
 
-    def test_no_keys(self, mocker):
+    def test_single_key(self, mocker):
         result = self.run_module_success(mocker, ssh_key_info, {
             'hetzner_user': '',
             'hetzner_password': '',
