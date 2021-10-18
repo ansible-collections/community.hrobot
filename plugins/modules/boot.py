@@ -17,6 +17,9 @@ author:
   - Felix Fontein (@felixfontein)
 description:
   - Set the boot configuration for a dedicated server.
+seealso:
+  - module: community.hrobot.ssh_key_info
+    description: Query information on SSH keys
 extends_documentation_fragment:
   - community.hrobot.robot
 
@@ -63,6 +66,8 @@ options:
         description:
           - One or more SSH key fingerprints to equip the rescue system with.
           - Only fingerprints for SSH keys deposited in the Robot API can be used.
+          - You can use the M(community.hrobot.ssh_key_info) module to query the
+            SSH keys you can use.
         type: list
         elements: str
   install_linux:
@@ -95,6 +100,8 @@ options:
         description:
           - One or more SSH key fingerprints to equip the rescue system with.
           - Only fingerprints for SSH keys deposited in the Robot API can be used.
+          - You can use the M(community.hrobot.ssh_key_info) module to query the
+            SSH keys you can use.
         type: list
         elements: str
   install_vnc:
