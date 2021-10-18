@@ -1,2 +1,3 @@
+plugins/modules/boot.py validate-modules:return-syntax-error  # only allowed in 2.13+
 plugins/modules/server.py validate-modules:return-syntax-error  # only allowed in 2.13+
 plugins/modules/server_info.py validate-modules:return-syntax-error  # only allowed in 2.13+
