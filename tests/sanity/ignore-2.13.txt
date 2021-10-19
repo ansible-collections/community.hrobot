@@ -1,1 +1,0 @@
-plugins/modules/boot.py validate-modules:return-syntax-error  # waiting for https://github.com/ansible/ansible/pull/76070
