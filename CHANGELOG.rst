@@ -32,7 +32,7 @@ New Plugins
 Inventory
 ~~~~~~~~~
 
-- robot - Hetzner Robot inventory source
+- community.hrobot.robot - Hetzner Robot inventory source
 
 v1.0.0
 ======
