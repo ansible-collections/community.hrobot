@@ -36,3 +36,44 @@ releases:
     - 1.1.1.yml
     - 9-force-basic-auth.yaml
     release_date: '2021-02-24'
+  1.2.0:
+    changes:
+      minor_changes:
+      - Avoid internal ansible-core module_utils in favor of equivalent public API
+        available since at least Ansible 2.9 (https://github.com/ansible-collections/community.hrobot/pull/18).
+      - firewall - rename option ``whitelist_hos`` to ``allowlist_hos``, keep old
+        name as alias (https://github.com/ansible-collections/community.hrobot/pull/15).
+      - firewall, firewall_info - add return value ``allowlist_hos``, which contains
+        the same value as ``whitelist_hos``. The old name ``whitelist_hos`` will be
+        removed eventually (https://github.com/ansible-collections/community.hrobot/pull/15).
+      - robot module utils - add ``allow_empty_result`` parameter to ``plugin_open_url_json``
+        and ``fetch_url_json`` (https://github.com/ansible-collections/community.hrobot/pull/16).
+      release_summary: Feature release with multiple new modules.
+    fragments:
+    - 1.2.0.yml
+    - 15-firewall-allowlist_hos.yml
+    - 16-module_utils-allow_empty_result.yml
+    - ansible-core-_text.yml
+    modules:
+    - description: Set boot configuration
+      name: boot
+      namespace: ''
+    - description: Reset a dedicated server
+      name: reset
+      namespace: ''
+    - description: Set or remove reverse DNS entry for IP
+      name: reverse_dns
+      namespace: ''
+    - description: Update server information
+      name: server
+      namespace: ''
+    - description: Query information on one or more servers
+      name: server_info
+      namespace: ''
+    - description: Add, remove or update SSH key
+      name: ssh_key
+      namespace: ''
+    - description: Query information on SSH keys
+      name: ssh_key_info
+      namespace: ''
+    release_date: '2021-10-20'

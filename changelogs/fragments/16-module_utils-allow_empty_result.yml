@@ -1,2 +1,0 @@
-minor_changes:
-- "robot module utils - add ``allow_empty_result`` parameter to ``plugin_open_url_json`` and ``fetch_url_json`` (https://github.com/ansible-collections/community.hrobot/pull/16)."
