@@ -7,8 +7,9 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-from ansible.module_utils.urls import fetch_url, open_url
+from ansible.module_utils.six import PY3
 from ansible.module_utils.six.moves.urllib.error import HTTPError
+from ansible.module_utils.urls import fetch_url, open_url
 
 import json
 import time
@@ -89,8 +90,12 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
     module.params['force_basic_auth'] = True
     resp, info = fetch_url(module, url, method=method, timeout=timeout, data=data, headers=headers)
     try:
+        # In Python 2, reading from a closed response yields a TypeError.
+        # In Python 3, read() simply returns ''
+        if PY3 and resp.closed:
+            raise TypeError
         content = resp.read()
-    except AttributeError:
+    except (AttributeError, TypeError):
         content = info.pop('body', None)
 
     if not content:
