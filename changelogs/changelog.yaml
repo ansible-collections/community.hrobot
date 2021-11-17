@@ -77,3 +77,13 @@ releases:
       name: ssh_key_info
       namespace: ''
     release_date: '2021-10-20'
+  1.2.1:
+    changes:
+      minor_changes:
+      - Generic module HTTP support code - fix usage of ``fetch_url`` with changes
+        in latest ansible-core ``devel`` branch (https://github.com/ansible-collections/community.hrobot/pull/30).
+      release_summary: Maintenance release.
+    fragments:
+    - 1.2.1.yml
+    - fetch_url-devel.yml
+    release_date: '2021-11-17'
