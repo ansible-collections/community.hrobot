@@ -1,3 +1,2 @@
 bugfixes:
-  - apt_repository - fix crash caused by ``cache.update()`` raising an ``IOError``
-    due to a timeout in ``apt update`` (https://github.com/ansible/ansible/issues/51995).
+  - bugfix for incorrect handling of ssh-keys for the community.hcloud.boot module. Trying to set the boot record with the module lets the API return errors (reported in https://github.com/ansible-collections/community.hrobot/issues/32). This is and the idempotence for ssh-keys is fixed with the https://github.com/ansible-collections/community.hrobot/pull/33 PR.
