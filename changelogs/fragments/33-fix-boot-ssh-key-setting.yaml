@@ -1,0 +1,3 @@
+bugfixes:
+  - apt_repository - fix crash caused by ``cache.update()`` raising an ``IOError``
+    due to a timeout in ``apt update`` (https://github.com/ansible/ansible/issues/51995).
