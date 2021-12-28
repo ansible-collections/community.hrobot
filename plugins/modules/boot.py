@@ -396,6 +396,7 @@ def main():
                     should = module.params[option_name][option_key]
                     if should is None:
                         continue
+                    # unfold the return object for the idempotence check to work correctly
                     if option_key == 'authorized_keys':
                         has = list(map(lambda x: x['key']['fingerprint'], existing.get(data_key)))
                     else:
