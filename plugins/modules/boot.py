@@ -422,7 +422,7 @@ def main():
                     result, dummy = fetch_url_json(
                         module,
                         url,
-                        data=urlencode(data,True),
+                        data=urlencode(data, True),
                         headers=headers,
                         method='POST',
                     )
