@@ -384,7 +384,11 @@ def main():
                 option = module.params[option_name][option_key]
                 if option is None or option == []:
                     continue
-                data[data_key] = option
+
+                if isinstance(option, list):
+                    data[data_key+'[]'] = option
+                else:
+                    data[data_key] = option
             if existing.get('active'):
                 # Idempotence check
                 needs_change = False
@@ -392,7 +396,10 @@ def main():
                     should = module.params[option_name][option_key]
                     if should is None:
                         continue
-                    has = existing.get(data_key)
+                    if option_key == 'authorized_keys':
+                        has = list(map(lambda x: x['key']['fingerprint'], existing.get(data_key)))
+                    else:
+                        has = existing.get(data_key)
                     if isinstance(has, list):
                         has = sorted(has)
                         if not isinstance(should, list):
@@ -415,7 +422,7 @@ def main():
                     result, dummy = fetch_url_json(
                         module,
                         url,
-                        data=urlencode(data),
+                        data=urlencode(data,True),
                         headers=headers,
                         method='POST',
                     )
