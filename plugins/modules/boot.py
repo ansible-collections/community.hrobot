@@ -392,7 +392,10 @@ def main():
                     should = module.params[option_name][option_key]
                     if should is None:
                         continue
+                    # unfold the return object for the idempotence check to work correctly
                     has = existing.get(data_key)
+                    if has and option_key == 'authorized_keys':
+                        has = [x['key']['fingerprint'] for x in has]
                     if isinstance(has, list):
                         has = sorted(has)
                         if not isinstance(should, list):
@@ -415,7 +418,7 @@ def main():
                     result, dummy = fetch_url_json(
                         module,
                         url,
-                        data=urlencode(data),
+                        data=urlencode(data, True),
                         headers=headers,
                         method='POST',
                     )

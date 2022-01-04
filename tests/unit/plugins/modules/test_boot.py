@@ -157,15 +157,40 @@ class TestHetznerBoot(BaseTestModule):
                 'os': 'linux',
                 'arch': 32,
                 'authorized_keys': [
-                    'abc',
-                    'def',
-                    'afz',
+                    'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                    'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99',
+                    '0f:1e:2d:3c:4b:5a:69:78:87:96:a5:b4:c3:d2:e1:f0',
                 ],
             },
         }, [
             FetchUrlCall('GET', 200)
             .result_json(_amend_boot({
-                'rescue': create_rescue_active(os='linux', arch=32, authorized_key=['def', 'afz', 'abc']),
+                'rescue': create_rescue_active(os='linux', arch=32, authorized_key=[
+                    {
+                        'key': {
+                            'fingerprint': 'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                            'name': 'baz',
+                            'size': 4096,
+                            'type': 'RSA',
+                        },
+                    },
+                    {
+                        'key': {
+                            'fingerprint': 'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99',
+                            'name': 'foo bar',
+                            'size': 2048,
+                            'type': 'RSA',
+                        },
+                    },
+                    {
+                        'key': {
+                            'fingerprint': '0f:1e:2d:3c:4b:5a:69:78:87:96:a5:b4:c3:d2:e1:f0',
+                            'name': 'test',
+                            'size': 3072,
+                            'type': 'RSA',
+                        },
+                    },
+                ]),
             }))
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
@@ -333,15 +358,40 @@ class TestHetznerBoot(BaseTestModule):
                 'arch': 32,
                 'lang': 'de',
                 'authorized_keys': [
-                    'abc',
-                    'def',
-                    'afz',
+                    'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                    '0f:1e:2d:3c:4b:5a:69:78:87:96:a5:b4:c3:d2:e1:f0',
+                    'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99',
                 ],
             },
         }, [
             FetchUrlCall('GET', 200)
             .result_json(_amend_boot({
-                'linux': create_linux_active(dist='Arch Linux latest minimal', arch=32, lang='de', authorized_key=['def', 'afz', 'abc']),
+                'linux': create_linux_active(dist='Arch Linux latest minimal', arch=32, lang='de', authorized_key=[
+                    {
+                        'key': {
+                            'fingerprint': 'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                            'name': 'abc',
+                            'size': 4096,
+                            'type': 'RSA',
+                        },
+                    },
+                    {
+                        'key': {
+                            'fingerprint': 'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99',
+                            'name': 'buzz',
+                            'size': 2048,
+                            'type': 'RSA',
+                        },
+                    },
+                    {
+                        'key': {
+                            'fingerprint': '0f:1e:2d:3c:4b:5a:69:78:87:96:a5:b4:c3:d2:e1:f0',
+                            'name': 'afz',
+                            'size': 2048,
+                            'type': 'RSA',
+                        },
+                    },
+                ]),
             }))
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
@@ -404,8 +454,8 @@ class TestHetznerBoot(BaseTestModule):
                 'arch': 32,
                 'lang': 'fr',
                 'authorized_keys': [
-                    'asdf',
-                    'foo bar',
+                    'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                    'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99',
                 ],
             },
         }, [
@@ -421,10 +471,27 @@ class TestHetznerBoot(BaseTestModule):
             .expect_form_value('arch', '32')
             .expect_form_value('lang', 'fr')
             .expect_form_present('authorized_key')
-            # .expect_form_value('authorized_key', 'asdf')
-            # .expect_form_value('authorized_key', 'foo bar')
+            # .expect_form_value('authorized_key', 'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0')
+            # .expect_form_value('authorized_key', 'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99')
             .result_json({
-                'linux': create_linux_active(dist='Debian 11 base', lang='fr', arch=32, authorized_key=['foo bar', 'asdf']),
+                'linux': create_linux_active(dist='Debian 11 base', lang='fr', arch=32, authorized_key=[
+                    {
+                        'key': {
+                            'fingerprint': 'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99',
+                            'name': 'foo bar',
+                            'size': 4096,
+                            'type': 'RSA',
+                        },
+                    },
+                    {
+                        'key': {
+                            'fingerprint': 'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                            'name': 'bar',
+                            'size': 2048,
+                            'type': 'RSA',
+                        },
+                    },
+                ]),
             })
             .expect_url('{0}/boot/23/linux'.format(BASE_URL)),
         ])
