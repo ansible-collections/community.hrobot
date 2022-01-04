@@ -87,3 +87,13 @@ releases:
     - 1.2.1.yml
     - fetch_url-devel.yml
     release_date: '2021-11-17'
+  1.2.2:
+    changes:
+      bugfixes:
+      - boot - fix incorrect handling of SSH authorized keys (https://github.com/ansible-collections/community.hrobot/issues/32,
+        https://github.com/ansible-collections/community.hrobot/pull/33).
+      release_summary: Bugfix release.
+    fragments:
+    - 1.2.2.yml
+    - 33-fix-boot-ssh-key-setting.yaml
+    release_date: '2022-01-04'

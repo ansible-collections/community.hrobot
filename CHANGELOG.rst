@@ -5,6 +5,19 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.2.2
+======
+
+Release Summary
+---------------
+
+Bugfix release.
+
+Bugfixes
+--------
+
+- boot - fix incorrect handling of SSH authorized keys (https://github.com/ansible-collections/community.hrobot/issues/32, https://github.com/ansible-collections/community.hrobot/pull/33).
+
 v1.2.1
 ======
 
