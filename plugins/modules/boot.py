@@ -384,11 +384,7 @@ def main():
                 option = module.params[option_name][option_key]
                 if option is None or option == []:
                     continue
-
-                if isinstance(option, list):
-                    data[data_key+'[]'] = option
-                else:
-                    data[data_key] = option
+                data[data_key] = option
             if existing.get('active'):
                 # Idempotence check
                 needs_change = False
@@ -397,10 +393,9 @@ def main():
                     if should is None:
                         continue
                     # unfold the return object for the idempotence check to work correctly
-                    if option_key == 'authorized_keys':
-                        has = list(map(lambda x: x['key']['fingerprint'], existing.get(data_key)))
-                    else:
-                        has = existing.get(data_key)
+                    has = existing.get(data_key)
+                    if has and option_key == 'authorized_keys':
+                        has = [x['key']['fingerprint'] for x in has]
                     if isinstance(has, list):
                         has = sorted(has)
                         if not isinstance(should, list):
