@@ -97,3 +97,9 @@ releases:
     - 1.2.2.yml
     - 33-fix-boot-ssh-key-setting.yaml
     release_date: '2022-01-04'
+  1.2.3:
+    changes:
+      release_summary: Docs update release.
+    fragments:
+    - 1.2.3.yml
+    release_date: '2022-03-22'
