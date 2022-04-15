@@ -1,0 +1,25 @@
+---
+- name: Check whether ipaddress is present
+  smoke_ipaddress:
+  register: result
+
+- name: Validate result 
+  assert:
+    that:
+      - result.msg == 'Everything is ok'
+
+- name: Check ssh_key module with invalid fingerprint
+  community.hrobot.ssh_key:
+    hetzner_user: foo
+    hetzner_password: bar
+    name: baz
+    state: absent
+    fingerprint: f0:0b
+  ignore_errors: true
+  register: result
+
+- name: Validate result 
+  assert:
+    that:
+      - result is failed
+      - "result.msg == 'Fingerprint must consist of 16 8-bit hex numbers: got 2 8-bit hex numbers instead'"
