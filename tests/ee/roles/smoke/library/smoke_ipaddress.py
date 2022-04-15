@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # (c) 2022 Felix Fontein <felix@fontein.de>
@@ -25,8 +25,7 @@ RETURN = r''' # '''
 
 import traceback
 
-from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.common.text.converters import to_native
+from ansible.module_utils.basic import AnsibleModule, missing_required_lib
 
 try:
     import ipaddress
