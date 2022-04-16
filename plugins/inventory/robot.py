@@ -135,29 +135,33 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         server_lists = []
         for server in servers:
             s = server['server']
-            server_name = s.get('server_name') or s['server_ip']
+            server_name = s.get('server_name') or s.get('server_ip') or str(s['server_number'])
             matched = self.filter(s, filters)
-            if matched:
-                if server_name not in server_lists:
-                    self.inventory.add_host(server_name)
-                    server_lists.append(server_name)
-                    self.inventory.set_variable(server_name, 'ansible_host', s['server_ip'])
-                    for hostvar, hostval in s.items():
-                        self.inventory.set_variable(server_name, "{0}_{1}".format('hrobot', hostvar), hostval)
+            if not matched:
+                continue
 
-                    # Composed variables
-                    server_vars = self.inventory.get_host(server_name).get_vars()
-                    self._set_composite_vars(self.get_option('compose'), server_vars, server_name, strict=strict)
+            if server_name in server_lists:
+                display.warning('Two of your Hetzner servers use the same server name ({0}). '
+                                'Please make sure that your server names are unique. '
+                                'Only the first server named {0} will be included in the inventory.'.format(server_name))
+                continue
 
-                    # Complex groups based on jinja2 conditionals, hosts that meet the conditional are added to group
-                    self._add_host_to_composed_groups(self.get_option('groups'), server, server_name, strict=strict)
+            self.inventory.add_host(server_name)
+            server_lists.append(server_name)
+            if 'server_ip' in s:
+                self.inventory.set_variable(server_name, 'ansible_host', s['server_ip'])
+            for hostvar, hostval in s.items():
+                self.inventory.set_variable(server_name, "{0}_{1}".format('hrobot', hostvar), hostval)
 
-                    # Create groups based on variable values and add the corresponding hosts to it
-                    self._add_host_to_keyed_groups(self.get_option('keyed_groups'), server, server_name, strict=strict)
-                else:
-                    display.warning('Two of your Hetzner servers use the same server name ({0}). '
-                                    'Please make sure that your server names are unique. '
-                                    'Only the first server named {0} will be included in the inventory.'.format(server_name))
+            # Composed variables
+            server_vars = self.inventory.get_host(server_name).get_vars()
+            self._set_composite_vars(self.get_option('compose'), server_vars, server_name, strict=strict)
+
+            # Complex groups based on jinja2 conditionals, hosts that meet the conditional are added to group
+            self._add_host_to_composed_groups(self.get_option('groups'), server, server_name, strict=strict)
+
+            # Create groups based on variable values and add the corresponding hosts to it
+            self._add_host_to_keyed_groups(self.get_option('keyed_groups'), server, server_name, strict=strict)
 
     def filter(self, server, filters):
         matched = True

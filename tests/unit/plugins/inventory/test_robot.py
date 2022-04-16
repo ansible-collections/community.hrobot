@@ -84,6 +84,11 @@ def test_populate(inventory, mocker):
                     'server_name': 'test-server',
                 },
             },
+            {
+                'server': {
+                    'server_number': 5,
+                },
+            },
         ])
         .expect_url('{0}/server'.format(BASE_URL)),
     ])
@@ -96,9 +101,11 @@ def test_populate(inventory, mocker):
 
     host_1 = inventory.inventory.get_host('1.2.3.4')
     host_2 = inventory.inventory.get_host('test-server')
+    host_3 = inventory.inventory.get_host('5')
 
     host_1_vars = host_1.get_vars()
     host_2_vars = host_2.get_vars()
+    host_3_vars = host_3.get_vars()
 
     assert host_1_vars['ansible_host'] == '1.2.3.4'
     assert host_1_vars['hrobot_server_ip'] == '1.2.3.4'
@@ -106,6 +113,9 @@ def test_populate(inventory, mocker):
     assert host_2_vars['ansible_host'] == '1.2.3.5'
     assert host_2_vars['hrobot_server_ip'] == '1.2.3.5'
     assert host_2_vars['hrobot_server_name'] == 'test-server'
+    assert 'ansible_host' not in host_3_vars
+    assert 'hrobot_server_ip' not in host_3_vars
+    assert 'hrobot_server_name' not in host_3_vars
 
 
 def test_inventory_file_simple(mocker):
