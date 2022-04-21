@@ -103,3 +103,19 @@ releases:
     fragments:
     - 1.2.3.yml
     release_date: '2022-03-22'
+  1.3.0:
+    changes:
+      bugfixes:
+      - robot inventory plugin - do not crash if a server neither has name or primary
+        IP set. Instead, fall back to using the server's number as the name. This
+        can happen if unnamed rack reservations show up in your server list (https://github.com/ansible-collections/community.hrobot/issues/40,
+        https://github.com/ansible-collections/community.hrobot/pull/47).
+      minor_changes:
+      - Prepare collection for inclusion in an Execution Environment by declaring
+        its dependencies (https://github.com/ansible-collections/community.hrobot/pull/45).
+      release_summary: Feature and bugfix release.
+    fragments:
+    - 1.3.0.yml
+    - 45-ee.yml
+    - 47-inventory-crash.yml
+    release_date: '2022-04-21'
