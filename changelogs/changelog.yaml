@@ -119,3 +119,13 @@ releases:
     - 45-ee.yml
     - 47-inventory-crash.yml
     release_date: '2022-04-21'
+  1.3.1:
+    changes:
+      bugfixes:
+      - Include ``simplified_bsd.txt`` license file for the ``robot`` and ``failover``
+        module utils.
+      release_summary: Maintenance release.
+    fragments:
+    - 1.3.1.yml
+    - simplified-bsd-license.yml
+    release_date: '2022-06-02'

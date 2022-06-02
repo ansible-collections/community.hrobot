@@ -5,6 +5,19 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.3.1
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Bugfixes
+--------
+
+- Include ``simplified_bsd.txt`` license file for the ``robot`` and ``failover`` module utils.
+
 v1.3.0
 ======
 
