@@ -18,6 +18,7 @@ from ansible.errors import AnsibleError
 from ansible.inventory.data import InventoryData
 from ansible.inventory.manager import InventoryManager
 from ansible.module_utils.common.text.converters import to_native
+from ansible.template import Templar
 
 from ansible_collections.community.internal_test_tools.tests.unit.mock.path import mock_unfrackpath_noop
 from ansible_collections.community.internal_test_tools.tests.unit.mock.loader import DictDataLoader
@@ -56,6 +57,7 @@ def access_mock(path, can_access=True):
 def inventory():
     r = InventoryModule()
     r.inventory = InventoryData()
+    r.templar = Templar(loader=DictDataLoader({}))
     return r
 
 
