@@ -24,6 +24,8 @@ DOCUMENTATION = r"""
         - ansible.builtin.constructed
         - ansible.builtin.inventory_cache
         - community.hrobot.robot
+    notes:
+        - The I(hetzner_user) and I(hetzner_password) options can be templated.
     options:
         plugin:
             description: Token that ensures this is a source file for the plugin.
@@ -51,6 +53,13 @@ plugin: community.hrobot.robot
 filters:
   status: ready
 
+# Example showing encrypted credentials
+# (This assumes that Mozilla sops was used to encrypt keys/hetzner.sops.yaml, which contains two values
+# hetzner_username and hetzner_password. Needs the community.sops collection to decode that file.)
+plugin: community.hrobot.robot
+hetzner_user: '{{ (lookup("community.sops.sops", "keys/hetzner.sops.yaml") | from_yaml).hetzner_username }}'
+hetzner_password: '{{ (lookup("community.sops.sops", "keys/hetzner.sops.yaml") | from_yaml).hetzner_password }}'
+
 # Example using constructed features to create groups
 plugin: community.hrobot.robot
 filters:
@@ -67,9 +76,10 @@ compose:
   server_name_ip: hrobot_server_name ~ '-' ~ hrobot_server_ip
 """
 
-from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
-from ansible.utils.display import Display
 from ansible.errors import AnsibleError
+from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
+from ansible.template import Templar
+from ansible.utils.display import Display
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
@@ -101,6 +111,8 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         config = self._read_config_data(path)
         self.load_cache_plugin()
         cache_key = self.get_cache_key(path)
+
+        self.templar = Templar(loader=loader)
 
         # cache may be True or False at this point to indicate if the inventory is being refreshed
         # get the user's cache option too to see if we should save the cache if it is changing
@@ -173,6 +185,6 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
 
     def get_servers(self):
         try:
-            return plugin_open_url_json(self, '{0}/server'.format(BASE_URL))[0]
+            return plugin_open_url_json(self, '{0}/server'.format(BASE_URL), templar=self.templar)[0]
         except PluginException as e:
             raise AnsibleError(e.error_message)

@@ -31,12 +31,17 @@ class PluginException(Exception):
 
 
 def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, headers=None,
-                         accept_errors=None, allow_empty_result=False):
+                         accept_errors=None, allow_empty_result=False, templar=None):
     '''
     Make general request to Hetzner's JSON robot API.
     '''
     user = plugin.get_option('hetzner_user')
     password = plugin.get_option('hetzner_password')
+    if templar is not None:
+        if templar.is_template(user):
+            user = templar.template(variable=user, disable_lookups=False)
+        if templar.is_template(password):
+            password = templar.template(variable=password, disable_lookups=False)
     try:
         response = open_url(
             url,

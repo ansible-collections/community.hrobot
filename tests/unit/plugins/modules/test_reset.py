@@ -20,13 +20,15 @@ class TestHetznerReset(BaseTestModule):
 
     def test_check_valid(self, mocker):
         result = self.run_module_success(mocker, reset, {
-            'hetzner_user': '',
-            'hetzner_password': '',
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
             'server_number': 23,
             'reset_type': 'software',
             '_ansible_check_mode': True,
         }, [
             FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
             .result_json({
                 'reset': {
                     'server_ip': '123.123.123.123',

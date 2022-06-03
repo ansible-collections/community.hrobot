@@ -55,11 +55,13 @@ class TestHetznerServer(BaseTestModule):
 
     def test_idempotent_not_specified(self, mocker):
         result = self.run_module_success(mocker, server, {
-            'hetzner_user': '',
-            'hetzner_password': '',
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
             'server_number': 23,
         }, [
             FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
             .result_json(create_server_data('foo'))
             .expect_url('{0}/server/23'.format(BASE_URL)),
         ])

@@ -140,11 +140,13 @@ class TestHetznerServerInfo(BaseTestModule):
 
     def test_server_number(self, mocker):
         result = self.run_module_success(mocker, server_info, {
-            'hetzner_user': '',
-            'hetzner_password': '',
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
             'server_number': 23,
         }, [
             FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
             .result_json(SERVER_DETAIL_DATA[23])
             .expect_url('{0}/server/23'.format(BASE_URL)),
         ])

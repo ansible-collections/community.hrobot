@@ -20,12 +20,14 @@ class TestHetznerReverseDNS(BaseTestModule):
 
     def test_idempotent_present(self, mocker):
         result = self.run_module_success(mocker, reverse_dns, {
-            'hetzner_user': '',
-            'hetzner_password': '',
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
             'ip': '1.2.3.4',
             'value': 'foo.example.com',
         }, [
             FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
             .result_json({
                 'rdns': {
                     'ip': '1.2.3.4',

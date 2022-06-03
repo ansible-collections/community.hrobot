@@ -22,11 +22,13 @@ class TestHetznerFailoverIPInfo(BaseTestModule):
 
     def test_unrouted(self, mocker):
         result = self.run_module_success(mocker, failover_ip_info, {
-            'hetzner_user': '',
-            'hetzner_password': '',
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
             'failover_ip': '1.2.3.4',
         }, [
             FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
             .result_json({
                 'failover': {
                     'ip': '1.2.3.4',
