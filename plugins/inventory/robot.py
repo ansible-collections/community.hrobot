@@ -53,6 +53,13 @@ plugin: community.hrobot.robot
 filters:
   status: ready
 
+# Example showing encrypted credentials
+# (This assumes that Mozilla sops was used to encrypt keys/hetzner.sops.yaml, which contains two values
+# hetzner_username and hetzner_password. Needs the community.sops collection to decode that file.)
+plugin: community.hrobot.robot
+hetzner_user: '{{ (lookup("community.sops.sops", "keys/hetzner.sops.yaml") | from_yaml).hetzner_username }}'
+hetzner_password: '{{ (lookup("community.sops.sops", "keys/hetzner.sops.yaml") | from_yaml).hetzner_password }}'
+
 # Example using constructed features to create groups
 plugin: community.hrobot.robot
 filters:
