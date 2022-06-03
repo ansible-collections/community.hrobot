@@ -1,2 +1,0 @@
-minor_changes:
-  - "robot inventory plugin - allow to template ``hetzner_user`` and ``hetzner_password`` (https://github.com/ansible-collections/community.hrobot/pull/49)."

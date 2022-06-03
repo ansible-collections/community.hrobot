@@ -5,6 +5,19 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.4.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+Minor Changes
+-------------
+
+- robot inventory plugin - allow to template ``hetzner_user`` and ``hetzner_password`` (https://github.com/ansible-collections/community.hrobot/pull/49).
+
 v1.3.1
 ======
 
