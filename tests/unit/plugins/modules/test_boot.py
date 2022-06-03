@@ -114,8 +114,8 @@ class TestHetznerBoot(BaseTestModule):
 
     def test_idempotent_regular(self, mocker):
         result = self.run_module_success(mocker, boot, {
-            'hetzner_user': '',
-            'hetzner_password': '',
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
             'server_number': 23,
             'regular_boot': True,
         }, [
@@ -123,6 +123,8 @@ class TestHetznerBoot(BaseTestModule):
             .result_json(_amend_boot({
                 'rescue': create_linux_inactive(),
             }))
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['changed'] is False
