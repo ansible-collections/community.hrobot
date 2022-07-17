@@ -1,3 +1,9 @@
+<!--
+Copyright (c) Ansible Project
+GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # Community Hetzner Robot Collection
 [![CI](https://github.com/ansible-collections/community.hrobot/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/community.hrobot/actions) [![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/community.hrobot)](https://codecov.io/gh/ansible-collections/community.hrobot)
 
