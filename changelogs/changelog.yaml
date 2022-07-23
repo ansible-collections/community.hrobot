@@ -139,3 +139,15 @@ releases:
     - 1.4.0.yml
     - 49-inventory-templated.yml
     release_date: '2022-06-03'
+  1.5.0:
+    changes:
+      minor_changes:
+      - All software licenses are now in the ``LICENSES/`` directory of the collection
+        root. Moreover, ``SPDX-License-Identifier:`` is used to declare the applicable
+        license for every file that is not automatically generated (https://github.com/ansible-collections/community.hrobot/pull/52).
+      release_summary: Maintenance release changing the way licenses are declared.
+        No functional changes.
+    fragments:
+    - 1.5.0.yml
+    - 52-licenses.yml
+    release_date: '2022-07-23'
