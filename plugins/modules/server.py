@@ -127,7 +127,7 @@ server:
       description:
         - List of assigned subnets.
       type: list
-      elements: str
+      elements: dict
       sample:
         - ip: '2a01:4f8:111:4221::'
           mask: 64
