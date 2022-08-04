@@ -5,6 +5,14 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.5.1
+======
+
+Release Summary
+---------------
+
+Maintenance release with small documentation fixes.
+
 v1.5.0
 ======
 

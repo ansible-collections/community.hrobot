@@ -151,3 +151,9 @@ releases:
     - 1.5.0.yml
     - 52-licenses.yml
     release_date: '2022-07-23'
+  1.5.1:
+    changes:
+      release_summary: Maintenance release with small documentation fixes.
+    fragments:
+    - 1.5.1.yml
+    release_date: '2022-08-04'
