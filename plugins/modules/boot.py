@@ -219,14 +219,14 @@ EXAMPLES = r'''
     regular_boot: true
 
 - name: Enable a rescue system (64bit Linux) for the next boot
-  community.hrobot.reset:
+  community.hrobot.boot:
     hetzner_user: foo
     hetzner_password: bar
     rescue:
       os: linux
 
 - name: Enable a Linux install for the next boot
-  community.hrobot.reset:
+  community.hrobot.boot:
     hetzner_user: foo
     hetzner_password: bar
     install_linux:
