@@ -292,6 +292,7 @@ from ansible.module_utils.common.text.converters import to_native, to_text
 try:
     import ipaddress
     HAS_IPADDRESS = True
+    IPADDRESS_IMP_ERR = None
 except ImportError as exc:
     IPADDRESS_IMP_ERR = traceback.format_exc()
     HAS_IPADDRESS = False
