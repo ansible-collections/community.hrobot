@@ -158,7 +158,7 @@ EXAMPLES = r'''
           ip_version: ipv4
           protocol: icmp
           action: accept
-        - name: TCP established
+        - name: Allow responses to incoming connections
           ip_version: ipv4
           protocol: tcp
           dst_port: '32768-65535'
