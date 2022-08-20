@@ -154,6 +154,16 @@ EXAMPLES = r'''
     allowlist_hos: yes
     rules:
       input:
+        - name: Allow ICMP protocol, so you can ping your server
+          ip_version: ipv4
+          protocol: icmp
+          action: accept
+        - name: Allow responses to incoming TCP connections
+          ip_version: ipv4
+          protocol: tcp
+          dst_port: '32768-65535'
+          tcp_flags: ack
+          action: accept
         - name: Allow everything to ports 20-23 from 4.3.2.1/24
           ip_version: ipv4
           src_ip: 4.3.2.1/24
