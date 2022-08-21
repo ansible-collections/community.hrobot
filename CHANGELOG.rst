@@ -5,6 +5,19 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.5.2
+======
+
+Release Summary
+---------------
+
+Maintenance release with a documentation improvement.
+
+Minor Changes
+-------------
+
+- The collection repository conforms to the `REUSE specification <https://reuse.software/spec/>`__ except for the changelog fragments (https://github.com/ansible-collections/community.hrobot/pull/60).
+
 v1.5.1
 ======
 

@@ -157,3 +157,13 @@ releases:
     fragments:
     - 1.5.1.yml
     release_date: '2022-08-04'
+  1.5.2:
+    changes:
+      minor_changes:
+      - The collection repository conforms to the `REUSE specification <https://reuse.software/spec/>`__
+        except for the changelog fragments (https://github.com/ansible-collections/community.hrobot/pull/60).
+      release_summary: Maintenance release with a documentation improvement.
+    fragments:
+    - 1.5.2.yml
+    - licenses.yml
+    release_date: '2022-08-21'
