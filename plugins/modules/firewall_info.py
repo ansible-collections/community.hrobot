@@ -30,7 +30,7 @@ options:
   server_ip:
     description: The server's main IP address.
     type: str
-    required: yes
+    required: true
   wait_for_configured:
     description:
       - Whether to wait until the firewall has been successfully configured before
@@ -42,7 +42,7 @@ options:
         updates, it can be better to disable waiting, and regularly use
         M(community.hrobot.firewall_info) to query status.
     type: bool
-    default: yes
+    default: true
   wait_delay:
     description:
       - Delay to wait (in seconds) before checking again whether the firewall has
@@ -96,7 +96,7 @@ firewall:
         - Status of the firewall.
         - C(active) or C(disabled).
         - Will be C(in process) if the firewall is currently updated, and
-          I(wait_for_configured) is set to C(no) or I(timeout) to a too small value.
+          I(wait_for_configured) is set to C(false) or I(timeout) to a too small value.
       type: str
       sample: active
     allowlist_hos:

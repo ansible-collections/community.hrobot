@@ -38,7 +38,7 @@ options:
         screen output. B(Be careful) and only use this when really necessary!
       - Note that not every server supports every reset method!
     type: str
-    required: yes
+    required: true
     choices:
       - software
       - hardware
