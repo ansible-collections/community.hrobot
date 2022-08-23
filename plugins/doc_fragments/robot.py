@@ -16,9 +16,9 @@ options:
   hetzner_user:
     description: The username for the Robot webservice user.
     type: str
-    required: yes
+    required: true
   hetzner_password:
     description: The password for the Robot webservice user.
     type: str
-    required: yes
+    required: true
 '''

@@ -30,7 +30,7 @@ options:
   failover_ip:
     description: The failover IP address.
     type: str
-    required: yes
+    required: true
   state:
     description:
       - Defines whether the IP will be routed or not.

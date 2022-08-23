@@ -33,7 +33,7 @@ extends_documentation_fragment:
 options:
   server_ip:
     description: The server's main IP address.
-    required: yes
+    required: true
     type: str
   port:
     description:
@@ -73,7 +73,7 @@ options:
             description:
               - Internet protocol version.
               - Note that currently, only IPv4 is supported by Hetzner.
-            required: yes
+            required: true
             type: str
             choices: [ ipv4, ipv6 ]
           dst_ip:
@@ -109,7 +109,7 @@ options:
           action:
             description:
               - Action if rule matches.
-            required: yes
+            required: true
             type: str
             choices: [ accept, discard ]
   update_timeout:
@@ -130,7 +130,7 @@ options:
         updates, it can be better to disable waiting, and regularly use
         M(community.hrobot.firewall_info) to query status.
     type: bool
-    default: yes
+    default: true
   wait_delay:
     description:
       - Delay to wait (in seconds) before checking again whether the firewall has
@@ -151,7 +151,7 @@ EXAMPLES = r'''
     hetzner_password: bar
     server_ip: 1.2.3.4
     state: present
-    allowlist_hos: yes
+    allowlist_hos: true
     rules:
       input:
         - name: Allow ICMP protocol, so you can ping your server
@@ -210,7 +210,7 @@ firewall:
         - Status of the firewall.
         - C(active) or C(disabled).
         - Will be C(in process) if the firewall is currently updated, and
-          I(wait_for_configured) is set to C(no) or I(timeout) to a too small value.
+          I(wait_for_configured) is set to C(false) or I(timeout) to a too small value.
       type: str
       sample: active
     allowlist_hos:
