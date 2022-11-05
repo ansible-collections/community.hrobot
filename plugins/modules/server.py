@@ -21,6 +21,11 @@ description:
   - Right now the API only supports updating the server's name.
 extends_documentation_fragment:
   - community.hrobot.robot
+  - community.hrobot.attributes.actiongroup_robot
+
+attributes:
+    action_group:
+        version_added: 1.6.0
 
 options:
   server_number:

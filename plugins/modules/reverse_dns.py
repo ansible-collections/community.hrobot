@@ -20,11 +20,16 @@ description:
   - Allows to set, update or remove a reverse DNS entry for an IP address.
 extends_documentation_fragment:
   - community.hrobot.robot
+  - community.hrobot.attributes.actiongroup_robot
 notes:
   - For the main IPv4 address of a server, deleting it actually sets it to a default hostname like
     C(static.X.Y.Z.W.clients.your-server.de). This substitution (delete is replaced by changing to
     this value) is done automatically by the API and results in the module not being idempotent
     in this case.
+
+attributes:
+    action_group:
+        version_added: 1.6.0
 
 options:
   ip:

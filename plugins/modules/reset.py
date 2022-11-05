@@ -20,6 +20,11 @@ description:
   - Reset a dedicated server with a software or hardware reset, or by requesting a manual reset.
 extends_documentation_fragment:
   - community.hrobot.robot
+  - community.hrobot.attributes.actiongroup_robot
+
+attributes:
+    action_group:
+        version_added: 1.6.0
 
 options:
   server_number:
