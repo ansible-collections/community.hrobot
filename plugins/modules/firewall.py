@@ -28,7 +28,17 @@ seealso:
   - module: community.hrobot.firewall_info
     description: Retrieve information on firewall configuration.
 extends_documentation_fragment:
-- community.hrobot.robot
+  - community.hrobot.robot
+  - community.hrobot.attributes
+  - community.hrobot.attributes.actiongroup_robot
+
+attributes:
+  action_group:
+    version_added: 1.6.0
+  check_mode:
+    support: full
+  diff_mode:
+    support: full
 
 options:
   server_ip:

@@ -24,7 +24,14 @@ seealso:
   - module: community.hrobot.failover_ip
     description: Manage failover IPs.
 extends_documentation_fragment:
-- community.hrobot.robot
+  - community.hrobot.robot
+  - community.hrobot.attributes
+  - community.hrobot.attributes.actiongroup_robot
+  - community.hrobot.attributes.info_module
+
+attributes:
+  action_group:
+    version_added: 1.6.0
 
 options:
   failover_ip:
