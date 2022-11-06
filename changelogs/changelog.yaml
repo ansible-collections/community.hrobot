@@ -167,3 +167,14 @@ releases:
     - 1.5.2.yml
     - licenses.yml
     release_date: '2022-08-21'
+  1.6.0:
+    changes:
+      minor_changes:
+      - Added a ``community.hrobot.robot`` module defaults group / action group. Use
+        with ``group/community.hrobot.robot`` to provide options for all Hetzner Robot
+        modules (https://github.com/ansible-collections/community.hrobot/pull/65).
+      release_summary: Feature release with improved documentation.
+    fragments:
+    - 1.6.0.yml
+    - action_group.yml
+    release_date: '2022-11-06'
