@@ -21,6 +21,16 @@ Tested with the current Ansible 2.9, ansible-base 2.10, ansible-core 2.11, ansib
 
 A Hetzner Robot account.
 
+## Collection Documentation
+
+Browsing the [**latest** collection documentation](https://docs.ansible.com/ansible/latest/collections/community/hrobot) will show docs for the _latest version released in the Ansible package_, not the latest version of the collection released on Galaxy.
+
+Browsing the [**devel** collection documentation](https://docs.ansible.com/ansible/devel/collections/community/hrobot) shows docs for the _latest version released on Galaxy_.
+
+We also separately publish [**latest commit** collection documentation](https://ansible-collections.github.io/community.hrobot/branch/main/) which shows docs for the _latest commit in the `main` branch_.
+
+If you use the Ansible package and do not update collections independently, use **latest**. If you install or update this collection directly from Galaxy, use **devel**. If you are looking to contribute, use **latest commit**.
+
 ## Included content
 
 - `community.hrobot.failover_ip` module
