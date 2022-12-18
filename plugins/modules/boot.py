@@ -18,6 +18,7 @@ author:
   - Felix Fontein (@felixfontein)
 description:
   - Set the boot configuration for a dedicated server.
+  - TEST!
 seealso:
   - module: community.hrobot.ssh_key
     description: Add, remove or update SSH key
