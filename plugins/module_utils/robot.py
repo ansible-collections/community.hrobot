@@ -12,6 +12,7 @@ from ansible.module_utils.six import PY3
 from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.module_utils.urls import fetch_url, open_url
 
+import certifi
 import json
 import time
 
@@ -53,6 +54,7 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
             headers=headers,
             method=method,
             timeout=timeout,
+            ca_path=certifi.where(),
         )
         status = response.code
         content = response.read()
@@ -94,7 +96,7 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
     module.params['url_username'] = module.params['hetzner_user']
     module.params['url_password'] = module.params['hetzner_password']
     module.params['force_basic_auth'] = True
-    resp, info = fetch_url(module, url, method=method, timeout=timeout, data=data, headers=headers)
+    resp, info = fetch_url(module, url, method=method, timeout=timeout, data=data, headers=headers, ca_path=certifi.where())
     try:
         # In Python 2, reading from a closed response yields a TypeError.
         # In Python 3, read() simply returns ''
