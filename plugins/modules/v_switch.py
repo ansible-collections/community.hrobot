@@ -335,6 +335,7 @@ def add_servers(module, id_, servers):
             'VSWITCH_SERVER_LIMIT_REACHED',
         ],
         allow_empty_result=True,
+        allowed_empty_result_status_codes=(201,),
     )
     if error == 'SERVER_NOT_FOUND':
         # information about which servers are failing is only there
