@@ -230,6 +230,7 @@ v_switch:
 from datetime import datetime
 
 from ansible.module_utils.basic import AnsibleModule
+from ansible.module_utils.six import PY3
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
@@ -272,6 +273,14 @@ def get_v_switch(module, id_, wait_condition=None):
     return result
 
 
+def print_list(possible_list):
+    # required by Python 2.X for printing lists elements without u'string'
+    if not PY3 and isinstance(possible_list, list):
+        return [x.encode('ascii') for x in possible_list]
+    else:
+        return possible_list
+
+
 def create_v_switch(module):
     headers = {'Content-type': 'application/x-www-form-urlencoded'}
     data = {'name': module.params['name'], 'vlan': module.params['vlan']}
@@ -284,7 +293,8 @@ def create_v_switch(module):
         accept_errors=['INVALID_INPUT', 'VSWITCH_LIMIT_REACHED'],
     )
     if error == 'INVALID_INPUT':
-        module.fail_json(msg='vSwitch invalid parameter ({0})'.format(result['error']['invalid']))
+        invalid_parameters = print_list(result['error']['invalid'])
+        module.fail_json(msg='vSwitch invalid parameter ({0})'.format(invalid_parameters))
     elif error == 'VSWITCH_LIMIT_REACHED':
         module.fail_json(msg='The maximum count of vSwitches is reached')
 
@@ -305,7 +315,8 @@ def delete_v_switch(module, id_):
         allow_empty_result=True,
     )
     if error == 'INVALID_INPUT':
-        module.fail_json(msg='vSwitch invalid parameter ({0})'.format(result['error']['invalid']))
+        invalid_parameters = print_list(result['error']['invalid'])
+        module.fail_json(msg='vSwitch invalid parameter ({0})'.format(invalid_parameters))
     elif error == 'NOT_FOUND':
         module.fail_json(msg='vSwitch not found to delete')
     elif error == 'CONFLICT':
