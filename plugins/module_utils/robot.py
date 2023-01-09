@@ -30,7 +30,7 @@ def get_x_www_form_urlenconded_dict_from_list(key, values):
     if len(values) == 1:
         return {'{key}[]'.format(key=key): values[0]}
     else:
-        return {'{key}[{index}]'.format(key=key, index=i): x for i, x in enumerate(values)}
+        return dict(('{key}[{index}]'.format(key=key, index=i), x) for i, x in enumerate(values))
 
 
 class PluginException(Exception):
