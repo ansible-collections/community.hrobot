@@ -182,14 +182,14 @@
 <a class="ansibleOptionLink" href="#parameter-name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The vSwitch’s name.</p>
-<p>In order to identify a vSwitch name and VLAN must match. If not, a new vSwitch will be created.</p>
+<p>In order to identify a vSwitch both name and VLAN must match. If not, a new vSwitch will be created.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-servers"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-v-switch-module-parameter-servers"><strong>servers</strong></p>
 <a class="ansibleOptionLink" href="#parameter-servers" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>List of server identifiers (server_number or server_ip).</p>
+<td><div class="ansible-option-cell"><p>List of server identifiers (server’s numeric ID or server’s main IPv4 or IPv6).</p>
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
 </div></td>
 </tr>
@@ -220,6 +220,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>The vSwitch’s VLAN ID.</p>
 <p>Range can be from 4000 to 4091.</p>
+<p>In order to identify a vSwitch both name and VLAN must match. If not, a new vSwitch will be created.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
