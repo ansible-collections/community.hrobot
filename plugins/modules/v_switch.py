@@ -39,12 +39,13 @@ options:
     description:
       - The vSwitch's VLAN ID.
       - Range can be from 4000 to 4091.
+      - In order to identify a vSwitch both name and VLAN must match. If not, a new vSwitch will be created.
     type: int
     required: true
   name:
     description:
       - The vSwitch's name.
-      - In order to identify a vSwitch name and VLAN must match. If not, a new vSwitch will be created.
+      - In order to identify a vSwitch both name and VLAN must match. If not, a new vSwitch will be created.
     type: str
     required: true
   state:
@@ -56,7 +57,7 @@ options:
     choices: [ present, absent ]
   servers:
     description:
-      - List of server identifiers (server_number or server_ip).
+      - List of server identifiers (server's numeric ID or server's main IPv4 or IPv6).
     type: list
     elements: str
     default: []
