@@ -813,6 +813,38 @@ class TestHetznerVSwitch(BaseTestModule):
         )
         assert result['msg'] == "The maximum number of servers is reached for this vSwitch"
 
+    def test_not_delete_if_servers_not_defined(self, mocker):
+        result = self.run_module_success(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(
+                    create_v_switch_data(
+                        4010, 'foo', server=[create_server_data('123.123.123.123', 321)]
+                    )
+                )
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+            ],
+        )
+        assert result['v_switch'] == create_v_switch_data(
+            4010, 'foo', server=[create_server_data('123.123.123.123', 321)]
+        )
+        assert result['changed'] is False
+
     def test_delete_server(self, mocker):
         result = self.run_module_success(
             mocker,

@@ -58,9 +58,9 @@ options:
   servers:
     description:
       - List of server identifiers (server's numeric ID or server's main IPv4 or IPv6).
+      - If servers is C(None), servers are not going to be deleted.
     type: list
     elements: str
-    default: []
   wait:
     description:
       - Whether to wait until the vSwitch has been successfully configured before
@@ -412,6 +412,9 @@ def set_desired_servers(module, id_):
     v_switch = get_v_switch(module, id_)
     changed = False
 
+    if module.params['servers'] is None:
+        return (v_switch, changed)
+
     servers_to_delete = get_servers_to_delete(v_switch['server'], module.params['servers'])
     if len(servers_to_delete) > 0:
         v_switch = delete_servers(module, id_, servers_to_delete)
@@ -428,7 +431,7 @@ def main():
         vlan=dict(type='int', required=True),
         name=dict(type='str', required=True),
         state=dict(type='str', default='present', choices=['present', 'absent']),
-        servers=dict(type='list', elements='str', default=[]),
+        servers=dict(type='list', elements='str'),
         wait=dict(type='bool', default=True),
         wait_delay=dict(type='int', default=10),
         timeout=dict(type='int', default=180),
