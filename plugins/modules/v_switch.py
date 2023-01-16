@@ -69,7 +69,7 @@ options:
         being set up in the servers. If this happens, the module will try again until
         the status changes to C(ready) or server has been removed from vSwitch.
       - Please note that if you disable wait while deleting and removing servers module
-        will fail with VSWITCH_IN_PROCESS error.
+        will fail with C(VSWITCH_IN_PROCESS) error.
     type: bool
     default: true
   wait_delay:
@@ -230,7 +230,7 @@ v_switch:
 from datetime import datetime
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.six import PY3
+from ansible.module_utils.common.text.converters import to_native
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
@@ -274,11 +274,8 @@ def get_v_switch(module, id_, wait_condition=None):
 
 
 def print_list(possible_list):
-    # required by Python 2.X for printing lists elements without u'string'
-    if not PY3 and isinstance(possible_list, list):
-        return [x.encode('ascii') for x in possible_list]
-    else:
-        return possible_list
+    if isinstance(possible_list, list):
+        return [to_native(x) for x in possible_list]
 
 
 def create_v_switch(module):
@@ -416,11 +413,11 @@ def set_desired_servers(module, id_):
         return (v_switch, changed)
 
     servers_to_delete = get_servers_to_delete(v_switch['server'], module.params['servers'])
-    if len(servers_to_delete) > 0:
+    if servers_to_delete:
         v_switch = delete_servers(module, id_, servers_to_delete)
         changed = True
     servers_to_add = get_servers_to_add(v_switch['server'], module.params['servers'])
-    if len(servers_to_add) > 0:
+    if servers_to_add:
         v_switch = add_servers(module, id_, servers_to_add)
         changed = True
     return (v_switch, changed)
@@ -439,7 +436,6 @@ def main():
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
     module = AnsibleModule(
         argument_spec=argument_spec,
-        supports_check_mode=True,
     )
 
     v_switches, error = fetch_url_json(module, V_SWITCH_BASE_URL, accept_errors=['UNAUTHORIZED'])
@@ -457,7 +453,7 @@ def main():
 
     if len(non_cancelled_v_switches) > 1:
         module.fail_json(
-            msg='Multiple vSwitches with same name and VLAN ID in non cancelled status. Clean it'
+            msg='Multiple vSwitches with same name and VLAN ID in non cancelled status. Clean it.'
         )
 
     elif len(non_cancelled_v_switches) == 1:
