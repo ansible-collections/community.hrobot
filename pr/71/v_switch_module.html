@@ -229,7 +229,7 @@
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether to wait until the vSwitch has been successfully configured before determining what to do, and before returning from the module.</p>
 <p>The API returns status <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">process</span></code> when the vSwitch is currently being set up in the servers. If this happens, the module will try again until the status changes to <code class="docutils literal notranslate"><span class="pre">ready</span></code> or server has been removed from vSwitch.</p>
-<p>Please note that if you disable wait while deleting and removing servers module will fail with VSWITCH_IN_PROCESS error.</p>
+<p>Please note that if you disable wait while deleting and removing servers module will fail with <code class="docutils literal notranslate"><span class="pre">VSWITCH_IN_PROCESS</span></code> error.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">false</span></code></p></li>
