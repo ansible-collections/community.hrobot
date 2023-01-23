@@ -421,11 +421,13 @@ def set_desired_servers(module, id_):
 
     servers_to_delete = get_servers_to_delete(v_switch['server'], module.params['servers'])
     if servers_to_delete:
-        v_switch = delete_servers(module, id_, servers_to_delete)
+        if not module.check_mode:
+            v_switch = delete_servers(module, id_, servers_to_delete)
         changed = True
     servers_to_add = get_servers_to_add(v_switch['server'], module.params['servers'])
     if servers_to_add:
-        v_switch = add_servers(module, id_, servers_to_add)
+        if not module.check_mode:
+            v_switch = add_servers(module, id_, servers_to_add)
         changed = True
     return (v_switch, changed)
 
@@ -443,6 +445,7 @@ def main():
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
     module = AnsibleModule(
         argument_spec=argument_spec,
+        supports_check_mode=True,
     )
 
     v_switches, error = fetch_url_json(module, V_SWITCH_BASE_URL, accept_errors=['UNAUTHORIZED'])
@@ -472,19 +475,22 @@ def main():
         if module.params['state'] == 'present':
             result['v_switch'] = v_switch
         elif module.params['state'] == 'absent':
-            delete_v_switch(module, id_)
+            if not module.check_mode:
+                delete_v_switch(module, id_)
             result['changed'] = True
         else:
             # not reachable
             raise NotImplementedError
     else:
         if module.params['state'] == 'present':
-            v_switch = create_v_switch(module)
+            if not module.check_mode:
+                v_switch = create_v_switch(module)
             result['changed'] = True
-            if module.params['servers']:
-                result['v_switch'] = add_servers(module, v_switch['id'], module.params['servers'])
-            else:
-                result['v_switch'] = v_switch
+            if not module.check_mode:
+                if module.params['servers']:
+                    result['v_switch'] = add_servers(module, v_switch['id'], module.params['servers'])
+                else:
+                    result['v_switch'] = v_switch
 
     module.exit_json(**result)
 
