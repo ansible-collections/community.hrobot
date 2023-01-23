@@ -58,7 +58,7 @@ options:
   servers:
     description:
       - List of server identifiers (server's numeric ID or server's main IPv4 or IPv6).
-      - If servers is C(None), servers are not going to be deleted.
+      - If servers is not specified, servers are not going to be deleted.
     type: list
     elements: str
   wait:
