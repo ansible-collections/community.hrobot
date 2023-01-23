@@ -372,6 +372,13 @@ class TestHetznerVSwitch(BaseTestModule):
         result = v_switch.get_servers_to_delete(current_servers, desired_servers)
         assert result == ['123.123.123.124']
 
+        current_servers = [
+            create_server_data('check_default_ipv6', 321),
+        ]
+        desired_servers = ['2a01:4f8:111:4221::']
+        result = v_switch.get_servers_to_delete(current_servers, desired_servers)
+        assert result == []
+
         current_servers = []
         desired_servers = ['123.123.123.123']
         result = v_switch.get_servers_to_delete(current_servers, desired_servers)
@@ -399,6 +406,13 @@ class TestHetznerVSwitch(BaseTestModule):
             create_server_data('123.123.123.124', 322),
         ]
         desired_servers = ['123.123.123.123']
+        result = v_switch.get_servers_to_add(current_servers, desired_servers)
+        assert result == []
+
+        current_servers = [
+            create_server_data('check_default_ipv6', 321),
+        ]
+        desired_servers = ['2a01:4f8:111:4221::']
         result = v_switch.get_servers_to_add(current_servers, desired_servers)
         assert result == []
 

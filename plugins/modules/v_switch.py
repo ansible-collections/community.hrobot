@@ -395,6 +395,7 @@ def get_servers_to_delete(current_servers, desired_servers):
         server['server_ip']
         for server in current_servers
         if server['server_ip'] not in desired_servers
+        and server['server_ipv6_net'] not in desired_servers
         and str(server['server_number']) not in desired_servers
     ]
 
@@ -402,10 +403,12 @@ def get_servers_to_delete(current_servers, desired_servers):
 def get_servers_to_add(current_servers, desired_servers):
     current_ids = [str(server['server_number']) for server in current_servers]
     current_ips = [server['server_ip'] for server in current_servers]
+    current_ipv6s = [server['server_ipv6_net'] for server in current_servers]
+
     return [
         server
         for server in desired_servers
-        if server not in current_ips and server not in current_ids
+        if server not in current_ips and server not in current_ids and server not in current_ipv6s
     ]
 
 
