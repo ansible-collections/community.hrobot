@@ -336,8 +336,9 @@ def add_servers(module, id_, servers):
         data=urlencode(data),
         headers=headers,
         method='POST',
-        # TODO: missing INVALID_INPUT, NOT_FOUND, VSWITCH_NOT_AVAILABLE, VSWITCH_PER_SERVER_LIMIT_REACHED
+        # TODO: missing NOT_FOUND, VSWITCH_NOT_AVAILABLE, VSWITCH_PER_SERVER_LIMIT_REACHED
         accept_errors=[
+            'INVALID_INPUT',
             'SERVER_NOT_FOUND',
             'VSWITCH_VLAN_NOT_UNIQUE',
             'VSWITCH_IN_PROCESS',
@@ -346,7 +347,10 @@ def add_servers(module, id_, servers):
         allow_empty_result=True,
         allowed_empty_result_status_codes=(201,),
     )
-    if error == 'SERVER_NOT_FOUND':
+    if error == 'INVALID_INPUT':
+        invalid_parameters = print_list(result['error']['invalid'])
+        module.fail_json(msg='Invalid parameter adding server ({0})'.format(invalid_parameters))
+    elif error == 'SERVER_NOT_FOUND':
         # information about which servers are failing is only there
         module.fail_json(msg=result['error']['message'])
     elif error == 'VSWITCH_VLAN_NOT_UNIQUE':
