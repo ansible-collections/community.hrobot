@@ -483,10 +483,9 @@ def main():
             raise NotImplementedError
     else:
         if module.params['state'] == 'present':
-            if not module.check_mode:
-                v_switch = create_v_switch(module)
             result['changed'] = True
             if not module.check_mode:
+                v_switch = create_v_switch(module)
                 if module.params['servers']:
                     result['v_switch'] = add_servers(module, v_switch['id'], module.params['servers'])
                 else:
