@@ -52,8 +52,8 @@ options:
     description:
       - State of the vSwitch.
       - vSwitch is created if state is C(present), and deleted if state is C(absent).
-      - You have to specify C(servers=[]) if you want to remove the servers in the vSwitch.
-      - C(absent) just cancel the vSwitch at the end of the current day.
+      - C(absent) just cancels the vSwitch at the end of the current day.
+      - When cancelling, you have to specify I(servers=[]) if you want to actively remove the servers in the vSwitch.
     type: str
     default: present
     choices: [ present, absent ]
@@ -164,8 +164,12 @@ v_switch:
           sample: 321
         status:
           description:
-            - Status of vSwitch for this server ('ready', 'in process', 'failed')
+            - Status of vSwitch for this server.
           type: str
+          choices:
+            - ready
+            - in process
+            - failed
           sample: 'ready'
       returned: success
     subnet:
