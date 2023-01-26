@@ -164,8 +164,12 @@ v_switch:
           sample: 321
         status:
           description:
-            - Status of vSwitch for this server ('ready', 'in process', 'failed')
+            - Status of vSwitch for this server.
           type: str
+          choices:
+            - ready
+            - in process
+            - failed
           sample: 'ready'
       returned: success
     subnet:
