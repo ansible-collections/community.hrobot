@@ -25,6 +25,14 @@ ROBOT_DEFAULT_ARGUMENT_SPEC = dict(
 BASE_URL = "https://robot-ws.your-server.de"
 
 
+def get_x_www_form_urlenconded_dict_from_list(key, values):
+    '''Return a dictionary with keys values'''
+    if len(values) == 1:
+        return {'{key}[]'.format(key=key): values[0]}
+    else:
+        return dict(('{key}[{index}]'.format(key=key, index=i), x) for i, x in enumerate(values))
+
+
 class PluginException(Exception):
     def __init__(self, message):
         super(PluginException, self).__init__(message)
@@ -32,7 +40,8 @@ class PluginException(Exception):
 
 
 def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, headers=None,
-                         accept_errors=None, allow_empty_result=False, templar=None):
+                         accept_errors=None, allow_empty_result=False,
+                         allowed_empty_result_status_codes=(200, 204), templar=None):
     '''
     Make general request to Hetzner's JSON robot API.
     '''
@@ -66,7 +75,7 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
         raise PluginException('Failed request to Hetzner Robot server endpoint {0}: {1}'.format(url, e))
 
     if not content:
-        if allow_empty_result and status in (200, 204):
+        if allow_empty_result and status in allowed_empty_result_status_codes:
             return None, None
         raise PluginException('Cannot retrieve content from {0}, HTTP status code {1}'.format(url, status))
 
@@ -87,7 +96,8 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
 
 
 def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=None,
-                   accept_errors=None, allow_empty_result=False):
+                   accept_errors=None, allow_empty_result=False,
+                   allowed_empty_result_status_codes=(200, 204)):
     '''
     Make general request to Hetzner's JSON robot API.
     '''
@@ -105,7 +115,7 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
         content = info.pop('body', None)
 
     if not content:
-        if allow_empty_result and info.get('status') in (200, 204):
+        if allow_empty_result and info.get('status') in allowed_empty_result_status_codes:
             return None, None
         module.fail_json(msg='Cannot retrieve content from {0}, HTTP status code {1}'.format(url, info.get('status')))
 
