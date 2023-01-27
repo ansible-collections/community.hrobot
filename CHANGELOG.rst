@@ -5,6 +5,19 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.7.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+New Modules
+-----------
+
+- community.hrobot.v_switch - Manage Hetzner's vSwitch
+
 v1.6.0
 ======
 

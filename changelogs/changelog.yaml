@@ -178,3 +178,13 @@ releases:
     - 1.6.0.yml
     - action_group.yml
     release_date: '2022-11-06'
+  1.7.0:
+    changes:
+      release_summary: Feature release.
+    fragments:
+    - 1.7.0.yml
+    modules:
+    - description: Manage Hetzner's vSwitch
+      name: v_switch
+      namespace: ''
+    release_date: '2023-01-27'
