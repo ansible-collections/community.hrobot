@@ -12,10 +12,7 @@ import textwrap
 
 import pytest
 
-from mock import MagicMock
-
 from ansible import constants as C
-from ansible.errors import AnsibleError
 from ansible.inventory.data import InventoryData
 from ansible.inventory.manager import InventoryManager
 from ansible.module_utils.common.text.converters import to_native
