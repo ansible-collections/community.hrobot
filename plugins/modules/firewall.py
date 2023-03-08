@@ -254,6 +254,7 @@ firewall:
             ip_version:
               description:
                 - Internet protocol version.
+                - No value means the rule applies both to IPv4 and IPv6.
               type: str
               sample: ipv4
             dst_ip:
@@ -294,6 +295,67 @@ firewall:
                 - C(accept) or C(discard).
               type: str
               sample: accept
+              choices:
+                - accept
+                - discard
+        output:
+          description:
+            - Output firewall rules.
+          type: list
+          elements: dict
+          contains:
+            name:
+              description:
+                - Name of the firewall rule.
+              type: str
+              sample: Allow HTTP access to server
+            ip_version:
+              description:
+                - Internet protocol version.
+                - No value means the rule applies both to IPv4 and IPv6.
+              type: str
+              sample: ~
+            dst_ip:
+              description:
+                - Destination IP address or subnet address.
+                - CIDR notation.
+              type: str
+              sample: 1.2.3.4/32
+            dst_port:
+              description:
+                - Destination port or port range.
+              type: str
+              sample: "443"
+            src_ip:
+              description:
+                - Source IP address or subnet address.
+                - CIDR notation.
+              type: str
+              sample: null
+            src_port:
+              description:
+                - Source port or port range.
+              type: str
+              sample: null
+            protocol:
+              description:
+                - Protocol above IP layer
+              type: str
+              sample: tcp
+            tcp_flags:
+              description:
+                - TCP flags or logical combination of flags.
+              type: str
+              sample: null
+            action:
+              description:
+                - Action if rule matches.
+                - C(accept) or C(discard).
+              type: str
+              sample: accept
+              choices:
+                - accept
+                - discard
 '''
 
 import traceback
