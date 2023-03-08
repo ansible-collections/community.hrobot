@@ -127,6 +127,59 @@ options:
             required: true
             type: str
             choices: [ accept, discard ]
+      output:
+        description:
+          - Output firewall rules.
+        type: list
+        elements: dict
+        version_added: 1.8.0
+        suboptions:
+          name:
+            description:
+              - Name of the firewall rule.
+            type: str
+          ip_version:
+            description:
+              - Internet protocol version.
+              - Leave away to filter both protocols. Note that in that case, neither I(dst_ip) nor I(src_ip) can be specified.
+            required: true
+            type: str
+          dst_ip:
+            description:
+              - Destination IP address or subnet address.
+              - CIDR notation.
+            type: str
+          dst_port:
+            description:
+              - Destination port or port range.
+            type: str
+          src_ip:
+            description:
+              - Source IP address or subnet address.
+              - CIDR notation.
+            type: str
+          src_port:
+            description:
+              - Source port or port range.
+            type: str
+          protocol:
+            description:
+              - Protocol above IP layer
+            type: str
+          tcp_flags:
+            description:
+              - TCP flags or logical combination of flags.
+              - Flags supported by Hetzner are C(syn), C(fin), C(rst), C(psh) and C(urg).
+              - They can be combined with C(|) (logical or) and C(&) (logical and).
+              - See L(the documentation,https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter)
+                for more information.
+            type: str
+          action:
+            description:
+              - Action if rule matches.
+            required: true
+            type: str
+            choices: [ accept, discard ]
   update_timeout:
     description:
       - Timeout to use when configuring the firewall.
@@ -191,6 +244,9 @@ EXAMPLES = r'''
           action: accept
         - name: Drop everything else
           action: discard
+      output:
+        - name: Accept everything
+          action: accept
   register: result
 
 - ansible.builtin.debug:
@@ -390,7 +446,7 @@ RULE_OPTION_NAMES = [
     'protocol', 'tcp_flags', 'action',
 ]
 
-RULES = ['input']
+RULES = ['input', 'output']
 
 
 def restrict_dict(dictionary, fields):
@@ -498,6 +554,17 @@ def main():
                 tcp_flags=dict(type='str'),
                 action=dict(type='str', required=True, choices=['accept', 'discard']),
             ), required_by=dict(ip_version=['dst_ip', 'src_ip'])),
+            output=dict(type='list', elements='dict', options=dict(
+                name=dict(type='str'),
+                ip_version=dict(type='str', choices=['ipv4', 'ipv6']),
+                dst_ip=dict(type='str'),
+                dst_port=dict(type='str'),
+                src_ip=dict(type='str'),
+                src_port=dict(type='str'),
+                protocol=dict(type='str'),
+                tcp_flags=dict(type='str'),
+                action=dict(type='str', required=True, choices=['accept', 'discard']),
+            ), required_by=dict(ip_version=['dst_ip', 'src_ip'])),
         )),
         update_timeout=dict(type='int', default=30),
         wait_for_configured=dict(type='bool', default=True),
@@ -517,8 +584,9 @@ def main():
     module.params['status'] = 'active' if (module.params['state'] == 'present') else 'disabled'
     if module.params['rules'] is None:
         module.params['rules'] = {}
-    if module.params['rules'].get('input') is None:
-        module.params['rules']['input'] = []
+    for chain in RULES:
+        if module.params['rules'].get(chain) is None:
+            module.params['rules'][chain] = []
 
     server_ip = module.params['server_ip']
 
