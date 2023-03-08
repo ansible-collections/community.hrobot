@@ -490,7 +490,7 @@ def main():
                 protocol=dict(type='str'),
                 tcp_flags=dict(type='str'),
                 action=dict(type='str', required=True, choices=['accept', 'discard']),
-            )),
+            ), required_by=dict(ip_version=['dst_ip', 'src_ip'])),
         )),
         update_timeout=dict(type='int', default=30),
         wait_for_configured=dict(type='bool', default=True),
