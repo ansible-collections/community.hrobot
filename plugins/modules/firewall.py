@@ -456,7 +456,7 @@ def restrict_dict(dictionary, fields):
 
 
 def restrict_firewall_config(config):
-    result = restrict_dict(config, ['port', 'status', 'whitelist_hos'])
+    result = restrict_dict(config, ['port', 'status', 'filter_ipv6', 'whitelist_hos'])
     result['rules'] = dict()
     for ruleset in RULES:
         result['rules'][ruleset] = [
@@ -551,7 +551,7 @@ def main():
                 protocol=dict(type='str'),
                 tcp_flags=dict(type='str'),
                 action=dict(type='str', required=True, choices=['accept', 'discard']),
-            ), required_by=dict(ip_version=['dst_ip', 'src_ip'])),
+            ), required_by=dict(dst_ip=['ip_version'], src_ip=['ip_version'])),
             output=dict(type='list', elements='dict', options=dict(
                 name=dict(type='str'),
                 ip_version=dict(type='str'),
@@ -562,7 +562,7 @@ def main():
                 protocol=dict(type='str'),
                 tcp_flags=dict(type='str'),
                 action=dict(type='str', required=True, choices=['accept', 'discard']),
-            ), required_by=dict(ip_version=['dst_ip', 'src_ip'])),
+            ), required_by=dict(dst_ip=['ip_version'], src_ip=['ip_version'])),
         )),
         update_timeout=dict(type='int', default=30),
         wait_for_configured=dict(type='bool', default=True),
