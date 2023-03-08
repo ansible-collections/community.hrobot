@@ -45,6 +45,12 @@ options:
     description: The server's main IP address.
     required: true
     type: str
+  filter_ipv6:
+    description:
+      - Whether to filter IPv6 traffic as well.
+      - IPv4 traffic is always filtered, IPv6 traffic filtering needs to be explicitly enabled.
+    type: bool
+    version_added: 1.8.0
   port:
     description:
       - Switch port of firewall.
@@ -160,6 +166,7 @@ EXAMPLES = r'''
     hetzner_password: bar
     server_ip: 1.2.3.4
     state: present
+    filter_ipv6: true
     allowlist_hos: true
     rules:
       input:
@@ -167,23 +174,22 @@ EXAMPLES = r'''
           ip_version: ipv4
           protocol: icmp
           action: accept
+          # Note that it is not possible to disable ICMP for IPv6
+          # (https://robot.hetzner.com/doc/webservice/en.html#post-firewall-server-id)
         - name: Allow responses to incoming TCP connections
-          ip_version: ipv4
           protocol: tcp
           dst_port: '32768-65535'
           tcp_flags: ack
           action: accept
-        - name: Allow everything to ports 20-23 from 4.3.2.1/24
+        - name: Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)
           ip_version: ipv4
           src_ip: 4.3.2.1/24
           dst_port: '20-23'
           action: accept
         - name: Allow everything to port 443
-          ip_version: ipv4
           dst_port: '443'
           action: accept
         - name: Drop everything else
-          ip_version: ipv4
           action: discard
   register: result
 
@@ -477,6 +483,7 @@ def main():
     argument_spec = dict(
         server_ip=dict(type='str', required=True),
         port=dict(type='str', default='main', choices=['main', 'kvm']),
+        filter_ipv6=dict(type='bool'),
         state=dict(type='str', default='present', choices=['present', 'absent']),
         allowlist_hos=dict(type='bool', aliases=['whitelist_hos']),
         rules=dict(type='dict', options=dict(
@@ -541,6 +548,7 @@ def main():
     # Build wanted (after) state and compare
     after = dict(before)
     changed = False
+    changed |= update(before, after, module.params, 'filter_ipv6')
     changed |= update(before, after, module.params, 'port')
     changed |= update(before, after, module.params, 'status')
     changed |= update(before, after, module.params, 'whitelist_hos', 'allowlist_hos')
