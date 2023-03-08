@@ -545,7 +545,7 @@ def main():
         rules=dict(type='dict', options=dict(
             input=dict(type='list', elements='dict', options=dict(
                 name=dict(type='str'),
-                ip_version=dict(type='str', choices=['ipv4', 'ipv6']),
+                ip_version=dict(type='str'),
                 dst_ip=dict(type='str'),
                 dst_port=dict(type='str'),
                 src_ip=dict(type='str'),
@@ -556,7 +556,7 @@ def main():
             ), required_by=dict(ip_version=['dst_ip', 'src_ip'])),
             output=dict(type='list', elements='dict', options=dict(
                 name=dict(type='str'),
-                ip_version=dict(type='str', choices=['ipv4', 'ipv6']),
+                ip_version=dict(type='str'),
                 dst_ip=dict(type='str'),
                 dst_port=dict(type='str'),
                 src_ip=dict(type='str'),
