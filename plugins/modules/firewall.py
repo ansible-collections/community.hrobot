@@ -42,9 +42,18 @@ attributes:
 
 options:
   server_ip:
-    description: The server's main IP address.
-    required: true
+    description:
+      - The server's main IP address.
+      - Exactly one of I(server_ip) and I(server_number) must be specified.
+      - Note that Hetzner deprecated identifying the server's firewall by the server's main IP.
+        Using this option can thus stop working at any time in the future. Use I(server_number) instead.
     type: str
+  server_number:
+    description:
+      - The server's number.
+      - Exactly one of I(server_ip) and I(server_number) must be specified.
+    type: int
+    version_added: 1.8.0
   filter_ipv6:
     description:
       - Whether to filter IPv6 traffic as well.
@@ -535,7 +544,8 @@ def firewall_configured(result, error):
 
 def main():
     argument_spec = dict(
-        server_ip=dict(type='str', required=True),
+        server_ip=dict(type='str'),
+        server_number=dict(type='int'),
         port=dict(type='str', default='main', choices=['main', 'kvm']),
         filter_ipv6=dict(type='bool'),
         state=dict(type='str', default='present', choices=['present', 'absent']),
@@ -586,10 +596,10 @@ def main():
         if module.params['rules'].get(chain) is None:
             module.params['rules'][chain] = []
 
-    server_ip = module.params['server_ip']
+    server_id = module.params['server_ip'] or module.params['server_number']
 
     # https://robot.your-server.de/doc/webservice/en.html#get-firewall-server-ip
-    url = "{0}/firewall/{1}".format(BASE_URL, server_ip)
+    url = "{0}/firewall/{1}".format(BASE_URL, server_id)
     if module.params['wait_for_configured']:
         try:
             result, error = fetch_url_json_with_retries(
@@ -628,7 +638,7 @@ def main():
     construct_status = None
     if changed and not module.check_mode:
         # https://robot.your-server.de/doc/webservice/en.html#post-firewall-server-ip
-        url = "{0}/firewall/{1}".format(BASE_URL, server_ip)
+        url = "{0}/firewall/{1}".format(BASE_URL, server_id)
         headers = {"Content-type": "application/x-www-form-urlencoded"}
         data = dict(after)
         data['filter_ipv6'] = str(data['filter_ipv6']).lower()

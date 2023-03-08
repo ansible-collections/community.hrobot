@@ -111,7 +111,7 @@ class TestHetznerFirewall(BaseTestModule):
         result = self.run_module_success(mocker, firewall, {
             'hetzner_user': '',
             'hetzner_password': '',
-            'server_ip': '1.2.3.4',
+            'server_number': 4321,
             'state': 'absent',
         }, [
             FetchUrlCall('GET', 200)
@@ -119,7 +119,7 @@ class TestHetznerFirewall(BaseTestModule):
                 'firewall': {
                     'filter_ipv6': False,
                     'server_ip': '1.2.3.4',
-                    'server_number': 1,
+                    'server_number': 4321,
                     'status': 'active',
                     'whitelist_hos': True,
                     'port': 'main',
@@ -129,13 +129,13 @@ class TestHetznerFirewall(BaseTestModule):
                     },
                 },
             })
-            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+            .expect_url('{0}/firewall/4321'.format(BASE_URL)),
             FetchUrlCall('POST', 200)
             .result_json({
                 'firewall': {
                     'filter_ipv6': False,
                     'server_ip': '1.2.3.4',
-                    'server_number': 1,
+                    'server_number': 4321,
                     'status': 'disabled',
                     'whitelist_hos': False,
                     'port': 'main',
@@ -145,7 +145,7 @@ class TestHetznerFirewall(BaseTestModule):
                     },
                 },
             })
-            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL))
+            .expect_url('{0}/firewall/4321'.format(BASE_URL))
             .expect_form_value('status', 'disabled'),
         ])
         assert result['changed'] is True
@@ -153,7 +153,7 @@ class TestHetznerFirewall(BaseTestModule):
         assert result['diff']['after']['status'] == 'disabled'
         assert result['firewall']['status'] == 'disabled'
         assert result['firewall']['server_ip'] == '1.2.3.4'
-        assert result['firewall']['server_number'] == 1
+        assert result['firewall']['server_number'] == 4321
 
     def test_absent_changed_no_rules(self, mocker):
         result = self.run_module_success(mocker, firewall, {

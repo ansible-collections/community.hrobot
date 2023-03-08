@@ -35,9 +35,18 @@ attributes:
 
 options:
   server_ip:
-    description: The server's main IP address.
+    description:
+      - The server's main IP address.
+      - Exactly one of I(server_ip) and I(server_number) must be specified.
+      - Note that Hetzner deprecated identifying the server's firewall by the server's main IP.
+        Using this option can thus stop working at any time in the future. Use I(server_number) instead.
     type: str
-    required: true
+  server_number:
+    description:
+      - The server's number.
+      - Exactly one of I(server_ip) and I(server_number) must be specified.
+    type: int
+    version_added: 1.8.0
   wait_for_configured:
     description:
       - Whether to wait until the firewall has been successfully configured before
@@ -262,7 +271,8 @@ def firewall_configured(result, error):
 
 def main():
     argument_spec = dict(
-        server_ip=dict(type='str', required=True),
+        server_ip=dict(type='str'),
+        server_number=dict(type='int'),
         wait_for_configured=dict(type='bool', default=True),
         wait_delay=dict(type='int', default=10),
         timeout=dict(type='int', default=180),
@@ -273,10 +283,10 @@ def main():
         supports_check_mode=True,
     )
 
-    server_ip = module.params['server_ip']
+    server_id = module.params['server_ip'] or module.params['server_number']
 
     # https://robot.your-server.de/doc/webservice/en.html#get-firewall-server-ip
-    url = "{0}/firewall/{1}".format(BASE_URL, server_ip)
+    url = "{0}/firewall/{1}".format(BASE_URL, server_id)
     if module.params['wait_for_configured']:
         try:
             result, error = fetch_url_json_with_retries(
