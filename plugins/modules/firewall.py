@@ -631,6 +631,7 @@ def main():
         url = "{0}/firewall/{1}".format(BASE_URL, server_ip)
         headers = {"Content-type": "application/x-www-form-urlencoded"}
         data = dict(after)
+        data['filter_ipv6'] = str(data['filter_ipv6']).lower()
         data['whitelist_hos'] = str(data['whitelist_hos']).lower()
         del data['rules']
         for ruleset in RULES:
