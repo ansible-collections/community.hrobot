@@ -82,10 +82,9 @@ options:
           ip_version:
             description:
               - Internet protocol version.
-              - Note that currently, only IPv4 is supported by Hetzner.
+              - Leave away to filter both protocols. Note that in that case, neither I(dst_ip) nor I(src_ip) can be specified.
             required: true
             type: str
-            choices: [ ipv4, ipv6 ]
           dst_ip:
             description:
               - Destination IP address or subnet address.
@@ -420,7 +419,7 @@ def update(before, after, params, name, param_name=None):
 
 
 def normalize_ip(ip, ip_version):
-    if ip is None:
+    if ip is None or ip_version is None:
         return ip
     if '/' in ip:
         ip, range = ip.split('/')
@@ -483,7 +482,7 @@ def main():
         rules=dict(type='dict', options=dict(
             input=dict(type='list', elements='dict', options=dict(
                 name=dict(type='str'),
-                ip_version=dict(type='str', required=True, choices=['ipv4', 'ipv6']),
+                ip_version=dict(type='str', choices=['ipv4', 'ipv6']),
                 dst_ip=dict(type='str'),
                 dst_port=dict(type='str'),
                 src_ip=dict(type='str'),
