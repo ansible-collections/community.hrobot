@@ -89,7 +89,6 @@ options:
             description:
               - Internet protocol version.
               - Leave away to filter both protocols. Note that in that case, neither I(dst_ip) nor I(src_ip) can be specified.
-            required: true
             type: str
           dst_ip:
             description:
@@ -142,7 +141,6 @@ options:
             description:
               - Internet protocol version.
               - Leave away to filter both protocols. Note that in that case, neither I(dst_ip) nor I(src_ip) can be specified.
-            required: true
             type: str
           dst_ip:
             description:
