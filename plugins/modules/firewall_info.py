@@ -169,7 +169,7 @@ firewall:
               sample: null
             protocol:
               description:
-                - Protocol above IP layer
+                - Protocol above IP layer.
               type: str
               sample: tcp
             tcp_flags:
@@ -227,7 +227,7 @@ firewall:
               sample: null
             protocol:
               description:
-                - Protocol above IP layer
+                - Protocol above IP layer.
               type: str
               sample: tcp
             tcp_flags:
