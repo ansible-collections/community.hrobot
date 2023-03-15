@@ -88,7 +88,7 @@ options:
           ip_version:
             description:
               - Internet protocol version.
-              - Leave away to filter both protocols. Note that in that case, neither I(dst_ip) nor I(src_ip) can be specified.
+              - Leave away to filter both protocols. Note that in that case, none of I(dst_ip), I(src_ip), or I(protocol) can be specified.
             type: str
           dst_ip:
             description:
@@ -140,7 +140,7 @@ options:
           ip_version:
             description:
               - Internet protocol version.
-              - Leave away to filter both protocols. Note that in that case, neither I(dst_ip) nor I(src_ip) can be specified.
+              - Leave away to filter both protocols. Note that in that case, none of I(dst_ip), I(src_ip), or I(protocol) can be specified.
             type: str
           dst_ip:
             description:
@@ -551,7 +551,7 @@ def main():
                 protocol=dict(type='str'),
                 tcp_flags=dict(type='str'),
                 action=dict(type='str', required=True, choices=['accept', 'discard']),
-            ), required_by=dict(dst_ip=['ip_version'], src_ip=['ip_version'])),
+            ), required_by=dict(dst_ip=['ip_version'], src_ip=['ip_version'], protocol=['ip_version'])),
             output=dict(type='list', elements='dict', options=dict(
                 name=dict(type='str'),
                 ip_version=dict(type='str'),
@@ -562,7 +562,7 @@ def main():
                 protocol=dict(type='str'),
                 tcp_flags=dict(type='str'),
                 action=dict(type='str', required=True, choices=['accept', 'discard']),
-            ), required_by=dict(dst_ip=['ip_version'], src_ip=['ip_version'])),
+            ), required_by=dict(dst_ip=['ip_version'], src_ip=['ip_version'], protocol=['ip_version'])),
         )),
         update_timeout=dict(type='int', default=30),
         wait_for_configured=dict(type='bool', default=True),
