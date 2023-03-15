@@ -312,6 +312,15 @@
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/filter_ipv6"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-filter-ipv6"><strong>filter_ipv6</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/filter_ipv6" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the firewall rules apply to IPv6 as well or not.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-port"><strong>port</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/port" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -321,7 +330,7 @@
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;main&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules"><strong>rules</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -329,7 +338,7 @@
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input"><strong>input</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
 </div></td>
@@ -337,17 +346,22 @@
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/action"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-action"><strong>action</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/action" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Action if rule matches.</p>
 <p><code class="docutils literal notranslate"><span class="pre">accept</span></code> or <code class="docutils literal notranslate"><span class="pre">discard</span></code>.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+<p class="ansible-option-line"><span class="ansible-option-choices">Can only return:</span></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;accept&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;discard&quot;</span></code></p></li>
+</ul>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;accept&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/dst_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-dst-ip"><strong>dst_ip</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/dst_ip" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -357,7 +371,7 @@
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;1.2.3.4/32&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/dst_port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-dst-port"><strong>dst_port</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/dst_port" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -366,16 +380,17 @@
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;443&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/ip_version"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-ip-version"><strong>ip_version</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/ip_version" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Internet protocol version.</p>
+<p>No value means the rule applies both to IPv4 and IPv6.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;ipv4&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/name"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-name"><strong>name</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/name" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -384,16 +399,16 @@
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;Allow</span> <span class="pre">HTTP</span> <span class="pre">access</span> <span class="pre">to</span> <span class="pre">server&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/protocol"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-protocol"><strong>protocol</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/protocol" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;tcp&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/src_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-src-ip"><strong>src_ip</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/src_ip" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -402,7 +417,7 @@
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/src_port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-src-port"><strong>src_port</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/src_port" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -410,7 +425,7 @@
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/tcp_flags"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-input-tcp-flags"><strong>tcp_flags</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/tcp_flags" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -418,7 +433,101 @@
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output"><strong>output</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Output firewall rules.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/action"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-action"><strong>action</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/action" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Action if rule matches.</p>
+<p><code class="docutils literal notranslate"><span class="pre">accept</span></code> or <code class="docutils literal notranslate"><span class="pre">discard</span></code>.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+<p class="ansible-option-line"><span class="ansible-option-choices">Can only return:</span></p>
+<ul class="simple">
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;accept&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;discard&quot;</span></code></p></li>
+</ul>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;accept&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/dst_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-dst-ip"><strong>dst_ip</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/dst_ip" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Destination IP address or subnet address.</p>
+<p>CIDR notation.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;1.2.3.4/32&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/dst_port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-dst-port"><strong>dst_port</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/dst_port" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Destination port or port range.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;443&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/ip_version"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-ip-version"><strong>ip_version</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/ip_version" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Internet protocol version.</p>
+<p>No value means the rule applies both to IPv4 and IPv6.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/name"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-name"><strong>name</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/name" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Name of the firewall rule.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;Allow</span> <span class="pre">HTTP</span> <span class="pre">access</span> <span class="pre">to</span> <span class="pre">server&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/protocol"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-protocol"><strong>protocol</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/protocol" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;tcp&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/src_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-src-ip"><strong>src_ip</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/src_ip" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Source IP address or subnet address.</p>
+<p>CIDR notation.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/src_port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-src-port"><strong>src_port</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/src_port" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Source port or port range.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-firewall/rules/output/tcp_flags"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-rules-output-tcp-flags"><strong>tcp_flags</strong></p>
+<a class="ansibleOptionLink" href="#return-firewall/rules/output/tcp_flags" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>TCP flags or logical combination of flags.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/server_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-server-ip"><strong>server_ip</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/server_ip" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -427,7 +536,7 @@
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;1.2.3.4&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/server_number"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-server-number"><strong>server_number</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/server_number" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -436,7 +545,7 @@
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">12345</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/status"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-status"><strong>status</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/status" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -447,7 +556,7 @@
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;active&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-firewall/whitelist_hos"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-return-firewall-whitelist-hos"><strong>whitelist_hos</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/whitelist_hos" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
