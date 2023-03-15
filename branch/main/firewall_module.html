@@ -401,12 +401,23 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-server_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-server-ip"><strong>server_ip</strong></p>
-<a class="ansibleOptionLink" href="#parameter-server_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<a class="ansibleOptionLink" href="#parameter-server_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The server’s main IP address.</p>
+<p>Exactly one of <em>server_ip</em> and <em>server_number</em> must be specified.</p>
+<p>Note that Hetzner deprecated identifying the server’s firewall by the server’s main IP. Using this option can thus stop working at any time in the future. Use <em>server_number</em> instead.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-server_number"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-server-number"><strong>server_number</strong></p>
+<a class="ansibleOptionLink" href="#parameter-server_number" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><span class="ansible-option-versionadded">added in community.hrobot 1.8.0</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The server’s number.</p>
+<p>Exactly one of <em>server_ip</em> and <em>server_number</em> must be specified.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-state"><strong>state</strong></p>
 <a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -419,7 +430,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-timeout"><strong>timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -427,7 +438,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">180</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-update_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-update-timeout"><strong>update_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-update_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -436,7 +447,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">30</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-wait_delay"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-wait-delay"><strong>wait_delay</strong></p>
 <a class="ansibleOptionLink" href="#parameter-wait_delay" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -444,7 +455,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <code class="ansible-option-default docutils literal notranslate"><span class="pre">10</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-wait_for_configured"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-wait-for-configured"><strong>wait_for_configured</strong></p>
 <a class="ansibleOptionLink" href="#parameter-wait_for_configured" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
