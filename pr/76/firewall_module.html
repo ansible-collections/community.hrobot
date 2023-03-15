@@ -14,7 +14,6 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -276,7 +275,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#parameter-rules/input/ip_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Internet protocol version.</p>
-<p>Leave away to filter both protocols. Note that in that case, neither <em>dst_ip</em> nor <em>src_ip</em> can be specified.</p>
+<p>Leave away to filter both protocols. Note that in that case, none of <em>dst_ip</em>, <em>src_ip</em>, or <em>protocol</em> can be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -290,7 +289,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <div class="ansibleOptionAnchor" id="parameter-rules/input/protocol"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-protocol"><strong>protocol</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/protocol" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -358,7 +357,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#parameter-rules/output/ip_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Internet protocol version.</p>
-<p>Leave away to filter both protocols. Note that in that case, neither <em>dst_ip</em> nor <em>src_ip</em> can be specified.</p>
+<p>Leave away to filter both protocols. Note that in that case, none of <em>dst_ip</em>, <em>src_ip</em>, or <em>protocol</em> can be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -372,7 +371,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <div class="ansibleOptionAnchor" id="parameter-rules/output/protocol"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-protocol"><strong>protocol</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/protocol" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -666,7 +665,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <div class="ansibleOptionAnchor" id="return-firewall/rules/input/protocol"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-return-firewall-rules-input-protocol"><strong>protocol</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/protocol" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;tcp&quot;</span></code></p>
 </div></td>
@@ -760,7 +759,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <div class="ansibleOptionAnchor" id="return-firewall/rules/output/protocol"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-return-firewall-rules-output-protocol"><strong>protocol</strong></p>
 <a class="ansibleOptionLink" href="#return-firewall/rules/output/protocol" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;tcp&quot;</span></code></p>
 </div></td>
