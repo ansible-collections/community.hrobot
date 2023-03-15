@@ -5,6 +5,25 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.8.0
+======
+
+Release Summary
+---------------
+
+Feature release for the Hetzner firewall changes.
+
+Major Changes
+-------------
+
+- firewall - Hetzner added output rules support to the firewall. This change unfortunately means that using old versions of the firewall module will always set the output rule list to empty, thus disallowing the server to send out packets (https://github.com/ansible-collections/community.hrobot/issues/75, https://github.com/ansible-collections/community.hrobot/pull/76).
+
+Minor Changes
+-------------
+
+- firewall, firewall_info - add ``filter_ipv6`` and ``rules.output`` output to support the new IPv6 filtering and output rules features (https://github.com/ansible-collections/community.hrobot/issues/75, https://github.com/ansible-collections/community.hrobot/pull/76).
+- firewall, firewall_info - add ``server_number`` option that can be used instead of ``server_ip`` to identify the server. Hetzner deprecated configuring the firewall by ``server_ip``, so using ``server_ip`` will stop at some point in the future (https://github.com/ansible-collections/community.hrobot/pull/77).
+
 v1.7.0
 ======
 
