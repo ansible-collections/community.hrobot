@@ -25,7 +25,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
         result = self.run_module_success(mocker, firewall_info, {
             'hetzner_user': 'test',
             'hetzner_password': 'hunter2',
-            'server_ip': '1.2.3.4',
+            'server_number': 1,
         }, [
             FetchUrlCall('GET', 200)
             .expect_basic_auth('test', 'hunter2')
@@ -44,7 +44,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
                     },
                 },
             })
-            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+            .expect_url('{0}/firewall/1'.format(BASE_URL)),
         ])
         assert result['changed'] is False
         assert result['firewall']['filter_ipv6'] is False
@@ -194,7 +194,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
         result = self.run_module_success(mocker, firewall_info, {
             'hetzner_user': '',
             'hetzner_password': '',
-            'server_ip': '1.2.3.4',
+            'server_number': 123,
             'wait_for_configured': True,
         }, [
             FetchUrlCall('GET', 200)
@@ -202,7 +202,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
                 'firewall': {
                     'filter_ipv6': True,
                     'server_ip': '1.2.3.4',
-                    'server_number': 1,
+                    'server_number': 123,
                     'status': 'in process',
                     'whitelist_hos': False,
                     'port': 'main',
@@ -212,13 +212,13 @@ class TestHetznerFirewallInfo(BaseTestModule):
                     },
                 },
             })
-            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+            .expect_url('{0}/firewall/123'.format(BASE_URL)),
             FetchUrlCall('GET', 200)
             .result_json({
                 'firewall': {
                     'filter_ipv6': True,
                     'server_ip': '1.2.3.4',
-                    'server_number': 1,
+                    'server_number': 123,
                     'status': 'in process',
                     'whitelist_hos': False,
                     'port': 'main',
@@ -228,13 +228,13 @@ class TestHetznerFirewallInfo(BaseTestModule):
                     },
                 },
             })
-            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+            .expect_url('{0}/firewall/123'.format(BASE_URL)),
             FetchUrlCall('GET', 200)
             .result_json({
                 'firewall': {
                     'filter_ipv6': False,
                     'server_ip': '1.2.3.4',
-                    'server_number': 1,
+                    'server_number': 123,
                     'status': 'active',
                     'whitelist_hos': True,
                     'port': 'main',
@@ -244,7 +244,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
                     },
                 },
             })
-            .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
+            .expect_url('{0}/firewall/123'.format(BASE_URL)),
         ])
         assert result['changed'] is False
         assert result['firewall']['filter_ipv6'] is False
@@ -252,7 +252,7 @@ class TestHetznerFirewallInfo(BaseTestModule):
         assert result['firewall']['allowlist_hos'] is True
         assert result['firewall']['status'] == 'active'
         assert result['firewall']['server_ip'] == '1.2.3.4'
-        assert result['firewall']['server_number'] == 1
+        assert result['firewall']['server_number'] == 123
 
     def test_wait_get_timeout(self, mocker):
         mocker.patch('time.sleep', lambda duration: None)
