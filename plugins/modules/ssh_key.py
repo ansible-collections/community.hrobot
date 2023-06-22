@@ -38,9 +38,9 @@ options:
     state:
         description:
           - Whether to make sure a public SSH key is present or absent.
-          - C(present) makes sure that the SSH key is available, and
+          - V(present) makes sure that the SSH key is available, and
             potentially updates names for existing SHS public keys.
-          - C(absent) makes sure that the SSH key is not available.
+          - V(absent) makes sure that the SSH key is not available.
             The fingerprint or public key data is used for matching the
             key.
         required: true
@@ -51,19 +51,19 @@ options:
     name:
         description:
           - The public key's name.
-          - Required if I(state=present), and ignored if I(state=absent).
+          - Required if O(state=present), and ignored if O(state=absent).
         type: str
     fingerprint:
         description:
           - The MD5 fingerprint of the public SSH key to remove.
-          - One of I(public_key) and I(fingerprint) are required if I(state=absent).
+          - One of O(public_key) and O(fingerprint) are required if O(state=absent).
         type: str
     public_key:
         description:
           - The public key data in OpenSSH format.
-          - "Example: C(ssh-rsa AAAAB3NzaC1yc+...)"
-          - One of I(public_key) and I(fingerprint) are required if I(state=absent).
-          - Required if I(state=present).
+          - "Example: V(ssh-rsa AAAAB3NzaC1yc+...)"
+          - One of O(public_key) and O(fingerprint) are required if O(state=absent).
+          - Required if O(state=present).
         type: str
 '''
 

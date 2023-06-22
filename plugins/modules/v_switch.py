@@ -51,9 +51,9 @@ options:
   state:
     description:
       - State of the vSwitch.
-      - vSwitch is created if state is C(present), and deleted if state is C(absent).
-      - C(absent) just cancels the vSwitch at the end of the current day.
-      - When cancelling, you have to specify I(servers=[]) if you want to actively remove the servers in the vSwitch.
+      - vSwitch is created if state is V(present), and deleted if state is V(absent).
+      - V(absent) just cancels the vSwitch at the end of the current day.
+      - When cancelling, you have to specify O(servers=[]) if you want to actively remove the servers in the vSwitch.
     type: str
     default: present
     choices: [ present, absent ]

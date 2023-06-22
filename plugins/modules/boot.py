@@ -46,31 +46,31 @@ options:
     description:
       - If this option is provided, all special boot configurations are removed and
         the installed operating system will be booted up next (assuming it is bootable).
-      - Precisely one of I(regular_boot), I(rescue), I(install_linux), I(install_vnc),
-        I(install_windows), I(install_plesk), and I(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
+        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
     type: bool
     choices:
       - true
   rescue:
     description:
       - If this option is provided, the rescue system will be activated for the next boot.
-      - Precisely one of I(regular_boot), I(rescue), I(install_linux), I(install_vnc),
-        I(install_windows), I(install_plesk), and I(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
+        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       os:
         description:
           - The operating system to use for the rescue system. Possible choices can
             change over time.
-          - Currently, C(linux), C(linuxold), C(freebsd), C(freebsdold), C(freebsdax),
-            C(freebsdbetaax), C(vkvm), and C(vkvmold) seem to be available.
+          - Currently, V(linux), V(linuxold), V(freebsd), V(freebsdold), V(freebsdax),
+            V(freebsdbetaax), V(vkvm), and V(vkvmold) seem to be available.
         type: str
         required: true
       arch:
         description:
           - The architecture to use for the rescue system.
           - Not all architectures are available for all operating systems.
-          - Defaults to C(64).
+          - Defaults to V(64).
         type: int
         choices:
           - 32
@@ -87,8 +87,8 @@ options:
   install_linux:
     description:
       - If this option is provided, a Linux system install will be activated for the next boot.
-      - Precisely one of I(regular_boot), I(rescue), I(install_linux), I(install_vnc),
-        I(install_windows), I(install_plesk), and I(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
+        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       dist:
@@ -100,7 +100,7 @@ options:
         description:
           - The architecture to use for the install.
           - Not all architectures are available for all distributions.
-          - Defaults to C(64).
+          - Defaults to V(64).
         type: int
         choices:
           - 32
@@ -122,8 +122,8 @@ options:
   install_vnc:
     description:
       - If this option is provided, a VNC installation will be activated for the next boot.
-      - Precisely one of I(regular_boot), I(rescue), I(install_linux), I(install_vnc),
-        I(install_windows), I(install_plesk), and I(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
+        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       dist:
@@ -135,7 +135,7 @@ options:
         description:
           - The architecture to use for the install.
           - Not all architectures are available for all distributions.
-          - Defaults to C(64).
+          - Defaults to V(64).
         type: int
         choices:
           - 32
@@ -148,8 +148,8 @@ options:
   install_windows:
     description:
       - If this option is provided, a Windows installation will be activated for the next boot.
-      - Precisely one of I(regular_boot), I(rescue), I(install_linux), I(install_vnc),
-        I(install_windows), I(install_plesk), and I(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
+        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       lang:
@@ -160,8 +160,8 @@ options:
   install_plesk:
     description:
       - If this option is provided, a Plesk installation will be activated for the next boot.
-      - Precisely one of I(regular_boot), I(rescue), I(install_linux), I(install_vnc),
-        I(install_windows), I(install_plesk), and I(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
+        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       dist:
@@ -173,7 +173,7 @@ options:
         description:
           - The architecture to use for the install.
           - Not all architectures are available for all distributions.
-          - Defaults to C(64).
+          - Defaults to V(64).
         type: int
         choices:
           - 32
@@ -191,8 +191,8 @@ options:
   install_cpanel:
     description:
       - If this option is provided, a cPanel installation will be activated for the next boot.
-      - Precisely one of I(regular_boot), I(rescue), I(install_linux), I(install_vnc),
-        I(install_windows), I(install_plesk), and I(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
+        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       dist:
@@ -204,7 +204,7 @@ options:
         description:
           - The architecture to use for the install.
           - Not all architectures are available for all distributions.
-          - Defaults to C(64).
+          - Defaults to V(64).
         type: int
         choices:
           - 32
@@ -266,7 +266,7 @@ password:
       - The root password for the active boot configuration, if available.
       - For non-rescue boot configurations, it is avised to change the root password
         as soon as possible.
-    returned: success and if a boot configuration other than C(regular_boot) is active
+    returned: success and if RV(configuration_type) is not V(regular_boot)
     type: str
 '''
 

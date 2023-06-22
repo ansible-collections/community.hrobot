@@ -44,7 +44,7 @@ options:
   state:
     description:
       - Defines whether the IP will be routed or not.
-      - If set to C(routed), I(value) must be specified.
+      - If set to V(routed), O(value) must be specified.
     type: str
     choices:
       - routed
@@ -53,7 +53,7 @@ options:
   value:
     description:
       - The new value for the failover IP address.
-      - Required when setting I(state) to C(routed).
+      - Required when setting O(state) to V(routed).
     type: str
   timeout:
     description:
@@ -85,12 +85,12 @@ RETURN = r'''
 value:
   description:
     - The value of the failover IP.
-    - Will be C(none) if the IP is unrouted.
+    - Will be V(none) if the IP is unrouted.
   returned: success
   type: str
 state:
   description:
-    - Will be C(routed) or C(unrouted).
+    - Will be V(routed) or V(unrouted).
   returned: success
   type: str
 '''

@@ -26,7 +26,7 @@ DOCUMENTATION = r"""
         - ansible.builtin.inventory_cache
         - community.hrobot.robot
     notes:
-        - The I(hetzner_user) and I(hetzner_password) options can be templated.
+        - The O(hetzner_user) and O(hetzner_password) options can be templated.
     options:
         plugin:
             description: Token that ensures this is a source file for the plugin.

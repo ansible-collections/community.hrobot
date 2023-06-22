@@ -44,14 +44,14 @@ options:
   server_ip:
     description:
       - The server's main IP address.
-      - Exactly one of I(server_ip) and I(server_number) must be specified.
+      - Exactly one of O(server_ip) and O(server_number) must be specified.
       - Note that Hetzner deprecated identifying the server's firewall by the server's main IP.
-        Using this option can thus stop working at any time in the future. Use I(server_number) instead.
+        Using this option can thus stop working at any time in the future. Use O(server_number) instead.
     type: str
   server_number:
     description:
       - The server's number.
-      - Exactly one of I(server_ip) and I(server_number) must be specified.
+      - Exactly one of O(server_ip) and O(server_number) must be specified.
     type: int
     version_added: 1.8.0
   filter_ipv6:
@@ -69,7 +69,7 @@ options:
   state:
     description:
       - Status of the firewall.
-      - Firewall is active if state is C(present), and disabled if state is C(absent).
+      - Firewall is active if state is V(present), and disabled if state is V(absent).
     type: str
     default: present
     choices: [ present, absent ]
@@ -97,7 +97,7 @@ options:
           ip_version:
             description:
               - Internet protocol version.
-              - Leave away to filter both protocols. Note that in that case, none of I(dst_ip), I(src_ip), or I(protocol) can be specified.
+              - Leave away to filter both protocols. Note that in that case, none of O(rules.input[].dst_ip), O(rules.input[].src_ip), or O(rules.input[].protocol) can be specified.
             type: str
           dst_ip:
             description:
@@ -124,8 +124,8 @@ options:
           tcp_flags:
             description:
               - TCP flags or logical combination of flags.
-              - Flags supported by Hetzner are C(syn), C(fin), C(rst), C(psh) and C(urg).
-              - They can be combined with C(|) (logical or) and C(&) (logical and).
+              - Flags supported by Hetzner are V(syn), V(fin), V(rst), V(psh) and V(urg).
+              - They can be combined with V(|) (logical or) and V(&) (logical and).
               - See L(the documentation,https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter)
                 for more information.
             type: str
@@ -149,7 +149,7 @@ options:
           ip_version:
             description:
               - Internet protocol version.
-              - Leave away to filter both protocols. Note that in that case, none of I(dst_ip), I(src_ip), or I(protocol) can be specified.
+              - Leave away to filter both protocols. Note that in that case, none of O(rules.output[].dst_ip), O(rules.output[].src_ip), or O(rules.output[].protocol) can be specified.
             type: str
           dst_ip:
             description:
@@ -176,8 +176,8 @@ options:
           tcp_flags:
             description:
               - TCP flags or logical combination of flags.
-              - Flags supported by Hetzner are C(syn), C(fin), C(rst), C(psh) and C(urg).
-              - They can be combined with C(|) (logical or) and C(&) (logical and).
+              - Flags supported by Hetzner are V(syn), V(fin), V(rst), V(psh) and V(urg).
+              - They can be combined with V(|) (logical or) and V(&) (logical and).
               - See L(the documentation,https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter)
                 for more information.
             type: str
@@ -270,7 +270,7 @@ firewall:
     port:
       description:
         - Switch port of firewall.
-        - C(main) or C(kvm).
+        - V(main) or V(kvm).
       type: str
       sample: main
     server_ip:
@@ -286,9 +286,9 @@ firewall:
     status:
       description:
         - Status of the firewall.
-        - C(active) or C(disabled).
-        - Will be C(in process) if the firewall is currently updated, and
-          I(wait_for_configured) is set to C(false) or I(timeout) to a too small value.
+        - V(active) or V(disabled).
+        - Will be V(in process) if the firewall is currently updated, and
+          O(wait_for_configured) is set to V(false) or O(timeout) to a too small value.
       type: str
       sample: active
     allowlist_hos:
@@ -300,7 +300,7 @@ firewall:
     whitelist_hos:
       description:
         - Whether Hetzner services have access.
-        - Old name of return value C(allowlist_hos), will be removed eventually.
+        - Old name of return value V(allowlist_hos), will be removed eventually.
       type: bool
       sample: true
     rules:
@@ -360,7 +360,7 @@ firewall:
             action:
               description:
                 - Action if rule matches.
-                - C(accept) or C(discard).
+                - V(accept) or V(discard).
               type: str
               sample: accept
               choices:
@@ -418,7 +418,7 @@ firewall:
             action:
               description:
                 - Action if rule matches.
-                - C(accept) or C(discard).
+                - V(accept) or V(discard).
               type: str
               sample: accept
               choices:
