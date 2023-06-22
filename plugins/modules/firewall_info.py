@@ -37,14 +37,14 @@ options:
   server_ip:
     description:
       - The server's main IP address.
-      - Exactly one of I(server_ip) and I(server_number) must be specified.
+      - Exactly one of O(server_ip) and O(server_number) must be specified.
       - Note that Hetzner deprecated identifying the server's firewall by the server's main IP.
-        Using this option can thus stop working at any time in the future. Use I(server_number) instead.
+        Using this option can thus stop working at any time in the future. Use O(server_number) instead.
     type: str
   server_number:
     description:
       - The server's number.
-      - Exactly one of I(server_ip) and I(server_number) must be specified.
+      - Exactly one of O(server_ip) and O(server_number) must be specified.
     type: int
     version_added: 1.8.0
   wait_for_configured:
@@ -94,7 +94,7 @@ firewall:
     port:
       description:
         - Switch port of firewall.
-        - C(main) or C(kvm).
+        - V(main) or V(kvm).
       type: str
       sample: main
     filter_ipv6:
@@ -115,9 +115,9 @@ firewall:
     status:
       description:
         - Status of the firewall.
-        - C(active) or C(disabled).
-        - Will be C(in process) if the firewall is currently updated, and
-          I(wait_for_configured) is set to C(false) or I(timeout) to a too small value.
+        - V(active) or V(disabled).
+        - Will be V(in process) if the firewall is currently updated, and
+          O(wait_for_configured) is set to V(false) or O(timeout) to a too small value.
       type: str
       sample: active
     allowlist_hos:
@@ -129,7 +129,7 @@ firewall:
     whitelist_hos:
       description:
         - Whether Hetzner services have access.
-        - Old name of return value C(allowlist_hos), will be removed eventually.
+        - Old name of return value V(allowlist_hos), will be removed eventually.
       type: bool
       sample: true
     rules:
@@ -189,7 +189,7 @@ firewall:
             action:
               description:
                 - Action if rule matches.
-                - C(accept) or C(discard).
+                - V(accept) or V(discard).
               type: str
               sample: accept
               choices:
@@ -247,7 +247,7 @@ firewall:
             action:
               description:
                 - Action if rule matches.
-                - C(accept) or C(discard).
+                - V(accept) or V(discard).
               type: str
               sample: accept
               choices:

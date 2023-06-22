@@ -100,7 +100,7 @@ server:
     traffic:
       description:
         - Free traffic quota.
-        - C(unlimited) in case of unlimited traffic.
+        - V(unlimited) in case of unlimited traffic.
       type: str
       sample: 5 TB
       returned: success

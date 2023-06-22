@@ -40,9 +40,9 @@ options:
   full_info:
     description:
       - Whether to provide full information for every server.
-      - Setting this to C(true) requires one REST call per server,
+      - Setting this to V(true) requires one REST call per server,
         which is slow and reduces your rate limit. Use with care.
-      - When I(server_number) is specified, this option is set to C(true).
+      - When O(server_number) is specified, this option is set to V(true).
     type: bool
     default: false
 '''
@@ -113,7 +113,7 @@ servers:
     traffic:
       description:
         - Free traffic quota.
-        - C(unlimited) in case of unlimited traffic.
+        - V(unlimited) in case of unlimited traffic.
       type: str
       sample: 5 TB
       returned: success
@@ -171,55 +171,55 @@ servers:
         - Whether the server can be automatically reset.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
     rescue:
       description:
         - Whether the rescue system is available.
       type: bool
       sample: false
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
     vnc:
       description:
         - Flag of VNC installation availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
     windows:
       description:
         - Flag of Windows installation availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
     plesk:
       description:
         - Flag of Plesk installation availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
     cpanel:
       description:
         - Flag of cPanel installation availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
     wol:
       description:
         - Flag of Wake On Lan availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
     hot_swap:
       description:
         - Flag of Hot Swap availability.
       type: bool
       sample: true
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
     linked_storagebox:
       description:
         - Linked Storage Box ID.
       type: int
       sample: 12345
-      returned: when I(full_info=true)
+      returned: when O(full_info=true)
 '''
 
 from ansible.module_utils.basic import AnsibleModule

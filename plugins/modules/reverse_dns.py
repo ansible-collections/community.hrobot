@@ -44,7 +44,7 @@ options:
     required: true
   state:
     description:
-      - Whether to set or update (C(present)) or delete (C(absent)) the reverse DNS entry for I(ip).
+      - Whether to set or update (V(present)) or delete (V(absent)) the reverse DNS entry for O(ip).
     type: str
     default: present
     choices:
@@ -52,8 +52,8 @@ options:
       - absent
   value:
     description:
-      - The reverse DNS entry for I(ip).
-      - Required if I(state=present).
+      - The reverse DNS entry for O(ip).
+      - Required if O(state=present).
     type: str
 '''
 

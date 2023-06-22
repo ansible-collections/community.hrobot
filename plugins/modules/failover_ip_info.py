@@ -59,12 +59,12 @@ RETURN = r'''
 value:
   description:
     - The value of the failover IP.
-    - Will be C(none) if the IP is unrouted.
+    - Will be V(none) if the IP is unrouted.
   returned: success
   type: str
 state:
   description:
-    - Will be C(routed) or C(unrouted).
+    - Will be V(routed) or V(unrouted).
   returned: success
   type: str
 failover_ip:
