@@ -277,7 +277,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#parameter-rules/input/ip_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Internet protocol version.</p>
-<p>Leave away to filter both protocols. Note that in that case, none of <em>dst_ip</em>, <em>src_ip</em>, or <em>protocol</em> can be specified.</p>
+<p>Leave away to filter both protocols. Note that in that case, none of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-input-dst-ip"><span class="std std-ref"><span class="pre">rules.input[].dst_ip</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-input-src-ip"><span class="std std-ref"><span class="pre">rules.input[].src_ip</span></span></a></strong></code>, or <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-input-protocol"><span class="std std-ref"><span class="pre">rules.input[].protocol</span></span></a></strong></code> can be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -314,8 +314,8 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#parameter-rules/input/tcp_flags" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>TCP flags or logical combination of flags.</p>
-<p>Flags supported by Hetzner are <code class="docutils literal notranslate"><span class="pre">syn</span></code>, <code class="docutils literal notranslate"><span class="pre">fin</span></code>, <code class="docutils literal notranslate"><span class="pre">rst</span></code>, <code class="docutils literal notranslate"><span class="pre">psh</span></code> and <code class="docutils literal notranslate"><span class="pre">urg</span></code>.</p>
-<p>They can be combined with <code class="docutils literal notranslate"><span class="pre">|</span></code> (logical or) and <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> (logical and).</p>
+<p>Flags supported by Hetzner are <code class="ansible-value docutils literal notranslate"><span class="pre">syn</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">fin</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">rst</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">psh</span></code> and <code class="ansible-value docutils literal notranslate"><span class="pre">urg</span></code>.</p>
+<p>They can be combined with <code class="ansible-value docutils literal notranslate"><span class="pre">|</span></code> (logical or) and <code class="ansible-value docutils literal notranslate"><span class="pre">&amp;</span></code> (logical and).</p>
 <p>See <a class="reference external" href="https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter">the documentation</a> for more information.</p>
 </div></td>
 </tr>
@@ -359,7 +359,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#parameter-rules/output/ip_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Internet protocol version.</p>
-<p>Leave away to filter both protocols. Note that in that case, none of <em>dst_ip</em>, <em>src_ip</em>, or <em>protocol</em> can be specified.</p>
+<p>Leave away to filter both protocols. Note that in that case, none of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-output-dst-ip"><span class="std std-ref"><span class="pre">rules.output[].dst_ip</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-output-src-ip"><span class="std std-ref"><span class="pre">rules.output[].src_ip</span></span></a></strong></code>, or <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-output-protocol"><span class="std std-ref"><span class="pre">rules.output[].protocol</span></span></a></strong></code> can be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -396,8 +396,8 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#parameter-rules/output/tcp_flags" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>TCP flags or logical combination of flags.</p>
-<p>Flags supported by Hetzner are <code class="docutils literal notranslate"><span class="pre">syn</span></code>, <code class="docutils literal notranslate"><span class="pre">fin</span></code>, <code class="docutils literal notranslate"><span class="pre">rst</span></code>, <code class="docutils literal notranslate"><span class="pre">psh</span></code> and <code class="docutils literal notranslate"><span class="pre">urg</span></code>.</p>
-<p>They can be combined with <code class="docutils literal notranslate"><span class="pre">|</span></code> (logical or) and <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> (logical and).</p>
+<p>Flags supported by Hetzner are <code class="ansible-value docutils literal notranslate"><span class="pre">syn</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">fin</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">rst</span></code>, <code class="ansible-value docutils literal notranslate"><span class="pre">psh</span></code> and <code class="ansible-value docutils literal notranslate"><span class="pre">urg</span></code>.</p>
+<p>They can be combined with <code class="ansible-value docutils literal notranslate"><span class="pre">|</span></code> (logical or) and <code class="ansible-value docutils literal notranslate"><span class="pre">&amp;</span></code> (logical and).</p>
 <p>See <a class="reference external" href="https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter">the documentation</a> for more information.</p>
 </div></td>
 </tr>
@@ -406,8 +406,8 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#parameter-server_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The server’s main IP address.</p>
-<p>Exactly one of <em>server_ip</em> and <em>server_number</em> must be specified.</p>
-<p>Note that Hetzner deprecated identifying the server’s firewall by the server’s main IP. Using this option can thus stop working at any time in the future. Use <em>server_number</em> instead.</p>
+<p>Exactly one of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-server-ip"><span class="std std-ref"><span class="pre">server_ip</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> must be specified.</p>
+<p>Note that Hetzner deprecated identifying the server’s firewall by the server’s main IP. Using this option can thus stop working at any time in the future. Use <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> instead.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -416,7 +416,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p><span class="ansible-option-versionadded">added in community.hrobot 1.8.0</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The server’s number.</p>
-<p>Exactly one of <em>server_ip</em> and <em>server_number</em> must be specified.</p>
+<p>Exactly one of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-server-ip"><span class="std std-ref"><span class="pre">server_ip</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -424,7 +424,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Status of the firewall.</p>
-<p>Firewall is active if state is <code class="docutils literal notranslate"><span class="pre">present</span></code>, and disabled if state is <code class="docutils literal notranslate"><span class="pre">absent</span></code>.</p>
+<p>Firewall is active if state is <code class="ansible-value docutils literal notranslate"><span class="pre">present</span></code>, and disabled if state is <code class="ansible-value docutils literal notranslate"><span class="pre">absent</span></code>.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><span class="pre">&quot;present&quot;</span></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -600,7 +600,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#return-firewall/port" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Switch port of firewall.</p>
-<p><code class="docutils literal notranslate"><span class="pre">main</span></code> or <code class="docutils literal notranslate"><span class="pre">kvm</span></code>.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">main</span></code> or <code class="ansible-value docutils literal notranslate"><span class="pre">kvm</span></code>.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;main&quot;</span></code></p>
 </div></td>
@@ -626,7 +626,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#return-firewall/rules/input/action" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Action if rule matches.</p>
-<p><code class="docutils literal notranslate"><span class="pre">accept</span></code> or <code class="docutils literal notranslate"><span class="pre">discard</span></code>.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">accept</span></code> or <code class="ansible-value docutils literal notranslate"><span class="pre">discard</span></code>.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Can only return:</span></p>
 <ul class="simple">
@@ -721,7 +721,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#return-firewall/rules/output/action" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Action if rule matches.</p>
-<p><code class="docutils literal notranslate"><span class="pre">accept</span></code> or <code class="docutils literal notranslate"><span class="pre">discard</span></code>.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">accept</span></code> or <code class="ansible-value docutils literal notranslate"><span class="pre">discard</span></code>.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Can only return:</span></p>
 <ul class="simple">
@@ -825,8 +825,8 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#return-firewall/status" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of the firewall.</p>
-<p><code class="docutils literal notranslate"><span class="pre">active</span></code> or <code class="docutils literal notranslate"><span class="pre">disabled</span></code>.</p>
-<p>Will be <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">process</span></code> if the firewall is currently updated, and <em>wait_for_configured</em> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> or <em>timeout</em> to a too small value.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">active</span></code> or <code class="ansible-value docutils literal notranslate"><span class="pre">disabled</span></code>.</p>
+<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">in</span> <span class="pre">process</span></code> if the firewall is currently updated, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-wait-for-configured"><span class="std std-ref"><span class="pre">wait_for_configured</span></span></a></strong></code> is set to <code class="ansible-value docutils literal notranslate"><span class="pre">false</span></code> or <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-timeout"><span class="std std-ref"><span class="pre">timeout</span></span></a></strong></code> to a too small value.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;active&quot;</span></code></p>
 </div></td>
@@ -836,7 +836,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <a class="ansibleOptionLink" href="#return-firewall/whitelist_hos" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether Hetzner services have access.</p>
-<p>Old name of return value <code class="docutils literal notranslate"><span class="pre">allowlist_hos</span></code>, will be removed eventually.</p>
+<p>Old name of return value <code class="ansible-value docutils literal notranslate"><span class="pre">allowlist_hos</span></code>, will be removed eventually.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>

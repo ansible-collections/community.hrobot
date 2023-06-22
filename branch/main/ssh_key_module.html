@@ -171,7 +171,7 @@
 <a class="ansibleOptionLink" href="#parameter-fingerprint" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The MD5 fingerprint of the public SSH key to remove.</p>
-<p>One of <em>public_key</em> and <em>fingerprint</em> are required if <em>state=absent</em>.</p>
+<p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-public-key"><span class="std std-ref"><span class="pre">public_key</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-fingerprint"><span class="std std-ref"><span class="pre">fingerprint</span></span></a></strong></code> are required if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-state"><span class="std std-ref"><span class="pre">state=absent</span></span></a></code>.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -193,7 +193,7 @@
 <a class="ansibleOptionLink" href="#parameter-name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The public key’s name.</p>
-<p>Required if <em>state=present</em>, and ignored if <em>state=absent</em>.</p>
+<p>Required if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>, and ignored if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-state"><span class="std std-ref"><span class="pre">state=absent</span></span></a></code>.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -201,9 +201,9 @@
 <a class="ansibleOptionLink" href="#parameter-public_key" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The public key data in OpenSSH format.</p>
-<p>Example: <code class="docutils literal notranslate"><span class="pre">ssh-rsa</span> <span class="pre">AAAAB3NzaC1yc+...</span></code></p>
-<p>One of <em>public_key</em> and <em>fingerprint</em> are required if <em>state=absent</em>.</p>
-<p>Required if <em>state=present</em>.</p>
+<p>Example: <code class="ansible-value docutils literal notranslate"><span class="pre">ssh-rsa</span> <span class="pre">AAAAB3NzaC1yc+...</span></code></p>
+<p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-public-key"><span class="std std-ref"><span class="pre">public_key</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-fingerprint"><span class="std std-ref"><span class="pre">fingerprint</span></span></a></strong></code> are required if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-state"><span class="std std-ref"><span class="pre">state=absent</span></span></a></code>.</p>
+<p>Required if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-ssh-key-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -211,8 +211,8 @@
 <a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether to make sure a public SSH key is present or absent.</p>
-<p><code class="docutils literal notranslate"><span class="pre">present</span></code> makes sure that the SSH key is available, and potentially updates names for existing SHS public keys.</p>
-<p><code class="docutils literal notranslate"><span class="pre">absent</span></code> makes sure that the SSH key is not available. The fingerprint or public key data is used for matching the key.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">present</span></code> makes sure that the SSH key is available, and potentially updates names for existing SHS public keys.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">absent</span></code> makes sure that the SSH key is not available. The fingerprint or public key data is used for matching the key.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;present&quot;</span></code></p></li>

@@ -191,7 +191,7 @@
 <a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Defines whether the IP will be routed or not.</p>
-<p>If set to <code class="docutils literal notranslate"><span class="pre">routed</span></code>, <em>value</em> must be specified.</p>
+<p>If set to <code class="ansible-value docutils literal notranslate"><span class="pre">routed</span></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-failover-ip-module-parameter-value"><span class="std std-ref"><span class="pre">value</span></span></a></strong></code> must be specified.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><span class="pre">&quot;routed&quot;</span></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -213,7 +213,7 @@
 <a class="ansibleOptionLink" href="#parameter-value" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The new value for the failover IP address.</p>
-<p>Required when setting <em>state</em> to <code class="docutils literal notranslate"><span class="pre">routed</span></code>.</p>
+<p>Required when setting <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-failover-ip-module-parameter-state"><span class="std std-ref"><span class="pre">state</span></span></a></strong></code> to <code class="ansible-value docutils literal notranslate"><span class="pre">routed</span></code>.</p>
 </div></td>
 </tr>
 </tbody>
@@ -301,7 +301,7 @@
 <div class="ansibleOptionAnchor" id="return-state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-failover-ip-module-return-state"><strong>state</strong></p>
 <a class="ansibleOptionLink" href="#return-state" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Will be <code class="docutils literal notranslate"><span class="pre">routed</span></code> or <code class="docutils literal notranslate"><span class="pre">unrouted</span></code>.</p>
+<td><div class="ansible-option-cell"><p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">routed</span></code> or <code class="ansible-value docutils literal notranslate"><span class="pre">unrouted</span></code>.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 </div></td>
 </tr>
@@ -310,7 +310,7 @@
 <a class="ansibleOptionLink" href="#return-value" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The value of the failover IP.</p>
-<p>Will be <code class="docutils literal notranslate"><span class="pre">none</span></code> if the IP is unrouted.</p>
+<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> if the IP is unrouted.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 </div></td>
 </tr>

@@ -169,8 +169,8 @@
 <a class="ansibleOptionLink" href="#parameter-full_info" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether to provide full information for every server.</p>
-<p>Setting this to <code class="docutils literal notranslate"><span class="pre">true</span></code> requires one REST call per server, which is slow and reduces your rate limit. Use with care.</p>
-<p>When <em>server_number</em> is specified, this option is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>Setting this to <code class="ansible-value docutils literal notranslate"><span class="pre">true</span></code> requires one REST call per server, which is slow and reduces your rate limit. Use with care.</p>
+<p>When <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> is specified, this option is set to <code class="ansible-value docutils literal notranslate"><span class="pre">true</span></code>.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><span class="pre">false</span></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -302,7 +302,7 @@
 <a class="ansibleOptionLink" href="#return-servers/cpanel" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Flag of cPanel installation availability.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
@@ -320,7 +320,7 @@
 <a class="ansibleOptionLink" href="#return-servers/hot_swap" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Flag of Hot Swap availability.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
@@ -338,7 +338,7 @@
 <a class="ansibleOptionLink" href="#return-servers/linked_storagebox" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Linked Storage Box ID.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">12345</span></code></p>
 </div></td>
 </tr>
@@ -356,7 +356,7 @@
 <a class="ansibleOptionLink" href="#return-servers/plesk" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Flag of Plesk installation availability.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
@@ -374,7 +374,7 @@
 <a class="ansibleOptionLink" href="#return-servers/rescue" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the rescue system is available.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
 </div></td>
 </tr>
@@ -383,7 +383,7 @@
 <a class="ansibleOptionLink" href="#return-servers/reset" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the server can be automatically reset.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
@@ -469,7 +469,7 @@
 <a class="ansibleOptionLink" href="#return-servers/traffic" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Free traffic quota.</p>
-<p><code class="docutils literal notranslate"><span class="pre">unlimited</span></code> in case of unlimited traffic.</p>
+<p><code class="ansible-value docutils literal notranslate"><span class="pre">unlimited</span></code> in case of unlimited traffic.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> success</p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;5</span> <span class="pre">TB&quot;</span></code></p>
 </div></td>
@@ -479,7 +479,7 @@
 <a class="ansibleOptionLink" href="#return-servers/vnc" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Flag of VNC installation availability.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
@@ -488,7 +488,7 @@
 <a class="ansibleOptionLink" href="#return-servers/windows" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Flag of Windows installation availability.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
@@ -497,7 +497,7 @@
 <a class="ansibleOptionLink" href="#return-servers/wol" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Flag of Wake On Lan availability.</p>
-<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <em>full_info=true</em></p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> when <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-full-info"><span class="std std-ref"><span class="pre">full_info=true</span></span></a></code></p>
 <p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
