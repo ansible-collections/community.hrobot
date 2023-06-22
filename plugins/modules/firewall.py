@@ -97,7 +97,8 @@ options:
           ip_version:
             description:
               - Internet protocol version.
-              - Leave away to filter both protocols. Note that in that case, none of O(rules.input[].dst_ip), O(rules.input[].src_ip), or O(rules.input[].protocol) can be specified.
+              - Leave away to filter both protocols. Note that in that case, none of O(rules.input[].dst_ip),
+                O(rules.input[].src_ip), or O(rules.input[].protocol) can be specified.
             type: str
           dst_ip:
             description:
@@ -149,7 +150,8 @@ options:
           ip_version:
             description:
               - Internet protocol version.
-              - Leave away to filter both protocols. Note that in that case, none of O(rules.output[].dst_ip), O(rules.output[].src_ip), or O(rules.output[].protocol) can be specified.
+              - Leave away to filter both protocols. Note that in that case, none of O(rules.output[].dst_ip),
+                O(rules.output[].src_ip), or O(rules.output[].protocol) can be specified.
             type: str
           dst_ip:
             description:
