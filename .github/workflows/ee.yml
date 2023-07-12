@@ -46,6 +46,9 @@ jobs:
           - name: ansible-core devel @ RHEL UBI 9
             ansible_core: https://github.com/ansible/ansible/archive/devel.tar.gz
             ansible_runner: ansible-runner
+            other_deps: |2
+                python_interpreter:
+                  package_system: python310 python310-pip python310-wheel python310-cryptography
             base_image: docker.io/redhat/ubi9:latest
             pre_base: '"#"'
           - name: ansible-core 2.15 @ Rocky Linux 9
