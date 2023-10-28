@@ -39,7 +39,7 @@ options:
         description:
           - Whether to make sure a public SSH key is present or absent.
           - V(present) makes sure that the SSH key is available, and
-            potentially updates names for existing SHS public keys.
+            potentially updates names for existing SSH public keys.
           - V(absent) makes sure that the SSH key is not available.
             The fingerprint or public key data is used for matching the
             key.
