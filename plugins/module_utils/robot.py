@@ -139,7 +139,7 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
             if accept_errors:
                 if result['error']['code'] in accept_errors:
                     return result, result['error']['code']
-            module.fail_json(msg=format_error_msg(result['error']))
+            module.fail_json(msg=format_error_msg(result['error']), error=result['error'])
         return result, None
     except ValueError:
         module.fail_json(msg='Cannot decode content retrieved from {0}'.format(url))
