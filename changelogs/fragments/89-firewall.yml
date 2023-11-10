@@ -1,0 +1,2 @@
+bugfixes:
+  - "Show more information (if available) from error messages (https://github.com/ansible-collections/community.hrobot/pull/89)."
