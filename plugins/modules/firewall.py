@@ -93,6 +93,8 @@ options:
           name:
             description:
               - Name of the firewall rule.
+              - Note that Hetzner restricts the characters that can be used for rule names. At the moment, only
+                letters C(a-z), C(A-Z), space, and the symbols C(.), C(-), C(+), C(_), and C(@) are allowed.
             type: str
           ip_version:
             description:
@@ -146,6 +148,8 @@ options:
           name:
             description:
               - Name of the firewall rule.
+              - Note that Hetzner restricts the characters that can be used for rule names. At the moment, only
+                letters C(a-z), C(A-Z), space, and the symbols C(.), C(-), C(+), C(_), and C(@) are allowed.
             type: str
           ip_version:
             description:
