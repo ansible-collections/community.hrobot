@@ -80,7 +80,14 @@ FETCH_URL_JSON_FAIL = [
             )).encode('utf-8'),
         )),
         None,
-        'Request failed: 400 foo (bar)'
+        'Request failed: 400 foo (bar)',
+        {
+            'error': {
+                'code': "foo",
+                'status': 400,
+                'message': "bar",
+            },
+        },
     ),
     (
         (None, dict(
@@ -97,7 +104,18 @@ FETCH_URL_JSON_FAIL = [
             )).encode('utf-8'),
         )),
         ['bar'],
-        'Request failed: 400 foo (bar)'
+        'Request failed: 400 foo (bar)',
+        {
+            'error': {
+                'code': "foo",
+                'status': 400,
+                'message': "bar",
+                'missing': None,
+                'invalid': None,
+                'max_request': None,
+                'interval': None,
+            },
+        },
     ),
     (
         (None, dict(
@@ -114,17 +132,31 @@ FETCH_URL_JSON_FAIL = [
             )).encode('utf-8'),
         )),
         None,
-        "Request failed: 400 foo (bar). Missing input parameters: ['foo']. Invalid input parameters: ['bar']. Maximum allowed requests: 0. Time interval in seconds: 0"
+        "Request failed: 400 foo (bar). Missing input parameters: ['foo']. Invalid input"
+        " parameters: ['bar']. Maximum allowed requests: 0. Time interval in seconds: 0",
+        {
+            'error': {
+                'code': "foo",
+                'status': 400,
+                'message': "bar",
+                'missing': ["foo"],
+                'invalid': ["bar"],
+                'max_request': 0,
+                'interval': 0,
+            },
+        },
     ),
     (
         (None, dict(body='{this is not json}'.encode('utf-8'))),
         [],
-        'Cannot decode content retrieved from https://foo/bar'
+        'Cannot decode content retrieved from https://foo/bar',
+        {},
     ),
     (
         (None, dict(status=400)),
         [],
-        'Cannot retrieve content from https://foo/bar, HTTP status code 400'
+        'Cannot retrieve content from https://foo/bar, HTTP status code 400',
+        {},
     ),
 ]
 
@@ -137,8 +169,8 @@ def test_fetch_url_json(monkeypatch, return_value, accept_errors, result):
     assert robot.fetch_url_json(module, 'https://foo/bar', accept_errors=accept_errors) == result
 
 
-@pytest.mark.parametrize("return_value, accept_errors, result", FETCH_URL_JSON_FAIL)
-def test_fetch_url_json_fail(monkeypatch, return_value, accept_errors, result):
+@pytest.mark.parametrize("return_value, accept_errors, result, fail_kwargs", FETCH_URL_JSON_FAIL)
+def test_fetch_url_json_fail(monkeypatch, return_value, accept_errors, result, fail_kwargs):
     module = get_module_mock()
     robot.fetch_url = MagicMock(return_value=return_value)
 
@@ -146,7 +178,7 @@ def test_fetch_url_json_fail(monkeypatch, return_value, accept_errors, result):
         robot.fetch_url_json(module, 'https://foo/bar', accept_errors=accept_errors)
 
     assert exc.value.fail_msg == result
-    assert exc.value.fail_kwargs == dict()
+    assert exc.value.fail_kwargs == fail_kwargs
 
 
 def test_fetch_url_json_empty(monkeypatch):
