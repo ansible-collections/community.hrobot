@@ -89,11 +89,32 @@ FETCH_URL_JSON_FAIL = [
                     code="foo",
                     status=400,
                     message="bar",
+                    missing=None,
+                    invalid=None,
+                    max_request=None,
+                    interval=None,
                 ),
             )).encode('utf-8'),
         )),
         ['bar'],
         'Request failed: 400 foo (bar)'
+    ),
+    (
+        (None, dict(
+            body=json.dumps(dict(
+                error=dict(
+                    code="foo",
+                    status=400,
+                    message="bar",
+                    missing=["foo"],
+                    invalid=["bar"],
+                    max_request=0,
+                    interval=0,
+                ),
+            )).encode('utf-8'),
+        )),
+        None,
+        "Request failed: 400 foo (bar). Missing input parameters: ['foo']. Invalid input parameters: ['bar']. Maximum allowed requests: 0. Time interval in seconds: 0"
     ),
     (
         (None, dict(body='{this is not json}'.encode('utf-8'))),

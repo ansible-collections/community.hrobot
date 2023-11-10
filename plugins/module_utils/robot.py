@@ -33,6 +33,24 @@ def get_x_www_form_urlenconded_dict_from_list(key, values):
         return dict(('{key}[{index}]'.format(key=key, index=i), x) for i, x in enumerate(values))
 
 
+def format_error_msg(error):
+    # Reference: https://robot.hetzner.com/doc/webservice/en.html#errors
+    msg = 'Request failed: {0} {1} ({2})'.format(
+        error['status'],
+        error['code'],
+        error['message'],
+    )
+    if error.get('missing'):
+        msg += '. Missing input parameters: {0}'.format(error['missing'])
+    if error.get('invalid'):
+        msg += '. Invalid input parameters: {0}'.format(error['invalid'])
+    if error.get('max_request') is not None:
+        msg += '. Maximum allowed requests: {0}'.format(error['max_request'])
+    if error.get('interval') is not None:
+        msg += '. Time interval in seconds: {0}'.format(error['interval'])
+    return msg
+
+
 class PluginException(Exception):
     def __init__(self, message):
         super(PluginException, self).__init__(message)
@@ -85,11 +103,7 @@ def plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, heade
             if accept_errors:
                 if result['error']['code'] in accept_errors:
                     return result, result['error']['code']
-            raise PluginException('Request failed: {0} {1} ({2})'.format(
-                result['error']['status'],
-                result['error']['code'],
-                result['error']['message']
-            ))
+            raise PluginException(format_error_msg(result['error']))
         return result, None
     except ValueError:
         raise PluginException('Cannot decode content retrieved from {0}'.format(url))
@@ -125,11 +139,7 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
             if accept_errors:
                 if result['error']['code'] in accept_errors:
                     return result, result['error']['code']
-            module.fail_json(msg='Request failed: {0} {1} ({2})'.format(
-                result['error']['status'],
-                result['error']['code'],
-                result['error']['message']
-            ))
+            module.fail_json(msg=format_error_msg(result['error']))
         return result, None
     except ValueError:
         module.fail_json(msg='Cannot decode content retrieved from {0}'.format(url))
