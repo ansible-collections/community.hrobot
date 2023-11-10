@@ -8,6 +8,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
+from ansible.module_utils.common.text.converters import to_native
 from ansible.module_utils.six import PY3
 from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.module_utils.urls import fetch_url, open_url
@@ -33,6 +34,12 @@ def get_x_www_form_urlenconded_dict_from_list(key, values):
         return dict(('{key}[{index}]'.format(key=key, index=i), x) for i, x in enumerate(values))
 
 
+def _format_list(obj):
+    if not isinstance(obj, (list, tuple)):
+        return to_native(obj)
+    return [_format_list(e) for e in obj]
+
+
 def format_error_msg(error):
     # Reference: https://robot.hetzner.com/doc/webservice/en.html#errors
     msg = 'Request failed: {0} {1} ({2})'.format(
@@ -41,9 +48,9 @@ def format_error_msg(error):
         error['message'],
     )
     if error.get('missing'):
-        msg += '. Missing input parameters: {0}'.format(error['missing'])
+        msg += '. Missing input parameters: {0}'.format(_format_list(error['missing']))
     if error.get('invalid'):
-        msg += '. Invalid input parameters: {0}'.format(error['invalid'])
+        msg += '. Invalid input parameters: {0}'.format(_format_list(error['invalid']))
     if error.get('max_request') is not None:
         msg += '. Maximum allowed requests: {0}'.format(error['max_request'])
     if error.get('interval') is not None:

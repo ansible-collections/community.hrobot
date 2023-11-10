@@ -177,6 +177,8 @@ def test_fetch_url_json_fail(monkeypatch, return_value, accept_errors, fail_msg,
     with pytest.raises(ModuleFailException) as exc:
         robot.fetch_url_json(module, 'https://foo/bar', accept_errors=accept_errors)
 
+    print(exc.value.fail_msg)
+    print(exc.value.fail_kwargs)
     assert exc.value.fail_msg == fail_msg
     assert exc.value.fail_kwargs == fail_kwargs
 
@@ -192,6 +194,8 @@ def test_fetch_url_json_empty(monkeypatch):
     with pytest.raises(ModuleFailException) as exc:
         robot.fetch_url_json(module, 'https://foo/bar', allow_empty_result=True)
 
+    print(exc.value.fail_msg)
+    print(exc.value.fail_kwargs)
     assert exc.value.fail_msg == 'Cannot retrieve content from https://foo/bar, HTTP status code 400'
     assert exc.value.fail_kwargs == dict()
 
@@ -216,6 +220,7 @@ def test_plugin_open_url_json_fail(monkeypatch, return_value, accept_errors, fai
     with pytest.raises(robot.PluginException) as exc:
         robot.plugin_open_url_json(plugin, 'https://foo/bar', accept_errors=accept_errors)
 
+    print(exc.value.error_message)
     assert exc.value.error_message == fail_msg
 
 
