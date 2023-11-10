@@ -236,7 +236,8 @@ EXAMPLES = r'''
     allowlist_hos: true
     rules:
       input:
-        - name: Allow ICMP protocol, so you can ping your server
+        - name: Allow ICMP protocol
+          # This is needed so you can ping your server
           ip_version: ipv4
           protocol: icmp
           action: accept
