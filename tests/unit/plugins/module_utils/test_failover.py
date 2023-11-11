@@ -67,14 +67,22 @@ GET_FAILOVER_FAIL = [
                 ),
             )).encode('utf-8'),
         )),
-        'Request failed: 400 foo (bar)'
+        'Request failed: 400 foo (bar)',
+        {
+            'error': {
+                'code': 'foo',
+                'status': 400,
+                'message': 'bar',
+            },
+        },
     ),
     (
         '1.2.3.4',
         (None, dict(
             body='{"foo": "bar"}'.encode('utf-8'),
         )),
-        'Cannot interpret result: {"foo": "bar"}'
+        'Cannot interpret result: {"foo": "bar"}',
+        {},
     ),
 ]
 
@@ -87,16 +95,16 @@ def test_get_failover_record(monkeypatch, ip, return_value, result, record):
     assert failover.get_failover_record(module, ip) == record
 
 
-@pytest.mark.parametrize("ip, return_value, result", GET_FAILOVER_FAIL)
-def test_get_failover_record_fail(monkeypatch, ip, return_value, result):
+@pytest.mark.parametrize("ip, return_value, fail_msg, fail_kwargs", GET_FAILOVER_FAIL)
+def test_get_failover_record_fail(monkeypatch, ip, return_value, fail_msg, fail_kwargs):
     module = get_module_mock()
     robot.fetch_url = MagicMock(return_value=copy.deepcopy(return_value))
 
     with pytest.raises(ModuleFailException) as exc:
         failover.get_failover_record(module, ip)
 
-    assert exc.value.fail_msg == result
-    assert exc.value.fail_kwargs == dict()
+    assert exc.value.fail_msg == fail_msg
+    assert exc.value.fail_kwargs == fail_kwargs
 
 
 @pytest.mark.parametrize("ip, return_value, result, record", GET_FAILOVER_SUCCESS)
@@ -107,16 +115,16 @@ def test_get_failover(monkeypatch, ip, return_value, result, record):
     assert failover.get_failover(module, ip) == result
 
 
-@pytest.mark.parametrize("ip, return_value, result", GET_FAILOVER_FAIL)
-def test_get_failover_fail(monkeypatch, ip, return_value, result):
+@pytest.mark.parametrize("ip, return_value, fail_msg, fail_kwargs", GET_FAILOVER_FAIL)
+def test_get_failover_fail(monkeypatch, ip, return_value, fail_msg, fail_kwargs):
     module = get_module_mock()
     robot.fetch_url = MagicMock(return_value=copy.deepcopy(return_value))
 
     with pytest.raises(ModuleFailException) as exc:
         failover.get_failover(module, ip)
 
-    assert exc.value.fail_msg == result
-    assert exc.value.fail_kwargs == dict()
+    assert exc.value.fail_msg == fail_msg
+    assert exc.value.fail_kwargs == fail_kwargs
 
 
 # ########################################################################################
@@ -164,7 +172,14 @@ SET_FAILOVER_FAIL = [
                 ),
             )).encode('utf-8'),
         )),
-        'Request failed: 400 foo (bar)'
+        'Request failed: 400 foo (bar)',
+        {
+            'error': {
+                'code': 'foo',
+                'status': 400,
+                'message': 'bar',
+            },
+        },
     ),
 ]
 
@@ -177,13 +192,13 @@ def test_set_failover(monkeypatch, ip, value, return_value, result):
     assert failover.set_failover(module, ip, value) == result
 
 
-@pytest.mark.parametrize("ip, value, return_value, result", SET_FAILOVER_FAIL)
-def test_set_failover_fail(monkeypatch, ip, value, return_value, result):
+@pytest.mark.parametrize("ip, value, return_value, fail_msg, fail_kwargs", SET_FAILOVER_FAIL)
+def test_set_failover_fail(monkeypatch, ip, value, return_value, fail_msg, fail_kwargs):
     module = get_module_mock()
     robot.fetch_url = MagicMock(return_value=copy.deepcopy(return_value))
 
     with pytest.raises(ModuleFailException) as exc:
         failover.set_failover(module, ip, value)
 
-    assert exc.value.fail_msg == result
-    assert exc.value.fail_kwargs == dict()
+    assert exc.value.fail_msg == fail_msg
+    assert exc.value.fail_kwargs == fail_kwargs

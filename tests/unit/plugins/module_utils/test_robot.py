@@ -80,7 +80,14 @@ FETCH_URL_JSON_FAIL = [
             )).encode('utf-8'),
         )),
         None,
-        'Request failed: 400 foo (bar)'
+        'Request failed: 400 foo (bar)',
+        {
+            'error': {
+                'code': "foo",
+                'status': 400,
+                'message': "bar",
+            },
+        },
     ),
     (
         (None, dict(
@@ -89,21 +96,67 @@ FETCH_URL_JSON_FAIL = [
                     code="foo",
                     status=400,
                     message="bar",
+                    missing=None,
+                    invalid=None,
+                    max_request=None,
+                    interval=None,
                 ),
             )).encode('utf-8'),
         )),
         ['bar'],
-        'Request failed: 400 foo (bar)'
+        'Request failed: 400 foo (bar)',
+        {
+            'error': {
+                'code': "foo",
+                'status': 400,
+                'message': "bar",
+                'missing': None,
+                'invalid': None,
+                'max_request': None,
+                'interval': None,
+            },
+        },
+    ),
+    (
+        (None, dict(
+            body=json.dumps(dict(
+                error=dict(
+                    code="foo",
+                    status=400,
+                    message="bar",
+                    missing=["foo"],
+                    invalid=["bar"],
+                    max_request=0,
+                    interval=0,
+                ),
+            )).encode('utf-8'),
+        )),
+        None,
+        "Request failed: 400 foo (bar). Missing input parameters: ['foo']. Invalid input"
+        " parameters: ['bar']. Maximum allowed requests: 0. Time interval in seconds: 0",
+        {
+            'error': {
+                'code': "foo",
+                'status': 400,
+                'message': "bar",
+                'missing': ["foo"],
+                'invalid': ["bar"],
+                'max_request': 0,
+                'interval': 0,
+            },
+        },
     ),
     (
         (None, dict(body='{this is not json}'.encode('utf-8'))),
         [],
-        'Cannot decode content retrieved from https://foo/bar'
+        'Cannot decode content retrieved from https://foo/bar',
+        {},
     ),
     (
         (None, dict(status=400)),
         [],
-        'Cannot retrieve content from https://foo/bar, HTTP status code 400'
+        'Cannot retrieve content from https://foo/bar, HTTP status code 400',
+        {},
     ),
 ]
 
@@ -116,16 +169,18 @@ def test_fetch_url_json(monkeypatch, return_value, accept_errors, result):
     assert robot.fetch_url_json(module, 'https://foo/bar', accept_errors=accept_errors) == result
 
 
-@pytest.mark.parametrize("return_value, accept_errors, result", FETCH_URL_JSON_FAIL)
-def test_fetch_url_json_fail(monkeypatch, return_value, accept_errors, result):
+@pytest.mark.parametrize("return_value, accept_errors, fail_msg, fail_kwargs", FETCH_URL_JSON_FAIL)
+def test_fetch_url_json_fail(monkeypatch, return_value, accept_errors, fail_msg, fail_kwargs):
     module = get_module_mock()
     robot.fetch_url = MagicMock(return_value=return_value)
 
     with pytest.raises(ModuleFailException) as exc:
         robot.fetch_url_json(module, 'https://foo/bar', accept_errors=accept_errors)
 
-    assert exc.value.fail_msg == result
-    assert exc.value.fail_kwargs == dict()
+    print(exc.value.fail_msg)
+    print(exc.value.fail_kwargs)
+    assert exc.value.fail_msg == fail_msg
+    assert exc.value.fail_kwargs == fail_kwargs
 
 
 def test_fetch_url_json_empty(monkeypatch):
@@ -139,6 +194,8 @@ def test_fetch_url_json_empty(monkeypatch):
     with pytest.raises(ModuleFailException) as exc:
         robot.fetch_url_json(module, 'https://foo/bar', allow_empty_result=True)
 
+    print(exc.value.fail_msg)
+    print(exc.value.fail_kwargs)
     assert exc.value.fail_msg == 'Cannot retrieve content from https://foo/bar, HTTP status code 400'
     assert exc.value.fail_kwargs == dict()
 
@@ -153,8 +210,8 @@ def test_plugin_open_url_json(monkeypatch, return_value, accept_errors, result):
     assert robot.plugin_open_url_json(plugin, 'https://foo/bar', accept_errors=accept_errors) == result
 
 
-@pytest.mark.parametrize("return_value, accept_errors, result", FETCH_URL_JSON_FAIL)
-def test_plugin_open_url_json_fail(monkeypatch, return_value, accept_errors, result):
+@pytest.mark.parametrize("return_value, accept_errors, fail_msg, fail_kwargs", FETCH_URL_JSON_FAIL)
+def test_plugin_open_url_json_fail(monkeypatch, return_value, accept_errors, fail_msg, fail_kwargs):
     response = MagicMock()
     response.read = MagicMock(return_value=return_value[1].get('body', ''))
     robot.open_url = MagicMock(side_effect=robot.HTTPError('https://foo/bar', 400, 'Error!', {}, response))
@@ -163,7 +220,8 @@ def test_plugin_open_url_json_fail(monkeypatch, return_value, accept_errors, res
     with pytest.raises(robot.PluginException) as exc:
         robot.plugin_open_url_json(plugin, 'https://foo/bar', accept_errors=accept_errors)
 
-    assert exc.value.error_message == result
+    print(exc.value.error_message)
+    assert exc.value.error_message == fail_msg
 
 
 def test_plugin_open_url_json_fail_other(monkeypatch):

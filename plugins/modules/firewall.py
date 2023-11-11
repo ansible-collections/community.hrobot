@@ -93,6 +93,8 @@ options:
           name:
             description:
               - Name of the firewall rule.
+              - Note that Hetzner restricts the characters that can be used for rule names. At the moment, only
+                letters C(a-z), C(A-Z), space, and the symbols C(.), C(-), C(+), C(_), and C(@) are allowed.
             type: str
           ip_version:
             description:
@@ -146,6 +148,8 @@ options:
           name:
             description:
               - Name of the firewall rule.
+              - Note that Hetzner restricts the characters that can be used for rule names. At the moment, only
+                letters C(a-z), C(A-Z), space, and the symbols C(.), C(-), C(+), C(_), and C(@) are allowed.
             type: str
           ip_version:
             description:
@@ -232,7 +236,8 @@ EXAMPLES = r'''
     allowlist_hos: true
     rules:
       input:
-        - name: Allow ICMP protocol, so you can ping your server
+        - name: Allow ICMP protocol
+          # This is needed so you can ping your server
           ip_version: ipv4
           protocol: icmp
           action: accept
@@ -243,7 +248,8 @@ EXAMPLES = r'''
           dst_port: '32768-65535'
           tcp_flags: ack
           action: accept
-        - name: Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)
+        - name: Allow restricted access from some known IPv4 addresses
+          # Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)
           ip_version: ipv4
           src_ip: 4.3.2.1/24
           dst_port: '20-23'
