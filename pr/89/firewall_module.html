@@ -553,7 +553,8 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <span class="w">          </span><span class="nt">dst_port</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;32768-65535&#39;</span>
 <span class="w">          </span><span class="nt">tcp_flags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ack</span>
 <span class="w">          </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">accept</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Allow restricted access from some known IPv4 addresses</span>
+<span class="w">          </span><span class="c1"># Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)</span>
 <span class="w">          </span><span class="nt">ip_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ipv4</span>
 <span class="w">          </span><span class="nt">src_ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.3.2.1/24</span>
 <span class="w">          </span><span class="nt">dst_port</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;20-23&#39;</span>
