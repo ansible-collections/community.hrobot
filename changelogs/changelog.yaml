@@ -244,3 +244,12 @@ releases:
     - 1.8.1.yml
     - semantic-markup.yml
     release_date: '2023-06-27'
+  1.8.2:
+    changes:
+      bugfixes:
+      - Show more information (if available) from error messages (https://github.com/ansible-collections/community.hrobot/pull/89).
+      release_summary: Maintenance release with updated documentation.
+    fragments:
+    - 1.8.2.yml
+    - 89-firewall.yml
+    release_date: '2023-11-11'

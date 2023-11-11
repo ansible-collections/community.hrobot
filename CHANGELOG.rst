@@ -5,6 +5,19 @@ Community Hetzner Robot Collection Release Notes
 .. contents:: Topics
 
 
+v1.8.2
+======
+
+Release Summary
+---------------
+
+Maintenance release with updated documentation.
+
+Bugfixes
+--------
+
+- Show more information (if available) from error messages (https://github.com/ansible-collections/community.hrobot/pull/89).
+
 v1.8.1
 ======
 
