@@ -113,9 +113,17 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
     def parse(self, inventory, loader, path, cache=True):
         super(InventoryModule, self).parse(inventory, loader, path)
         servers = {}
-        config = self._read_config_data(path)
+        orig_config = self._read_config_data(path)
         self.load_cache_plugin()
         cache_key = self.get_cache_key(path)
+
+        if 'filters' in orig_config:
+            display.deprecated(
+                'The `filters` option of the community.hrobot.robot inventory plugin has been renamed to `simple_filters`. '
+                'The old name will stop working in community.hrobot 2.0.0.',
+                collection_name='community.hrobot',
+                version='2.0.0',
+            )
 
         self.templar = Templar(loader=loader)
 
