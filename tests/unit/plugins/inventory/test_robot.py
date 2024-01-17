@@ -60,7 +60,7 @@ def inventory():
 
 
 def get_option(option):
-    if option == 'filters':
+    if option == 'simple_filters':
         return {}
     if option == 'hetzner_user':
         return 'test'
@@ -159,7 +159,7 @@ def test_inventory_file_simple(mocker):
     plugin: community.hrobot.robot
     hetzner_user: test
     hetzner_password: hunter2
-    filters:
+    simple_filters:
       dc: foo
     """)}
     im = InventoryManager(loader=DictDataLoader(inventory_file), sources=inventory_filename)
@@ -216,7 +216,7 @@ def test_inventory_file_simple_2(mocker):
     plugin: community.hrobot.robot
     hetzner_user: '{{ "test" }}'
     hetzner_password: '{{ "hunter2" }}'
-    filters:
+    simple_filters:
       dc: foo
     """)}
     im = InventoryManager(loader=DictDataLoader(inventory_file), sources=inventory_filename)
@@ -260,7 +260,7 @@ def test_inventory_file_fail(mocker, error_result):
     plugin: community.hrobot.robot
     hetzner_user: test
     hetzner_password: hunter2
-    filters:
+    simple_filters:
       dc: foo
     """)}
     im = InventoryManager(loader=DictDataLoader(inventory_file), sources=inventory_filename)

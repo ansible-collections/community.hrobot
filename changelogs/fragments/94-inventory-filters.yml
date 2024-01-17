@@ -1,0 +1,7 @@
+minor_changes:
+  - robot inventory plugin - the ``filters`` option has been renamed to ``simple_filters``. The old name still works until community.hrobot 2.0.0.
+    Then it will change to allow more complex filtering with the ``community.library_inventory_filtering_v1`` collection's functionality
+    (https://github.com/ansible-collections/community.hrobot/pull/94).
+deprecated_features:
+  - robot inventory plugin - the ``filters`` option has been renamed to ``simple_filters``. The old name will stop working in community.hrobot 2.0.0
+    (https://github.com/ansible-collections/community.hrobot/pull/94).
