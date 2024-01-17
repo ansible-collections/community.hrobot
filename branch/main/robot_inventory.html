@@ -295,16 +295,6 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-filters"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-filters"><strong>filters</strong></p>
-<a class="ansibleOptionLink" href="#parameter-filters" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>A dictionary of filter value pairs.</p>
-<p>Available filters are listed here are keys of server like <code class="docutils literal notranslate"><span class="pre">status</span></code> or <code class="docutils literal notranslate"><span class="pre">server_ip</span></code>.</p>
-<p>See <a class="reference external" href="https://robot.your-server.de/doc/webservice/en.html#get-server">https://robot.your-server.de/doc/webservice/en.html#get-server</a> for all values that can be used.</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{}</span></code></p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-groups"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-groups"><strong>groups</strong></p>
 <a class="ansibleOptionLink" href="#parameter-groups" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -312,7 +302,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{}</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-hetzner_password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-hetzner-password"><strong>hetzner_password</strong></p>
 <a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -323,7 +313,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-hetzner-user"><strong>hetzner_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-hetzner_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -334,7 +324,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyed_groups"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-keyed-groups"><strong>keyed_groups</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyed_groups" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
 </div></td>
@@ -342,7 +332,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">[]</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyed_groups/default_value"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-keyed-groups-default-value"><strong>default_value</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyed_groups/default_value" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 <p><em class="ansible-option-versionadded">added in ansible-core 2.12</em></p>
@@ -351,21 +341,21 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>This option is mutually exclusive with <code class="docutils literal notranslate"><span class="pre">trailing_separator</span></code>.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyed_groups/key"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-keyed-groups-key"><strong>key</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyed_groups/key" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The key from input dictionary used to generate groups</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyed_groups/parent_group"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-keyed-groups-parent-group"><strong>parent_group</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyed_groups/parent_group" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>parent group for keyed group</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyed_groups/prefix"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-keyed-groups-prefix"><strong>prefix</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyed_groups/prefix" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -373,7 +363,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyed_groups/separator"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-keyed-groups-separator"><strong>separator</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyed_groups/separator" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -381,7 +371,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;_&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-keyed_groups/trailing_separator"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-keyed-groups-trailing-separator"><strong>trailing_separator</strong></p>
 <a class="ansibleOptionLink" href="#parameter-keyed_groups/trailing_separator" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 <p><em class="ansible-option-versionadded">added in ansible-core 2.12</em></p>
@@ -395,7 +385,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-leading_separator"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-leading-separator"><strong>leading_separator</strong></p>
 <a class="ansibleOptionLink" href="#parameter-leading_separator" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 <p><em class="ansible-option-versionadded">added in ansible-core 2.11</em></p>
@@ -413,7 +403,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-plugin"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-plugin"><strong>plugin</strong></p>
 <a class="ansibleOptionLink" href="#parameter-plugin" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -422,6 +412,19 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;community.hrobot.robot&quot;</span></code></p></li>
 </ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-simple_filters"></div>
+<div class="ansibleOptionAnchor" id="parameter-filters"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-simple-filters"><span id="ansible-collections-community-hrobot-robot-inventory-parameter-filters"></span><strong>simple_filters</strong></p>
+<a class="ansibleOptionLink" href="#parameter-simple_filters" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-aliases">aliases: filters</span></p>
+<p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A dictionary of filter value pairs.</p>
+<p>Available filters are listed here are keys of server like <code class="docutils literal notranslate"><span class="pre">status</span></code> or <code class="docutils literal notranslate"><span class="pre">server_ip</span></code>.</p>
+<p>See <a class="reference external" href="https://robot.your-server.de/doc/webservice/en.html#get-server">https://robot.your-server.de/doc/webservice/en.html#get-server</a> for all values that can be used.</p>
+<p>This option has been renamed from <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-robot-inventory-parameter-filters"><span class="std std-ref"><span class="pre">filters</span></span></a></strong></code> to <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-robot-inventory-parameter-simple-filters"><span class="std std-ref"><span class="pre">simple_filters</span></span></a></strong></code> in community.hrobot 1.9.0. The old name can still be used until community.hrobot 2.0.0.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{}</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -489,7 +492,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 
 <span class="c1"># Example using constructed features to create groups</span>
 <span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">community.hrobot.robot</span>
-<span class="nt">filters</span><span class="p">:</span>
+<span class="nt">simple_filters</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ready</span>
 <span class="w">  </span><span class="nt">traffic</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unlimited</span>
 <span class="c1"># keyed_groups may be used to create custom groups</span>
