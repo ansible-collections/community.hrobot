@@ -38,13 +38,17 @@ DOCUMENTATION = r"""
         hetzner_password:
             env:
                 - name: HROBOT_API_PASSWORD
-        filters:
+        simple_filters:
             description:
                 - A dictionary of filter value pairs.
                 - Available filters are listed here are keys of server like C(status) or C(server_ip).
                 - See U(https://robot.your-server.de/doc/webservice/en.html#get-server) for all values that can be used.
+                - This option has been renamed from O(filters) to O(simple_filters) in community.hrobot 1.9.0.
+                  The old name can still be used until community.hrobot 2.0.0.
             type: dict
             default: {}
+            aliases:
+                - filters
 """
 
 EXAMPLES = r"""
@@ -63,7 +67,7 @@ hetzner_password: '{{ (lookup("community.sops.sops", "keys/hetzner.sops.yaml") |
 
 # Example using constructed features to create groups
 plugin: community.hrobot.robot
-filters:
+simple_filters:
   status: ready
   traffic: unlimited
 # keyed_groups may be used to create custom groups
@@ -143,7 +147,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         self.populate(servers)
 
     def populate(self, servers):
-        filters = self.get_option('filters')
+        filters = self.get_option('simple_filters')
         strict = self.get_option('strict')
         server_lists = []
         for server in servers:
