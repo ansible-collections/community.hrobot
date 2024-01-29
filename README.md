@@ -37,7 +37,7 @@ If you use the Ansible package and do not update collections independently, use 
 - `community.hrobot.failover_ip_info` module
 - `community.hrobot.firewall` module
 - `community.hrobot.firewall_info` module
-- `community.hrobot.hrobot` inventory plugin
+- `community.hrobot.robot` inventory plugin
 
 You can find [documentation for the modules and plugins in this collection here](https://docs.ansible.com/ansible/devel/collections/community/hrobot/).
 
