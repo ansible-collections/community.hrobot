@@ -4,7 +4,6 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
-
 v1.9.0
 ======
 
@@ -52,7 +51,6 @@ correctly. You should be still able to read it in most cases, but you need
 ansible-core 2.15 or later to see it as it is intended. Alternatively you can
 look at `the devel docsite <https://docs.ansible.com/ansible/devel/collections/community/hrobot/>`__
 for the rendered HTML version of the documentation of the latest release.
-
 
 Known Issues
 ------------
@@ -279,7 +277,6 @@ Release Summary
 ---------------
 
 The ``community.hrobot`` continues the work on the Hetzner Robot modules from their state in ``community.general`` 1.2.0. The changes listed here are thus relative to the modules ``community.general.hetzner_*``.
-
 
 Breaking Changes / Porting Guide
 --------------------------------
