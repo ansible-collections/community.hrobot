@@ -85,6 +85,7 @@ from ansible.errors import AnsibleError
 from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
 from ansible.template import Templar
 from ansible.utils.display import Display
+from ansible.utils.unsafe_proxy import wrap_var as make_unsafe
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
@@ -174,9 +175,9 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
             self.inventory.add_host(server_name)
             server_lists.append(server_name)
             if 'server_ip' in s:
-                self.inventory.set_variable(server_name, 'ansible_host', s['server_ip'])
+                self.inventory.set_variable(server_name, 'ansible_host', make_unsafe(s['server_ip']))
             for hostvar, hostval in s.items():
-                self.inventory.set_variable(server_name, "{0}_{1}".format('hrobot', hostvar), hostval)
+                self.inventory.set_variable(server_name, "{0}_{1}".format('hrobot', hostvar), make_unsafe(hostval))
 
             # Composed variables
             server_vars = self.inventory.get_host(server_name).get_vars()

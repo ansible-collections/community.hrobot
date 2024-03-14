@@ -17,6 +17,7 @@ from ansible.inventory.data import InventoryData
 from ansible.inventory.manager import InventoryManager
 from ansible.module_utils.common.text.converters import to_native
 from ansible.template import Templar
+from ansible.utils.unsafe_proxy import AnsibleUnsafe
 
 from ansible_collections.community.internal_test_tools.tests.unit.mock.path import mock_unfrackpath_noop
 from ansible_collections.community.internal_test_tools.tests.unit.mock.loader import DictDataLoader
@@ -359,3 +360,56 @@ def test_inventory_file_collision(mocker):
     assert len(im._inventory.groups['ungrouped'].hosts) == 1
     assert len(im._inventory.groups['all'].hosts) == 0
     # TODO: check for warning
+
+
+def test_unsafe(inventory, mocker):
+    open_url = OpenUrlProxy([
+        OpenUrlCall('GET', 200)
+        .result_json([
+            {
+                'server': {
+                    'server_ip': '1.2.3.4',
+                    'dc': 'abc',
+                },
+            },
+            {
+                'server': {
+                    'server_ip': '1.2.3.5',
+                    'server_name': 'foo',
+                    'dc': 'EVALU{{ "" }}ATED',
+                },
+            },
+        ])
+        .expect_url('{0}/server'.format(BASE_URL)),
+    ])
+    mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
+
+    inventory.get_option = mocker.MagicMock(side_effect=get_option)
+    inventory.populate(inventory.get_servers())
+
+    open_url.assert_is_done()
+
+    host_1 = inventory.inventory.get_host('1.2.3.4')
+    host_2 = inventory.inventory.get_host('foo')
+
+    host_1_vars = host_1.get_vars()
+    host_2_vars = host_2.get_vars()
+
+    assert host_1_vars['ansible_host'] == '1.2.3.4'
+    assert host_1_vars['hrobot_server_ip'] == '1.2.3.4'
+    assert host_1_vars['hrobot_dc'] == 'abc'
+
+    assert host_2_vars['ansible_host'] == '1.2.3.5'
+    assert host_2_vars['hrobot_server_ip'] == '1.2.3.5'
+    assert host_2_vars['hrobot_server_name'] == 'foo'
+    assert host_2_vars['hrobot_dc'] == 'EVALU{{ "" }}ATED'
+
+    # Make sure everything is unsafe
+    assert isinstance(host_1_vars['ansible_host'], AnsibleUnsafe)
+    assert isinstance(host_1_vars['hrobot_server_ip'], AnsibleUnsafe)
+    assert isinstance(host_1_vars['hrobot_dc'], AnsibleUnsafe)
+
+    assert isinstance(host_2_vars['ansible_host'], AnsibleUnsafe)
+    assert isinstance(host_2_vars['hrobot_server_ip'], AnsibleUnsafe)
+    assert isinstance(host_2_vars['hrobot_server_name'], AnsibleUnsafe)
+    assert isinstance(host_2_vars['hrobot_dc'], AnsibleUnsafe)
