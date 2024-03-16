@@ -268,3 +268,15 @@ releases:
     - 1.9.0.yml
     - 94-inventory-filters.yml
     release_date: '2024-01-21'
+  1.9.1:
+    changes:
+      release_summary: Bugfix release.
+      security_fixes:
+      - robot inventory plugin - make sure all data received from the Hetzner robot
+        service server is marked as unsafe, so remote code execution by obtaining
+        texts that can be evaluated as templates is not possible (https://www.die-welt.net/2024/03/remote-code-execution-in-ansible-dynamic-inventory-plugins/,
+        https://github.com/ansible-collections/community.hrobot/pull/99).
+    fragments:
+    - 1.9.1.yml
+    - inventory-rce.yml
+    release_date: '2024-03-16'
