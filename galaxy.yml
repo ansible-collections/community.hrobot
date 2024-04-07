@@ -29,3 +29,5 @@ issues: https://github.com/ansible-collections/community.hrobot/issues
 build_ignore:
   - .gitignore
   - changelogs/.plugin-cache.yaml
+dependencies:
+  community.library_inventory_filtering_v1: '>=1.0.0'
