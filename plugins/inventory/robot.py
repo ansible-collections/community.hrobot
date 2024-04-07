@@ -43,12 +43,11 @@ DOCUMENTATION = r"""
                 - A dictionary of filter value pairs.
                 - Available filters are listed here are keys of server like C(status) or C(server_ip).
                 - See U(https://robot.your-server.de/doc/webservice/en.html#get-server) for all values that can be used.
-                - This option has been renamed from O(filters) to O(simple_filters) in community.hrobot 1.9.0.
-                  The old name can still be used until community.hrobot 2.0.0.
+                - This option used to be called O(filters) before community.hrobot 2.0.0. It has been renamed from
+                  O(filters) to O(simple_filters) in community.hrobotdns 1.9.0, and the old name was still available
+                  as an alias until community.hrobot 2.0.0. O(filters) is now used for something else.
             type: dict
             default: {}
-            aliases:
-                - filters
 """
 
 EXAMPLES = r"""
@@ -114,17 +113,9 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
     def parse(self, inventory, loader, path, cache=True):
         super(InventoryModule, self).parse(inventory, loader, path)
         servers = {}
-        orig_config = self._read_config_data(path)
+        self._read_config_data(path)
         self.load_cache_plugin()
         cache_key = self.get_cache_key(path)
-
-        if 'filters' in orig_config:
-            display.deprecated(
-                'The `filters` option of the community.hrobot.robot inventory plugin has been renamed to `simple_filters`. '
-                'The old name will stop working in community.hrobot 2.0.0.',
-                collection_name='community.hrobot',
-                version='2.0.0',
-            )
 
         self.templar = Templar(loader=loader)
 

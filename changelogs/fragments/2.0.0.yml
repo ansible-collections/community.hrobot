@@ -11,3 +11,6 @@ major_changes:
     repository, you need to make sure that you also have to install the dependency
     if you are using the inventory plugin
     (https://github.com/ansible-collections/community.hrobot/pull/101).
+breaking_canges:
+  - "robot inventory plugin - ``filters`` is now no longer an alias of ``simple_filters``, but a new, different option
+     (https://github.com/ansible-collections/community.hrobot/pull/101).
