@@ -11,9 +11,9 @@ major_changes:
     repository, you need to make sure that you also have to install the dependency
     if you are using the inventory plugin
     (https://github.com/ansible-collections/community.hrobot/pull/101).
-breaking_canges:
+breaking_changes:
   - "robot inventory plugin - ``filters`` is now no longer an alias of ``simple_filters``, but a new, different option
-     (https://github.com/ansible-collections/community.hrobot/pull/101).
+     (https://github.com/ansible-collections/community.hrobot/pull/101)."
 minor_changes:
   - "robot inventory plugin - add ``filter`` option which allows to include and exclude
      hosts based on Jinja2 conditions (https://github.com/ansible-collections/community.hrobot/pull/101)."
