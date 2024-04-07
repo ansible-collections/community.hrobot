@@ -25,6 +25,7 @@ DOCUMENTATION = r"""
         - ansible.builtin.constructed
         - ansible.builtin.inventory_cache
         - community.hrobot.robot
+        - community.library_inventory_filtering_v1.inventory_filter
     notes:
         - The O(hetzner_user) and O(hetzner_password) options can be templated.
     options:
@@ -48,6 +49,8 @@ DOCUMENTATION = r"""
                   as an alias until community.hrobot 2.0.0. O(filters) is now used for something else.
             type: dict
             default: {}
+        filters:
+            version_added: 2.0.0
 """
 
 EXAMPLES = r"""
@@ -57,12 +60,18 @@ plugin: community.hrobot.robot
 filters:
   status: ready
 
-# Example showing encrypted credentials
+# Example showing encrypted credentials and using filters
 # (This assumes that Mozilla sops was used to encrypt keys/hetzner.sops.yaml, which contains two values
 # hetzner_username and hetzner_password. Needs the community.sops collection to decode that file.)
 plugin: community.hrobot.robot
 hetzner_user: '{{ (lookup("community.sops.sops", "keys/hetzner.sops.yaml") | from_yaml).hetzner_username }}'
 hetzner_password: '{{ (lookup("community.sops.sops", "keys/hetzner.sops.yaml") | from_yaml).hetzner_password }}'
+filters:
+  # Accept all servers in FSN1-DC1 and FSN1-DC2
+  - include: >-
+      hrobot_dc in ["FSN1-DC1", "FSN1-DC2"]
+  # Exclude all servers that didn't match any of the above filters
+  - exclude: true
 
 # Example using constructed features to create groups
 plugin: community.hrobot.robot
@@ -84,6 +93,8 @@ from ansible.errors import AnsibleError
 from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
 from ansible.template import Templar
 from ansible.utils.display import Display
+
+from ansible_collections.community.library_inventory_filtering_v1.plugins.plugin_utils.inventory_filter import parse_filters, filter_host
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
@@ -147,14 +158,24 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         self.populate(servers)
 
     def populate(self, servers):
-        filters = self.get_option('simple_filters')
+        simple_filters = self.get_option('simple_filters')
+        filters = parse_filters(self.get_option('filters'))
         strict = self.get_option('strict')
         server_lists = []
         for server in servers:
             s = server['server']
             server_name = s.get('server_name') or s.get('server_ip') or str(s['server_number'])
-            matched = self.filter(s, filters)
+            matched = self.filter(s, simple_filters)
             if not matched:
+                continue
+
+            facts = {}
+            if 'server_ip' in s:
+                facts['ansible_host'] = make_unsafe(s['server_ip'])
+            for hostvar, hostval in s.items():
+                facts["{0}_{1}".format('hrobot', hostvar)] = make_unsafe(hostval)
+
+            if not filter_host(self, server_name, facts, filters):
                 continue
 
             if server_name in server_lists:
@@ -165,10 +186,8 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
 
             self.inventory.add_host(server_name)
             server_lists.append(server_name)
-            if 'server_ip' in s:
-                self.inventory.set_variable(server_name, 'ansible_host', make_unsafe(s['server_ip']))
-            for hostvar, hostval in s.items():
-                self.inventory.set_variable(server_name, "{0}_{1}".format('hrobot', hostvar), make_unsafe(hostval))
+            for key, value in facts.items():
+                self.inventory.set_variable(server_name, key, value)
 
             # Composed variables
             server_vars = self.inventory.get_host(server_name).get_vars()
@@ -180,9 +199,9 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
             # Create groups based on variable values and add the corresponding hosts to it
             self._add_host_to_keyed_groups(self.get_option('keyed_groups'), server, server_name, strict=strict)
 
-    def filter(self, server, filters):
+    def filter(self, server, simple_filters):
         matched = True
-        for key, value in filters.items():
+        for key, value in simple_filters.items():
             if server.get(key) != value:
                 matched = False
                 break

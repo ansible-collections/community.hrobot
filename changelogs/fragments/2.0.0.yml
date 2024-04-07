@@ -14,3 +14,6 @@ major_changes:
 breaking_canges:
   - "robot inventory plugin - ``filters`` is now no longer an alias of ``simple_filters``, but a new, different option
      (https://github.com/ansible-collections/community.hrobot/pull/101).
+minor_changes:
+  - "robot inventory plugin - add ``filter`` option which allows to include and exclude
+     hosts based on Jinja2 conditions (https://github.com/ansible-collections/community.hrobot/pull/101)."

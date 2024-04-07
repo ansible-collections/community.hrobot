@@ -63,6 +63,8 @@ def inventory():
 def get_option(option):
     if option == 'simple_filters':
         return {}
+    if option == 'filters':
+        return []
     if option == 'hetzner_user':
         return 'test'
     if option == 'hetzner_password':
