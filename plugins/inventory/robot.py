@@ -85,13 +85,13 @@ from ansible.errors import AnsibleError
 from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
 from ansible.template import Templar
 from ansible.utils.display import Display
-from ansible.utils.unsafe_proxy import wrap_var as make_unsafe
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     PluginException,
     plugin_open_url_json,
 )
+from ansible_collections.community.hrobot.plugins.plugin_utils.unsafe import make_unsafe
 
 display = Display()
 
