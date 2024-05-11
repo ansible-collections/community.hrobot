@@ -81,7 +81,7 @@
 <a id="release-summary"></a>
 ### Release Summary
 
-\.\.\.
+New major release 2\.0\.0\.
 
 <a id="major-changes"></a>
 ### Major Changes

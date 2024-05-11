@@ -10,7 +10,7 @@ v2.0.0
 Release Summary
 ---------------
 
-...
+New major release 2.0.0.
 
 Major Changes
 -------------
