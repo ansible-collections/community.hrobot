@@ -5,7 +5,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
 # Community Hetzner Robot Collection
-[![CI](https://github.com/ansible-collections/community.hrobot/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/community.hrobot/actions) [![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/community.hrobot)](https://codecov.io/gh/ansible-collections/community.hrobot)
+[![CI](https://github.com/ansible-collections/community.hrobot/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/community.hrobot/actions)
+[![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/community.hrobot)](https://codecov.io/gh/ansible-collections/community.hrobot)
+[![REUSE status](https://api.reuse.software/badge/github.com/ansible-collections/community.hrobot)](https://api.reuse.software/info/github.com/ansible-collections/community.hrobot)
 
 This repository contains the `community.hrobot` Ansible Collection. The collection includes modules to work with [Hetzner's Robot](https://docs.hetzner.com/robot/).
 
