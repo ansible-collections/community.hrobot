@@ -474,8 +474,10 @@ class TestHetznerBoot(BaseTestModule):
             .expect_form_value('arch', '32')
             .expect_form_value('lang', 'fr')
             .expect_form_present('authorized_key[]')
-            # .expect_form_value('authorized_key[]', 'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0')
-            # .expect_form_value('authorized_key[]', 'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99')
+            .expect_form_values('authorized_key[]', [
+                'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99',
+            ])
             .result_json({
                 'linux': create_linux_active(dist='Debian 11 base', lang='fr', arch=32, authorized_key=[
                     {
