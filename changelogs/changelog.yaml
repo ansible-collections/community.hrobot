@@ -290,3 +290,13 @@ releases:
     - 1.9.2.yml
     - 102-unsafe.yml
     release_date: '2024-04-16'
+  1.9.3:
+    changes:
+      bugfixes:
+      - boot - use PHP array form encoding when sending multiple ``authorized_key``
+        (https://github.com/ansible-collections/community.hrobot/issues/112, https://github.com/ansible-collections/community.hrobot/pull/113).
+      release_summary: Bugfix release.
+    fragments:
+    - 1.9.3.yml
+    - fix-authorized_key-php-array-form-encoding.yml
+    release_date: '2024-06-17'

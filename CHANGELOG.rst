@@ -4,6 +4,19 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v1.9.3
+======
+
+Release Summary
+---------------
+
+Bugfix release.
+
+Bugfixes
+--------
+
+- boot - use PHP array form encoding when sending multiple ``authorized_key`` (https://github.com/ansible-collections/community.hrobot/issues/112, https://github.com/ansible-collections/community.hrobot/pull/113).
+
 v1.9.2
 ======
 
