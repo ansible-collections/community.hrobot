@@ -284,13 +284,13 @@ BOOT_CONFIGURATION_DATA = [
     ('rescue', 'rescue', {
         'os': ('os', 'os'),
         'arch': ('arch', 'arch'),
-        'authorized_keys': ('authorized_key', 'authorized_key'),
+        'authorized_keys': ('authorized_key', 'authorized_key[]'),
     }),
     ('install_linux', 'linux', {
         'dist': ('dist', 'dist'),
         'arch': ('arch', 'arch'),
         'lang': ('lang', 'lang'),
-        'authorized_keys': ('authorized_key', 'authorized_key'),
+        'authorized_keys': ('authorized_key', 'authorized_key[]'),
     }),
     ('install_vnc', 'vnc', {
         'dist': ('dist', 'dist'),
@@ -404,7 +404,7 @@ def main():
                     if should is None:
                         continue
                     # unfold the return object for the idempotence check to work correctly
-                    has = existing.get(data_key)
+                    has = existing.get(result_key)
                     if has and option_key == 'authorized_keys':
                         has = [x['key']['fingerprint'] for x in has]
                     if isinstance(has, list):
