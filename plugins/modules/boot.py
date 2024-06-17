@@ -404,7 +404,7 @@ def main():
                     if should is None:
                         continue
                     # unfold the return object for the idempotence check to work correctly
-                    has = existing.get(data_key)
+                    has = existing.get(result_key)
                     if has and option_key == 'authorized_keys':
                         has = [x['key']['fingerprint'] for x in has]
                     if isinstance(has, list):
