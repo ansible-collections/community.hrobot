@@ -313,9 +313,19 @@ releases:
       - The collection no longer supports Ansible, ansible-base, and ansible-core
         releases that are currently End of Life at the time of the 2.0.0 release.
         This means that Ansible 2.9, ansible-base 2.10, ansible-core 2.11, ansible-core
-        2.12, and ansible-core 2.13 are no longer supported. The
-        collection might still work with these versions, but it can stop working at
-        any moment without advance notice, and this will not be considered a bug (https://github.com/ansible-collections/community.hrobot/pull/101).
+        2.12, and ansible-core 2.13 are no longer supported. The collection might
+        still work with these versions, but it can stop working at any moment without
+        advance notice, and this will not be considered a bug (https://github.com/ansible-collections/community.hrobot/pull/101).
     fragments:
     - 2.0.0.yml
     release_date: '2024-05-11'
+  2.0.1:
+    changes:
+      bugfixes:
+      - boot - use PHP array form encoding when sending multiple ``authorized_key``
+        (https://github.com/ansible-collections/community.hrobot/issues/112, https://github.com/ansible-collections/community.hrobot/pull/113).
+      release_summary: Bugfix release.
+    fragments:
+    - 2.0.1.yml
+    - fix-authorized_key-php-array-form-encoding.yml
+    release_date: '2024-06-17'
