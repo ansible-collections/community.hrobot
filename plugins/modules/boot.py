@@ -284,13 +284,13 @@ BOOT_CONFIGURATION_DATA = [
     ('rescue', 'rescue', {
         'os': ('os', 'os'),
         'arch': ('arch', 'arch'),
-        'authorized_keys': ('authorized_key', 'authorized_key'),
+        'authorized_keys': ('authorized_key', 'authorized_key[]'),
     }),
     ('install_linux', 'linux', {
         'dist': ('dist', 'dist'),
         'arch': ('arch', 'arch'),
         'lang': ('lang', 'lang'),
-        'authorized_keys': ('authorized_key', 'authorized_key'),
+        'authorized_keys': ('authorized_key', 'authorized_key[]'),
     }),
     ('install_vnc', 'vnc', {
         'dist': ('dist', 'dist'),

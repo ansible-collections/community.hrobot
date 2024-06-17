@@ -1,0 +1,2 @@
+bugfixes:
+  - robot - Use PHP array form encoding when sending multiple `authorized_key` (https://github.com/ansible-collections/community.hrobot/pull/113).
