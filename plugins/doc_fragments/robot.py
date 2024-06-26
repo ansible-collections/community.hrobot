@@ -14,11 +14,11 @@ class ModuleDocFragment(object):
     DOCUMENTATION = r'''
 options:
   hetzner_user:
-    description: The username for the Robot webservice user.
+    description: The username for the Robot web-service user.
     type: str
     required: true
   hetzner_password:
-    description: The password for the Robot webservice user.
+    description: The password for the Robot web-service user.
     type: str
     required: true
 '''
