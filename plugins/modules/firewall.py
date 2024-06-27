@@ -19,6 +19,7 @@ description:
   - Manage Hetzner's dedicated server firewall.
   - Note that idempotency check for TCP flags simply compares strings and doesn't
     try to interpret the rules. This might change in the future.
+  - Test!!!
 requirements:
   - ipaddress
 seealso:
