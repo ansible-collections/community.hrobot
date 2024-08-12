@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community.Hrobot Release Notes &mdash; Community.Hrobot Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5707b69d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
+      <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd-ethical-ads.css?v=289b023e" />
+
+  
+    <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7f41d439"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="community.hrobot.boot module – Set boot configuration" href="boot_module.html" />
+    <link rel="prev" title="Community.Hrobot" href="index.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+
+
+
+
+</head>
+
+<body class="wy-body-for-nav"><!-- extra body elements for Ansible beyond RTD Sphinx Theme -->
+
+<div class="DocSite-globalNav ansibleNav">
+  <ul>
+    <li><a href="https://www.ansible.com/blog" target="_blank">Blog</a></li>
+    <li><a href="https://forum.ansible.com/" target="_blank">Ansible community forum</a></li>
+    <li><a href="https://docs.ansible.com/" target="_blank">Documentation</a></li>
+  </ul>
+</div>
+
+<a class="DocSite-nav" href="https://ansible-collections.github.io/community.hrobot/branch/main/" style="padding-bottom: 30px;">
+
+  <img class="DocSiteNav-logo"
+    src="_static/images/Ansible-Mark-RGB_White.png"
+    alt="Ansible Logo">
+  <div class="DocSiteNav-title">Community.Hrobot Collection Docs</div>
+</a>
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Community.Hrobot Collection
+          </a><!--- Based on https://github.com/rtfd/sphinx_rtd_theme/pull/438/files -->
+
+<div class="version">
+  
+    
+  
+</div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <label class="sr-only" for="q">Search docs:</label>
+    <input type="text" class="st-default-search-input" id="q" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+  
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Community.Hrobot Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v2-0-1">v2.0.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#release-summary">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bugfixes">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v2-0-0">v2.0.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#major-changes">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#minor-changes">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#breaking-changes-porting-guide">Breaking Changes / Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#removed-features-previously-deprecated">Removed Features (previously deprecated)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-9-2">v1.9.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-9-1">v1.9.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-fixes">Security Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-9-0">v1.9.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deprecated-features">Deprecated Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-8-2">v1.8.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-8-1">v1.8.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-8-0">v1.8.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Major Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-7-0">v1.7.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-modules">New Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-0">v1.6.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-5-2">v1.5.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-5-1">v1.5.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Release Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-5-0">v1.5.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-0">v1.4.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id21">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-3-1">v1.3.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id23">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-3-0">v1.3.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-3">v1.2.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id28">Release Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-2">v1.2.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id29">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-1">v1.2.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id31">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id32">Minor Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-0">v1.2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id33">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id34">Minor Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">New Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-1-1">v1.1.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id36">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id37">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-1-0">v1.1.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id38">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-plugins">New Plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#inventory">Inventory</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-0">v1.0.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id39">Release Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id40">Breaking Changes / Porting Guide</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="boot_module.html">community.hrobot.boot module – Set boot configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="failover_ip_module.html">community.hrobot.failover_ip module – Manage Hetzner’s failover IPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="failover_ip_info_module.html">community.hrobot.failover_ip_info module – Retrieve information on Hetzner’s failover IPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firewall_module.html">community.hrobot.firewall module – Manage Hetzner’s dedicated server firewall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firewall_info_module.html">community.hrobot.firewall_info module – Manage Hetzner’s dedicated server firewall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reset_module.html">community.hrobot.reset module – Reset a dedicated server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse_dns_module.html">community.hrobot.reverse_dns module – Set or remove reverse DNS entry for IP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server_module.html">community.hrobot.server module – Update server information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server_info_module.html">community.hrobot.server_info module – Query information on one or more servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh_key_module.html">community.hrobot.ssh_key module – Add, remove or update SSH key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh_key_info_module.html">community.hrobot.ssh_key_info module – Query information on SSH keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v_switch_module.html">community.hrobot.v_switch module – Manage Hetzner’s vSwitch</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="robot_inventory.html">community.hrobot.robot inventory – Hetzner Robot inventory source</a></li>
+</ul>
+<!-- extra nav elements for Ansible beyond RTD Sphinx Theme -->
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Community.Hrobot Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Community.Hrobot Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+  
+           <div itemprop="articleBody">
+             
+  <section id="community-hrobot-release-notes">
+<h1><a class="toc-backref" href="#id41" role="doc-backlink">Community.Hrobot Release Notes</a><a class="headerlink" href="#community-hrobot-release-notes" title="Link to this heading"></a></h1>
+<nav class="contents" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#community-hrobot-release-notes" id="id41">Community.Hrobot Release Notes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#v2-0-1" id="id42">v2.0.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#release-summary" id="id43">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#bugfixes" id="id44">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v2-0-0" id="id45">v2.0.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id46">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#major-changes" id="id47">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#minor-changes" id="id48">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#breaking-changes-porting-guide" id="id49">Breaking Changes / Porting Guide</a></p></li>
+<li><p><a class="reference internal" href="#removed-features-previously-deprecated" id="id50">Removed Features (previously deprecated)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-9-2" id="id51">v1.9.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id2" id="id52">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id53">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-9-1" id="id54">v1.9.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id4" id="id55">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#security-fixes" id="id56">Security Fixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-9-0" id="id57">v1.9.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id5" id="id58">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id59">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#deprecated-features" id="id60">Deprecated Features</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-8-2" id="id61">v1.8.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id7" id="id62">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id8" id="id63">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-8-1" id="id64">v1.8.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id9" id="id65">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#known-issues" id="id66">Known Issues</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-8-0" id="id67">v1.8.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id10" id="id68">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id11" id="id69">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id12" id="id70">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-7-0" id="id71">v1.7.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id13" id="id72">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#new-modules" id="id73">New Modules</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-6-0" id="id74">v1.6.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id14" id="id75">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id15" id="id76">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-5-2" id="id77">v1.5.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id16" id="id78">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id17" id="id79">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-5-1" id="id80">v1.5.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id18" id="id81">Release Summary</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-5-0" id="id82">v1.5.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id19" id="id83">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id20" id="id84">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-4-0" id="id85">v1.4.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id21" id="id86">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id22" id="id87">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-3-1" id="id88">v1.3.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id23" id="id89">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id24" id="id90">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-3-0" id="id91">v1.3.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id25" id="id92">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id26" id="id93">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id27" id="id94">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-2-3" id="id95">v1.2.3</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id28" id="id96">Release Summary</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-2-2" id="id97">v1.2.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id29" id="id98">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id30" id="id99">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-2-1" id="id100">v1.2.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id31" id="id101">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id32" id="id102">Minor Changes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-2-0" id="id103">v1.2.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id33" id="id104">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id34" id="id105">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id35" id="id106">New Modules</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-1-1" id="id107">v1.1.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id36" id="id108">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id37" id="id109">Bugfixes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-1-0" id="id110">v1.1.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id38" id="id111">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#new-plugins" id="id112">New Plugins</a></p>
+<ul>
+<li><p><a class="reference internal" href="#inventory" id="id113">Inventory</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#v1-0-0" id="id114">v1.0.0</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id39" id="id115">Release Summary</a></p></li>
+<li><p><a class="reference internal" href="#id40" id="id116">Breaking Changes / Porting Guide</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="v2-0-1">
+<h2><a class="toc-backref" href="#id42" role="doc-backlink">v2.0.1</a><a class="headerlink" href="#v2-0-1" title="Link to this heading"></a></h2>
+<section id="release-summary">
+<h3><a class="toc-backref" href="#id43" role="doc-backlink">Release Summary</a><a class="headerlink" href="#release-summary" title="Link to this heading"></a></h3>
+<p>Bugfix release.</p>
+</section>
+<section id="bugfixes">
+<h3><a class="toc-backref" href="#id44" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#bugfixes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>boot - use PHP array form encoding when sending multiple <code class="docutils literal notranslate"><span class="pre">authorized_key</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/issues/112">https://github.com/ansible-collections/community.hrobot/issues/112</a>, <a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/113">https://github.com/ansible-collections/community.hrobot/pull/113</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v2-0-0">
+<h2><a class="toc-backref" href="#id45" role="doc-backlink">v2.0.0</a><a class="headerlink" href="#v2-0-0" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3><a class="toc-backref" href="#id46" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>New major release 2.0.0.</p>
+</section>
+<section id="major-changes">
+<h3><a class="toc-backref" href="#id47" role="doc-backlink">Major Changes</a><a class="headerlink" href="#major-changes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">community.hrobot</span></code> collection now depends on the <code class="docutils literal notranslate"><span class="pre">community.library_inventory_filtering_v1</span></code> collection. This utility collection provides host filtering functionality for inventory plugins. If you use the Ansible community package, both collections are included and you do not have to do anything special. If you install the collection with <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span></code>, it will be installed automatically. If you install the collection by copying the files of the collection to a place where ansible-core can find it, for example by cloning the git repository, you need to make sure that you also have to install the dependency if you are using the inventory plugin (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/101">https://github.com/ansible-collections/community.hrobot/pull/101</a>).</p></li>
+</ul>
+</section>
+<section id="minor-changes">
+<h3><a class="toc-backref" href="#id48" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>robot inventory plugin - add <code class="docutils literal notranslate"><span class="pre">filter</span></code> option which allows to include and exclude hosts based on Jinja2 conditions (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/101">https://github.com/ansible-collections/community.hrobot/pull/101</a>).</p></li>
+</ul>
+</section>
+<section id="breaking-changes-porting-guide">
+<h3><a class="toc-backref" href="#id49" role="doc-backlink">Breaking Changes / Porting Guide</a><a class="headerlink" href="#breaking-changes-porting-guide" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>robot inventory plugin - <code class="docutils literal notranslate"><span class="pre">filters</span></code> is now no longer an alias of <code class="docutils literal notranslate"><span class="pre">simple_filters</span></code>, but a new, different option (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/101">https://github.com/ansible-collections/community.hrobot/pull/101</a>).</p></li>
+</ul>
+</section>
+<section id="removed-features-previously-deprecated">
+<h3><a class="toc-backref" href="#id50" role="doc-backlink">Removed Features (previously deprecated)</a><a class="headerlink" href="#removed-features-previously-deprecated" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The collection no longer supports Ansible, ansible-base, and ansible-core releases that are currently End of Life at the time of the 2.0.0 release. This means that Ansible 2.9, ansible-base 2.10, ansible-core 2.11, ansible-core 2.12, and ansible-core 2.13 are no longer supported. The collection might still work with these versions, but it can stop working at any moment without advance notice, and this will not be considered a bug (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/101">https://github.com/ansible-collections/community.hrobot/pull/101</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-9-2">
+<h2><a class="toc-backref" href="#id51" role="doc-backlink">v1.9.2</a><a class="headerlink" href="#v1-9-2" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3><a class="toc-backref" href="#id52" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>Bugfix release.</p>
+</section>
+<section id="id3">
+<h3><a class="toc-backref" href="#id53" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>inventory plugins - add unsafe wrapper to avoid marking strings that do not contain <code class="docutils literal notranslate"><span class="pre">{</span></code> or <code class="docutils literal notranslate"><span class="pre">}</span></code> as unsafe, to work around a bug in AWX (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/102">https://github.com/ansible-collections/community.hrobot/pull/102</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-9-1">
+<h2><a class="toc-backref" href="#id54" role="doc-backlink">v1.9.1</a><a class="headerlink" href="#v1-9-1" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3><a class="toc-backref" href="#id55" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>Bugfix release.</p>
+</section>
+<section id="security-fixes">
+<h3><a class="toc-backref" href="#id56" role="doc-backlink">Security Fixes</a><a class="headerlink" href="#security-fixes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>robot inventory plugin - make sure all data received from the Hetzner robot service server is marked as unsafe, so remote code execution by obtaining texts that can be evaluated as templates is not possible (<a class="reference external" href="https://www.die-welt.net/2024/03/remote-code-execution-in-ansible-dynamic-inventory-plugins/">https://www.die-welt.net/2024/03/remote-code-execution-in-ansible-dynamic-inventory-plugins/</a>, <a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/99">https://github.com/ansible-collections/community.hrobot/pull/99</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-9-0">
+<h2><a class="toc-backref" href="#id57" role="doc-backlink">v1.9.0</a><a class="headerlink" href="#v1-9-0" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3><a class="toc-backref" href="#id58" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>Feature and maintenance release.</p>
+</section>
+<section id="id6">
+<h3><a class="toc-backref" href="#id59" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>robot inventory plugin - the <code class="docutils literal notranslate"><span class="pre">filters</span></code> option has been renamed to <code class="docutils literal notranslate"><span class="pre">simple_filters</span></code>. The old name still works until community.hrobot 2.0.0. Then it will change to allow more complex filtering with the <code class="docutils literal notranslate"><span class="pre">community.library_inventory_filtering_v1</span></code> collection’s functionality (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/94">https://github.com/ansible-collections/community.hrobot/pull/94</a>).</p></li>
+</ul>
+</section>
+<section id="deprecated-features">
+<h3><a class="toc-backref" href="#id60" role="doc-backlink">Deprecated Features</a><a class="headerlink" href="#deprecated-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>robot inventory plugin - the <code class="docutils literal notranslate"><span class="pre">filters</span></code> option has been renamed to <code class="docutils literal notranslate"><span class="pre">simple_filters</span></code>. The old name will stop working in community.hrobot 2.0.0 (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/94">https://github.com/ansible-collections/community.hrobot/pull/94</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-2">
+<h2><a class="toc-backref" href="#id61" role="doc-backlink">v1.8.2</a><a class="headerlink" href="#v1-8-2" title="Link to this heading"></a></h2>
+<section id="id7">
+<h3><a class="toc-backref" href="#id62" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>Maintenance release with updated documentation.</p>
+</section>
+<section id="id8">
+<h3><a class="toc-backref" href="#id63" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Show more information (if available) from error messages (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/89">https://github.com/ansible-collections/community.hrobot/pull/89</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-1">
+<h2><a class="toc-backref" href="#id64" role="doc-backlink">v1.8.1</a><a class="headerlink" href="#v1-8-1" title="Link to this heading"></a></h2>
+<section id="id9">
+<h3><a class="toc-backref" href="#id65" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>Maintenance release with updated documentation.</p>
+<p>From this version on, community.hrobot is using the new <a class="reference external" href="https://docs.ansible.com/ansible/devel/dev_guide/developing_modules_documenting.html#semantic-markup-within-module-documentation">Ansible semantic markup</a>
+in its documentation. If you look at documentation with the ansible-doc CLI tool
+from ansible-core before 2.15, please note that it does not render the markup
+correctly. You should be still able to read it in most cases, but you need
+ansible-core 2.15 or later to see it as it is intended. Alternatively you can
+look at <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/community/hrobot/">the devel docsite</a>
+for the rendered HTML version of the documentation of the latest release.</p>
+</section>
+<section id="known-issues">
+<h3><a class="toc-backref" href="#id66" role="doc-backlink">Known Issues</a><a class="headerlink" href="#known-issues" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Ansible markup will show up in raw form on ansible-doc text output for ansible-core before 2.15. If you have trouble deciphering the documentation markup, please upgrade to ansible-core 2.15 (or newer), or read the HTML documentation on <a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/community/hrobot/">https://docs.ansible.com/ansible/devel/collections/community/hrobot/</a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-8-0">
+<h2><a class="toc-backref" href="#id67" role="doc-backlink">v1.8.0</a><a class="headerlink" href="#v1-8-0" title="Link to this heading"></a></h2>
+<section id="id10">
+<h3><a class="toc-backref" href="#id68" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>Feature release for the Hetzner firewall changes.</p>
+</section>
+<section id="id11">
+<h3><a class="toc-backref" href="#id69" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>firewall - Hetzner added output rules support to the firewall. This change unfortunately means that using old versions of the firewall module will always set the output rule list to empty, thus disallowing the server to send out packets (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/issues/75">https://github.com/ansible-collections/community.hrobot/issues/75</a>, <a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/76">https://github.com/ansible-collections/community.hrobot/pull/76</a>).</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3><a class="toc-backref" href="#id70" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>firewall, firewall_info - add <code class="docutils literal notranslate"><span class="pre">filter_ipv6</span></code> and <code class="docutils literal notranslate"><span class="pre">rules.output</span></code> output to support the new IPv6 filtering and output rules features (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/issues/75">https://github.com/ansible-collections/community.hrobot/issues/75</a>, <a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/76">https://github.com/ansible-collections/community.hrobot/pull/76</a>).</p></li>
+<li><p>firewall, firewall_info - add <code class="docutils literal notranslate"><span class="pre">server_number</span></code> option that can be used instead of <code class="docutils literal notranslate"><span class="pre">server_ip</span></code> to identify the server. Hetzner deprecated configuring the firewall by <code class="docutils literal notranslate"><span class="pre">server_ip</span></code>, so using <code class="docutils literal notranslate"><span class="pre">server_ip</span></code> will stop at some point in the future (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/77">https://github.com/ansible-collections/community.hrobot/pull/77</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-7-0">
+<h2><a class="toc-backref" href="#id71" role="doc-backlink">v1.7.0</a><a class="headerlink" href="#v1-7-0" title="Link to this heading"></a></h2>
+<section id="id13">
+<h3><a class="toc-backref" href="#id72" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<p>Feature release.</p>
+</section>
+<section id="new-modules">
+<h3><a class="toc-backref" href="#id73" role="doc-backlink">New Modules</a><a class="headerlink" href="#new-modules" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.hrobot.v_switch - Manage Hetzner’s vSwitch</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-6-0">
+<h2><a class="toc-backref" href="#id74" role="doc-backlink">v1.6.0</a><a class="headerlink" href="#v1-6-0" title="Link to this heading"></a></h2>
+<section id="id14">
+<h3><a class="toc-backref" href="#id75" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<p>Feature release with improved documentation.</p>
+</section>
+<section id="id15">
+<h3><a class="toc-backref" href="#id76" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added a <code class="docutils literal notranslate"><span class="pre">community.hrobot.robot</span></code> module defaults group / action group. Use with <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> to provide options for all Hetzner Robot modules (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/65">https://github.com/ansible-collections/community.hrobot/pull/65</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-5-2">
+<h2><a class="toc-backref" href="#id77" role="doc-backlink">v1.5.2</a><a class="headerlink" href="#v1-5-2" title="Link to this heading"></a></h2>
+<section id="id16">
+<h3><a class="toc-backref" href="#id78" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<p>Maintenance release with a documentation improvement.</p>
+</section>
+<section id="id17">
+<h3><a class="toc-backref" href="#id79" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The collection repository conforms to the <a class="reference external" href="https://reuse.software/spec/">REUSE specification</a> except for the changelog fragments (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/60">https://github.com/ansible-collections/community.hrobot/pull/60</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-5-1">
+<h2><a class="toc-backref" href="#id80" role="doc-backlink">v1.5.1</a><a class="headerlink" href="#v1-5-1" title="Link to this heading"></a></h2>
+<section id="id18">
+<h3><a class="toc-backref" href="#id81" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<p>Maintenance release with small documentation fixes.</p>
+</section>
+</section>
+<section id="v1-5-0">
+<h2><a class="toc-backref" href="#id82" role="doc-backlink">v1.5.0</a><a class="headerlink" href="#v1-5-0" title="Link to this heading"></a></h2>
+<section id="id19">
+<h3><a class="toc-backref" href="#id83" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<p>Maintenance release changing the way licenses are declared. No functional changes.</p>
+</section>
+<section id="id20">
+<h3><a class="toc-backref" href="#id84" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>All software licenses are now in the <code class="docutils literal notranslate"><span class="pre">LICENSES/</span></code> directory of the collection root. Moreover, <code class="docutils literal notranslate"><span class="pre">SPDX-License-Identifier:</span></code> is used to declare the applicable license for every file that is not automatically generated (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/52">https://github.com/ansible-collections/community.hrobot/pull/52</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-4-0">
+<h2><a class="toc-backref" href="#id85" role="doc-backlink">v1.4.0</a><a class="headerlink" href="#v1-4-0" title="Link to this heading"></a></h2>
+<section id="id21">
+<h3><a class="toc-backref" href="#id86" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<p>Feature release.</p>
+</section>
+<section id="id22">
+<h3><a class="toc-backref" href="#id87" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>robot inventory plugin - allow to template <code class="docutils literal notranslate"><span class="pre">hetzner_user</span></code> and <code class="docutils literal notranslate"><span class="pre">hetzner_password</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/49">https://github.com/ansible-collections/community.hrobot/pull/49</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-3-1">
+<h2><a class="toc-backref" href="#id88" role="doc-backlink">v1.3.1</a><a class="headerlink" href="#v1-3-1" title="Link to this heading"></a></h2>
+<section id="id23">
+<h3><a class="toc-backref" href="#id89" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<p>Maintenance release.</p>
+</section>
+<section id="id24">
+<h3><a class="toc-backref" href="#id90" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Include <code class="docutils literal notranslate"><span class="pre">simplified_bsd.txt</span></code> license file for the <code class="docutils literal notranslate"><span class="pre">robot</span></code> and <code class="docutils literal notranslate"><span class="pre">failover</span></code> module utils.</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-3-0">
+<h2><a class="toc-backref" href="#id91" role="doc-backlink">v1.3.0</a><a class="headerlink" href="#v1-3-0" title="Link to this heading"></a></h2>
+<section id="id25">
+<h3><a class="toc-backref" href="#id92" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<p>Feature and bugfix release.</p>
+</section>
+<section id="id26">
+<h3><a class="toc-backref" href="#id93" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prepare collection for inclusion in an Execution Environment by declaring its dependencies (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/45">https://github.com/ansible-collections/community.hrobot/pull/45</a>).</p></li>
+</ul>
+</section>
+<section id="id27">
+<h3><a class="toc-backref" href="#id94" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>robot inventory plugin - do not crash if a server neither has name or primary IP set. Instead, fall back to using the server’s number as the name. This can happen if unnamed rack reservations show up in your server list (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/issues/40">https://github.com/ansible-collections/community.hrobot/issues/40</a>, <a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/47">https://github.com/ansible-collections/community.hrobot/pull/47</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-2-3">
+<h2><a class="toc-backref" href="#id95" role="doc-backlink">v1.2.3</a><a class="headerlink" href="#v1-2-3" title="Link to this heading"></a></h2>
+<section id="id28">
+<h3><a class="toc-backref" href="#id96" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<p>Docs update release.</p>
+</section>
+</section>
+<section id="v1-2-2">
+<h2><a class="toc-backref" href="#id97" role="doc-backlink">v1.2.2</a><a class="headerlink" href="#v1-2-2" title="Link to this heading"></a></h2>
+<section id="id29">
+<h3><a class="toc-backref" href="#id98" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<p>Bugfix release.</p>
+</section>
+<section id="id30">
+<h3><a class="toc-backref" href="#id99" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>boot - fix incorrect handling of SSH authorized keys (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/issues/32">https://github.com/ansible-collections/community.hrobot/issues/32</a>, <a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/33">https://github.com/ansible-collections/community.hrobot/pull/33</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-2-1">
+<h2><a class="toc-backref" href="#id100" role="doc-backlink">v1.2.1</a><a class="headerlink" href="#v1-2-1" title="Link to this heading"></a></h2>
+<section id="id31">
+<h3><a class="toc-backref" href="#id101" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<p>Maintenance release.</p>
+</section>
+<section id="id32">
+<h3><a class="toc-backref" href="#id102" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Generic module HTTP support code - fix usage of <code class="docutils literal notranslate"><span class="pre">fetch_url</span></code> with changes in latest ansible-core <code class="docutils literal notranslate"><span class="pre">devel</span></code> branch (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/30">https://github.com/ansible-collections/community.hrobot/pull/30</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-2-0">
+<h2><a class="toc-backref" href="#id103" role="doc-backlink">v1.2.0</a><a class="headerlink" href="#v1-2-0" title="Link to this heading"></a></h2>
+<section id="id33">
+<h3><a class="toc-backref" href="#id104" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
+<p>Feature release with multiple new modules.</p>
+</section>
+<section id="id34">
+<h3><a class="toc-backref" href="#id105" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Avoid internal ansible-core module_utils in favor of equivalent public API available since at least Ansible 2.9 (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/18">https://github.com/ansible-collections/community.hrobot/pull/18</a>).</p></li>
+<li><p>firewall - rename option <code class="docutils literal notranslate"><span class="pre">whitelist_hos</span></code> to <code class="docutils literal notranslate"><span class="pre">allowlist_hos</span></code>, keep old name as alias (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/15">https://github.com/ansible-collections/community.hrobot/pull/15</a>).</p></li>
+<li><p>firewall, firewall_info - add return value <code class="docutils literal notranslate"><span class="pre">allowlist_hos</span></code>, which contains the same value as <code class="docutils literal notranslate"><span class="pre">whitelist_hos</span></code>. The old name <code class="docutils literal notranslate"><span class="pre">whitelist_hos</span></code> will be removed eventually (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/15">https://github.com/ansible-collections/community.hrobot/pull/15</a>).</p></li>
+<li><p>robot module utils - add <code class="docutils literal notranslate"><span class="pre">allow_empty_result</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">plugin_open_url_json</span></code> and <code class="docutils literal notranslate"><span class="pre">fetch_url_json</span></code> (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/16">https://github.com/ansible-collections/community.hrobot/pull/16</a>).</p></li>
+</ul>
+</section>
+<section id="id35">
+<h3><a class="toc-backref" href="#id106" role="doc-backlink">New Modules</a><a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>community.hrobot.boot - Set boot configuration</p></li>
+<li><p>community.hrobot.reset - Reset a dedicated server</p></li>
+<li><p>community.hrobot.reverse_dns - Set or remove reverse DNS entry for IP</p></li>
+<li><p>community.hrobot.server - Update server information</p></li>
+<li><p>community.hrobot.server_info - Query information on one or more servers</p></li>
+<li><p>community.hrobot.ssh_key - Add, remove or update SSH key</p></li>
+<li><p>community.hrobot.ssh_key_info - Query information on SSH keys</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-1-1">
+<h2><a class="toc-backref" href="#id107" role="doc-backlink">v1.1.1</a><a class="headerlink" href="#v1-1-1" title="Link to this heading"></a></h2>
+<section id="id36">
+<h3><a class="toc-backref" href="#id108" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<p>Bugfix release which reduces the number of HTTPS queries for the modules and plugins.</p>
+</section>
+<section id="id37">
+<h3><a class="toc-backref" href="#id109" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>robot - force HTTP basic authentication to reduce number of HTTPS requests (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/9">https://github.com/ansible-collections/community.hrobot/pull/9</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="v1-1-0">
+<h2><a class="toc-backref" href="#id110" role="doc-backlink">v1.1.0</a><a class="headerlink" href="#v1-1-0" title="Link to this heading"></a></h2>
+<section id="id38">
+<h3><a class="toc-backref" href="#id111" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
+<p>Release with a new inventory plugin.</p>
+</section>
+<section id="new-plugins">
+<h3><a class="toc-backref" href="#id112" role="doc-backlink">New Plugins</a><a class="headerlink" href="#new-plugins" title="Link to this heading"></a></h3>
+<section id="inventory">
+<h4><a class="toc-backref" href="#id113" role="doc-backlink">Inventory</a><a class="headerlink" href="#inventory" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>community.hrobot.robot - Hetzner Robot inventory source</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="v1-0-0">
+<h2><a class="toc-backref" href="#id114" role="doc-backlink">v1.0.0</a><a class="headerlink" href="#v1-0-0" title="Link to this heading"></a></h2>
+<section id="id39">
+<h3><a class="toc-backref" href="#id115" role="doc-backlink">Release Summary</a><a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">community.hrobot</span></code> continues the work on the Hetzner Robot modules from their state in <code class="docutils literal notranslate"><span class="pre">community.general</span></code> 1.2.0. The changes listed here are thus relative to the modules <code class="docutils literal notranslate"><span class="pre">community.general.hetzner_*</span></code>.</p>
+</section>
+<section id="id40">
+<h3><a class="toc-backref" href="#id116" role="doc-backlink">Breaking Changes / Porting Guide</a><a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>firewall - now requires the <a class="reference external" href="https://pypi.org/project/ipaddress/">ipaddress</a> library (<a class="reference external" href="https://github.com/ansible-collections/community.hrobot/pull/2">https://github.com/ansible-collections/community.hrobot/pull/2</a>).</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+<footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Community.Hrobot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="boot_module.html" class="btn btn-neutral float-right" title="community.hrobot.boot module – Set boot configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Community.Hrobot Contributors.</p>
+  </div>
+
+  
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script><!-- extra footer elements for Ansible beyond RTD Sphinx Theme -->
+
+</body>
+</html>
