@@ -330,3 +330,10 @@ releases:
       - 2.0.1.yml
       - fix-authorized_key-php-array-form-encoding.yml
     release_date: '2024-06-17'
+  2.0.2:
+    changes:
+      release_summary: Maintenance release with updated documentation.
+    fragments:
+      - 0-readme.yml
+      - 2.0.2.yml
+    release_date: '2024-10-04'
