@@ -1,8 +1,10 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="2.14.0" name="antsibull-docs" />
+<meta content="2.15.0" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>community.hrobot.robot inventory – Hetzner Robot inventory source &mdash; Community.Hrobot Collection  documentation</title>
@@ -13,15 +15,11 @@
 
   
     <link rel="shortcut icon" href="_static/images/Ansible-Mark-RGB_Black.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=7f41d439"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="community.hrobot.v_switch module – Manage Hetzner’s vSwitch" href="v_switch_module.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
@@ -182,12 +180,12 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">inventory</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">cache = false</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[inventory]</span>
+<span class="na">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
 </pre></div>
 </div>
 </li>
-<li><p>Environment variable: <span class="target" id="index-0"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_INVENTORY_CACHE" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-0"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/environment_variables.html#envvar-ANSIBLE_INVENTORY_CACHE" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
@@ -199,17 +197,17 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entries:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">defaults</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">fact_caching_connection = VALUE</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[defaults]</span>
+<span class="na">fact_caching_connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">VALUE</span>
 </pre></div>
 </div>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">inventory</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">cache_connection = VALUE</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[inventory]</span>
+<span class="na">cache_connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">VALUE</span>
 </pre></div>
 </div>
 </li>
 <li><p>Environment variable: <span class="target" id="index-1"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_CACHE_PLUGIN_CONNECTION" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_CACHE_PLUGIN_CONNECTION</span></code></a></p></li>
-<li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_INVENTORY_CACHE_CONNECTION" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE_CONNECTION</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-2"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/environment_variables.html#envvar-ANSIBLE_INVENTORY_CACHE_CONNECTION" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE_CONNECTION</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
@@ -222,17 +220,17 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entries:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">defaults</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">fact_caching = memory</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[defaults]</span>
+<span class="na">fact_caching</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">memory</span>
 </pre></div>
 </div>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">inventory</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">cache_plugin = memory</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[inventory]</span>
+<span class="na">cache_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">memory</span>
 </pre></div>
 </div>
 </li>
 <li><p>Environment variable: <span class="target" id="index-3"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_CACHE_PLUGIN" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_CACHE_PLUGIN</span></code></a></p></li>
-<li><p>Environment variable: <span class="target" id="index-4"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_INVENTORY_CACHE_PLUGIN" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE_PLUGIN</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-4"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/environment_variables.html#envvar-ANSIBLE_INVENTORY_CACHE_PLUGIN" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE_PLUGIN</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
@@ -245,17 +243,17 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entries:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">defaults</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">fact_caching_prefix = ansible_inventory_</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[defaults]</span>
+<span class="na">fact_caching_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ansible_inventory_</span>
 </pre></div>
 </div>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">inventory</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">cache_prefix = ansible_inventory_</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[inventory]</span>
+<span class="na">cache_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ansible_inventory_</span>
 </pre></div>
 </div>
 </li>
 <li><p>Environment variable: <span class="target" id="index-5"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_CACHE_PLUGIN_PREFIX" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_CACHE_PLUGIN_PREFIX</span></code></a></p></li>
-<li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_INVENTORY_CACHE_PLUGIN_PREFIX" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE_PLUGIN_PREFIX</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-6"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/environment_variables.html#envvar-ANSIBLE_INVENTORY_CACHE_PLUGIN_PREFIX" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE_PLUGIN_PREFIX</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
@@ -268,17 +266,17 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entries:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">defaults</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">fact_caching_timeout = 3600</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[defaults]</span>
+<span class="na">fact_caching_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">3600</span>
 </pre></div>
 </div>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">inventory</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">cache_timeout = 3600</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[inventory]</span>
+<span class="na">cache_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">3600</span>
 </pre></div>
 </div>
 </li>
 <li><p>Environment variable: <span class="target" id="index-7"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_CACHE_PLUGIN_TIMEOUT" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_CACHE_PLUGIN_TIMEOUT</span></code></a></p></li>
-<li><p>Environment variable: <span class="target" id="index-8"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/config.html#envvar-ANSIBLE_INVENTORY_CACHE_TIMEOUT" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE_TIMEOUT</span></code></a></p></li>
+<li><p>Environment variable: <span class="target" id="index-8"></span><a class="reference external" href="https://docs.ansible.com/ansible/devel/collections/environment_variables.html#envvar-ANSIBLE_INVENTORY_CACHE_TIMEOUT" title="(in Ansible vdevel)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSIBLE_INVENTORY_CACHE_TIMEOUT</span></code></a></p></li>
 </ul>
 </div></td>
 </tr>
@@ -450,8 +448,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-configuration">Configuration:</strong></p>
 <ul>
 <li><p>INI entry:</p>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">inventory_plugins</span><span class="p p-Indicator">]</span>
-<span class="l l-Scalar l-Scalar-Plain">use_extra_vars = false</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[inventory_plugins]</span>
+<span class="na">use_extra_vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
 </pre></div>
 </div>
 </li>
