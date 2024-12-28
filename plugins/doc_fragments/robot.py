@@ -11,7 +11,7 @@ __metaclass__ = type
 class ModuleDocFragment(object):
 
     # Standard files documentation fragment
-    DOCUMENTATION = r'''
+    DOCUMENTATION = r"""
 options:
   hetzner_user:
     description: The username for the Robot web-service user.
@@ -21,4 +21,4 @@ options:
     description: The password for the Robot web-service user.
     type: str
     required: true
-'''
+"""

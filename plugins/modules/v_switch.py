@@ -10,8 +10,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: v_switch
 short_description: Manage Hetzner's vSwitch
 version_added: 1.7.0
@@ -51,12 +50,12 @@ options:
   state:
     description:
       - State of the vSwitch.
-      - vSwitch is created if state is V(present), and deleted if state is V(absent).
+      - VSwitch is created if state is V(present), and deleted if state is V(absent).
       - V(absent) just cancels the vSwitch at the end of the current day.
       - When cancelling, you have to specify O(servers=[]) if you want to actively remove the servers in the vSwitch.
     type: str
     default: present
-    choices: [ present, absent ]
+    choices: [present, absent]
   servers:
     description:
       - List of server identifiers (server's numeric ID or server's main IPv4 or IPv6).
@@ -65,13 +64,12 @@ options:
     elements: str
   wait:
     description:
-      - Whether to wait until the vSwitch has been successfully configured before
-        determining what to do, and before returning from the module.
-      - The API returns status C(in process) when the vSwitch is currently
-        being set up in the servers. If this happens, the module will try again until
-        the status changes to C(ready) or server has been removed from vSwitch.
-      - Please note that if you disable wait while deleting and removing servers module
-        will fail with C(VSWITCH_IN_PROCESS) error.
+      - Whether to wait until the vSwitch has been successfully configured before determining what to do, and before returning
+        from the module.
+      - The API returns status C(in process) when the vSwitch is currently being set up in the servers. If this happens, the
+        module will try again until the status changes to C(ready) or server has been removed from vSwitch.
+      - Please note that if you disable wait while deleting and removing servers module will fail with C(VSWITCH_IN_PROCESS)
+        error.
     type: bool
     default: true
   wait_delay:
@@ -84,9 +82,9 @@ options:
       - Timeout (in seconds) for waiting for vSwitch servers to be configured.
     type: int
     default: 180
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Create vSwitch with VLAN 4010 and name foo
   community.hrobot.v_switch:
     hetzner_user: foo
@@ -103,9 +101,9 @@ EXAMPLES = r'''
     servers:
       - 123.123.123.123
       - 154323
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 v_switch:
   description:
     - Information on the vSwitch.
@@ -230,7 +228,7 @@ v_switch:
           type: str
           sample: '10.0.2.1'
       returned: success
-'''
+"""
 
 
 from datetime import datetime

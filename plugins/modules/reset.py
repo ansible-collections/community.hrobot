@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: reset
 short_description: Reset a dedicated server
 version_added: 1.2.0
@@ -41,11 +40,11 @@ options:
     description:
       - How to reset the server.
       - V(software) is a software reset. This should be similar to pressing Ctrl+Alt+Del on the keyboard.
-      - V(power) is a hardware reset similar to pressing the Power button. An ACPI signal is sent, and if the
-        server is configured correctly, this will trigger a regular shutdown.
+      - V(power) is a hardware reset similar to pressing the Power button. An ACPI signal is sent, and if the server is configured
+        correctly, this will trigger a regular shutdown.
       - V(hardware) is a hardware reset similar to pressing the Restart button. The power is cycled for the server.
-      - V(manual) is a manual reset. This requests a technician to manually do the shutdown while looking at the
-        screen output. B(Be careful) and only use this when really necessary!
+      - V(manual) is a manual reset. This requests a technician to manually do the shutdown while looking at the screen output.
+        B(Be careful) and only use this when really necessary!
       - Note that not every server supports every reset method!
     type: str
     required: true
@@ -54,9 +53,9 @@ options:
       - hardware
       - power
       - manual
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Send ACPI signal to server to request controlled shutdown
   community.hrobot.reset:
     hetzner_user: foo
@@ -78,9 +77,9 @@ EXAMPLES = r'''
     hetzner_password: bar
     server_number: 1234
     reset_type: manual
-'''
+"""
 
-RETURN = r''' # '''
+RETURN = r""" # """
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import urlencode

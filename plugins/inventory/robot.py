@@ -10,47 +10,47 @@ __metaclass__ = type
 
 
 DOCUMENTATION = r"""
-    name: robot
-    author:
-        - Oleksandr Stepanov (@alexandrst88)
-    short_description: Hetzner Robot inventory source
-    version_added: 1.1.0
+name: robot
+author:
+  - Oleksandr Stepanov (@alexandrst88)
+short_description: Hetzner Robot inventory source
+version_added: 1.1.0
+description:
+  - Reads servers from Hetzner Robot API.
+  - Uses a YAML configuration file that ends with C(robot.yml) or C(robot.yaml).
+  - The inventory plugin adds all values from U(https://robot.your-server.de/doc/webservice/en.html#get-server) prepended
+    with C(hrobot_) to the server's inventory. For example, the variable C(hrobot_dc) contains the data center the server
+    is located in.
+extends_documentation_fragment:
+  - ansible.builtin.constructed
+  - ansible.builtin.inventory_cache
+  - community.hrobot.robot
+  - community.library_inventory_filtering_v1.inventory_filter
+notes:
+  - The O(hetzner_user) and O(hetzner_password) options can be templated.
+options:
+  plugin:
+    description: Token that ensures this is a source file for the plugin.
+    required: true
+    choices: ["community.hrobot.robot"]
+  hetzner_user:
+    env:
+      - name: HROBOT_API_USER
+  hetzner_password:
+    env:
+      - name: HROBOT_API_PASSWORD
+  simple_filters:
     description:
-        - Reads servers from Hetzner Robot API.
-        - Uses a YAML configuration file that ends with C(robot.yml) or C(robot.yaml).
-        - The inventory plugin adds all values from U(https://robot.your-server.de/doc/webservice/en.html#get-server)
-          prepended with C(hrobot_) to the server's inventory.
-          For example, the variable C(hrobot_dc) contains the data center the server is located in.
-    extends_documentation_fragment:
-        - ansible.builtin.constructed
-        - ansible.builtin.inventory_cache
-        - community.hrobot.robot
-        - community.library_inventory_filtering_v1.inventory_filter
-    notes:
-        - The O(hetzner_user) and O(hetzner_password) options can be templated.
-    options:
-        plugin:
-            description: Token that ensures this is a source file for the plugin.
-            required: true
-            choices: ["community.hrobot.robot"]
-        hetzner_user:
-            env:
-                - name: HROBOT_API_USER
-        hetzner_password:
-            env:
-                - name: HROBOT_API_PASSWORD
-        simple_filters:
-            description:
-                - A dictionary of filter value pairs.
-                - Available filters are listed here are keys of server like C(status) or C(server_ip).
-                - See U(https://robot.your-server.de/doc/webservice/en.html#get-server) for all values that can be used.
-                - This option used to be called O(filters) before community.hrobot 2.0.0. It has been renamed from
-                  O(filters) to O(simple_filters) in community.hrobotdns 1.9.0, and the old name was still available
-                  as an alias until community.hrobot 2.0.0. O(filters) is now used for something else.
-            type: dict
-            default: {}
-        filters:
-            version_added: 2.0.0
+      - A dictionary of filter value pairs.
+      - Available filters are listed here are keys of server like C(status) or C(server_ip).
+      - See U(https://robot.your-server.de/doc/webservice/en.html#get-server) for all values that can be used.
+      - This option used to be called O(filters) before community.hrobot 2.0.0. It has been renamed from O(filters) to O(simple_filters)
+        in community.hrobotdns 1.9.0, and the old name was still available as an alias until community.hrobot 2.0.0. O(filters)
+        is now used for something else.
+    type: dict
+    default: {}
+  filters:
+    version_added: 2.0.0
 """
 
 EXAMPLES = r"""

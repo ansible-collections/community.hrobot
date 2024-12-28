@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: failover_ip
 short_description: Manage Hetzner's failover IPs
 author:
@@ -58,14 +57,13 @@ options:
   timeout:
     description:
       - Timeout to use when routing or unrouting the failover IP.
-      - Note that the API call returns when the failover IP has been
-        successfully routed to the new address, respectively successfully
-        unrouted.
+      - Note that the API call returns when the failover IP has been successfully routed to the new address, respectively
+        successfully unrouted.
     type: int
     default: 180
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Set value of failover IP 1.2.3.4 to 5.6.7.8
   community.hrobot.failover_ip:
     hetzner_user: foo
@@ -79,9 +77,9 @@ EXAMPLES = r'''
     hetzner_password: bar
     failover_ip: 1.2.3.4
     state: unrouted
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 value:
   description:
     - The value of the failover IP.
@@ -93,7 +91,7 @@ state:
     - Will be V(routed) or V(unrouted).
   returned: success
   type: str
-'''
+"""
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (

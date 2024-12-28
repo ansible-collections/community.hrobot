@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: boot
 short_description: Set boot configuration
 version_added: 1.2.0
@@ -20,9 +19,9 @@ description:
   - Set the boot configuration for a dedicated server.
 seealso:
   - module: community.hrobot.ssh_key
-    description: Add, remove or update SSH key
+    description: Add, remove or update SSH key.
   - module: community.hrobot.ssh_key_info
-    description: Query information on SSH keys
+    description: Query information on SSH keys.
 extends_documentation_fragment:
   - community.hrobot.robot
   - community.hrobot.attributes
@@ -44,26 +43,25 @@ options:
     required: true
   regular_boot:
     description:
-      - If this option is provided, all special boot configurations are removed and
-        the installed operating system will be booted up next (assuming it is bootable).
-      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
-        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
+      - If this option is provided, all special boot configurations are removed and the installed operating system will be
+        booted up next (assuming it is bootable).
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc), O(install_windows), O(install_plesk),
+        and O(install_cpanel) must be provided.
     type: bool
     choices:
       - true
   rescue:
     description:
       - If this option is provided, the rescue system will be activated for the next boot.
-      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
-        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc), O(install_windows), O(install_plesk),
+        and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       os:
         description:
-          - The operating system to use for the rescue system. Possible choices can
-            change over time.
-          - Currently, V(linux), V(linuxold), V(freebsd), V(freebsdold), V(freebsdax),
-            V(freebsdbetaax), V(vkvm), and V(vkvmold) seem to be available.
+          - The operating system to use for the rescue system. Possible choices can change over time.
+          - Currently, V(linux), V(linuxold), V(freebsd), V(freebsdold), V(freebsdax), V(freebsdbetaax), V(vkvm), and V(vkvmold)
+            seem to be available.
         type: str
         required: true
       arch:
@@ -79,16 +77,15 @@ options:
         description:
           - One or more SSH key fingerprints to equip the rescue system with.
           - Only fingerprints for SSH keys deposited in the Robot API can be used.
-          - You can use the M(community.hrobot.ssh_key_info) module to query the
-            SSH keys you can use, and the M(community.hrobot.ssh_key) module to
-            add or update SSH keys.
+          - You can use the M(community.hrobot.ssh_key_info) module to query the SSH keys you can use, and the M(community.hrobot.ssh_key)
+            module to add or update SSH keys.
         type: list
         elements: str
   install_linux:
     description:
       - If this option is provided, a Linux system install will be activated for the next boot.
-      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
-        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc), O(install_windows), O(install_plesk),
+        and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       dist:
@@ -114,16 +111,15 @@ options:
         description:
           - One or more SSH key fingerprints to equip the rescue system with.
           - Only fingerprints for SSH keys deposited in the Robot API can be used.
-          - You can use the M(community.hrobot.ssh_key_info) module to query the
-            SSH keys you can use, and the M(community.hrobot.ssh_key) module to
-            add or update SSH keys.
+          - You can use the M(community.hrobot.ssh_key_info) module to query the SSH keys you can use, and the M(community.hrobot.ssh_key)
+            module to add or update SSH keys.
         type: list
         elements: str
   install_vnc:
     description:
       - If this option is provided, a VNC installation will be activated for the next boot.
-      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
-        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc), O(install_windows), O(install_plesk),
+        and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       dist:
@@ -148,8 +144,8 @@ options:
   install_windows:
     description:
       - If this option is provided, a Windows installation will be activated for the next boot.
-      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
-        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc), O(install_windows), O(install_plesk),
+        and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       lang:
@@ -160,8 +156,8 @@ options:
   install_plesk:
     description:
       - If this option is provided, a Plesk installation will be activated for the next boot.
-      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
-        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc), O(install_windows), O(install_plesk),
+        and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       dist:
@@ -191,8 +187,8 @@ options:
   install_cpanel:
     description:
       - If this option is provided, a cPanel installation will be activated for the next boot.
-      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc),
-        O(install_windows), O(install_plesk), and O(install_cpanel) must be provided.
+      - Precisely one of O(regular_boot), O(rescue), O(install_linux), O(install_vnc), O(install_windows), O(install_plesk),
+        and O(install_cpanel) must be provided.
     type: dict
     suboptions:
       dist:
@@ -219,9 +215,9 @@ options:
           - The hostname.
         type: str
         required: true
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Disable all special boot configurations
   community.hrobot.boot:
     hetzner_user: foo
@@ -245,30 +241,29 @@ EXAMPLES = r'''
       authorized_keys:
         - 56:29:99:a4:5d:ed:ac:95:c1:f5:88:82:90:5d:dd:10
         - 15:28:b0:03:95:f0:77:b3:10:56:15:6b:77:22:a5:bb
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 configuration_type:
-    description:
-      - Describes the active boot configuration.
-    returned: success
-    type: str
-    choices:
-      - regular_boot
-      - rescue
-      - install_linux
-      - install_vnc
-      - install_windows
-      - install_plesk
-      - install_cpanel
+  description:
+    - Describes the active boot configuration.
+  returned: success
+  type: str
+  choices:
+    - regular_boot
+    - rescue
+    - install_linux
+    - install_vnc
+    - install_windows
+    - install_plesk
+    - install_cpanel
 password:
-    description:
-      - The root password for the active boot configuration, if available.
-      - For non-rescue boot configurations, it is avised to change the root password
-        as soon as possible.
-    returned: success and if RV(configuration_type) is not V(regular_boot)
-    type: str
-'''
+  description:
+    - The root password for the active boot configuration, if available.
+    - For non-rescue boot configurations, it is avised to change the root password as soon as possible.
+  returned: success and if RV(configuration_type) is not V(regular_boot)
+  type: str
+"""
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import urlencode

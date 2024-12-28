@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: ssh_key_info
 short_description: Query information on SSH keys
 version_added: 1.2.0
@@ -20,7 +19,7 @@ description:
   - List information on all your SSH keys stored in Hetzner's Robot.
 seealso:
   - module: community.hrobot.ssh_key
-    description: Add, remove or update SSH key
+    description: Add, remove or update SSH key.
 extends_documentation_fragment:
   - community.hrobot.robot
   - community.hrobot.attributes
@@ -29,9 +28,9 @@ extends_documentation_fragment:
 attributes:
   action_group:
     version_added: 1.6.0
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: List all SSH keys
   community.hrobot.ssh_key_info:
     hetzner_user: foo
@@ -41,42 +40,42 @@ EXAMPLES = r'''
 - name: Show how many keys were found
   ansible.builtin.debug:
     msg: "Found {{ ssh_keys.ssh_keys | length }} keys"
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 ssh_keys:
-    description:
-      - The list of all SSH keys stored in Hetzner's Robot for your user.
-    returned: success
-    type: list
-    elements: dict
-    contains:
-        name:
-            description:
-              - The key's name shown in the UI.
-            type: str
-            sample: key1
-        fingerprint:
-            description:
-              - The key's MD5 fingerprint.
-            type: str
-            sample: 56:29:99:a4:5d:ed:ac:95:c1:f5:88:82:90:5d:dd:10
-        type:
-            description:
-              - The key's algorithm type.
-            type: str
-            sample: ECDSA
-        size:
-            description:
-              - The key's size in bits.
-            type: int
-            sample: 521
-        data:
-            description:
-              - The key data in OpenSSH's format.
-            type: str
-            sample: ecdsa-sha2-nistp521 AAAAE2VjZHNh ...
-'''
+  description:
+    - The list of all SSH keys stored in Hetzner's Robot for your user.
+  returned: success
+  type: list
+  elements: dict
+  contains:
+    name:
+      description:
+        - The key's name shown in the UI.
+      type: str
+      sample: key1
+    fingerprint:
+      description:
+        - The key's MD5 fingerprint.
+      type: str
+      sample: 56:29:99:a4:5d:ed:ac:95:c1:f5:88:82:90:5d:dd:10
+    type:
+      description:
+        - The key's algorithm type.
+      type: str
+      sample: ECDSA
+    size:
+      description:
+        - The key's size in bits.
+      type: int
+      sample: 521
+    data:
+      description:
+        - The key data in OpenSSH's format.
+      type: str
+      sample: ecdsa-sha2-nistp521 AAAAE2VjZHNh ...
+"""
 
 from ansible.module_utils.basic import AnsibleModule
 
