@@ -230,19 +230,19 @@ EXAMPLES = r"""
     rules:
       input:
         - name: Allow ICMP protocol
-        # This is needed so you can ping your server
+          # This is needed so you can ping your server
           ip_version: ipv4
           protocol: icmp
           action: accept
-        # Note that it is not possible to disable ICMP for IPv6
-        # (https://robot.hetzner.com/doc/webservice/en.html#post-firewall-server-id)
+          # Note that it is not possible to disable ICMP for IPv6
+          # (https://robot.hetzner.com/doc/webservice/en.html#post-firewall-server-id)
         - name: Allow responses to incoming TCP connections
           protocol: tcp
           dst_port: '32768-65535'
           tcp_flags: ack
           action: accept
         - name: Allow restricted access from some known IPv4 addresses
-        # Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)
+          # Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)
           ip_version: ipv4
           src_ip: 4.3.2.1/24
           dst_port: '20-23'
