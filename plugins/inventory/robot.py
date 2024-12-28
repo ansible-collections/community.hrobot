@@ -70,7 +70,7 @@ filters:
   # Accept all servers in FSN1-DC1 and FSN1-DC2
   - include: >-
       hrobot_dc in ["FSN1-DC1", "FSN1-DC2"]
-  # Exclude all servers that didn't match any of the above filters
+  # Exclude all servers that did not match any of the above filters
   - exclude: true
 
 # Example using constructed features to create groups
@@ -134,12 +134,12 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         # get the user's cache option too to see if we should save the cache if it is changing
         user_cache_setting = self.get_option('cache')
 
-        # read if the user has caching enabled and the cache isn't being refreshed
+        # read if the user has caching enabled and the cache is not being refreshed
         attempt_to_read_cache = user_cache_setting and cache
         # update if the user has caching enabled and the cache is being refreshed; update this value to True if the cache has expired below
         cache_needs_update = user_cache_setting and not cache
 
-        # attempt to read the cache if inventory isn't being refreshed and the user has caching enabled
+        # attempt to read the cache if inventory is not being refreshed and the user has caching enabled
         if attempt_to_read_cache:
             try:
                 servers = self._cache[cache_key]

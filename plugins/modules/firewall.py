@@ -17,7 +17,7 @@ author:
   - Felix Fontein (@felixfontein)
 description:
   - Manage Hetzner's dedicated server firewall.
-  - Note that idempotency check for TCP flags simply compares strings and doesn't
+  - Note that idempotency check for TCP flags simply compares strings and does not
     try to interpret the rules. This might change in the future.
 requirements:
   - ipaddress
