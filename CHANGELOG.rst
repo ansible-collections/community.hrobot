@@ -4,6 +4,17 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v1.9.5
+======
+
+Release Summary
+---------------
+
+This is the final community.hrobot 1.x.y release.
+Please upgrade to community.hrobot 2.x.y as soon as possible to receive further bugfixes.
+
+Thanks to everyone who contributed to community.robot 1.x.y releases!
+
 v1.9.4
 ======
 
