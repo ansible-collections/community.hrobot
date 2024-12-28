@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: server_info
 short_description: Query information on one or more servers
 version_added: 1.2.0
@@ -40,14 +39,13 @@ options:
   full_info:
     description:
       - Whether to provide full information for every server.
-      - Setting this to V(true) requires one REST call per server,
-        which is slow and reduces your rate limit. Use with care.
+      - Setting this to V(true) requires one REST call per server, which is slow and reduces your rate limit. Use with care.
       - When O(server_number) is specified, this option is set to V(true).
     type: bool
     default: false
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Query a list of all servers
   community.hrobot.server_info:
     hetzner_user: foo
@@ -64,9 +62,9 @@ EXAMPLES = r'''
 - name: Output data on specific server
   ansible.builtin.debug:
     msg: "Server name: {{ result.servers[0].server_name }}"
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 servers:
   description:
     - List of servers matching the provided options.
@@ -220,7 +218,7 @@ servers:
       type: int
       sample: 12345
       returned: when O(full_info=true)
-'''
+"""
 
 from ansible.module_utils.basic import AnsibleModule
 

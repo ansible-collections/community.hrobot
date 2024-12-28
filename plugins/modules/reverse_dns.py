@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: reverse_dns
 short_description: Set or remove reverse DNS entry for IP
 version_added: 1.2.0
@@ -23,11 +22,9 @@ extends_documentation_fragment:
   - community.hrobot.attributes
   - community.hrobot.attributes.actiongroup_robot
 notes:
-  - For the main IPv4 address of a server, deleting it actually sets it to a default hostname like
-    C(static.X.Y.Z.W.clients.your-server.de). This substitution (delete is replaced by changing to
-    this value) is done automatically by the API and results in the module not being idempotent
-    in this case.
-
+  - For the main IPv4 address of a server, deleting it actually sets it to a default hostname like C(static.X.Y.Z.W.clients.your-server.de).
+    This substitution (delete is replaced by changing to this value) is done automatically by the API and results in the module
+    not being idempotent in this case.
 attributes:
   action_group:
     version_added: 1.6.0
@@ -55,9 +52,9 @@ options:
       - The reverse DNS entry for O(ip).
       - Required if O(state=present).
     type: str
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Set reverse DNS entry for 1.2.3.4
   community.hrobot.reverse_dns:
     hetzner_user: foo
@@ -71,9 +68,9 @@ EXAMPLES = r'''
     hetzner_password: bar
     ip: 2a01:f48:111:4221::1
     state: absent
-'''
+"""
 
-RETURN = r''' # '''
+RETURN = r""" # """
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import urlencode

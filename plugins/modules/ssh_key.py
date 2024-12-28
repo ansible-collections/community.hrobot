@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: ssh_key
 short_description: Add, remove or update SSH key
 version_added: 1.2.0
@@ -20,7 +19,7 @@ description:
   - Add, remove or update an SSH key stored in Hetzner's Robot.
 seealso:
   - module: community.hrobot.ssh_key_info
-    description: Query information on SSH keys
+    description: Query information on SSH keys.
 extends_documentation_fragment:
   - community.hrobot.robot
   - community.hrobot.attributes
@@ -35,39 +34,37 @@ attributes:
     support: none
 
 options:
-    state:
-        description:
-          - Whether to make sure a public SSH key is present or absent.
-          - V(present) makes sure that the SSH key is available, and
-            potentially updates names for existing SSH public keys.
-          - V(absent) makes sure that the SSH key is not available.
-            The fingerprint or public key data is used for matching the
-            key.
-        required: true
-        type: str
-        choices:
-          - present
-          - absent
-    name:
-        description:
-          - The public key's name.
-          - Required if O(state=present), and ignored if O(state=absent).
-        type: str
-    fingerprint:
-        description:
-          - The MD5 fingerprint of the public SSH key to remove.
-          - One of O(public_key) and O(fingerprint) are required if O(state=absent).
-        type: str
-    public_key:
-        description:
-          - The public key data in OpenSSH format.
-          - "Example: V(ssh-rsa AAAAB3NzaC1yc+...)"
-          - One of O(public_key) and O(fingerprint) are required if O(state=absent).
-          - Required if O(state=present).
-        type: str
-'''
+  state:
+    description:
+      - Whether to make sure a public SSH key is present or absent.
+      - V(present) makes sure that the SSH key is available, and potentially updates names for existing SSH public keys.
+      - V(absent) makes sure that the SSH key is not available. The fingerprint or public key data is used for matching the
+        key.
+    required: true
+    type: str
+    choices:
+      - present
+      - absent
+  name:
+    description:
+      - The public key's name.
+      - Required if O(state=present), and ignored if O(state=absent).
+    type: str
+  fingerprint:
+    description:
+      - The MD5 fingerprint of the public SSH key to remove.
+      - One of O(public_key) and O(fingerprint) are required if O(state=absent).
+    type: str
+  public_key:
+    description:
+      - The public key data in OpenSSH format.
+      - 'Example: V(ssh-rsa AAAAB3NzaC1yc+..).'
+      - One of O(public_key) and O(fingerprint) are required if O(state=absent).
+      - Required if O(state=present).
+    type: str
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Add an SSH key
   community.hrobot.ssh_key:
     hetzner_user: foo
@@ -82,17 +79,17 @@ EXAMPLES = r'''
     hetzner_password: bar
     state: absent
     fingerprint: cb:8b:ef:a7:fe:04:87:3f:e5:55:cd:12:e3:e8:9f:99
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 fingerprint:
-    description:
-      - The MD5 fingerprint of the key.
-      - This is the value used to reference the SSH public key, for example in the M(community.hrobot.boot) module.
-    returned: success
-    type: str
-    sample: cb:8b:ef:a7:fe:04:87:3f:e5:55:cd:12:e3:e8:9f:99
-'''
+  description:
+    - The MD5 fingerprint of the key.
+    - This is the value used to reference the SSH public key, for example in the M(community.hrobot.boot) module.
+  returned: success
+  type: str
+  sample: cb:8b:ef:a7:fe:04:87:3f:e5:55:cd:12:e3:e8:9f:99
+"""
 
 import base64
 import binascii

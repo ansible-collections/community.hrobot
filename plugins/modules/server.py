@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: server
 short_description: Update server information
 version_added: 1.2.0
@@ -43,18 +42,18 @@ options:
       - The server's name.
       - If this option is not provided, it will not be adjusted.
     type: str
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Set server's name to foo.example.com
   community.hrobot.server:
     hetzner_user: foo
     hetzner_password: bar
     server_number: 123
     server_name: foo.example.com
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 server:
   description:
     - Information on the server.
@@ -207,7 +206,7 @@ server:
       type: int
       sample: 12345
       returned: success
-'''
+"""
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import urlencode

@@ -9,21 +9,20 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: firewall
 short_description: Manage Hetzner's dedicated server firewall
 author:
   - Felix Fontein (@felixfontein)
 description:
   - Manage Hetzner's dedicated server firewall.
-  - Note that idempotency check for TCP flags simply compares strings and does not
-    try to interpret the rules. This might change in the future.
+  - Note that idempotency check for TCP flags simply compares strings and does not try to interpret the rules. This might
+    change in the future.
 requirements:
   - ipaddress
 seealso:
   - name: Firewall documentation
-    description: Hetzner's documentation on the stateless firewall for dedicated servers
+    description: Hetzner's documentation on the stateless firewall for dedicated servers.
     link: https://docs.hetzner.com/robot/dedicated-server/firewall/
   - module: community.hrobot.firewall_info
     description: Retrieve information on firewall configuration.
@@ -45,8 +44,8 @@ options:
     description:
       - The server's main IP address.
       - Exactly one of O(server_ip) and O(server_number) must be specified.
-      - Note that Hetzner deprecated identifying the server's firewall by the server's main IP.
-        Using this option can thus stop working at any time in the future. Use O(server_number) instead.
+      - Note that Hetzner deprecated identifying the server's firewall by the server's main IP. Using this option can thus
+        stop working at any time in the future. Use O(server_number) instead.
     type: str
   server_number:
     description:
@@ -64,7 +63,7 @@ options:
     description:
       - Switch port of firewall.
     type: str
-    choices: [ main, kvm ]
+    choices: [main, kvm]
     default: main
   state:
     description:
@@ -72,7 +71,7 @@ options:
       - Firewall is active if state is V(present), and disabled if state is V(absent).
     type: str
     default: present
-    choices: [ present, absent ]
+    choices: [present, absent]
   allowlist_hos:
     description:
       - Whether Hetzner services have access.
@@ -93,14 +92,14 @@ options:
           name:
             description:
               - Name of the firewall rule.
-              - Note that Hetzner restricts the characters that can be used for rule names. At the moment, only
-                letters C(a-z), C(A-Z), space, and the symbols C(.), C(-), C(+), C(_), and C(@) are allowed.
+              - Note that Hetzner restricts the characters that can be used for rule names. At the moment, only letters C(a-z),
+                C(A-Z), space, and the symbols C(.), C(-), C(+), C(_), and C(@) are allowed.
             type: str
           ip_version:
             description:
               - Internet protocol version.
-              - Leave away to filter both protocols. Note that in that case, none of O(rules.input[].dst_ip),
-                O(rules.input[].src_ip), or O(rules.input[].protocol) can be specified.
+              - Leave away to filter both protocols. Note that in that case, none of O(rules.input[].dst_ip), O(rules.input[].src_ip),
+                or O(rules.input[].protocol) can be specified.
             type: str
           dst_ip:
             description:
@@ -129,15 +128,14 @@ options:
               - TCP flags or logical combination of flags.
               - Flags supported by Hetzner are V(syn), V(fin), V(rst), V(psh) and V(urg).
               - They can be combined with V(|) (logical or) and V(&) (logical and).
-              - See L(the documentation,https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter)
-                for more information.
+              - See L(the documentation,https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter) for more information.
             type: str
           action:
             description:
               - Action if rule matches.
             required: true
             type: str
-            choices: [ accept, discard ]
+            choices: [accept, discard]
       output:
         description:
           - Output firewall rules.
@@ -148,14 +146,14 @@ options:
           name:
             description:
               - Name of the firewall rule.
-              - Note that Hetzner restricts the characters that can be used for rule names. At the moment, only
-                letters C(a-z), C(A-Z), space, and the symbols C(.), C(-), C(+), C(_), and C(@) are allowed.
+              - Note that Hetzner restricts the characters that can be used for rule names. At the moment, only letters C(a-z),
+                C(A-Z), space, and the symbols C(.), C(-), C(+), C(_), and C(@) are allowed.
             type: str
           ip_version:
             description:
               - Internet protocol version.
-              - Leave away to filter both protocols. Note that in that case, none of O(rules.output[].dst_ip),
-                O(rules.output[].src_ip), or O(rules.output[].protocol) can be specified.
+              - Leave away to filter both protocols. Note that in that case, none of O(rules.output[].dst_ip), O(rules.output[].src_ip),
+                or O(rules.output[].protocol) can be specified.
             type: str
           dst_ip:
             description:
@@ -184,38 +182,33 @@ options:
               - TCP flags or logical combination of flags.
               - Flags supported by Hetzner are V(syn), V(fin), V(rst), V(psh) and V(urg).
               - They can be combined with V(|) (logical or) and V(&) (logical and).
-              - See L(the documentation,https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter)
-                for more information.
+              - See L(the documentation,https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter) for more information.
             type: str
           action:
             description:
               - Action if rule matches.
             required: true
             type: str
-            choices: [ accept, discard ]
+            choices: [accept, discard]
   update_timeout:
     description:
       - Timeout to use when configuring the firewall.
-      - Note that the API call returns before the firewall has been
-        successfully set up.
+      - Note that the API call returns before the firewall has been successfully set up.
     type: int
     default: 30
   wait_for_configured:
     description:
-      - Whether to wait until the firewall has been successfully configured before
-        determining what to do, and before returning from the module.
-      - The API returns status C(in progress) when the firewall is currently
-        being configured. If this happens, the module will try again until
-        the status changes to C(active) or C(disabled).
-      - Please note that there is a request limit. If you have to do multiple
-        updates, it can be better to disable waiting, and regularly use
-        M(community.hrobot.firewall_info) to query status.
+      - Whether to wait until the firewall has been successfully configured before determining what to do, and before returning
+        from the module.
+      - The API returns status C(in progress) when the firewall is currently being configured. If this happens, the module
+        will try again until the status changes to C(active) or C(disabled).
+      - Please note that there is a request limit. If you have to do multiple updates, it can be better to disable waiting,
+        and regularly use M(community.hrobot.firewall_info) to query status.
     type: bool
     default: true
   wait_delay:
     description:
-      - Delay to wait (in seconds) before checking again whether the firewall has
-        been configured.
+      - Delay to wait (in seconds) before checking again whether the firewall has been configured.
     type: int
     default: 10
   timeout:
@@ -223,9 +216,9 @@ options:
       - Timeout (in seconds) for waiting for firewall to be configured.
     type: int
     default: 180
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Configure firewall for server with main IP 1.2.3.4
   community.hrobot.firewall:
     hetzner_user: foo
@@ -237,19 +230,19 @@ EXAMPLES = r'''
     rules:
       input:
         - name: Allow ICMP protocol
-          # This is needed so you can ping your server
+        # This is needed so you can ping your server
           ip_version: ipv4
           protocol: icmp
           action: accept
-          # Note that it is not possible to disable ICMP for IPv6
-          # (https://robot.hetzner.com/doc/webservice/en.html#post-firewall-server-id)
+        # Note that it is not possible to disable ICMP for IPv6
+        # (https://robot.hetzner.com/doc/webservice/en.html#post-firewall-server-id)
         - name: Allow responses to incoming TCP connections
           protocol: tcp
           dst_port: '32768-65535'
           tcp_flags: ack
           action: accept
         - name: Allow restricted access from some known IPv4 addresses
-          # Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)
+        # Allow everything to ports 20-23 from 4.3.2.1/24 (IPv4 only)
           ip_version: ipv4
           src_ip: 4.3.2.1/24
           dst_port: '20-23'
@@ -266,9 +259,9 @@ EXAMPLES = r'''
 
 - ansible.builtin.debug:
     msg: "{{ result }}"
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 firewall:
   description:
     - The firewall configuration.
@@ -295,8 +288,8 @@ firewall:
       description:
         - Status of the firewall.
         - V(active) or V(disabled).
-        - Will be V(in process) if the firewall is currently updated, and
-          O(wait_for_configured) is set to V(false) or O(timeout) to a too small value.
+        - Will be V(in process) if the firewall is currently updated, and O(wait_for_configured) is set to V(false) or O(timeout)
+          to a too small value.
       type: str
       sample: active
     allowlist_hos:
@@ -349,12 +342,12 @@ firewall:
                 - Source IP address or subnet address.
                 - CIDR notation.
               type: str
-              sample: null
+              sample:
             src_port:
               description:
                 - Source port or port range.
               type: str
-              sample: null
+              sample:
             protocol:
               description:
                 - Protocol above IP layer.
@@ -364,7 +357,7 @@ firewall:
               description:
                 - TCP flags or logical combination of flags.
               type: str
-              sample: null
+              sample:
             action:
               description:
                 - Action if rule matches.
@@ -390,7 +383,7 @@ firewall:
                 - Internet protocol version.
                 - No value means the rule applies both to IPv4 and IPv6.
               type: str
-              sample: ~
+              sample:
             dst_ip:
               description:
                 - Destination IP address or subnet address.
@@ -407,12 +400,12 @@ firewall:
                 - Source IP address or subnet address.
                 - CIDR notation.
               type: str
-              sample: null
+              sample:
             src_port:
               description:
                 - Source port or port range.
               type: str
-              sample: null
+              sample:
             protocol:
               description:
                 - Protocol above IP layer.
@@ -422,7 +415,7 @@ firewall:
               description:
                 - TCP flags or logical combination of flags.
               type: str
-              sample: null
+              sample:
             action:
               description:
                 - Action if rule matches.
@@ -432,7 +425,7 @@ firewall:
               choices:
                 - accept
                 - discard
-'''
+"""
 
 import traceback
 

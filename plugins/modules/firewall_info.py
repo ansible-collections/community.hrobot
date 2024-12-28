@@ -9,8 +9,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
-DOCUMENTATION = r'''
----
+DOCUMENTATION = r"""
 module: firewall_info
 short_description: Manage Hetzner's dedicated server firewall
 author:
@@ -19,7 +18,7 @@ description:
   - Manage Hetzner's dedicated server firewall.
 seealso:
   - name: Firewall documentation
-    description: Hetzner's documentation on the stateless firewall for dedicated servers
+    description: Hetzner's documentation on the stateless firewall for dedicated servers.
     link: https://docs.hetzner.com/robot/dedicated-server/firewall/
   - module: community.hrobot.firewall
     description: Configure firewall.
@@ -38,8 +37,8 @@ options:
     description:
       - The server's main IP address.
       - Exactly one of O(server_ip) and O(server_number) must be specified.
-      - Note that Hetzner deprecated identifying the server's firewall by the server's main IP.
-        Using this option can thus stop working at any time in the future. Use O(server_number) instead.
+      - Note that Hetzner deprecated identifying the server's firewall by the server's main IP. Using this option can thus
+        stop working at any time in the future. Use O(server_number) instead.
     type: str
   server_number:
     description:
@@ -49,20 +48,16 @@ options:
     version_added: 1.8.0
   wait_for_configured:
     description:
-      - Whether to wait until the firewall has been successfully configured before
-        returning from the module.
-      - The API returns status C(in progress) when the firewall is currently
-        being configured. If this happens, the module will try again until
-        the status changes to C(active) or C(disabled).
-      - Please note that there is a request limit. If you have to do multiple
-        updates, it can be better to disable waiting, and regularly use
-        M(community.hrobot.firewall_info) to query status.
+      - Whether to wait until the firewall has been successfully configured before returning from the module.
+      - The API returns status C(in progress) when the firewall is currently being configured. If this happens, the module
+        will try again until the status changes to C(active) or C(disabled).
+      - Please note that there is a request limit. If you have to do multiple updates, it can be better to disable waiting,
+        and regularly use M(community.hrobot.firewall_info) to query status.
     type: bool
     default: true
   wait_delay:
     description:
-      - Delay to wait (in seconds) before checking again whether the firewall has
-        been configured.
+      - Delay to wait (in seconds) before checking again whether the firewall has been configured.
     type: int
     default: 10
   timeout:
@@ -70,9 +65,9 @@ options:
       - Timeout (in seconds) for waiting for firewall to be configured.
     type: int
     default: 180
-'''
+"""
 
-EXAMPLES = r'''
+EXAMPLES = r"""
 - name: Get firewall configuration for server with main IP 1.2.3.4
   community.hrobot.firewall_info:
     hetzner_user: foo
@@ -82,9 +77,9 @@ EXAMPLES = r'''
 
 - ansible.builtin.debug:
     msg: "{{ result.firewall }}"
-'''
+"""
 
-RETURN = r'''
+RETURN = r"""
 firewall:
   description:
     - The firewall configuration.
@@ -116,8 +111,8 @@ firewall:
       description:
         - Status of the firewall.
         - V(active) or V(disabled).
-        - Will be V(in process) if the firewall is currently updated, and
-          O(wait_for_configured) is set to V(false) or O(timeout) to a too small value.
+        - Will be V(in process) if the firewall is currently updated, and O(wait_for_configured) is set to V(false) or O(timeout)
+          to a too small value.
       type: str
       sample: active
     allowlist_hos:
@@ -170,12 +165,12 @@ firewall:
                 - Source IP address or subnet address.
                 - CIDR notation.
               type: str
-              sample: null
+              sample:
             src_port:
               description:
                 - Source port or port range.
               type: str
-              sample: null
+              sample:
             protocol:
               description:
                 - Protocol above IP layer.
@@ -185,7 +180,7 @@ firewall:
               description:
                 - TCP flags or logical combination of flags.
               type: str
-              sample: null
+              sample:
             action:
               description:
                 - Action if rule matches.
@@ -211,7 +206,7 @@ firewall:
                 - Internet protocol version.
                 - No value means the rule applies both to IPv4 and IPv6.
               type: str
-              sample: ~
+              sample:
             dst_ip:
               description:
                 - Destination IP address or subnet address.
@@ -228,12 +223,12 @@ firewall:
                 - Source IP address or subnet address.
                 - CIDR notation.
               type: str
-              sample: null
+              sample:
             src_port:
               description:
                 - Source port or port range.
               type: str
-              sample: null
+              sample:
             protocol:
               description:
                 - Protocol above IP layer.
@@ -243,7 +238,7 @@ firewall:
               description:
                 - TCP flags or logical combination of flags.
               type: str
-              sample: null
+              sample:
             action:
               description:
                 - Action if rule matches.
@@ -253,7 +248,7 @@ firewall:
               choices:
                 - accept
                 - discard
-'''
+"""
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
