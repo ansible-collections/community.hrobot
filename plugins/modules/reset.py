@@ -29,6 +29,10 @@ attributes:
     support: full
   diff_mode:
     support: none
+  idempotent:
+    support: none
+    details:
+      - This module performs an action on every invocation.
 
 options:
   server_number:

@@ -32,6 +32,8 @@ attributes:
     support: full
   diff_mode:
     support: none
+  idempotent:
+    support: full
 
 options:
   state:

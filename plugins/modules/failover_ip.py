@@ -34,6 +34,8 @@ attributes:
     support: full
   diff_mode:
     support: full
+  idempotent:
+    support: full
 
 options:
   failover_ip:

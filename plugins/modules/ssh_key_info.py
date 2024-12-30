@@ -24,6 +24,7 @@ extends_documentation_fragment:
   - community.hrobot.robot
   - community.hrobot.attributes
   - community.hrobot.attributes.actiongroup_robot
+  - community.hrobot.attributes.idempotent_not_modify_state
   - community.hrobot.attributes.info_module
 attributes:
   action_group:
