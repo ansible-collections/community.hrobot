@@ -30,6 +30,8 @@ attributes:
     support: full
   diff_mode:
     support: none
+  idempotent:
+    support: full
 
 options:
   server_number:
