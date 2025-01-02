@@ -17,3 +17,4 @@ action_groups:
     - server_info
     - ssh_key
     - ssh_key_info
+    - storagebox_info
