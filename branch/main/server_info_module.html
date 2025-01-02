@@ -99,6 +99,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ssh_key_module.html">community.hrobot.ssh_key module – Add, remove or update SSH key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ssh_key_info_module.html">community.hrobot.ssh_key_info module – Query information on SSH keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="storagebox_info_module.html">community.hrobot.storagebox_info module – Query information on one or more storage boxes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="v_switch_module.html">community.hrobot.v_switch module – Manage Hetzner’s vSwitch</a></li>
 </ul>
 <ul>
@@ -174,7 +175,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether to provide full information for every server.</p>
 <p>Setting this to <code class="ansible-value docutils literal notranslate"><span class="pre">true</span></code> requires one REST call per server, which is slow and reduces your rate limit. Use with care.</p>
-<p>When <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> is specified, this option is set to <code class="ansible-value docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>When <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-server-info-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> is specified, this option is always treated as having value <code class="ansible-value docutils literal notranslate"><span class="pre">true</span></code>.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
