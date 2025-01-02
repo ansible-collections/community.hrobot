@@ -53,10 +53,19 @@ If you use the Ansible package and do not update collections independently, use 
 
 ## Included content
 
+- `community.hrobot.boot` module
 - `community.hrobot.failover_ip` module
 - `community.hrobot.failover_ip_info` module
 - `community.hrobot.firewall` module
 - `community.hrobot.firewall_info` module
+- `community.hrobot.reset` module
+- `community.hrobot.reverse_dns` module
+- `community.hrobot.server_info` module
+- `community.hrobot.server` module
+- `community.hrobot.ssh_key_info` module
+- `community.hrobot.ssh_key` module
+- `community.hrobot.storagebox_info` module
+- `community.hrobot.v_switch` module
 - `community.hrobot.robot` inventory plugin
 
 You can find [documentation for the modules and plugins in this collection here](https://docs.ansible.com/ansible/devel/collections/community/hrobot/).
