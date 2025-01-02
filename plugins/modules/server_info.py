@@ -41,7 +41,7 @@ options:
     description:
       - Whether to provide full information for every server.
       - Setting this to V(true) requires one REST call per server, which is slow and reduces your rate limit. Use with care.
-      - When O(server_number) is specified, this option is set to V(true).
+      - When O(server_number) is specified, this option is always treated as having value V(true).
     type: bool
     default: false
 """
