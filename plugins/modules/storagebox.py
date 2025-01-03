@@ -185,14 +185,13 @@ def main():
             module.fail_json(msg='The values to update were invalid ({0})'.format(module.jsonify(changes)))
         after = extract(result)
 
-    module.exit_json(
-        changed=bool(changes),
-        diff={
-            'before': before,
-            'after': after,
-        },
-        **after,
-    )
+    result = dict(after)
+    result['changed'] = bool(changes)
+    result['diff'] = {
+        'before': before,
+        'after': after,
+    }
+    module.exit_json(**result)
 
 
 if __name__ == '__main__':  # pragma: no cover
