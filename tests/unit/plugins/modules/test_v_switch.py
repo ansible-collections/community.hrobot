@@ -163,6 +163,28 @@ class TestHetznerVSwitch(BaseTestModule):
         assert result['changed'] is True
         assert result['v_switch'] == create_v_switch_data(4010, 'foo')
 
+    def test_create_check(self, mocker):
+        result = self.run_module_success(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                '_ansible_check_mode': True,
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json([])
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+            ],
+        )
+        assert result['changed'] is True
+        assert 'v_switch' not in result
+
     def test_v_switch_different_name(self, mocker):
         result = self.run_module_success(
             mocker,
@@ -309,6 +331,34 @@ class TestHetznerVSwitch(BaseTestModule):
                 .expect_basic_auth('test', 'hunter2')
                 .expect_force_basic_auth(True)
                 .expect_form_value('cancellation_date', datetime.now().strftime('%y-%m-%d'))
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+            ],
+        )
+
+        assert result['changed'] is True
+
+    def test_delete_check(self, mocker):
+        result = self.run_module_success(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                'state': 'absent',
+                '_ansible_check_mode': True,
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switch_data(4010, 'foo'))
                 .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
             ],
         )
@@ -640,6 +690,35 @@ class TestHetznerVSwitch(BaseTestModule):
         assert result['v_switch'] == create_v_switch_data(
             4010, 'foo', server=[create_server_data('123.123.123.123', 321)]
         )
+        assert result['changed'] is True
+
+    def test_add_server_check(self, mocker):
+        result = self.run_module_success(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                'servers': ['123.123.123.123'],
+                '_ansible_check_mode': True,
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switch_data(4010, 'foo'))
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+            ],
+        )
+
+        assert result['v_switch'] == create_v_switch_data(4010, 'foo')
         assert result['changed'] is True
 
     def test_add_server_no_wait(self, mocker):
@@ -1114,6 +1193,41 @@ class TestHetznerVSwitch(BaseTestModule):
         )
 
         assert result['v_switch'] == create_v_switch_data(4010, 'foo')
+        assert result['changed'] is True
+
+    def test_delete_server_check(self, mocker):
+        result = self.run_module_success(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                'servers': [],
+                '_ansible_check_mode': True,
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(
+                    create_v_switch_data(
+                        4010, 'foo', server=[create_server_data('123.123.123.123', 321)]
+                    )
+                )
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+            ],
+        )
+
+        assert result['v_switch'] == create_v_switch_data(
+            4010, 'foo', server=[create_server_data('123.123.123.123', 321)]
+        )
         assert result['changed'] is True
 
     def test_delete_server_wait(self, mocker):
