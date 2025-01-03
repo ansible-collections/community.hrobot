@@ -32,10 +32,10 @@ def create_v_switch_data(vlan, name, server=[]):
     }
 
 
-def create_v_switches_data(vlan, name):
+def create_v_switches_data(vlan, name, id_=4321):
     return [
         {
-            'id': 4321,
+            'id': id_,
             'name': name,
             'vlan': vlan,
             'cancelled': False,
@@ -85,6 +85,57 @@ class TestHetznerVSwitch(BaseTestModule):
         )
         assert result['changed'] is False
         assert result['v_switch'] == create_v_switch_data(4010, 'foo')
+
+    def test_not_found_after_list(self, mocker):
+        result = self.run_module_failed(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 404)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json({
+                    'error': {
+                        'status': 404,
+                        'code': 'NOT_FOUND',
+                        'message': 'Cannot find vswitch',
+                    },
+                })
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+            ],
+        )
+        assert result['msg'] == 'vSwitch not found.'
+
+    def test_not_unique(self, mocker):
+        result = self.run_module_failed(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo') + create_v_switches_data(4010, 'foo', id_=1234))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+            ],
+        )
+        assert result['msg'] == 'Multiple vSwitches with same name and VLAN ID in non cancelled status. Clean it.'
 
     def test_create(self, mocker):
         result = self.run_module_success(
@@ -263,6 +314,125 @@ class TestHetznerVSwitch(BaseTestModule):
         )
 
         assert result['changed'] is True
+
+    def test_delete_not_found(self, mocker):
+        result = self.run_module_failed(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                'state': 'absent',
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switch_data(4010, 'foo'))
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+                FetchUrlCall('DELETE', 404)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .expect_form_value('cancellation_date', datetime.now().strftime('%y-%m-%d'))
+                .result_json({
+                    'error': {
+                        'status': 404,
+                        'code': 'NOT_FOUND',
+                        'message': 'not found',
+                    },
+                })
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+            ],
+        )
+
+        assert result['msg'] == 'vSwitch not found to delete'
+
+    def test_delete_conflict(self, mocker):
+        result = self.run_module_failed(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                'state': 'absent',
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switch_data(4010, 'foo'))
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+                FetchUrlCall('DELETE', 404)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .expect_form_value('cancellation_date', datetime.now().strftime('%y-%m-%d'))
+                .result_json({
+                    'error': {
+                        'status': 409,
+                        'code': 'CONFLICT',
+                        'message': 'Already cancelled',
+                    },
+                })
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+            ],
+        )
+
+        assert result['msg'] == 'The vSwitch is already cancelled'
+
+    def test_delete_invalid_input(self, mocker):
+        result = self.run_module_failed(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                'state': 'absent',
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switch_data(4010, 'foo'))
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+                FetchUrlCall('DELETE', 404)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .expect_form_value('cancellation_date', datetime.now().strftime('%y-%m-%d'))
+                .result_json({
+                    'error': {
+                        'status': 400,
+                        'code': 'INVALID_INPUT',
+                        'message': 'Invalid input',
+                        'invalid': [],
+                        'missing': None,
+                    },
+                })
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+            ],
+        )
+
+        assert result['msg'] == 'vSwitch invalid parameter ([])'
 
     def test_create_with_server(self, mocker):
         result = self.run_module_success(
@@ -701,6 +871,46 @@ class TestHetznerVSwitch(BaseTestModule):
             ],
         )
         assert result['msg'] == 'server "123.123.123.123" not found'
+
+    def test_add_server_vlan_invalid_input(self, mocker):
+        result = self.run_module_failed(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                'servers': ['123.123.123.123'],
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switches_data(4010, 'foo'))
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json(create_v_switch_data(4010, 'foo'))
+                .expect_url('{0}/vswitch/4321'.format(BASE_URL)),
+                FetchUrlCall('POST', 201)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .expect_form_value('server[]', '123.123.123.123')
+                .result_json({
+                    'error': {
+                        'status': 400,
+                        'code': 'INVALID_INPUT',
+                        'message': 'Invalid input',
+                        'invalid': ['foobar'],
+                        'missing': None,
+                    },
+                })
+                .expect_url('{0}/vswitch/4321/server'.format(BASE_URL)),
+            ],
+        )
+        assert result['msg'] == "Invalid parameter adding server (['foobar'])"
 
     def test_add_server_vlan_not_unique_error(self, mocker):
         result = self.run_module_failed(
