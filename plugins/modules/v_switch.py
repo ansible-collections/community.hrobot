@@ -34,6 +34,8 @@ attributes:
     support: none
   idempotent:
     support: full
+  action_group:
+    version_added: 2.1.0
 
 options:
   vlan:
