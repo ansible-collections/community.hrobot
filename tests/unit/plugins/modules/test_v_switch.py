@@ -365,6 +365,28 @@ class TestHetznerVSwitch(BaseTestModule):
 
         assert result['changed'] is True
 
+    def test_delete_idempotent(self, mocker):
+        result = self.run_module_success(
+            mocker,
+            v_switch,
+            {
+                'hetzner_user': 'test',
+                'hetzner_password': 'hunter2',
+                'vlan': 4010,
+                'name': 'foo',
+                'state': 'absent',
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .expect_basic_auth('test', 'hunter2')
+                .expect_force_basic_auth(True)
+                .result_json([])
+                .expect_url('{0}/vswitch'.format(BASE_URL)),
+            ],
+        )
+
+        assert result['changed'] is False
+
     def test_delete_not_found(self, mocker):
         result = self.run_module_failed(
             mocker,
