@@ -1,0 +1,2 @@
+deprecated_features:
+  - "boot - the various ``arch`` suboptions have been deprecated and will be removed from community.hrobot 3.0.0 (https://github.com/ansible-collections/community.hrobot/pull/134)."

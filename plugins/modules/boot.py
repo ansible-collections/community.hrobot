@@ -71,6 +71,7 @@ options:
           - The architecture to use for the rescue system.
           - Not all architectures are available for all operating systems.
           - Defaults to V(64).
+          - This option is deprecated and will be removed in community.hrobot 3.0.0.
         type: int
         choices:
           - 32
@@ -100,6 +101,7 @@ options:
           - The architecture to use for the install.
           - Not all architectures are available for all distributions.
           - Defaults to V(64).
+          - This option is deprecated and will be removed in community.hrobot 3.0.0.
         type: int
         choices:
           - 32
@@ -134,6 +136,7 @@ options:
           - The architecture to use for the install.
           - Not all architectures are available for all distributions.
           - Defaults to V(64).
+          - This option is deprecated and will be removed in community.hrobot 3.0.0.
         type: int
         choices:
           - 32
@@ -172,6 +175,7 @@ options:
           - The architecture to use for the install.
           - Not all architectures are available for all distributions.
           - Defaults to V(64).
+          - This option is deprecated and will be removed in community.hrobot 3.0.0.
         type: int
         choices:
           - 32
@@ -203,6 +207,7 @@ options:
           - The architecture to use for the install.
           - Not all architectures are available for all distributions.
           - Defaults to V(64).
+          - This option is deprecated and will be removed in community.hrobot 3.0.0.
         type: int
         choices:
           - 32
@@ -318,18 +323,18 @@ def main():
         regular_boot=dict(type='bool', choices=[True]),
         rescue=dict(type='dict', options=dict(
             os=dict(type='str', required=True),
-            arch=dict(type='int', choices=[32, 64]),
+            arch=dict(type='int', choices=[32, 64], removed_in_version='3.0.0', removed_from_collection='community.hrobot'),
             authorized_keys=dict(type='list', elements='str', no_log=False),
         )),
         install_linux=dict(type='dict', options=dict(
             dist=dict(type='str', required=True),
-            arch=dict(type='int', choices=[32, 64]),
+            arch=dict(type='int', choices=[32, 64], removed_in_version='3.0.0', removed_from_collection='community.hrobot'),
             lang=dict(type='str', required=True),
             authorized_keys=dict(type='list', elements='str', no_log=False),
         )),
         install_vnc=dict(type='dict', options=dict(
             dist=dict(type='str', required=True),
-            arch=dict(type='int', choices=[32, 64]),
+            arch=dict(type='int', choices=[32, 64], removed_in_version='3.0.0', removed_from_collection='community.hrobot'),
             lang=dict(type='str', required=True),
         )),
         install_windows=dict(type='dict', options=dict(
@@ -337,13 +342,13 @@ def main():
         )),
         install_plesk=dict(type='dict', options=dict(
             dist=dict(type='str', required=True),
-            arch=dict(type='int', choices=[32, 64]),
+            arch=dict(type='int', choices=[32, 64], removed_in_version='3.0.0', removed_from_collection='community.hrobot'),
             lang=dict(type='str', required=True),
             hostname=dict(type='str', required=True),
         )),
         install_cpanel=dict(type='dict', options=dict(
             dist=dict(type='str', required=True),
-            arch=dict(type='int', choices=[32, 64]),
+            arch=dict(type='int', choices=[32, 64], removed_in_version='3.0.0', removed_from_collection='community.hrobot'),
             lang=dict(type='str', required=True),
             hostname=dict(type='str', required=True),
         )),
