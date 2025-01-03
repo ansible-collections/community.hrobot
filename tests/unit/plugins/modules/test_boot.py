@@ -546,3 +546,27 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['msg'] == 'There is no boot configuration available for this server'
+
+    def test_invalid_fingerprint(self, mocker):
+        result = self.run_module_failed(mocker, boot, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_number': 23,
+            'rescue': {
+                'os': 'linux',
+                'arch': 32,
+                'authorized_keys': [
+                    'asdf a-b',
+                ],
+            },
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(_amend_boot({
+                'rescue': create_rescue_active(os='linux', arch=32, authorized_key=[]),
+            }))
+            .expect_url('{0}/boot/23'.format(BASE_URL)),
+        ])
+        assert result['msg'] == (
+            "Error while extracting fingerprint of rescue.authorized_keys[1]'s value 'asdf a-b':"
+            " Error while extracting fingerprint from public key data: Incorrect padding"
+        )
