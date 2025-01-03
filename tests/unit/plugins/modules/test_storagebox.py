@@ -182,3 +182,189 @@ class TestHetznerStorageboxInfo(BaseTestModule):
         assert result['changed'] is True
         for key in STORAGEBOX_KEYS:
             assert result[key] == updated['storagebox'][key], "Unexpected difference for {0!r}".format(key)
+
+    def test_change_name_rate_limit_fail(self, mocker):
+        result = self.run_module_failed(mocker, storagebox, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'id': 23,
+            'name': 'Backup',
+            'ssh': True,
+            'rate_limit_retry_timeout': 0,
+        }, [
+            FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .result_json(STORAGEBOX_DETAIL_DATA[23])
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 403)
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            })
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+        ])
+        assert result['msg'] == (
+            'Request failed: 403 RATE_LIMIT_EXCEEDED (Rate limit exceeded).'
+            ' Maximum allowed requests: 1. Time interval in seconds: 5'
+        )
+
+    def test_change_name_rate_limit(self, mocker):
+        mocker.patch('time.sleep', lambda duration: None)
+        updated = update_info(23, name='Backup')
+        result = self.run_module_success(mocker, storagebox, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'id': 23,
+            'name': 'Backup',
+            'ssh': True,
+            'rate_limit_retry_timeout': -1,
+        }, [
+            FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .result_json(STORAGEBOX_DETAIL_DATA[23])
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 403)
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            })
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 403)
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            })
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 200)
+            .result_json(updated)
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+        ])
+        assert result['changed'] is True
+        for key in STORAGEBOX_KEYS:
+            assert result[key] == updated['storagebox'][key], "Unexpected difference for {0!r}".format(key)
+
+    def test_change_name_rate_limit_timeout(self, mocker):
+        elapsed = [123.4]
+
+        def sleep(duration):
+            elapsed[0] += duration
+            print('sleep', duration, '->', elapsed[0])
+
+        def get_time():
+            elapsed[0] += 0.03
+            print('get', elapsed[0])
+            return elapsed[0]
+
+        mocker.patch('time.sleep', sleep)
+        mocker.patch('time.time', get_time)
+        result = self.run_module_failed(mocker, storagebox, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'id': 23,
+            'name': 'Backup',
+            'ssh': True,
+            'rate_limit_retry_timeout': 7,
+        }, [
+            FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .result_json(STORAGEBOX_DETAIL_DATA[23])
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 403)
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            })
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 403)
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            })
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 403)
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            })
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+        ])
+        assert result['msg'] == (
+            'Request failed: 403 RATE_LIMIT_EXCEEDED (Rate limit exceeded).'
+            ' Maximum allowed requests: 1. Time interval in seconds: 5.'
+            ' Waited a total of 5.1 seconds for rate limit errors to go away'
+        )
