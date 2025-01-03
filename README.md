@@ -64,6 +64,7 @@ If you use the Ansible package and do not update collections independently, use 
 - `community.hrobot.server` module
 - `community.hrobot.ssh_key_info` module
 - `community.hrobot.ssh_key` module
+- `community.hrobot.storagebox` module
 - `community.hrobot.storagebox_info` module
 - `community.hrobot.v_switch` module
 - `community.hrobot.robot` inventory plugin
