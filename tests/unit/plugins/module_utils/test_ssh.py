@@ -14,21 +14,14 @@ from ansible_collections.community.hrobot.plugins.module_utils.ssh import (
     extract_fingerprint,
 )
 
-PUBLIC_KEY_1 = (
-    'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7g+C+gXspRfsNRFXHSeEuQLrUEb+pSV9OUi3zz0DvdxzaXyP4I1vUErnwll5P5'
-    '8KFdkWp65haqiGteM53zuGJa251c+J41Y69jLEI0jX4mGj4BskB0Cud23lnVzYTktzjkwGz2tGlRjaSYzYdm9lR3Nf6rlWBP1iz6C'
-    'QasBHVLGWUBuJF+DQ16ztHV9EWtifDprVoMHK5EaGW19W5OCW73sPJfvbdDjolTZC6QZ7lKOGcZjdFBM7nnIyfIHYfjnXPZh9eMnY'
-    '6KWEAKuhQpPO1SB82PrLvBPlYzNewO1BiOQWoJyJfJBr1vRBfhLzY9VAoNr5fDSUxtn3UmZ2OmcNCx+qb8iUrn+E3K3i4sRn5iYVA'
-    'dO4pmsjx5SENXlfpj/Mmz6wu3bQGN5k1jYtq+sKxGuIRiX+9sxEQ1KBXIqMfM1zSzitxGQSGUrqEgWpxJKVmDscGnlZBGGTPvPRwX'
-    'i3VLeiTH+AkGOnWrlVenKpBh/0IWPI8fN/d7GolWHT53Cyi0HQbb3nKMUlfXWFKukbdSb9mvJ0v1Pv8qlWb6+fDZCBi0hz/fmE+hx'
-    '/+uwnY9Vk8H5CzTDQOmXKx6Gj3Lff9RSWD/WePW8LyukWz0l18GOGWzv/HqNIVtljdfJMa5v2kckhZAFPxQvZBMUIX0wkRTmGJOcQ'
-    '+A8ZKOVaScMnXXQ=='
+from ..data import (
+    SSH_PUBLIC_KEY_1,
+    SSH_FINGERPRINT_1,
 )
-FINGERPRINT_1 = 'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0'
 
 
 def test_normalize_fingerprint():
-    assert normalize_fingerprint(FINGERPRINT_1) == FINGERPRINT_1
+    assert normalize_fingerprint(SSH_FINGERPRINT_1) == SSH_FINGERPRINT_1
     assert normalize_fingerprint('F5:7e:4f:d8:ab:20:b8:5B:8b:2f:7a:4:47:fd:96:73') == (
         'f5:7e:4f:d8:ab:20:b8:5b:8b:2f:7a:04:47:fd:96:73'
     )
@@ -61,8 +54,8 @@ def test_normalize_fingerprint():
 
 
 def test_extract_fingerprint():
-    assert extract_fingerprint(PUBLIC_KEY_1) == FINGERPRINT_1
-    assert extract_fingerprint('   %s   foo@ bar   ' % PUBLIC_KEY_1.replace(' ', '    ')) == FINGERPRINT_1
+    assert extract_fingerprint(SSH_PUBLIC_KEY_1) == SSH_FINGERPRINT_1
+    assert extract_fingerprint('   %s   foo@ bar   ' % SSH_PUBLIC_KEY_1.replace(' ', '    ')) == SSH_FINGERPRINT_1
 
     key = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGGdztn98LzAZkwHzSNa2HpTERPzBZdrdMt9u++0qQ+U'
     assert extract_fingerprint(key) == 'f5:7e:4f:d8:ab:20:b8:5b:8b:2f:7a:04:47:fd:96:73'
