@@ -486,9 +486,8 @@ def main():
             if not module.check_mode:
                 delete_v_switch(module, id_)
             result['changed'] = True
-        else:
-            # not reachable
-            raise NotImplementedError
+        else:  # pragma: no cover
+            raise NotImplementedError("not reachable")  # pragma: no cover
     else:
         if module.params['state'] == 'present':
             result['changed'] = True
