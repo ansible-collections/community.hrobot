@@ -14,6 +14,11 @@ from ansible_collections.community.internal_test_tools.tests.unit.utils.fetch_ur
 from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE_URL
 from ansible_collections.community.hrobot.plugins.modules import boot
 
+from ..data import (
+    SSH_PUBLIC_KEY_1,
+    SSH_FINGERPRINT_1,
+)
+
 
 def _amend_server_data(data):
     data.update({
@@ -160,7 +165,7 @@ class TestHetznerBoot(BaseTestModule):
                 'os': 'linux',
                 'arch': 32,
                 'authorized_keys': [
-                    'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                    SSH_PUBLIC_KEY_1,
                     'aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99',
                     '0f:1e:2d:3c:4b:5a:69:78:87:96:a5:b4:c3:d2:e1:f0',
                 ],
@@ -171,7 +176,7 @@ class TestHetznerBoot(BaseTestModule):
                 'rescue': create_rescue_active(os='linux', arch=32, authorized_key=[
                     {
                         'key': {
-                            'fingerprint': 'e4:47:42:71:81:62:bf:06:1c:23:fa:f3:8f:7b:6f:d0',
+                            'fingerprint': SSH_FINGERPRINT_1,
                             'name': 'baz',
                             'size': 4096,
                             'type': 'RSA',
@@ -541,3 +546,27 @@ class TestHetznerBoot(BaseTestModule):
             .expect_url('{0}/boot/23'.format(BASE_URL)),
         ])
         assert result['msg'] == 'There is no boot configuration available for this server'
+
+    def test_invalid_fingerprint(self, mocker):
+        result = self.run_module_failed(mocker, boot, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_number': 23,
+            'rescue': {
+                'os': 'linux',
+                'arch': 32,
+                'authorized_keys': [
+                    'asdf a-b',
+                ],
+            },
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(_amend_boot({
+                'rescue': create_rescue_active(os='linux', arch=32, authorized_key=[]),
+            }))
+            .expect_url('{0}/boot/23'.format(BASE_URL)),
+        ])
+        assert result['msg'] == (
+            "Error while extracting fingerprint of rescue.authorized_keys[1]'s value 'asdf a-b':"
+            " Error while extracting fingerprint from public key data: Incorrect padding"
+        )

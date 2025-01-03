@@ -1,0 +1,4 @@
+minor_changes:
+  - "boot - it is now possible to specify SSH public keys in ``authorized_keys``.
+     The fingerprint needed by the Robot API will be extracted automatically
+     (https://github.com/ansible-collections/community.hrobot/pull/134)."

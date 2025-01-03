@@ -93,11 +93,7 @@ fingerprint:
   sample: cb:8b:ef:a7:fe:04:87:3f:e5:55:cd:12:e3:e8:9f:99
 """
 
-import base64
-import binascii
-import re
-
-from ansible.module_utils.basic import AnsibleModule, AVAILABLE_HASH_ALGORITHMS
+from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.common.text.converters import to_native
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
@@ -107,53 +103,12 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     fetch_url_json,
 )
 
-
-class FingerprintError(Exception):
-    pass
-
-
-SPACE_RE = re.compile(' +')
-FINGERPRINT_PART = re.compile('^[0-9a-f]{2}$')
-
-
-def normalize_fingerprint(fingerprint, size=16):
-    if ':' in fingerprint:
-        fingerprint = fingerprint.split(':')
-    else:
-        fingerprint = [fingerprint[i:i + 2] for i in range(0, len(fingerprint), 2)]
-    if len(fingerprint) != size:
-        raise FingerprintError(
-            'Fingerprint must consist of {0} 8-bit hex numbers: got {1} 8-bit hex numbers instead'.format(size, len(fingerprint)))
-    for i, part in enumerate(fingerprint):
-        new_part = part.lower()
-        if len(new_part) < 2:
-            new_part = '0{0}'.format(new_part)
-        if not FINGERPRINT_PART.match(new_part):
-            raise FingerprintError(
-                'Fingerprint must consist of {0} 8-bit hex numbers: number {1} is invalid: "{2}"'.format(size, i + 1, part))
-        fingerprint[i] = new_part
-    return ':'.join(fingerprint)
-
-
-def extract_fingerprint(public_key, alg='md5', size=16):
-    try:
-        public_key = SPACE_RE.split(public_key.strip())[1]
-    except IndexError:
-        raise FingerprintError(
-            'Error while extracting fingerprint from public key data: cannot split public key into at least two parts')
-    try:
-        public_key = base64.b64decode(public_key)
-    except (binascii.Error, TypeError) as exc:
-        raise FingerprintError(
-            'Error while extracting fingerprint from public key data: {0}'.format(exc))
-    try:
-        algorithm = AVAILABLE_HASH_ALGORITHMS[alg]
-    except KeyError:
-        raise FingerprintError(
-            'Hash algorithm {0} is not available. Possibly running in FIPS mode.'.format(alg.upper()))
-    digest = algorithm()
-    digest.update(public_key)
-    return normalize_fingerprint(digest.hexdigest(), size=size)
+from ansible_collections.community.hrobot.plugins.module_utils.ssh import (
+    FingerprintError,
+    normalize_fingerprint,
+    extract_fingerprint,
+    remove_comment,
+)
 
 
 def main():
@@ -225,7 +180,7 @@ def main():
         }
         if not exists:
             # Create key
-            data['data'] = ' '.join(SPACE_RE.split(public_key.strip())[:2])
+            data['data'] = remove_comment(public_key)
             url = "{0}/key".format(BASE_URL)
         # Update or create key
         headers = {"Content-type": "application/x-www-form-urlencoded"}
