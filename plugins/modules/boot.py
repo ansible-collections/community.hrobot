@@ -78,7 +78,8 @@ options:
           - 64
       authorized_keys:
         description:
-          - One or more SSH key fingerprints to equip the rescue system with.
+          - One or more SSH key fingerprints to equip the rescue system with. You can also specify the public key itself,
+            the module will compute its fingerprint and pass it on to the Robot API.
           - Only fingerprints for SSH keys deposited in the Robot API can be used.
           - You can use the M(community.hrobot.ssh_key_info) module to query the SSH keys you can use, and the M(community.hrobot.ssh_key)
             module to add or update SSH keys.
@@ -113,7 +114,8 @@ options:
         required: true
       authorized_keys:
         description:
-          - One or more SSH key fingerprints to equip the rescue system with.
+          - One or more SSH key fingerprints to equip the rescue system with. You can also specify the public key itself,
+            the module will compute its fingerprint and pass it on to the Robot API.
           - Only fingerprints for SSH keys deposited in the Robot API can be used.
           - You can use the M(community.hrobot.ssh_key_info) module to query the SSH keys you can use, and the M(community.hrobot.ssh_key)
             module to add or update SSH keys.
@@ -281,6 +283,11 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     fetch_url_json,
 )
 
+from ansible_collections.community.hrobot.plugins.module_utils.ssh import (
+    FingerprintError,
+    extract_fingerprint,
+)
+
 
 BOOT_CONFIGURATION_DATA = [
     ('rescue', 'rescue', {
@@ -398,8 +405,27 @@ def main():
                 if option is None or option == []:
                     continue
                 data[data_key] = option
+            # Normalize options
+            option_key = 'authorized_keys'
+            if module.params[option_name].get(option_key):
+                should = module.params[option_name][option_key]
+                for index, key in enumerate(should):
+                    if ' ' in key:
+                        try:
+                            should[index] = extract_fingerprint(key)
+                        except FingerprintError as exc:
+                            module.fail_json(
+                                msg="Error while extracting fingerprint of {option_name}.{option_key}[{idx}]'s value {key!r}: {exc}".format(
+                                    option_name=option_name,
+                                    option_key=option_key,
+                                    idx=index + 1,
+                                    key=key,
+                                    exc=exc,
+                                ),
+                            )
+                module.params[option_name][option_key] = should
+            # Idempotence check
             if existing.get('active'):
-                # Idempotence check
                 needs_change = False
                 for option_key, (result_key, data_key) in options.items():
                     should = module.params[option_name][option_key]
