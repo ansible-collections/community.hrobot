@@ -30,6 +30,11 @@ from ansible_collections.community.hrobot.plugins.inventory.robot import Invento
 from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE_URL
 
 
+# The hashes involved are computed from the prefix and the plugin's name.
+CACHE_PREFIX = 'prefix'
+CACHE_KEY = 'prefixcommunity.hrobot.robot_4e69bs_95733'
+
+
 original_exists = os.path.exists
 original_access = os.access
 
@@ -473,3 +478,135 @@ def test_unsafe(inventory, mocker):
     assert not isinstance(host_2_vars['hrobot_server_ip'], AnsibleUnsafe)
     assert isinstance(host_2_vars['hrobot_server_name'], AnsibleUnsafe)
     assert isinstance(host_2_vars['hrobot_dc'], AnsibleUnsafe)
+
+
+def test_inventory_cache_empty(tmpdir, mocker):
+    cache_directory = os.path.join(tmpdir, 'cache')
+    open_url = OpenUrlProxy([
+        OpenUrlCall('GET', 200)
+        .result_json([
+            {
+                'server': {
+                    'server_ip': '1.2.3.4',
+                    'dc': 'foo',
+                },
+            },
+            {
+                'server': {
+                    'server_ip': '1.2.3.5',
+                    'server_name': 'test-server',
+                    'dc': 'foo',
+                },
+            },
+        ])
+        .expect_basic_auth('test', 'hunter2')
+        .expect_force_basic_auth(True)
+        .expect_url('{0}/server'.format(BASE_URL)),
+    ])
+    inventory_filename = "test.robot.yaml"
+    mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
+    mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
+    mocker.patch('os.path.exists', exists_mock(inventory_filename))
+    mocker.patch('os.access', access_mock(inventory_filename))
+
+    assert not os.path.exists(cache_directory)
+
+    C.INVENTORY_ENABLED = ['community.hrobot.robot']
+    inventory_file = {inventory_filename: textwrap.dedent(f"""\
+    ---
+    plugin: community.hrobot.robot
+    hetzner_user: test
+    hetzner_password: hunter2
+    cache: true
+    cache_plugin: ansible.builtin.jsonfile
+    cache_connection: {cache_directory}
+    cache_prefix: {CACHE_PREFIX}
+    """)}
+    im = InventoryManager(loader=DictDataLoader(inventory_file), sources=inventory_filename)
+    open_url.assert_is_done()
+
+    assert im._inventory.hosts
+    assert '1.2.3.4' in im._inventory.hosts
+    assert 'test-server' in im._inventory.hosts
+    assert im._inventory.get_host('1.2.3.4') in im._inventory.groups['ungrouped'].hosts
+    assert im._inventory.get_host('test-server') in im._inventory.groups['ungrouped'].hosts
+    assert len(im._inventory.groups['ungrouped'].hosts) == 2
+    assert len(im._inventory.groups['all'].hosts) == 0
+
+    assert os.path.exists(cache_directory)
+    assert os.path.isdir(cache_directory)
+    print(os.listdir(cache_directory))
+
+    cache_filename = os.path.join(cache_directory, CACHE_KEY)
+    assert os.path.exists(cache_filename)
+    assert os.path.isfile(cache_filename)
+
+    with open(cache_filename, 'rb') as f:
+        data = json.load(f)
+        print(data)
+    assert data == [
+        {
+            'server': {
+                'dc': 'foo',
+                'server_ip': '1.2.3.4',
+            },
+        },
+        {
+            'server': {
+                'dc': 'foo',
+                'server_ip': '1.2.3.5',
+                'server_name': 'test-server',
+            },
+        },
+    ]
+
+
+def test_inventory_cache_full(tmpdir, mocker):
+    cache_directory = os.path.join(tmpdir, 'cache')
+    open_url = OpenUrlProxy([])
+    inventory_filename = "test.robot.yaml"
+    mocker.patch('ansible_collections.community.hrobot.plugins.module_utils.robot.open_url', open_url)
+    mocker.patch('ansible.inventory.manager.unfrackpath', mock_unfrackpath_noop)
+    mocker.patch('os.path.exists', exists_mock(inventory_filename))
+    mocker.patch('os.access', access_mock(inventory_filename))
+
+    os.mkdir(cache_directory)
+    cache_filename = os.path.join(cache_directory, CACHE_KEY)
+    with open(cache_filename, 'wt') as f:
+        json.dump([
+            {
+                'server': {
+                    'dc': 'foo',
+                    'server_ip': '1.2.3.4',
+                },
+            },
+            {
+                'server': {
+                    'dc': 'foo',
+                    'server_ip': '1.2.3.5',
+                    'server_name': 'test-server',
+                },
+            },
+        ], f)
+
+    C.INVENTORY_ENABLED = ['community.hrobot.robot']
+    inventory_file = {inventory_filename: textwrap.dedent(f"""\
+    ---
+    plugin: community.hrobot.robot
+    hetzner_user: test
+    hetzner_password: hunter2
+    cache: true
+    cache_plugin: ansible.builtin.jsonfile
+    cache_connection: {cache_directory}
+    cache_prefix: {CACHE_PREFIX}
+    """)}
+    im = InventoryManager(loader=DictDataLoader(inventory_file), sources=inventory_filename)
+    open_url.assert_is_done()
+
+    assert im._inventory.hosts
+    assert '1.2.3.4' in im._inventory.hosts
+    assert 'test-server' in im._inventory.hosts
+    assert im._inventory.get_host('1.2.3.4') in im._inventory.groups['ungrouped'].hosts
+    assert im._inventory.get_host('test-server') in im._inventory.groups['ungrouped'].hosts
+    assert len(im._inventory.groups['ungrouped'].hosts) == 2
+    assert len(im._inventory.groups['all'].hosts) == 0
