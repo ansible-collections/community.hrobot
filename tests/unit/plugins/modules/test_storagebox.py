@@ -145,6 +145,8 @@ class TestHetznerStorageboxInfo(BaseTestModule):
                     'status': 400,
                     'code': 'INVALID_INPUT',
                     'message': 'Invalid input',
+                    'invalid': ['storagebox_name'],
+                    'missing': None,
                 },
             })
             .expect_form_value('storagebox_name', 'Backup')
@@ -155,7 +157,7 @@ class TestHetznerStorageboxInfo(BaseTestModule):
             .expect_form_value_absent('zfs')
             .expect_url('{0}/storagebox/23'.format(BASE_URL)),
         ])
-        assert result['msg'] == 'The values to update were invalid ({"storagebox_name": "Backup"})'
+        assert result['msg'] == 'The values to update were invalid (storagebox_name)'
 
     def test_change_name(self, mocker):
         updated = update_info(23, name='Backup')

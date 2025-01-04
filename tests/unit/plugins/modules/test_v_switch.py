@@ -303,7 +303,7 @@ class TestHetznerVSwitch(BaseTestModule):
                 .expect_url('{0}/vswitch'.format(BASE_URL)),
             ],
         )
-        assert result['msg'] == "vSwitch invalid parameter (['vlan'])"
+        assert result['msg'] == "vSwitch invalid parameter (vlan)"
 
     def test_delete(self, mocker):
         result = self.run_module_success(
@@ -496,7 +496,7 @@ class TestHetznerVSwitch(BaseTestModule):
                         'status': 400,
                         'code': 'INVALID_INPUT',
                         'message': 'Invalid input',
-                        'invalid': [],
+                        'invalid': 'foo',
                         'missing': None,
                     },
                 })
@@ -504,7 +504,10 @@ class TestHetznerVSwitch(BaseTestModule):
             ],
         )
 
-        assert result['msg'] == 'vSwitch invalid parameter ([])'
+        assert result['msg'] in (
+            "vSwitch invalid parameter ('foo')",
+            "vSwitch invalid parameter (u'foo')",
+        )
 
     def test_create_with_server(self, mocker):
         result = self.run_module_success(
@@ -1004,14 +1007,14 @@ class TestHetznerVSwitch(BaseTestModule):
                         'status': 400,
                         'code': 'INVALID_INPUT',
                         'message': 'Invalid input',
-                        'invalid': ['foobar'],
+                        'invalid': ['foobar', 'bazbam'],
                         'missing': None,
                     },
                 })
                 .expect_url('{0}/vswitch/4321/server'.format(BASE_URL)),
             ],
         )
-        assert result['msg'] == "Invalid parameter adding server (['foobar'])"
+        assert result['msg'] == "Invalid parameter adding server (foobar, bazbam)"
 
     def test_add_server_vlan_not_unique_error(self, mocker):
         result = self.run_module_failed(
