@@ -79,6 +79,7 @@ def raw_plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, h
     Make general request to Hetzner's JSON robot API.
     Does not handle rate limiting especially.
     '''
+    accept_errors = accept_errors or ()
     user = plugin.get_option('hetzner_user')
     password = plugin.get_option('hetzner_password')
     if templar is not None:
@@ -116,9 +117,8 @@ def raw_plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, h
     try:
         result = json.loads(content.decode('utf-8'))
         if 'error' in result:
-            if accept_errors:
-                if result['error']['code'] in accept_errors:
-                    return result, result['error']['code']
+            if result['error']['code'] in accept_errors:
+                return result, result['error']['code']
             raise PluginException(format_error_msg(result['error'], rate_limit_timeout=rate_limit_timeout))
         return result, None
     except ValueError:
@@ -133,6 +133,7 @@ def raw_fetch_url_json(module, url, method='GET', timeout=10, data=None, headers
     Make general request to Hetzner's JSON robot API.
     Does not handle rate limiting especially.
     '''
+    accept_errors = accept_errors or ()
     module.params['url_username'] = module.params['hetzner_user']
     module.params['url_password'] = module.params['hetzner_password']
     module.params['force_basic_auth'] = True
@@ -154,9 +155,8 @@ def raw_fetch_url_json(module, url, method='GET', timeout=10, data=None, headers
     try:
         result = module.from_json(content.decode('utf8'))
         if 'error' in result:
-            if accept_errors:
-                if result['error']['code'] in accept_errors:
-                    return result, result['error']['code']
+            if result['error']['code'] in accept_errors:
+                return result, result['error']['code']
             module.fail_json(
                 msg=format_error_msg(result['error'], rate_limit_timeout=rate_limit_timeout),
                 error=result['error'],

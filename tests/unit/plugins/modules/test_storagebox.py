@@ -11,6 +11,8 @@ from ansible_collections.community.internal_test_tools.tests.unit.utils.fetch_ur
     BaseTestModule,
 )
 
+from ansible_collections.community.internal_test_tools.tests.unit.compat.mock import call, MagicMock
+
 from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE_URL
 from ansible_collections.community.hrobot.plugins.modules import storagebox
 
@@ -221,7 +223,8 @@ class TestHetznerStorageboxInfo(BaseTestModule):
         )
 
     def test_change_name_rate_limit(self, mocker):
-        mocker.patch('time.sleep', lambda duration: None)
+        sleep_mock = MagicMock()
+        mocker.patch('time.sleep', sleep_mock)
         updated = update_info(23, name='Backup')
         result = self.run_module_success(mocker, storagebox, {
             'hetzner_user': 'test',
@@ -259,8 +262,40 @@ class TestHetznerStorageboxInfo(BaseTestModule):
                     'status': 403,
                     'code': 'RATE_LIMIT_EXCEEDED',
                     'message': 'Rate limit exceeded',
-                    'interval': 5,
+                    'interval': 3,
                     'max_request': 1,
+                },
+            })
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 403)
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 4,
+                    'max_request': 1,
+                },
+            })
+            .expect_form_value('storagebox_name', 'Backup')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value_absent('ssh')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 403)
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
                 },
             })
             .expect_form_value('storagebox_name', 'Backup')
@@ -283,6 +318,12 @@ class TestHetznerStorageboxInfo(BaseTestModule):
         assert result['changed'] is True
         for key in STORAGEBOX_KEYS:
             assert result[key] == updated['storagebox'][key], "Unexpected difference for {0!r}".format(key)
+        sleep_mock.assert_has_calls([
+            call(5),
+            call(3),
+            call(3),
+            call(3),
+        ])
 
     def test_change_name_rate_limit_timeout(self, mocker):
         elapsed = [123.4]
