@@ -1,1 +1,2 @@
+plugins/modules/storagebox_snapshot_plan.py pylint:unbalanced-dict-unpacking  # only seems to be a problem with pylint included in ansible-core 2.15
 tests/ee/roles/smoke/library/smoke_ipaddress.py shebang
