@@ -97,6 +97,33 @@ def create_vnc_inactive():
     }
 
 
+def create_vnc_active():
+    return {
+        "server_ip": "123.123.123.123",
+        "server_ipv6_net": "2a01:4f8:111:4221::",
+        "server_number": 321,
+        "dist": "centOS-5.0",
+        "arch": 32,
+        "lang": "en_US",
+        "active": True,
+        "password": "jEt0dtUvomlyOwRr",
+    }
+
+
+def create_cpanel_active(hostname):
+    return {
+        "server_ip": "123.123.123.123",
+        "server_ipv6_net": "2a01:4f8:111:4221::",
+        "server_number": 321,
+        "dist": "CentOS 5.6 + cPanel",
+        "arch": 64,
+        "lang": "en",
+        "active": True,
+        "password": "ie8Nhz6R",
+        "hostname": hostname,
+    }
+
+
 def _amend_boot(data=None):
     if data is None:
         data = {}
@@ -508,6 +535,97 @@ class TestHetznerBoot(BaseTestModule):
         assert result['changed'] is True
         assert result['configuration_type'] == 'install_linux'
         assert result['password'] == 'aBcDeFgHiJ1234'
+
+    def test_install_vnc_deactivate(self, mocker):
+        result = self.run_module_success(mocker, boot, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_number': 23,
+            'regular_boot': True,
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(_amend_boot({
+                'vnc': create_vnc_active(),
+            }))
+            .expect_url('{0}/boot/23'.format(BASE_URL)),
+            FetchUrlCall('DELETE', 200)
+            .expect_url('{0}/boot/23/vnc'.format(BASE_URL)),
+        ])
+        assert result['changed'] is True
+        assert result['configuration_type'] == 'regular_boot'
+        assert result['password'] is None
+
+    def test_install_vnc_activate(self, mocker):
+        result = self.run_module_success(mocker, boot, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_number': 23,
+            'install_vnc': {
+                'dist': 'Arch Linux latest minimal',
+                'lang': 'en',
+            },
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(_amend_boot())
+            .expect_url('{0}/boot/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 200)
+            .expect_form_value('dist', 'Arch Linux latest minimal')
+            .expect_form_value_absent('arch')
+            .expect_form_value_absent('authorized_key')
+            .result_json({
+                'vnc': create_vnc_active(),
+            })
+            .expect_url('{0}/boot/23/vnc'.format(BASE_URL)),
+        ])
+        assert result['changed'] is True
+        assert result['configuration_type'] == 'install_vnc'
+        assert result['password'] == 'jEt0dtUvomlyOwRr'
+
+    def test_install_cpanel_deactivate(self, mocker):
+        result = self.run_module_success(mocker, boot, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_number': 23,
+            'regular_boot': True,
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(_amend_boot({
+                'cpanel': create_cpanel_active('foobar'),
+            }))
+            .expect_url('{0}/boot/23'.format(BASE_URL)),
+            FetchUrlCall('DELETE', 200)
+            .expect_url('{0}/boot/23/cpanel'.format(BASE_URL)),
+        ])
+        assert result['changed'] is True
+        assert result['configuration_type'] == 'regular_boot'
+        assert result['password'] is None
+
+    def test_install_cpanel_activate(self, mocker):
+        result = self.run_module_success(mocker, boot, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'server_number': 23,
+            'install_cpanel': {
+                'dist': 'Arch Linux latest minimal',
+                'lang': 'en',
+                'hostname': 'foobar',
+            },
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(_amend_boot())
+            .expect_url('{0}/boot/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 200)
+            .expect_form_value('dist', 'Arch Linux latest minimal')
+            .expect_form_value_absent('arch')
+            .expect_form_value_absent('authorized_key')
+            .result_json({
+                'cpanel': create_cpanel_active('foobar'),
+            })
+            .expect_url('{0}/boot/23/cpanel'.format(BASE_URL)),
+        ])
+        assert result['changed'] is True
+        assert result['configuration_type'] == 'install_cpanel'
+        assert result['password'] == 'ie8Nhz6R'
 
     def test_server_not_found(self, mocker):
         result = self.run_module_failed(mocker, boot, {

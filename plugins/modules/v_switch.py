@@ -283,7 +283,8 @@ def get_v_switch(module, id_, wait_condition=None):
 
 def print_list(possible_list):
     if isinstance(possible_list, list):
-        return [to_native(x) for x in possible_list]
+        return ', '.join([to_native(x) for x in possible_list])
+    return repr(possible_list)
 
 
 def create_v_switch(module):

@@ -51,7 +51,7 @@ class TestHetznerSSHKey(BaseTestModule):
             'fingerprint': SSH_FINGERPRINT_1,
         }, [
             FetchUrlCall('DELETE', 404)
-            .result_json({
+            .result_error_json('Not found', {
                 'error': {
                     'status': 404,
                     'code': 'NOT_FOUND',

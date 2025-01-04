@@ -438,7 +438,7 @@ def main():
                     if isinstance(has, list):
                         has = sorted(has)
                         if not isinstance(should, list):
-                            should = [should]
+                            should = [should]  # pragma: no cover
                         should = sorted(should)
                     if should != has:
                         needs_change = True

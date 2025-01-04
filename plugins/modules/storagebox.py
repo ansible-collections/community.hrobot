@@ -182,7 +182,8 @@ def main():
             accept_errors=['INVALID_INPUT'],
         )
         if error:
-            module.fail_json(msg='The values to update were invalid ({0})'.format(module.jsonify(changes)))
+            invalid = result['error'].get('invalid') or []
+            module.fail_json(msg='The values to update were invalid ({0})'.format(', '.join(invalid)))
         after = extract(result)
 
     result = dict(after)
