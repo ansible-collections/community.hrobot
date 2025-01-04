@@ -195,6 +195,17 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-v-switch-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
+<a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Timeout (in seconds) for waiting when rate limit exceeded errors are returned.</p>
+<p>Set to <code class="ansible-value docutils literal notranslate"><span class="pre">0</span></code> to not retry.</p>
+<p>Set to a negative value like <code class="ansible-value docutils literal notranslate"><span class="pre">-1</span></code> to retry forever.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">-1</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-servers"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-v-switch-module-parameter-servers"><strong>servers</strong></p>
 <a class="ansibleOptionLink" href="#parameter-servers" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
 </div></td>
@@ -202,7 +213,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>If servers is not specified, servers are not going to be deleted.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-v-switch-module-parameter-state"><strong>state</strong></p>
 <a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -217,7 +228,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-v-switch-module-parameter-timeout"><strong>timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -225,7 +236,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">180</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-vlan"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-v-switch-module-parameter-vlan"><strong>vlan</strong></p>
 <a class="ansibleOptionLink" href="#parameter-vlan" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -234,7 +245,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>In order to identify a vSwitch both name and VLAN must match. If not, a new vSwitch will be created.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-wait"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-v-switch-module-parameter-wait"><strong>wait</strong></p>
 <a class="ansibleOptionLink" href="#parameter-wait" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -248,7 +259,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-wait_delay"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-v-switch-module-parameter-wait-delay"><strong>wait_delay</strong></p>
 <a class="ansibleOptionLink" href="#parameter-wait_delay" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>

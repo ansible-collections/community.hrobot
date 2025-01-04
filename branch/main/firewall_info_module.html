@@ -186,6 +186,17 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
+<a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Timeout (in seconds) for waiting when rate limit exceeded errors are returned.</p>
+<p>Set to <code class="ansible-value docutils literal notranslate"><span class="pre">0</span></code> to not retry.</p>
+<p>Set to a negative value like <code class="ansible-value docutils literal notranslate"><span class="pre">-1</span></code> to retry forever.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">-1</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-server_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-parameter-server-ip"><strong>server_ip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-server_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -194,7 +205,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Note that Hetzner deprecated identifying the server’s firewall by the server’s main IP. Using this option can thus stop working at any time in the future. Use <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-info-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> instead.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-server_number"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-parameter-server-number"><strong>server_number</strong></p>
 <a class="ansibleOptionLink" href="#parameter-server_number" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 <p><em class="ansible-option-versionadded">added in community.hrobot 1.8.0</em></p>
@@ -203,7 +214,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Exactly one of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-info-module-parameter-server-ip"><span class="std std-ref"><span class="pre">server_ip</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-info-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-parameter-timeout"><strong>timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -211,7 +222,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">180</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-wait_delay"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-parameter-wait-delay"><strong>wait_delay</strong></p>
 <a class="ansibleOptionLink" href="#parameter-wait_delay" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -219,7 +230,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">10</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-wait_for_configured"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-info-module-parameter-wait-for-configured"><strong>wait_for_configured</strong></p>
 <a class="ansibleOptionLink" href="#parameter-wait_for_configured" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>

@@ -436,6 +436,17 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
+<a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Timeout (in seconds) for waiting when rate limit exceeded errors are returned.</p>
+<p>Set to <code class="ansible-value docutils literal notranslate"><span class="pre">0</span></code> to not retry.</p>
+<p>Set to a negative value like <code class="ansible-value docutils literal notranslate"><span class="pre">-1</span></code> to retry forever.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">-1</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-simple_filters"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-simple-filters"><strong>simple_filters</strong></p>
 <a class="ansibleOptionLink" href="#parameter-simple_filters" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
@@ -446,7 +457,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">{}</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-strict"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-strict"><strong>strict</strong></p>
 <a class="ansibleOptionLink" href="#parameter-strict" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -459,7 +470,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-use_extra_vars"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-robot-inventory-parameter-use-extra-vars"><strong>use_extra_vars</strong></p>
 <a class="ansibleOptionLink" href="#parameter-use_extra_vars" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 <p><em class="ansible-option-versionadded">added in ansible-core 2.11</em></p>

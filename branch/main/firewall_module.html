@@ -238,20 +238,31 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
+<a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Timeout (in seconds) for waiting when rate limit exceeded errors are returned.</p>
+<p>Set to <code class="ansible-value docutils literal notranslate"><span class="pre">0</span></code> to not retry.</p>
+<p>Set to a negative value like <code class="ansible-value docutils literal notranslate"><span class="pre">-1</span></code> to retry forever.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">-1</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules"><strong>rules</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Firewall rules.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input"><strong>input</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Input firewall rules.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/action"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-action"><strong>action</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/action" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -263,7 +274,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/dst_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-dst-ip"><strong>dst_ip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/dst_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -271,14 +282,14 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>CIDR notation.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/dst_port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-dst-port"><strong>dst_port</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/dst_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Destination port or port range.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/ip_version"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-ip-version"><strong>ip_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/ip_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -286,7 +297,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>Leave away to filter both protocols. Note that in that case, none of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-input-dst-ip"><span class="std std-ref"><span class="pre">rules.input[].dst_ip</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-input-src-ip"><span class="std std-ref"><span class="pre">rules.input[].src_ip</span></span></a></strong></code>, or <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-input-protocol"><span class="std std-ref"><span class="pre">rules.input[].protocol</span></span></a></strong></code> can be specified.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/name"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-name"><strong>name</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -294,14 +305,14 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>Note that Hetzner restricts the characters that can be used for rule names. At the moment, only letters <code class="docutils literal notranslate"><span class="pre">a-z</span></code>, <code class="docutils literal notranslate"><span class="pre">A-Z</span></code>, space, and the symbols <code class="docutils literal notranslate"><span class="pre">.</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">_</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> are allowed.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/protocol"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-protocol"><strong>protocol</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/protocol" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/src_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-src-ip"><strong>src_ip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/src_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -309,14 +320,14 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>CIDR notation.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/src_port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-src-port"><strong>src_port</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/src_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Source port or port range.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/input/tcp_flags"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-input-tcp-flags"><strong>tcp_flags</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/input/tcp_flags" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -326,7 +337,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>See <a class="reference external" href="https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter">the documentation</a> for more information.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output"><strong>output</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
 <p><em class="ansible-option-versionadded">added in community.hrobot 1.8.0</em></p>
@@ -334,7 +345,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Output firewall rules.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/action"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-action"><strong>action</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/action" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -346,7 +357,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/dst_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-dst-ip"><strong>dst_ip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/dst_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -354,14 +365,14 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>CIDR notation.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/dst_port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-dst-port"><strong>dst_port</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/dst_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Destination port or port range.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/ip_version"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-ip-version"><strong>ip_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/ip_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -369,7 +380,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>Leave away to filter both protocols. Note that in that case, none of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-output-dst-ip"><span class="std std-ref"><span class="pre">rules.output[].dst_ip</span></span></a></strong></code>, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-output-src-ip"><span class="std std-ref"><span class="pre">rules.output[].src_ip</span></span></a></strong></code>, or <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-rules-output-protocol"><span class="std std-ref"><span class="pre">rules.output[].protocol</span></span></a></strong></code> can be specified.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/name"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-name"><strong>name</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -377,14 +388,14 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>Note that Hetzner restricts the characters that can be used for rule names. At the moment, only letters <code class="docutils literal notranslate"><span class="pre">a-z</span></code>, <code class="docutils literal notranslate"><span class="pre">A-Z</span></code>, space, and the symbols <code class="docutils literal notranslate"><span class="pre">.</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">_</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> are allowed.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/protocol"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-protocol"><strong>protocol</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/protocol" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Protocol above IP layer.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/src_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-src-ip"><strong>src_ip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/src_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -392,14 +403,14 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>CIDR notation.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/src_port"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-src-port"><strong>src_port</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/src_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Source port or port range.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rules/output/tcp_flags"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-rules-output-tcp-flags"><strong>tcp_flags</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rules/output/tcp_flags" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -409,7 +420,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>See <a class="reference external" href="https://wiki.hetzner.de/index.php/Robot_Firewall/en#Parameter">the documentation</a> for more information.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-server_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-server-ip"><strong>server_ip</strong></p>
 <a class="ansibleOptionLink" href="#parameter-server_ip" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -418,7 +429,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>Note that Hetzner deprecated identifying the server’s firewall by the server’s main IP. Using this option can thus stop working at any time in the future. Use <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> instead.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-server_number"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-server-number"><strong>server_number</strong></p>
 <a class="ansibleOptionLink" href="#parameter-server_number" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 <p><em class="ansible-option-versionadded">added in community.hrobot 1.8.0</em></p>
@@ -427,7 +438,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p>Exactly one of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-server-ip"><span class="std std-ref"><span class="pre">server_ip</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-firewall-module-parameter-server-number"><span class="std std-ref"><span class="pre">server_number</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-state"><strong>state</strong></p>
 <a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -440,7 +451,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-timeout"><strong>timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -448,7 +459,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">180</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-update_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-update-timeout"><strong>update_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-update_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -457,7 +468,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">30</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-wait_delay"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-wait-delay"><strong>wait_delay</strong></p>
 <a class="ansibleOptionLink" href="#parameter-wait_delay" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
@@ -465,7 +476,7 @@ see <a class="reference internal" href="#ansible-collections-community-hrobot-fi
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">10</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-wait_for_configured"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-firewall-module-parameter-wait-for-configured"><strong>wait_for_configured</strong></p>
 <a class="ansibleOptionLink" href="#parameter-wait_for_configured" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
