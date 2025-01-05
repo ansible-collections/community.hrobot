@@ -148,6 +148,9 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
                 cache_needs_update = True
         elif not cache_needs_update:
             servers = self.get_servers()
+        else:
+            # This can only happen if the code is modified so that cache=False
+            pass  # pragma: no cover
 
         if cache_needs_update:
             servers = self.get_servers()
