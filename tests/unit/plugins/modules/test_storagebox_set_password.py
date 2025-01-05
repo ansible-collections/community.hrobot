@@ -67,7 +67,7 @@ class TestStorageboxSetPassword(BaseTestModule):
                 'error': {
                     'status': 404,
                     'code': 'STORAGEBOX_NOT_FOUND',
-                    'message': f'Storage Box with ID 456 not found',
+                    'message': 'Storage Box with ID 456 not found',
                 },
             })
             .expect_url(BASE_URL + '/storagebox/456/password'),
@@ -88,8 +88,8 @@ class TestStorageboxSetPassword(BaseTestModule):
                 'error': {
                     'status': 409,
                     'code': 'STORAGEBOX_INVALID_PASSWORD',
-                    'message': 'The chosen password has been considered insecure or does not comply with our password guideline',
+                    'message': "The chosen password has been considered insecure or does not comply with Hetzner's password guideline",
                 }})
             .expect_url(BASE_URL + '/storagebox/123/password')
         ])
-        assert result['msg'] == 'The chosen password has been considered insecure or does not comply with our password guideline'
+        assert result['msg'] == "The chosen password has been considered insecure or does not comply with Hetzner's password guideline"

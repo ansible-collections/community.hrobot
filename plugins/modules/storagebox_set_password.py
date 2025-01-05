@@ -13,13 +13,13 @@ module: storagebox_set_password
 short_description: (Re)set the password for a storage box
 version_added: 2.1.0
 author:
-    - Matthias Hurdebise (@matthiashurdebise)
+  - Matthias Hurdebise (@matthiashurdebise)
 description:
-    - (Re)set the password for a storage box.
+  - (Re)set the password for a storage box.
 extends_documentation_fragment:
-    - community.hrobot.robot
-    - community.hrobot.attributes
-    - community.hrobot.attributes.actiongroup_robot
+  - community.hrobot.robot
+  - community.hrobot.attributes
+  - community.hrobot.attributes.actiongroup_robot
 
 attributes:
   check_mode:
@@ -32,40 +32,44 @@ attributes:
       - This module performs an action on every invocation.
 
 options:
-    id:
-        description:
-        - The ID of the storage box to modify.
-        type: int
-        required: true
-    password:
-        description:
-        - The new password for the storage box.
-        type: str
-        required: false
+  id:
+    description:
+      - The ID of the storage box to modify.
+    type: int
+    required: true
+  password:
+    description:
+      - The new password for the storage box.
+      - If not provided, a random password will be created by the Robot API
+        and returned as RV(password).
+    type: str
 """
 
 EXAMPLES = r"""
 - name: Set the password
   community.hrobot.storagebox_set_password:
-      id: 123
-      password: "newpassword"
+    id: 123
+    password: "newpassword"
 
 - name: Set a random password
   community.hrobot.storagebox_set_password:
-      id: 123
+    id: 123
+  register: result
 
 - name: Output new password
   ansible.builtin.debug:
-      msg: "New password: {{ result.password }}"
+    msg: "New password: {{ result.password }}"
 """
 
 RETURN = r"""
 password:
-    description:
-        - The new password for the storage box.
-    returned: success
-    type: str
-    sample: "newpassword"
+  description:
+    - The new password for the storage box.
+    - Note that if the password has been provided as O(password), Ansible will censor this return value to something
+      like C(VALUE_SPECIFIED_IN_NO_LOG_PARAMETER).
+  returned: success
+  type: str
+  sample: "newpassword"
 """
 
 from ansible.module_utils.basic import AnsibleModule
@@ -79,8 +83,10 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
 
 
 def main():
-    argument_spect = dict(id=dict(
-        type="int", required=True), password=dict(type="str", required=False, no_log=True))
+    argument_spect = dict(
+        id=dict(type="int", required=True),
+        password=dict(type="str", no_log=True),
+    )
     argument_spect.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
     module = AnsibleModule(argument_spect, supports_check_mode=False)
 
@@ -91,8 +97,9 @@ def main():
     accepted_errors = ["STORAGEBOX_NOT_FOUND", "STORAGEBOX_INVALID_PASSWORD"]
 
     if password:
+        headers = {"Content-type": "application/x-www-form-urlencoded"}
         result, error = fetch_url_json(
-            module, url, method="POST", accept_errors=accepted_errors, data=urlencode({"password": password}))
+            module, url, method="POST", accept_errors=accepted_errors, data=urlencode({"password": password}), headers=headers)
     else:
         result, error = fetch_url_json(
             module, url, method="POST", accept_errors=accepted_errors)
@@ -104,7 +111,7 @@ def main():
 
         if error == 'STORAGEBOX_INVALID_PASSWORD':
             module.fail_json(
-                msg='The chosen password has been considered insecure or does not comply with our password guideline')
+                msg="The chosen password has been considered insecure or does not comply with Hetzner's password guideline")
 
     module.exit_json(changed=True, password=result["password"])
 

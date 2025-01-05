@@ -19,6 +19,7 @@ action_groups:
     - ssh_key_info
     - storagebox
     - storagebox_info
+    - storagebox_set_password
     - storagebox_snapshot_plan
     - storagebox_snapshot_plan_info
     - v_switch
