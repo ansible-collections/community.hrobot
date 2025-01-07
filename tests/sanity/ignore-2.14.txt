@@ -1,1 +1,2 @@
+plugins/inventory/robot.py yamllint:unparsable-with-libyaml
 tests/ee/roles/smoke/library/smoke_ipaddress.py shebang
