@@ -1,3 +1,0 @@
-plugins/modules/boot.py validate-modules:return-syntax-error  # only allowed in 2.13+
-plugins/modules/firewall.py pylint:bad-option-value  # a pylint test that is disabled was modified over time
-tests/ee/roles/smoke/library/smoke_ipaddress.py shebang

@@ -54,12 +54,14 @@ options:
 """
 
 EXAMPLES = r"""
+---
 # Fetch all hosts in Hetzner Robot
 plugin: community.hrobot.robot
 # Filters all servers in ready state
 filters:
   status: ready
 
+---
 # Example showing encrypted credentials and using filters
 # (This assumes that Mozilla sops was used to encrypt keys/hetzner.sops.yaml, which contains two values
 # hetzner_username and hetzner_password. Needs the community.sops collection to decode that file.)
@@ -73,6 +75,7 @@ filters:
   # Exclude all servers that did not match any of the above filters
   - exclude: true
 
+---
 # Example using constructed features to create groups
 plugin: community.hrobot.robot
 simple_filters:
