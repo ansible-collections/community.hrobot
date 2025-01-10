@@ -510,12 +510,14 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </section>
 <section id="examples">
 <h2><a class="toc-backref" href="#id4" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch all hosts in Hetzner Robot</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="c1"># Fetch all hosts in Hetzner Robot</span>
 <span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">community.hrobot.robot</span>
 <span class="c1"># Filters all servers in ready state</span>
 <span class="nt">filters</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ready</span>
 
+<span class="nn">---</span>
 <span class="c1"># Example showing encrypted credentials and using filters</span>
 <span class="c1"># (This assumes that Mozilla sops was used to encrypt keys/hetzner.sops.yaml, which contains two values</span>
 <span class="c1"># hetzner_username and hetzner_password. Needs the community.sops collection to decode that file.)</span>
@@ -529,6 +531,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <span class="w">  </span><span class="c1"># Exclude all servers that did not match any of the above filters</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 
+<span class="nn">---</span>
 <span class="c1"># Example using constructed features to create groups</span>
 <span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">community.hrobot.robot</span>
 <span class="nt">simple_filters</span><span class="p">:</span>
