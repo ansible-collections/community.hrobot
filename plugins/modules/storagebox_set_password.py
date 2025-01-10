@@ -104,14 +104,13 @@ def main():
         result, error = fetch_url_json(
             module, url, method="POST", accept_errors=accepted_errors)
 
-    if error is not None:
-        if error == 'STORAGEBOX_NOT_FOUND':
-            module.fail_json(
-                msg='Storage Box with ID {0} not found'.format(id))
+    if error == 'STORAGEBOX_NOT_FOUND':
+        module.fail_json(
+            msg='Storage Box with ID {0} not found'.format(id))
 
-        if error == 'STORAGEBOX_INVALID_PASSWORD':
-            module.fail_json(
-                msg="The chosen password has been considered insecure or does not comply with Hetzner's password guideline")
+    if error == 'STORAGEBOX_INVALID_PASSWORD':
+        module.fail_json(
+            msg="The chosen password has been considered insecure or does not comply with Hetzner's password guideline")
 
     module.exit_json(changed=True, password=result["password"])
 
