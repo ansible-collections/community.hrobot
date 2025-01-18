@@ -4,6 +4,35 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v2.1.0
+======
+
+Release Summary
+---------------
+
+Feature release with several new modules and a deprecation.
+
+Minor Changes
+-------------
+
+- All modules and plugins now have a ``rate_limit_retry_timeout`` option, which allows to configure for how long to wait in case of rate limiting errors. By default, the modules wait indefinitely. Setting the option to ``0`` does not retry (this was the behavior in previous versions), and a positive value sets a number of seconds to wait at most (https://github.com/ansible-collections/community.hrobot/pull/140).
+- boot - it is now possible to specify SSH public keys in ``authorized_keys``. The fingerprint needed by the Robot API will be extracted automatically (https://github.com/ansible-collections/community.hrobot/pull/134).
+- v_switch - the module is now part of the ``community.hrobot.robot`` action group, despite already being documented as part of it (https://github.com/ansible-collections/community.hrobot/pull/136).
+
+Deprecated Features
+-------------------
+
+- boot - the various ``arch`` suboptions have been deprecated and will be removed from community.hrobot 3.0.0 (https://github.com/ansible-collections/community.hrobot/pull/134).
+
+New Modules
+-----------
+
+- community.hrobot.storagebox - Modify a storage box's basic configuration.
+- community.hrobot.storagebox_info - Query information on one or more storage boxes.
+- community.hrobot.storagebox_set_password - (Re)set the password for a storage box.
+- community.hrobot.storagebox_snapshot_plan - Modify a storage box's snapshot plans.
+- community.hrobot.storagebox_snapshot_plan_info - Query the snapshot plans for a storage box.
+
 v2.0.3
 ======
 

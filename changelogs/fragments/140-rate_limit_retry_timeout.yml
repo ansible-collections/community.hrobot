@@ -1,4 +1,0 @@
-minor_changes:
-  - "All modules and plugins now have a ``rate_limit_retry_timeout`` option, which allows to configure for how long to wait in case of rate limiting errors.
-     By default, the modules wait indefinitely. Setting the option to ``0`` does not retry (this was the behavior in previous versions), and a positive value
-     sets a number of seconds to wait at most (https://github.com/ansible-collections/community.hrobot/pull/140)."

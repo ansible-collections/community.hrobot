@@ -1,3 +1,0 @@
-minor_changes:
-  - "v_switch - the module is now part of the ``community.hrobot.robot`` action group, despite already being documented as part of it
-     (https://github.com/ansible-collections/community.hrobot/pull/136)."
