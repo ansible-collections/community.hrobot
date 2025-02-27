@@ -56,6 +56,33 @@ class TestHetznerResetInfo(BaseTestModule):
             'operating_status': 'not supported',
         }
 
+    def test_valid_no_type(self, mocker):
+        result = self.run_module_success(mocker, reset_info, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'server_number': 23,
+        }, [
+            FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .result_json({
+                'reset': {
+                    'server_ip': '123.123.123.123',
+                    'server_ipv6_net': '2a01:4f8:111:4221::',
+                    'server_number': 23,
+                    'operating_status': 'not supported',
+                },
+            })
+            .expect_url('{0}/reset/23'.format(BASE_URL)),
+        ])
+        assert result['changed'] is True
+        assert result['reset'] == {
+            'server_ip': '123.123.123.123',
+            'server_ipv6_net': '2a01:4f8:111:4221::',
+            'server_number': 23,
+            'operating_status': 'not supported',
+        }
+
     # Errors
 
     def test_server_not_found(self, mocker):
