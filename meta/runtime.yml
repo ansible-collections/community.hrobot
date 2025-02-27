@@ -12,6 +12,7 @@ action_groups:
     - firewall
     - firewall_info
     - reset
+    - reset_info
     - reverse_dns
     - server
     - server_info

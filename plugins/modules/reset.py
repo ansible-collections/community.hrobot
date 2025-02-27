@@ -17,6 +17,9 @@ author:
   - Felix Fontein (@felixfontein)
 description:
   - Reset a dedicated server with a software or hardware reset, or by requesting a manual reset.
+seealso:
+  - module: community.hrobot.reset_info
+    description: Retrieve information on resetter.
 extends_documentation_fragment:
   - community.hrobot.robot
   - community.hrobot.attributes
@@ -49,7 +52,8 @@ options:
       - V(hardware) is a hardware reset similar to pressing the Restart button. The power is cycled for the server.
       - V(manual) is a manual reset. This requests a technician to manually do the shutdown while looking at the screen output.
         B(Be careful) and only use this when really necessary!
-      - Note that not every server supports every reset method!
+      - "Note that not every server supports every reset method! You can query the supported reset methods by using the
+         RV(community.hrobot.reset_info#module:reset.type) return value of the M(community.hrobot.reset_info) module."
     type: str
     required: true
     choices:
@@ -64,7 +68,7 @@ EXAMPLES = r"""
   community.hrobot.reset:
     hetzner_user: foo
     hetzner_password: bar
-    failover_ip: 1.2.3.4
+    server_number: 1234
     state: power
 
 - name: Make sure that the server supports manual reset
