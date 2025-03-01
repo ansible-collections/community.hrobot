@@ -22,7 +22,7 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="community.hrobot.reverse_dns module – Set or remove reverse DNS entry for IP" href="reverse_dns_module.html" />
+    <link rel="next" title="community.hrobot.reset_info module – Query information on the resetter of a dedicated server" href="reset_info_module.html" />
     <link rel="prev" title="community.hrobot.firewall_info module – Manage Hetzner’s dedicated server firewall" href="firewall_info_module.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
 
 
@@ -86,6 +86,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#collection-links">Collection links</a></li>
@@ -93,6 +94,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="reset_info_module.html">community.hrobot.reset_info module – Query information on the resetter of a dedicated server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reverse_dns_module.html">community.hrobot.reverse_dns module – Set or remove reverse DNS entry for IP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server_module.html">community.hrobot.server module – Update server information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server_info_module.html">community.hrobot.server_info module – Query information on one or more servers</a></li>
@@ -153,7 +155,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#parameters" id="id2">Parameters</a></p></li>
 <li><p><a class="reference internal" href="#attributes" id="id3">Attributes</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id4">See Also</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
 </ul>
 </nav>
 <section id="synopsis">
@@ -205,7 +208,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p><code class="ansible-value docutils literal notranslate"><span class="pre">power</span></code> is a hardware reset similar to pressing the Power button. An ACPI signal is sent, and if the server is configured correctly, this will trigger a regular shutdown.</p>
 <p><code class="ansible-value docutils literal notranslate"><span class="pre">hardware</span></code> is a hardware reset similar to pressing the Restart button. The power is cycled for the server.</p>
 <p><code class="ansible-value docutils literal notranslate"><span class="pre">manual</span></code> is a manual reset. This requests a technician to manually do the shutdown while looking at the screen output. <strong>Be careful</strong> and only use this when really necessary!</p>
-<p>Note that not every server supports every reset method!</p>
+<p>Note that not every server supports every reset method! You can query the supported reset methods by using the <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="reset_info_module.html#ansible-collections-community-hrobot-reset-info-module-return-reset-type"><span class="std std-ref"><span class="pre">reset.type</span></span></a></code> return value of the <a class="reference internal" href="reset_info_module.html#ansible-collections-community-hrobot-reset-info-module"><span class="std std-ref">community.hrobot.reset_info</span></a> module.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;software&quot;</span></code></p></li>
@@ -273,13 +276,23 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </tbody>
 </table>
 </section>
+<section id="see-also">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="reset_info_module.html#ansible-collections-community-hrobot-reset-info-module"><span class="std std-ref">community.hrobot.reset_info</span></a></dt><dd><p>Retrieve information on resetter.</p>
+</dd>
+</dl>
+</div>
+</section>
 <section id="examples">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Send ACPI signal to server to request controlled shutdown</span>
 <span class="w">  </span><span class="nt">community.hrobot.reset</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">hetzner_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
 <span class="w">    </span><span class="nt">hetzner_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
-<span class="w">    </span><span class="nt">failover_ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.2.3.4</span>
+<span class="w">    </span><span class="nt">server_number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1234</span>
 <span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">power</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Make sure that the server supports manual reset</span>
@@ -325,7 +338,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 
 <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="firewall_info_module.html" class="btn btn-neutral float-left" title="community.hrobot.firewall_info module – Manage Hetzner’s dedicated server firewall" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="reverse_dns_module.html" class="btn btn-neutral float-right" title="community.hrobot.reverse_dns module – Set or remove reverse DNS entry for IP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="reset_info_module.html" class="btn btn-neutral float-right" title="community.hrobot.reset_info module – Query information on the resetter of a dedicated server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
