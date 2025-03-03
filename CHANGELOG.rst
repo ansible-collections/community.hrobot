@@ -4,6 +4,19 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v2.2.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+New Modules
+-----------
+
+- community.hrobot.reset_info - Query information on the resetter of a dedicated server.
+
 v2.1.0
 ======
 

@@ -383,3 +383,13 @@ releases:
         name: storagebox_snapshot_plan_info
         namespace: ''
     release_date: '2025-01-18'
+  2.2.0:
+    changes:
+      release_summary: Feature release.
+    fragments:
+      - 2.2.0.yml
+    modules:
+      - description: Query information on the resetter of a dedicated server.
+        name: reset_info
+        namespace: ''
+    release_date: '2025-03-03'
