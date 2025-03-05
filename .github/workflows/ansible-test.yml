@@ -32,6 +32,7 @@ jobs:
           - stable-2.17
           - stable-2.18
           - devel
+          - refs/pull/84621/head
     runs-on: ubuntu-latest
     steps:
       - name: Perform sanity testing
@@ -41,7 +42,7 @@ jobs:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           testing-type: sanity
           pre-test-cmd: >-
-            git clone --depth=1 --single-branch --branch stable-1 https://github.com/ansible-collections/community.library_inventory_filtering.git ../../community/library_inventory_filtering_v1
+            git clone --depth=1 --single-branch --branch ci-data-tagging https://github.com/felixfontein/community.library_inventory_filtering.git ../../community/library_inventory_filtering_v1
 
   units:
     runs-on: ubuntu-latest
@@ -57,6 +58,7 @@ jobs:
           - stable-2.17
           - stable-2.18
           - devel
+          - refs/pull/84621/head
 
     steps:
       - name: >-
@@ -68,5 +70,5 @@ jobs:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           testing-type: units
           test-deps: >-
-            git+https://github.com/ansible-collections/community.internal_test_tools.git,main
-            git+https://github.com/ansible-collections/community.library_inventory_filtering.git,stable-1
+            git+https://github.com/felixfontein/community.internal_test_tools.git,ci-data-tagging
+            git+https://github.com/felixfontein/community.library_inventory_filtering.git,ci-data-tagging
