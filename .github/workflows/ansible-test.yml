@@ -36,15 +36,7 @@ jobs:
           - stable-2.16
           - stable-2.17
           - stable-2.18
-    # Ansible-test on various stable branches does not yet work well with cgroups v2.
-    # Since ubuntu-latest now uses Ubuntu 22.04, we need to fall back to the ubuntu-20.04
-    # image for these stable branches. The list of branches where this is necessary will
-    # shrink over time, check out https://github.com/ansible-collections/news-for-maintainers/issues/28
-    # for the latest list.
-    runs-on: >-
-      ${{ contains(fromJson(
-          '["stable-2.9", "stable-2.10", "stable-2.11"]'
-      ), matrix.ansible) && 'ubuntu-20.04' || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     steps:
       - name: Perform sanity testing
         uses: felixfontein/ansible-test-gh-action@main
@@ -55,15 +47,7 @@ jobs:
           testing-type: sanity
 
   units:
-    # Ansible-test on various stable branches does not yet work well with cgroups v2.
-    # Since ubuntu-latest now uses Ubuntu 22.04, we need to fall back to the ubuntu-20.04
-    # image for these stable branches. The list of branches where this is necessary will
-    # shrink over time, check out https://github.com/ansible-collections/news-for-maintainers/issues/28
-    # for the latest list.
-    runs-on: >-
-      ${{ contains(fromJson(
-          '["stable-2.9", "stable-2.10", "stable-2.11"]'
-      ), matrix.ansible) && 'ubuntu-20.04' || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     name: Units (Ⓐ${{ matrix.ansible }})
     strategy:
       # As soon as the first unit test fails, cancel the others to free up the CI queue
