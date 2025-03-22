@@ -8,6 +8,9 @@ __metaclass__ = type
 
 import pytest
 
+from ansible_collections.community.internal_test_tools.tests.unit.plugins.modules.utils import (
+    extract_warnings_texts,
+)
 from ansible_collections.community.internal_test_tools.tests.unit.utils.fetch_url_module_framework import (
     FetchUrlCall,
     BaseTestModule,
@@ -15,8 +18,6 @@ from ansible_collections.community.internal_test_tools.tests.unit.utils.fetch_ur
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE_URL
 from ansible_collections.community.hrobot.plugins.modules import firewall
-
-from .utils import extract_warnings_texts
 
 
 def create_params(parameter, *values):
