@@ -16,6 +16,8 @@ from ansible_collections.community.internal_test_tools.tests.unit.utils.fetch_ur
 from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE_URL
 from ansible_collections.community.hrobot.plugins.modules import firewall
 
+from .utils import extract_warnings_texts
+
 
 def create_params(parameter, *values):
     assert len(values) > 1
@@ -926,7 +928,7 @@ class TestHetznerFirewall(BaseTestModule):
         assert result['firewall']['status'] == 'in process'
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1
-        assert 'Timeout while waiting for firewall to be configured.' in result['warnings']
+        assert 'Timeout while waiting for firewall to be configured.' in extract_warnings_texts(result)
 
     def test_nowait_update(self, mocker):
         result = self.run_module_success(mocker, firewall, {
