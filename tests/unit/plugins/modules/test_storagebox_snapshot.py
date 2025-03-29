@@ -24,7 +24,7 @@ CREATED_SNAPSHOT = {
 
 
 class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
-    MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox_snapshot_info.AnsibleModule'
+    MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox_snapshot.AnsibleModule'
     MOCK_ANSIBLE_MODULEUTILS_URLS_FETCH_URL = 'ansible_collections.community.hrobot.plugins.module_utils.robot.fetch_url'
 
     def test_create_snapshot(self, mocker):
@@ -52,7 +52,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             FetchUrlCall('POST', 200)
             .expect_basic_auth('test', 'hunter2')
             .expect_force_basic_auth(True)
-            .expect_url('{}/storagebox/23/snapshot/{}/comment'.format(BASE_URL, '2025-03-28T15-20-51'))
+            .expect_url('{0}/storagebox/23/snapshot/{1}/comment'.format(BASE_URL, '2025-03-28T15-20-51'))
         ])
 
     def test_delete_snapshot(self, mocker):
@@ -66,7 +66,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             FetchUrlCall('DELETE', 200)
             .expect_basic_auth('test', 'hunter2')
             .expect_force_basic_auth(True)
-            .expect_url('{}/storagebox/23/snapshot/{}'.format(BASE_URL, '2025-03-28T15-20-51'))
+            .expect_url('{0}/storagebox/23/snapshot/{1}'.format(BASE_URL, '2025-03-28T15-20-51'))
         ])
 
     def test_create_limit_exceeded(self, mocker):
@@ -78,7 +78,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             FetchUrlCall('POST', 409)
             .expect_basic_auth('test', 'hunter2')
             .expect_force_basic_auth(True)
-            .expect_url('{}/storagebox/23/snapshot'.format(BASE_URL))
+            .expect_url('{0}/storagebox/23/snapshot'.format(BASE_URL))
         ])
         resutl['msg'] == 'Snapshot limit exceeded'
 

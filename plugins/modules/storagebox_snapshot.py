@@ -109,8 +109,8 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
 
 def handle_errors(module, error, storagebox_id=None, snapshot_name=None):
     error_messages = {
-        "STORAGEBOX_NOT_FOUND": "Storagebox with ID {} does not exist".format(storagebox_id),
-        "SNAPSHOT_NOT_FOUND": "Snapshot with name {} does not exist".format(snapshot_name),
+        "STORAGEBOX_NOT_FOUND": "Storagebox with ID {0} does not exist".format(storagebox_id),
+        "SNAPSHOT_NOT_FOUND": "Snapshot with name {0} does not exist".format(snapshot_name),
         "SNAPSHOT_LIMIT_EXCEEDED": "Snapshot limit exceeded",
     }
     module.fail_json(msg=error_messages.get(error, error))
@@ -141,7 +141,7 @@ def main():
     if state == 'present':
         if not snapshot_name:
             # Create snapshot
-            url = "{}/storagebox/{}/snapshot".format(BASE_URL, storagebox_id)
+            url = "{0}/storagebox/{1}/snapshot".format(BASE_URL, storagebox_id)
             result, error = fetch_url_json(module, url, method="POST", accept_errors=[
                 "STORAGEBOX_NOT_FOUND", "SNAPSHOT_LIMIT_EXCEEDED"])
             if error:
@@ -152,7 +152,7 @@ def main():
                 module.fail_json(
                     msg="snapshot_comment is required when updating a snapshot")
             # Update snapshot comment
-            url = "{}/storagebox/{}/snapshot/{}/comment".format(
+            url = "{0}/storagebox/{1}/snapshot/{2}/comment".format(
                 BASE_URL, storagebox_id, snapshot_name)
             headers = {"Content-type": "application/x-www-form-urlencoded"}
             dummy, error = fetch_url_json(module, url, method="POST", data=urlencode(
@@ -163,7 +163,7 @@ def main():
 
     elif state == 'absent':
         # Delete snapshot
-        url = "{}/storagebox/{}/snapshot/{}".format(
+        url = "{0}/storagebox/{1}/snapshot/{2}".format(
             BASE_URL, storagebox_id, snapshot_name)
         dummy, error = fetch_url_json(module, url, method="DELETE", accept_errors=[
             "STORAGEBOX_NOT_FOUND", "SNAPSHOT_NOT_FOUND"], allow_empty_result=True)
