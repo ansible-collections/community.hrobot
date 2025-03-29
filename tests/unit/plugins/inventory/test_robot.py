@@ -34,6 +34,7 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE
 
 
 # The hashes involved are computed from the prefix and the plugin's name.
+# This no longer works with Data Tagging
 CACHE_PREFIX = 'prefix'
 CACHE_KEY = 'prefixcommunity.hrobot.robot_4e69bs_95733'
 
@@ -490,6 +491,7 @@ def test_unsafe(inventory, mocker):
     assert not is_trusted(host_2_vars['hrobot_dc'])
 
 
+@pytest.mark.skipif(SUPPORTS_DATA_TAGGING, reason="The Data Tagging PR changes how the on-disk cache looks like")
 def test_inventory_cache_empty(tmpdir, mocker):
     cache_directory = os.path.join(tmpdir, 'cache')
     open_url = OpenUrlProxy([
@@ -571,6 +573,7 @@ def test_inventory_cache_empty(tmpdir, mocker):
     ]
 
 
+@pytest.mark.skipif(SUPPORTS_DATA_TAGGING, reason="The Data Tagging PR changes how the on-disk cache looks like")
 def test_inventory_cache_full(tmpdir, mocker):
     cache_directory = os.path.join(tmpdir, 'cache')
     open_url = OpenUrlProxy([])
