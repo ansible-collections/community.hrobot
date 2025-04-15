@@ -40,8 +40,7 @@ options:
     description:
       - The name of the snapshot to comment or delete.
       - The snapshot name is automatically generated and should not be specified when creating a snapshot.
-      - Required when setting O(state) to V(absent)
-      - Required when O(snapshot_comment) is specified
+      - Required when setting O(state) to V(absent), or when O(snapshot_comment) is specified.
     type: str
   state:
     description:
