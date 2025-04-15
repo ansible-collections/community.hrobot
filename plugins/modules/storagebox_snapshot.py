@@ -12,6 +12,7 @@ __metaclass__ = type
 DOCUMENTATION = r"""
 module: storagebox_snapshot
 short_description: Create, update, or delete a snapshot of a storage box
+version_added: 2.3.0
 author:
   - Matthias Hurdebise (@matthiashurdebise)
 description:
