@@ -150,6 +150,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>To install it, use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">community.hrobot</span></code>.</p>
 <p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">community.hrobot.storagebox_snapshot</span></code>.</p>
 </div>
+<p class="ansible-version-added">New in community.hrobot 2.3.0</p>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
@@ -212,8 +213,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-cell"><p>The name of the snapshot to comment or delete.</p>
 <p>The snapshot name is automatically generated and should not be specified when creating a snapshot.</p>
-<p>Required when setting <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-module-parameter-state"><span class="std std-ref"><span class="pre">state</span></span></a></strong></code> to <code class="ansible-value docutils literal notranslate"><span class="pre">absent</span></code></p>
-<p>Required when <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-module-parameter-snapshot-comment"><span class="std std-ref"><span class="pre">snapshot_comment</span></span></a></strong></code> is specified</p>
+<p>Required when setting <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-module-parameter-state"><span class="std std-ref"><span class="pre">state</span></span></a></strong></code> to <code class="ansible-value docutils literal notranslate"><span class="pre">absent</span></code>, or when <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-module-parameter-snapshot-comment"><span class="std std-ref"><span class="pre">snapshot_comment</span></span></a></strong></code> is specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
