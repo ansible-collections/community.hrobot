@@ -22,6 +22,29 @@ CREATED_SNAPSHOT = {
     }
 }
 
+EXISTING_SNAPSHOTS = [
+    {
+        "snapshot": {
+            "name": "2015-12-21T12-40-38",
+            "timestamp": "2015-12-21T13:40:38+00:00",
+            "size": 400,
+            "filesystem_size": 12345,
+            "automatic": False,
+            "comment": "Test-Snapshot 1"
+        }
+    },
+    {
+        "snapshot": {
+            "name": "2025-03-28T15-20-51",
+            "timestamp": "2025-03-28T15:19:30+00:00",
+            "size": 10000,
+            "filesystem_size": 22345,
+            "automatic": False,
+            "comment": "Test-Snapshot 2"
+        }
+    }
+]
+
 
 class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
     MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox_snapshot.AnsibleModule'
@@ -41,19 +64,46 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
         assert result['changed'] is True
         assert result['snapshot'] == CREATED_SNAPSHOT['snapshot']
 
+    def test_create_snapshot_check_mode(self, mocker):
+        result = self.run_module_success(mocker, storagebox_snapshot, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'storagebox_id': 23,
+            '_ansible_check_mode': True}, [
+        ])
+        assert result['changed'] is True
+
     def test_comment_snapshot(self, mocker):
         self.run_module_success(mocker, storagebox_snapshot, {
             'hetzner_user': 'test',
             'hetzner_password': 'hunter2',
             'storagebox_id': 23,
             'snapshot_name': '2025-03-28T15-20-51',
-            'snapshot_comment': 'This is a test comment',
+            'snapshot_comment': 'Changing Comment',
         }, [
+            FetchUrlCall('GET', 200)
+            .result_json(EXISTING_SNAPSHOTS)
+            .expect_url(BASE_URL + '/storagebox/23/snapshot'),
             FetchUrlCall('POST', 200)
             .expect_basic_auth('test', 'hunter2')
             .expect_force_basic_auth(True)
             .expect_url('{0}/storagebox/23/snapshot/{1}/comment'.format(BASE_URL, '2025-03-28T15-20-51'))
         ])
+    
+    def test_comment_snapshot_check_mode(self, mocker):
+        result = self.run_module_success(mocker, storagebox_snapshot, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'storagebox_id': 23,
+            'snapshot_name': '2025-03-28T15-20-51',
+            'snapshot_comment': 'Test-Snapshot 2',
+            '_ansible_check_mode': True
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(EXISTING_SNAPSHOTS)
+            .expect_url(BASE_URL + '/storagebox/23/snapshot'),
+        ])
+        assert result['changed'] is False
 
     def test_delete_snapshot(self, mocker):
         self.run_module_success(mocker, storagebox_snapshot, {
@@ -63,11 +113,29 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             'snapshot_name': '2025-03-28T15-20-51',
             'state': 'absent'
         }, [
+            FetchUrlCall('GET', 200)
+            .result_json(EXISTING_SNAPSHOTS)
+            .expect_url(BASE_URL + '/storagebox/23/snapshot'),
             FetchUrlCall('DELETE', 200)
             .expect_basic_auth('test', 'hunter2')
             .expect_force_basic_auth(True)
             .expect_url('{0}/storagebox/23/snapshot/{1}'.format(BASE_URL, '2025-03-28T15-20-51'))
         ])
+
+    def test_delete_snapshot_check_mode(self, mocker):
+        result = self.run_module_success(mocker, storagebox_snapshot, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'storagebox_id': 23,
+            'snapshot_name': '2025-03-28T15-20-51',
+            'state': 'absent',
+            '_ansible_check_mode': True
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json(EXISTING_SNAPSHOTS)
+            .expect_url(BASE_URL + '/storagebox/23/snapshot')
+        ])
+        assert result['changed'] is True
 
     def test_create_limit_exceeded(self, mocker):
         resutl = self.run_module_failed(mocker, storagebox_snapshot, {
@@ -102,19 +170,14 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             'hetzner_user': 'test',
             'hetzner_password': 'hunter2',
             'storagebox_id': 23,
-            'snapshot_name': 'nonexistent-snapshot',
+            'snapshot_name': 'does-not-exist',
             'state': 'absent'
         }, [
-            FetchUrlCall('DELETE', 404)
-            .expect_url(BASE_URL + '/storagebox/23/snapshot/nonexistent-snapshot')
-            .result_json({
-                'error': {
-                    'status': 404,
-                    'code': 'SNAPSHOT_NOT_FOUND',
-                    'message': 'Snapshot with name nonexistent-snapshot not found'
-                }
-            })
+            FetchUrlCall("GET", 200)
+            .expect_url(BASE_URL + '/storagebox/23/snapshot')
+            .result_json(EXISTING_SNAPSHOTS)
         ])
+        assert result['changed'] is False
 
     def test_storagebox_id_unknown(self, mocker):
         result = self.run_module_failed(mocker, storagebox_snapshot, {
@@ -142,15 +205,9 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             'snapshot_name': '2038-01-19T03:14:17',
             'snapshot_comment': 'Test comment'
         }, [
-            FetchUrlCall('POST', 404)
-            .result_json({
-                'error': {
-                    'status': 404,
-                    'code': 'SNAPSHOT_NOT_FOUND',
-                    'message': 'Snapshot with name 2038-01-19T03:14:17 does not exist',
-                }
-            })
-            .expect_url(BASE_URL + '/storagebox/23/snapshot/2038-01-19T03:14:17/comment')
+            FetchUrlCall('GET', 200)
+            .result_json(EXISTING_SNAPSHOTS)
+            .expect_url(BASE_URL + '/storagebox/23/snapshot')
         ])
         assert result['msg'] == 'Snapshot with name 2038-01-19T03:14:17 does not exist'
 

@@ -131,6 +131,7 @@ def main():
         argument_spec=argument_spec,
         required_by={"snapshot_comment": ["snapshot_name"]},
         required_if=[["state", "absent", ["snapshot_name"]]],
+        supports_check_mode=True
     )
 
     storagebox_id = module.params['storagebox_id']
@@ -138,37 +139,87 @@ def main():
     snapshot_name = module.params['snapshot_name']
     snapshot_comment = module.params['snapshot_comment']
 
-    if state == 'present':
-        if not snapshot_name:
-            # Create snapshot
-            url = "{0}/storagebox/{1}/snapshot".format(BASE_URL, storagebox_id)
-            result, error = fetch_url_json(module, url, method="POST", accept_errors=[
-                "STORAGEBOX_NOT_FOUND", "SNAPSHOT_LIMIT_EXCEEDED"])
-            if error:
-                handle_errors(module, error, storagebox_id)
-            module.exit_json(changed=True, snapshot=result['snapshot'])
-        else:
-            if not snapshot_comment:
-                module.fail_json(
-                    msg="snapshot_comment is required when updating a snapshot")
-            # Update snapshot comment
-            url = "{0}/storagebox/{1}/snapshot/{2}/comment".format(
-                BASE_URL, storagebox_id, snapshot_name)
-            headers = {"Content-type": "application/x-www-form-urlencoded"}
-            dummy, error = fetch_url_json(module, url, method="POST", data=urlencode(
-                {"comment": snapshot_comment}), headers=headers, accept_errors=["STORAGEBOX_NOT_FOUND", "SNAPSHOT_NOT_FOUND"], allow_empty_result=True)
-            if error:
-                handle_errors(module, error, storagebox_id, snapshot_name)
+    # Create snapshot
+    if state == 'present' and not snapshot_name:
+        if module.check_mode:
             module.exit_json(changed=True)
+        snapshot = create_snapshot(module, storagebox_id)
+        module.exit_json(changed=True, snapshot=snapshot)
 
+    # Update snapshot comment
+    elif state == 'present' and snapshot_name:
+        if not snapshot_comment:
+            module.fail_json(
+                msg="snapshot_comment is required when updating a snapshot")
+
+        snapshots = fetch_snapshots(
+            module=module, storagebox_id=storagebox_id)
+        snapshot = get_snapshot_by_name(snapshots, snapshot_name)
+        if not snapshot:
+            handle_errors(module, "SNAPSHOT_NOT_FOUND",
+                          snapshot_name=snapshot_name)
+        if snapshot_comment != snapshot['comment']:
+            if not module.check_mode:
+                update_snapshot_comment(
+                    module, storagebox_id, snapshot_name, snapshot_comment)
+            module.exit_json(changed=True)
+        else:
+            module.exit_json(changed=False)
+
+    # Delete snapshot
     elif state == 'absent':
-        # Delete snapshot
-        url = "{0}/storagebox/{1}/snapshot/{2}".format(
-            BASE_URL, storagebox_id, snapshot_name)
-        dummy, error = fetch_url_json(module, url, method="DELETE", accept_errors=[
-            "STORAGEBOX_NOT_FOUND", "SNAPSHOT_NOT_FOUND"], allow_empty_result=True)
-        changed = not bool(error)
-        module.exit_json(changed=changed)
+        snapshots = fetch_snapshots(module=module, storagebox_id=storagebox_id)
+        snapshot = get_snapshot_by_name(snapshots, snapshot_name)
+        if snapshot:
+            if not module.check_mode:
+                delete_snapshot(module, storagebox_id, snapshot_name)
+            module.exit_json(changed=True)
+        else:
+            module.exit_json(changed=False)
+
+
+def delete_snapshot(module, storagebox_id, snapshot_name):
+    url = "{0}/storagebox/{1}/snapshot/{2}".format(
+        BASE_URL, storagebox_id, snapshot_name)
+    dummy, error = fetch_url_json(module, url, method="DELETE", accept_errors=[
+        "STORAGEBOX_NOT_FOUND", "SNAPSHOT_NOT_FOUND"], allow_empty_result=True)
+    if error and error == "STORAGEBOX_NOT_FOUND":
+        handle_errors(module, error, storagebox_id, snapshot_name)
+
+
+def update_snapshot_comment(module, storagebox_id, snapshot_name, snapshot_comment):
+    url = "{0}/storagebox/{1}/snapshot/{2}/comment".format(
+        BASE_URL, storagebox_id, snapshot_name)
+    headers = {"Content-type": "application/x-www-form-urlencoded"}
+    dummy, error = fetch_url_json(module, url, method="POST", data=urlencode(
+        {"comment": snapshot_comment}), headers=headers, accept_errors=["STORAGEBOX_NOT_FOUND", "SNAPSHOT_NOT_FOUND"], allow_empty_result=True)
+    if error:
+        handle_errors(module, error, storagebox_id, snapshot_name)
+
+
+def create_snapshot(module, storagebox_id):
+    url = "{0}/storagebox/{1}/snapshot".format(BASE_URL, storagebox_id)
+    result, error = fetch_url_json(module, url, method="POST", accept_errors=[
+        "STORAGEBOX_NOT_FOUND", "SNAPSHOT_LIMIT_EXCEEDED"])
+    if error:
+        handle_errors(module, error, storagebox_id)
+    return result['snapshot']
+
+
+def get_snapshot_by_name(snapshots, name):
+    for snapshot in snapshots:
+        if snapshot['name'] == name:
+            return snapshot
+    return None
+
+
+def fetch_snapshots(module, storagebox_id):
+    url = "{0}/storagebox/{1}/snapshot".format(BASE_URL, storagebox_id)
+    result, error = fetch_url_json(module, url, method="GET", accept_errors=[
+        "STORAGEBOX_NOT_FOUND"])
+    if error:
+        handle_errors(module, error, storagebox_id)
+    return [item['snapshot'] for item in result]
 
 
 if __name__ == '__main__':  # pragma: no cover
