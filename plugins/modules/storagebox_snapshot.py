@@ -12,6 +12,7 @@ __metaclass__ = type
 DOCUMENTATION = r"""
 module: storagebox_snapshot
 short_description: Create, update, or delete a snapshot of a storage box
+version_added: 2.3.0
 author:
   - Matthias Hurdebise (@matthiashurdebise)
 description:
@@ -22,7 +23,7 @@ extends_documentation_fragment:
   - community.hrobot.attributes.actiongroup_robot
 attributes:
   check_mode:
-    support: none
+    support: full
   diff_mode:
     support: none
   idempotent:
@@ -39,8 +40,7 @@ options:
     description:
       - The name of the snapshot to comment or delete.
       - The snapshot name is automatically generated and should not be specified when creating a snapshot.
-      - Required when setting O(state) to V(absent)
-      - Required when O(snapshot_comment) is specified
+      - Required when setting O(state) to V(absent), or when O(snapshot_comment) is specified.
     type: str
   state:
     description:
