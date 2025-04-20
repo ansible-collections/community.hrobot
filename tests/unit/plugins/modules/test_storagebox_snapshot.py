@@ -105,6 +105,25 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
         ])
         assert result['changed'] is False
 
+    def test_comment_snapshot_nonexistent_storagebox(self, mocker):
+        self.run_module_failed(mocker, storagebox_snapshot, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'storagebox_id': 54,
+            'snapshot_name': '2025-03-28T15-20-51',
+            'snapshot_comment': 'Changing Comment',
+        }, [
+            FetchUrlCall('GET', 404)
+            .result_json({
+                'error': {
+                    'status': 404,
+                    'code': 'STORAGEBOX_NOT_FOUND',
+                    'message': 'Storagebox with ID 54 does not exist',
+                }
+            })
+            .expect_url(BASE_URL + '/storagebox/54/snapshot')
+        ])
+
     def test_delete_snapshot(self, mocker):
         self.run_module_success(mocker, storagebox_snapshot, {
             'hetzner_user': 'test',
@@ -178,6 +197,26 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             .result_json(EXISTING_SNAPSHOTS)
         ])
         assert result['changed'] is False
+
+    def test_delete_snapshot_nonexistent_storagebox(self, mocker):
+        result = self.run_module_failed(mocker, storagebox_snapshot, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'storagebox_id': 54,
+            'snapshot_name': '2025-03-28T15-20-51',
+            'state': 'absent'
+        }, [
+            FetchUrlCall("GET", 404)
+            .result_json({
+                'error': {
+                    'status': 404,
+                    'code': 'STORAGEBOX_NOT_FOUND',
+                    'message': 'Storagebox with ID 54 does not exist',
+                }
+            })
+            .expect_url(BASE_URL + '/storagebox/54/snapshot')
+        ])
+        assert result['msg'] == 'Storagebox with ID 54 does not exist'
 
     def test_storagebox_id_unknown(self, mocker):
         result = self.run_module_failed(mocker, storagebox_snapshot, {

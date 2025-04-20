@@ -181,20 +181,15 @@ def main():
 def delete_snapshot(module, storagebox_id, snapshot_name):
     url = "{0}/storagebox/{1}/snapshot/{2}".format(
         BASE_URL, storagebox_id, snapshot_name)
-    dummy, error = fetch_url_json(module, url, method="DELETE", accept_errors=[
-        "STORAGEBOX_NOT_FOUND", "SNAPSHOT_NOT_FOUND"], allow_empty_result=True)
-    if error and error != "SNAPSHOT_NOT_FOUND":
-        handle_errors(module, error, storagebox_id, snapshot_name)
+    fetch_url_json(module, url, method="DELETE", allow_empty_result=True)
 
 
 def update_snapshot_comment(module, storagebox_id, snapshot_name, snapshot_comment):
     url = "{0}/storagebox/{1}/snapshot/{2}/comment".format(
         BASE_URL, storagebox_id, snapshot_name)
     headers = {"Content-type": "application/x-www-form-urlencoded"}
-    dummy, error = fetch_url_json(module, url, method="POST", data=urlencode(
-        {"comment": snapshot_comment}), headers=headers, accept_errors=["STORAGEBOX_NOT_FOUND", "SNAPSHOT_NOT_FOUND"], allow_empty_result=True)
-    if error:
-        handle_errors(module, error, storagebox_id, snapshot_name)
+    fetch_url_json(module, url, method="POST", data=urlencode(
+        {"comment": snapshot_comment}), headers=headers, allow_empty_result=True)
 
 
 def create_snapshot(module, storagebox_id):
