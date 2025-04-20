@@ -148,7 +148,7 @@ def main():
 
     # Update snapshot comment
     elif state == 'present' and snapshot_name:
-        if not snapshot_comment:
+        if snapshot_comment is None:
             module.fail_json(
                 msg="snapshot_comment is required when updating a snapshot")
 
