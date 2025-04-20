@@ -167,7 +167,7 @@ def main():
             module.exit_json(changed=False)
 
     # Delete snapshot
-    elif state == 'absent':
+    else:
         snapshots = fetch_snapshots(module=module, storagebox_id=storagebox_id)
         snapshot = get_snapshot_by_name(snapshots, snapshot_name)
         if snapshot:
