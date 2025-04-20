@@ -183,7 +183,7 @@ def delete_snapshot(module, storagebox_id, snapshot_name):
         BASE_URL, storagebox_id, snapshot_name)
     dummy, error = fetch_url_json(module, url, method="DELETE", accept_errors=[
         "STORAGEBOX_NOT_FOUND", "SNAPSHOT_NOT_FOUND"], allow_empty_result=True)
-    if error and error == "STORAGEBOX_NOT_FOUND":
+    if error and error != "SNAPSHOT_NOT_FOUND":
         handle_errors(module, error, storagebox_id, snapshot_name)
 
 
