@@ -162,9 +162,9 @@ def main():
             if not module.check_mode:
                 update_snapshot_comment(
                     module, storagebox_id, snapshot_name, snapshot_comment)
-            module.exit_json(changed=True)
+            module.exit_json(changed=True, snapshot=snapshot)
         else:
-            module.exit_json(changed=False)
+            module.exit_json(changed=False, snapshot=snapshot)
 
     # Delete snapshot
     else:
