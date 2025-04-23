@@ -79,7 +79,7 @@ RETURN = r"""
 snapshot:
   description:
     - The snapshot that was created.
-  returned: success
+  returned: success and O(state=present)
   type: dict
   contains:
     name:
