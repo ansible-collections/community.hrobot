@@ -44,6 +44,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Query a list of all storage boxes
   community.hrobot.storagebox_info:
     hetzner_user: foo
