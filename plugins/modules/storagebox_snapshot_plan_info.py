@@ -33,6 +33,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Query the snapshot plans
   community.hrobot.storagebox_snapshot_plan_info:
     hetzner_user: foo

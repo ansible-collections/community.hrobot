@@ -36,6 +36,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Query resetter information for server 1234
   community.hrobot.reset_info:
     hetzner_user: foo

@@ -64,6 +64,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Send ACPI signal to server to request controlled shutdown
   community.hrobot.reset:
     hetzner_user: foo
@@ -87,7 +88,7 @@ EXAMPLES = r"""
     reset_type: manual
 """
 
-RETURN = r""" # """
+RETURN = r"""#"""
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import urlencode

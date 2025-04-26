@@ -227,6 +227,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Disable all special boot configurations
   community.hrobot.boot:
     hetzner_user: foo

@@ -47,6 +47,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Query a list of all servers
   community.hrobot.server_info:
     hetzner_user: foo

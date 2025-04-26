@@ -57,6 +57,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Set reverse DNS entry for 1.2.3.4
   community.hrobot.reverse_dns:
     hetzner_user: foo
@@ -72,7 +73,7 @@ EXAMPLES = r"""
     state: absent
 """
 
-RETURN = r""" # """
+RETURN = r"""#"""
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import urlencode

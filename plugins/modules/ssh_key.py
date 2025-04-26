@@ -67,6 +67,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Add an SSH key
   community.hrobot.ssh_key:
     hetzner_user: foo
