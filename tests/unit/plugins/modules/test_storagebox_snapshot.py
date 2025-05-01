@@ -78,7 +78,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             'hetzner_user': 'test',
             'hetzner_password': 'hunter2',
             'storagebox_id': 23,
-            'snapshot_comment' : 'On Creation Comment'}, [
+            'snapshot_comment': 'On Creation Comment'}, [
             FetchUrlCall('POST', 200)
             .expect_basic_auth('test', 'hunter2')
             .expect_force_basic_auth(True)
