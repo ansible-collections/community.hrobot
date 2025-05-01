@@ -57,6 +57,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Create a snapshot
   community.hrobot.storagebox_snapshot:
     storagebox_id: 12345
