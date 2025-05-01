@@ -129,7 +129,6 @@ def main():
 
     module = AnsibleModule(
         argument_spec=argument_spec,
-        required_by={"snapshot_comment": ["snapshot_name"]},
         required_if=[["state", "absent", ["snapshot_name"]]],
         supports_check_mode=True
     )
@@ -144,6 +143,13 @@ def main():
         if module.check_mode:
             module.exit_json(changed=True)
         snapshot = create_snapshot(module, storagebox_id)
+
+        # Add the comment if provided
+        if snapshot_comment is not None:
+            update_snapshot_comment(
+                module, storagebox_id, snapshot['name'], snapshot_comment)
+            snapshot['comment'] = snapshot_comment
+
         module.exit_json(changed=True, snapshot=snapshot)
 
     # Update snapshot comment

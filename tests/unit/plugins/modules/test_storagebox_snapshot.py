@@ -24,23 +24,23 @@ CREATED_SNAPSHOT = {
 
 EXISTING_SNAPSHOTS = [
     {
-        "snapshot": {
-            "name": "2015-12-21T12-40-38",
-            "timestamp": "2015-12-21T13:40:38+00:00",
-            "size": 400,
-            "filesystem_size": 12345,
-            "automatic": False,
-            "comment": "Test-Snapshot 1"
+        'snapshot': {
+            'name': '2015-12-21T12-40-38',
+            'timestamp': '2015-12-21T13:40:38+00:00',
+            'size': 400,
+            'filesystem_size': 12345,
+            'automatic': False,
+            'comment': 'Test-Snapshot 1'
         }
     },
     {
-        "snapshot": {
-            "name": "2025-03-28T15-20-51",
-            "timestamp": "2025-03-28T15:19:30+00:00",
-            "size": 10000,
-            "filesystem_size": 22345,
-            "automatic": False,
-            "comment": "Test-Snapshot 2"
+        'snapshot': {
+            'name': '2025-03-28T15-20-51',
+            'timestamp': '2025-03-28T15:19:30+00:00',
+            'size': 10000,
+            'filesystem_size': 22345,
+            'automatic': False,
+            'comment': 'Test-Snapshot 2'
         }
     }
 ]
@@ -72,6 +72,30 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             '_ansible_check_mode': True}, [
         ])
         assert result['changed'] is True
+
+    def test_create_snapshot_with_comment(self, mocker):
+        result = self.run_module_success(mocker, storagebox_snapshot, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'storagebox_id': 23,
+            'snapshot_comment' : 'On Creation Comment'}, [
+            FetchUrlCall('POST', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .result_json(CREATED_SNAPSHOT)
+            .expect_url(BASE_URL + '/storagebox/23/snapshot'),
+            FetchUrlCall("POST", 200)
+            .expect_url('{0}/storagebox/23/snapshot/{1}/comment'.format(BASE_URL, CREATED_SNAPSHOT['snapshot']['name']))
+            .result_json({
+                'snapshot': {
+                    'name': '2025-03-28T15-20-51',
+                    'timestamp': '2025-03-28T16:20:51+01:00',
+                    'size': 0,
+                    'comment': 'On Creation Comment'
+                }})
+        ])
+        assert result['changed'] is True
+        assert result['snapshot']['comment'] == 'On Creation Comment'
 
     def test_comment_snapshot(self, mocker):
         self.run_module_success(mocker, storagebox_snapshot, {
