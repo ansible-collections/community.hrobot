@@ -47,6 +47,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Set server's name to foo.example.com
   community.hrobot.server:
     hetzner_user: foo

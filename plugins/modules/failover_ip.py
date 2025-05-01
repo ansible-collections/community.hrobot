@@ -66,6 +66,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Set value of failover IP 1.2.3.4 to 5.6.7.8
   community.hrobot.failover_ip:
     hetzner_user: foo

@@ -221,6 +221,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Configure firewall for server with main IP 1.2.3.4
   community.hrobot.firewall:
     hetzner_user: foo

@@ -85,6 +85,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Setup storagebox
   community.hrobot.storagebox_snapshot_plan:
     hetzner_user: foo

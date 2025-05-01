@@ -46,6 +46,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Set the password
   community.hrobot.storagebox_set_password:
     id: 123
