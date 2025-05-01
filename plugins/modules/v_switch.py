@@ -89,6 +89,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Create vSwitch with VLAN 4010 and name foo
   community.hrobot.v_switch:
     hetzner_user: foo

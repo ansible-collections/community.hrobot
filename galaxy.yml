@@ -15,7 +15,7 @@ description: Modules for controlling Hetzner's Robot
 license:
   - GPL-3.0-or-later
   - BSD-2-Clause
-#license_file: COPYING
+# license_file: COPYING
 tags:
   - hetzner
   - robot

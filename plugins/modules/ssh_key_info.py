@@ -32,6 +32,7 @@ attributes:
 """
 
 EXAMPLES = r"""
+---
 - name: List all SSH keys
   community.hrobot.ssh_key_info:
     hetzner_user: foo

@@ -7,7 +7,7 @@
   smoke_ipaddress:
   register: result
 
-- name: Validate result 
+- name: Validate result
   assert:
     that:
       - result.msg == 'Everything is ok'
@@ -22,7 +22,7 @@
   ignore_errors: true
   register: result
 
-- name: Validate result 
+- name: Validate result
   assert:
     that:
       - result is failed

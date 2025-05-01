@@ -69,6 +69,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Get firewall configuration for server with main IP 1.2.3.4
   community.hrobot.firewall_info:
     hetzner_user: foo

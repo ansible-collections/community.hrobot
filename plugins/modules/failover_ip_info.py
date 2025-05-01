@@ -41,6 +41,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Get value of failover IP 1.2.3.4
   community.hrobot.failover_ip_info:
     hetzner_user: foo
