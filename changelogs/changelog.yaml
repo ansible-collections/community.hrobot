@@ -393,3 +393,13 @@ releases:
         name: reset_info
         namespace: ''
     release_date: '2025-03-03'
+  2.3.0:
+    changes:
+      release_summary: Feature release.
+    fragments:
+      - 2.3.0.yml
+    modules:
+      - description: Create, update, or delete a snapshot of a storage box.
+        name: storagebox_snapshot
+        namespace: ''
+    release_date: '2025-05-02'

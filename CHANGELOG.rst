@@ -4,6 +4,19 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v2.3.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+New Modules
+-----------
+
+- community.hrobot.storagebox_snapshot - Create, update, or delete a snapshot of a storage box.
+
 v2.2.0
 ======
 
