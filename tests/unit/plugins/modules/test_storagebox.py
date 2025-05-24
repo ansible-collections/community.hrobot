@@ -411,3 +411,31 @@ class TestHetznerStoragebox(BaseTestModule):
             ' Maximum allowed requests: 1. Time interval in seconds: 5.'
             ' Waited a total of 5.1 seconds for rate limit errors to go away'
         )
+
+    def test_change_ssh(self, mocker):
+        updated = update_info(23, ssh=False)
+        result = self.run_module_success(mocker, storagebox, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'id': 23,
+            'name': 'Backup Server 2',
+            'ssh': False,
+        }, [
+            FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .result_json(STORAGEBOX_DETAIL_DATA[23])
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+            FetchUrlCall('POST', 200)
+            .result_json(updated)
+            .expect_form_value_absent('storagebox_name')
+            .expect_form_value_absent('webdav')
+            .expect_form_value_absent('samba')
+            .expect_form_value('ssh', 'false')
+            .expect_form_value_absent('external_reachability')
+            .expect_form_value_absent('zfs')
+            .expect_url('{0}/storagebox/23'.format(BASE_URL)),
+        ])
+        assert result['changed'] is True
+        for key in STORAGEBOX_KEYS:
+            assert result[key] == updated['storagebox'][key], "Unexpected difference for {0!r}".format(key)
