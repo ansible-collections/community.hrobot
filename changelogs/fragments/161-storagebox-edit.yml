@@ -1,0 +1,3 @@
+bugfixes:
+  - "storagebox - make sure that changes of boolean parameters are sent correctly to the Robot service
+     (https://github.com/ansible-collections/community.hrobot/issues/160, https://github.com/ansible-collections/community.hrobot/pull/161)."

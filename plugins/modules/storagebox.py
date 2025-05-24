@@ -170,7 +170,10 @@ def main():
         if value is not None:
             if before[data_name] != value:
                 after[data_name] = value
-                changes[change_name] = value
+                if isinstance(value, bool):
+                    changes[change_name] = str(value).lower()
+                else:
+                    changes[change_name] = value
 
     if changes and not module.check_mode:
         headers = {"Content-type": "application/x-www-form-urlencoded"}
