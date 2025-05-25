@@ -68,6 +68,7 @@ If you use the Ansible package and do not update collections independently, use 
 - `community.hrobot.storagebox_info` module
 - `community.hrobot.storagebox_set_password` module
 - `community.hrobot.storagebox_snapshot` module
+- `community.hrobot.storagebox_snapshot_info` module
 - `community.hrobot.storagebox_snapshot_plan` module
 - `community.hrobot.storagebox_snapshot_plan_info` module
 - `community.hrobot.v_switch` module
