@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2025 Felix Fontein <felix@fontein.de>
+# Copyright (c) 2025 Matthias Hurdebise <matthias_hurdebise@hotmail.fr>
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -12,7 +12,7 @@ __metaclass__ = type
 DOCUMENTATION = r"""
 module: storagebox_snapshot_info
 short_description: Query the snapshots for a storage box
-version_added: 2.3.0
+version_added: 2.4.0
 author:
   - Matthias Hurdebise (@matthiashurdebise)
 description:
@@ -33,6 +33,7 @@ options:
 """
 
 EXAMPLES = r"""
+---
 - name: Query the snapshots
   community.hrobot.storagebox_snapshot_info:
     hetzner_user: foo
@@ -58,7 +59,7 @@ snapshots:
       description:
         - The snapshot name.
       type: str
-      sample: 2025-01-21T12-40-38
+      sample: "2025-01-21T12-40-38"
       returned: success
     timestamp:
       description:
