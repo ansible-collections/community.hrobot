@@ -71,6 +71,7 @@ If you use the Ansible package and do not update collections independently, use 
 - `community.hrobot.storagebox_snapshot_info` module
 - `community.hrobot.storagebox_snapshot_plan` module
 - `community.hrobot.storagebox_snapshot_plan_info` module
+- `community.hrobot.storagebox_subaccount_info` module
 - `community.hrobot.v_switch` module
 - `community.hrobot.robot` inventory plugin
 
