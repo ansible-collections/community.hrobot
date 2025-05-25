@@ -268,12 +268,12 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount_info</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">hetzner_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
 <span class="w">    </span><span class="nt">hetzner_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
-<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123</span>
+<span class="w">    </span><span class="nt">storage_box_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123</span>
 <span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Output data</span>
 <span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Username</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">first</span><span class="nv"> </span><span class="s">subaccount:</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">result.subaccount</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.username</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Username</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">first</span><span class="nv"> </span><span class="s">subaccount:</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">result.subaccounts</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.username</span> <span class="cp">}}</span><span class="s">&quot;</span>
 </pre></div>
 </div>
 </section>
