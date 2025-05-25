@@ -39,15 +39,15 @@ EXAMPLES = r"""
   community.hrobot.storagebox_subaccount_info:
     hetzner_user: foo
     hetzner_password: bar
-    id: 123
+    storage_box_id: 123
   register: result
 
 - name: Output data
   ansible.builtin.debug:
-    msg: "Username of the first subaccount: {{ result.subaccount[0].username }}"
+    msg: "Username of the first subaccount: {{ result.subaccounts[0].username }}"
 """
 RETURN = r"""
-subaccount:
+subaccounts:
   description:
     - The storage box's info.
     - All date and time parameters are in UTC.

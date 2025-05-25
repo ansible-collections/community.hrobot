@@ -67,8 +67,8 @@ class TestHetznerStorageboxSubbacountInfo(BaseTestModule):
             .expect_url(BASE_URL + '/storagebox/23/subaccount')
         ])
         assert result['changed'] is False
-        assert len(result['subaccount']) == 2
-        assert result['subaccount'][0] == STORAGEBOX_SUBACCOUNTS[0]['subaccount']
+        assert len(result['subaccounts']) == 2
+        assert result['subaccounts'][0] == STORAGEBOX_SUBACCOUNTS[0]['subaccount']
 
     def test_storagebox_id_unknown(self, mocker):
         result = self.run_module_failed(mocker, storagebox_subaccount_info, {
