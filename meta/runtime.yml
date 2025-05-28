@@ -25,4 +25,5 @@ action_groups:
     - storagebox_snapshot_info
     - storagebox_snapshot_plan
     - storagebox_snapshot_plan_info
+    - storagebox_subaccount_info
     - v_switch
