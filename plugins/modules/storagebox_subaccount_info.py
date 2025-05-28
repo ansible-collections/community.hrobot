@@ -46,6 +46,7 @@ EXAMPLES = r"""
   ansible.builtin.debug:
     msg: "Username of the first subaccount: {{ result.subaccounts[0].username }}"
 """
+
 RETURN = r"""
 subaccounts:
   description:
