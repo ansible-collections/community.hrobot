@@ -7,7 +7,7 @@
 <meta content="2.16.3" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>community.hrobot.reset_info module – Query information on the resetter of a dedicated server &mdash; Community.Hrobot Collection  documentation</title>
+  <title>community.hrobot.storagebox_subaccount_info module – Query the subaccounts for a storage box &mdash; Community.Hrobot Collection  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=41de9001" />
       <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
       <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
@@ -22,8 +22,8 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="community.hrobot.reverse_dns module – Set or remove reverse DNS entry for IP" href="reverse_dns_module.html" />
-    <link rel="prev" title="community.hrobot.reset module – Reset a dedicated server" href="reset_module.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
+    <link rel="next" title="community.hrobot.v_switch module – Manage Hetzner’s vSwitch" href="v_switch_module.html" />
+    <link rel="prev" title="community.hrobot.storagebox_snapshot_plan_info module – Query the snapshot plans for a storage box" href="storagebox_snapshot_plan_info_module.html" /><!-- extra head elements for Ansible beyond RTD Sphinx Theme -->
 
 
 
@@ -83,19 +83,7 @@
 <li class="toctree-l1"><a class="reference internal" href="firewall_module.html">community.hrobot.firewall module – Manage Hetzner’s dedicated server firewall</a></li>
 <li class="toctree-l1"><a class="reference internal" href="firewall_info_module.html">community.hrobot.firewall_info module – Manage Hetzner’s dedicated server firewall</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reset_module.html">community.hrobot.reset module – Reset a dedicated server</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">community.hrobot.reset_info module – Query information on the resetter of a dedicated server</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#return-values">Return Values</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#collection-links">Collection links</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="reset_info_module.html">community.hrobot.reset_info module – Query information on the resetter of a dedicated server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reverse_dns_module.html">community.hrobot.reverse_dns module – Set or remove reverse DNS entry for IP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server_module.html">community.hrobot.server module – Update server information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server_info_module.html">community.hrobot.server_info module – Query information on one or more servers</a></li>
@@ -108,7 +96,18 @@
 <li class="toctree-l1"><a class="reference internal" href="storagebox_snapshot_info_module.html">community.hrobot.storagebox_snapshot_info module – Query the snapshots for a storage box</a></li>
 <li class="toctree-l1"><a class="reference internal" href="storagebox_snapshot_plan_module.html">community.hrobot.storagebox_snapshot_plan module – Modify a storage box’s snapshot plans</a></li>
 <li class="toctree-l1"><a class="reference internal" href="storagebox_snapshot_plan_info_module.html">community.hrobot.storagebox_snapshot_plan_info module – Query the snapshot plans for a storage box</a></li>
-<li class="toctree-l1"><a class="reference internal" href="storagebox_subaccount_info_module.html">community.hrobot.storagebox_subaccount_info module – Query the subaccounts for a storage box</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">community.hrobot.storagebox_subaccount_info module – Query the subaccounts for a storage box</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#return-values">Return Values</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collection-links">Collection links</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="v_switch_module.html">community.hrobot.v_switch module – Manage Hetzner’s vSwitch</a></li>
 </ul>
 <ul>
@@ -130,10 +129,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">community.hrobot.reset_info module – Query information on the resetter of a dedicated server</li>
+      <li class="breadcrumb-item active">community.hrobot.storagebox_subaccount_info module – Query the subaccounts for a storage box</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/ansible-collections/community.hrobot/edit/main/plugins/modules/reset_info.py?description=%23%23%23%23%23%20SUMMARY%0A%3C!—%20Your%20description%20here%20–%3E%0A%0A%0A%23%23%23%23%23%20ISSUE%20TYPE%0A-%20Docs%20Pull%20Request%0A%0A%2Blabel:%20docsite_pr" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ansible-collections/community.hrobot/edit/main/plugins/modules/storagebox_subaccount_info.py?description=%23%23%23%23%23%20SUMMARY%0A%3C!—%20Your%20description%20here%20–%3E%0A%0A%0A%23%23%23%23%23%20ISSUE%20TYPE%0A-%20Docs%20Pull%20Request%0A%0A%2Blabel:%20docsite_pr" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -143,31 +142,30 @@
   
            <div itemprop="articleBody">
              
-  <span class="target" id="ansible-collections-community-hrobot-reset-info-module"></span><section id="community-hrobot-reset-info-module-query-information-on-the-resetter-of-a-dedicated-server">
-<h1>community.hrobot.reset_info module – Query information on the resetter of a dedicated server<a class="headerlink" href="#community-hrobot-reset-info-module-query-information-on-the-resetter-of-a-dedicated-server" title="Link to this heading"></a></h1>
+  <span class="target" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module"></span><section id="community-hrobot-storagebox-subaccount-info-module-query-the-subaccounts-for-a-storage-box">
+<h1>community.hrobot.storagebox_subaccount_info module – Query the subaccounts for a storage box<a class="headerlink" href="#community-hrobot-storagebox-subaccount-info-module-query-the-subaccounts-for-a-storage-box" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This module is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/community/hrobot/">community.hrobot collection</a> (version 2.4.0).</p>
 <p>It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
 To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it, use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">community.hrobot</span></code>.</p>
-<p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">community.hrobot.reset_info</span></code>.</p>
+<p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">community.hrobot.storagebox_subaccount_info</span></code>.</p>
 </div>
-<p class="ansible-version-added">New in community.hrobot 2.2.0</p>
+<p class="ansible-version-added">New in community.hrobot 2.4.0</p>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#parameters" id="id2">Parameters</a></p></li>
 <li><p><a class="reference internal" href="#attributes" id="id3">Attributes</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id4">See Also</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id6">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id5">Return Values</a></p></li>
 </ul>
 </nav>
 <section id="synopsis">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Query information on the resetter of a dedicated server.</p></li>
+<li><p>Query the subaccounts for a storage box.</p></li>
 </ul>
 </section>
 <section id="parameters">
@@ -180,21 +178,21 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-hetzner_password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-parameter-hetzner-password"><strong>hetzner_password</strong></p>
+<div class="ansibleOptionAnchor" id="parameter-hetzner_password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-password"><strong>hetzner_password</strong></p>
 <a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The password for the Robot web-service user.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-parameter-hetzner-user"><strong>hetzner_user</strong></p>
+<div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-user"><strong>hetzner_user</strong></p>
 <a class="ansibleOptionLink" href="#parameter-hetzner_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The username for the Robot web-service user.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
+<div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 <p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
 </div></td>
@@ -205,10 +203,10 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-server_number"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-parameter-server-number"><strong>server_number</strong></p>
-<a class="ansibleOptionLink" href="#parameter-server_number" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
+<div class="ansibleOptionAnchor" id="parameter-storagebox_id"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-storagebox-id"><strong>storagebox_id</strong></p>
+<a class="ansibleOptionLink" href="#parameter-storagebox_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The server number of the server to query its resetter.</p>
+<td><div class="ansible-option-cell"><p>The ID of the storage box to query.</p>
 </div></td>
 </tr>
 </tbody>
@@ -225,7 +223,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="attribute-action_group"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-attribute-action-group"><strong>action_group</strong></p>
+<div class="ansibleOptionAnchor" id="attribute-action_group"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-attribute-action-group"><strong>action_group</strong></p>
 <a class="ansibleOptionLink" href="#attribute-action_group" title="Permalink to this attribute"></a></div></td>
 <td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-property">Action group:</strong> <strong class="ansible-attribute-support-full">community.hrobot.robot</strong></p>
 </div></td>
@@ -233,7 +231,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="attribute-check_mode"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-attribute-check-mode"><strong>check_mode</strong></p>
+<div class="ansibleOptionAnchor" id="attribute-check_mode"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-attribute-check-mode"><strong>check_mode</strong></p>
 <a class="ansibleOptionLink" href="#attribute-check_mode" title="Permalink to this attribute"></a></div></td>
 <td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-label">Support: </strong><strong class="ansible-attribute-support-full">full</strong></p>
 <p>This action does not modify state.</p>
@@ -242,7 +240,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="attribute-diff_mode"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-attribute-diff-mode"><strong>diff_mode</strong></p>
+<div class="ansibleOptionAnchor" id="attribute-diff_mode"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-attribute-diff-mode"><strong>diff_mode</strong></p>
 <a class="ansibleOptionLink" href="#attribute-diff_mode" title="Permalink to this attribute"></a></div></td>
 <td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-label">Support: </strong>      <span class="ansible-attribute-support-na">N/A</span></p>
 <p>This action does not modify state.</p>
@@ -251,7 +249,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="attribute-idempotent"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-attribute-idempotent"><strong>idempotent</strong></p>
+<div class="ansibleOptionAnchor" id="attribute-idempotent"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-attribute-idempotent"><strong>idempotent</strong></p>
 <a class="ansibleOptionLink" href="#attribute-idempotent" title="Permalink to this attribute"></a></div></td>
 <td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-label">Support: </strong><strong class="ansible-attribute-support-full">full</strong></p>
 <p>This action does not modify state.</p>
@@ -263,34 +261,24 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </tbody>
 </table>
 </section>
-<section id="see-also">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="reset_module.html#ansible-collections-community-hrobot-reset-module"><span class="std std-ref">community.hrobot.reset</span></a></dt><dd><p>Reset dedicated server.</p>
-</dd>
-</dl>
-</div>
-</section>
 <section id="examples">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Query resetter information for server 1234</span>
-<span class="w">  </span><span class="nt">community.hrobot.reset_info</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Query the subaccounts</span>
+<span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount_info</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">hetzner_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
 <span class="w">    </span><span class="nt">hetzner_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
-<span class="w">    </span><span class="nt">server_number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1234</span>
+<span class="w">    </span><span class="nt">storage_box_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123</span>
 <span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result</span>
 
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Show reset methods</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Output data</span>
 <span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">result.reset.type</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Username</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">first</span><span class="nv"> </span><span class="s">subaccount:</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">result.subaccounts</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.username</span> <span class="cp">}}</span><span class="s">&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="return-values">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Return Values</a><a class="headerlink" href="#return-values" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Return Values</a><a class="headerlink" href="#return-values" title="Link to this heading"></a></h2>
 <p>Common return values are documented <a class="reference external" href="https://docs.ansible.com/ansible/devel/reference_appendices/common_return_values.html#common-return-values" title="(in Ansible vdevel)"><span class="xref std std-ref">here</span></a>, the following are the fields unique to this module:</p>
 <table class="longtable ansible-option-table docutils align-default" style="width: 100%">
 <thead>
@@ -300,64 +288,111 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-reset"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-return-reset"><strong>reset</strong></p>
-<a class="ansibleOptionLink" href="#return-reset" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+<div class="ansibleOptionAnchor" id="return-subaccounts"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts"><strong>subaccounts</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Information on the server’s resetter.</p>
+<td><div class="ansible-option-cell"><p>The storage box’s info.</p>
+<p>All date and time parameters are in UTC.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-reset/operating_status"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-return-reset-operating-status"><strong>operating_status</strong></p>
-<a class="ansibleOptionLink" href="#return-reset/operating_status" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="return-subaccounts/accountid"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-accountid"><strong>accountid</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/accountid" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The server’s operating status.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Username of the main user.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;not</span> <span class="pre">supported&quot;</span></code></p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;u2342&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-reset/server_ip"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-return-reset-server-ip"><strong>server_ip</strong></p>
-<a class="ansibleOptionLink" href="#return-reset/server_ip" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="return-subaccounts/comment"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-comment"><strong>comment</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/comment" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The primary IPv4 address of the server.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Custom comment for the sub-account.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;123.123.123.123&quot;</span></code></p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">subaccount&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-reset/server_ipv6_net"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-return-reset-server-ipv6-net"><strong>server_ipv6_net</strong></p>
-<a class="ansibleOptionLink" href="#return-reset/server_ipv6_net" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="return-subaccounts/createtime"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-createtime"><strong>createtime</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/createtime" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The primary IPv6 network of the server.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Timestamp when the sub-account was created.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2a01:4f8:111:4221::&quot;</span></code></p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2023-08-25T14:23:05Z&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-reset/server_number"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-return-reset-server-number"><strong>server_number</strong></p>
-<a class="ansibleOptionLink" href="#return-reset/server_number" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<div class="ansibleOptionAnchor" id="return-subaccounts/external_reachability"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-external-reachability"><strong>external_reachability</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/external_reachability" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The server’s ID.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of external reachability.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">321</span></code></p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-reset/type"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-reset-info-module-return-reset-type"><strong>type</strong></p>
-<a class="ansibleOptionLink" href="#return-reset/type" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+<div class="ansibleOptionAnchor" id="return-subaccounts/homedirectory"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-homedirectory"><strong>homedirectory</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/homedirectory" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The reset types supported by the resetter.</p>
-<p>Can be used for the <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="reset_module.html#ansible-collections-community-hrobot-reset-module-parameter-reset-type"><span class="std std-ref"><span class="pre">reset_type</span></span></a></strong></code> option of the <a class="reference internal" href="reset_module.html#ansible-collections-community-hrobot-reset-module"><span class="std std-ref">community.hrobot.reset</span></a> module.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Homedirectory of the sub-account.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Can only return:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;software&quot;</span></code></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;hardware&quot;</span></code></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;power&quot;</span></code></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;manual&quot;</span></code></p></li>
-</ul>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">[&quot;software&quot;,</span> <span class="pre">&quot;hardware&quot;,</span> <span class="pre">&quot;manual&quot;]</span></code></p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;/home/u2342-sub1&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/readonly"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-readonly"><strong>readonly</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/readonly" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Indicates if the sub-account is in readonly mode.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/samba"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-samba"><strong>samba</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/samba" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of Samba support.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/server"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-server"><strong>server</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/server" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Server on which the sub-account resides.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;sb1234.your-storagebox.de&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/ssh"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-ssh"><strong>ssh</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/ssh" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of SSH support.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/username"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-username"><strong>username</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/username" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Username of the sub-account.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;u2342-sub1&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/webdav"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-webdav"><strong>webdav</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/webdav" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of WebDAV support.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
 </tbody>
@@ -365,7 +400,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <section id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Felix Fontein (&#64;felixfontein)</p></li>
+<li><p>Victor LEFEBVRE (&#64;vic1707)</p></li>
 </ul>
 </section>
 <section id="collection-links">
@@ -388,8 +423,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
           
 
 <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="reset_module.html" class="btn btn-neutral float-left" title="community.hrobot.reset module – Reset a dedicated server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="reverse_dns_module.html" class="btn btn-neutral float-right" title="community.hrobot.reverse_dns module – Set or remove reverse DNS entry for IP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="storagebox_snapshot_plan_info_module.html" class="btn btn-neutral float-left" title="community.hrobot.storagebox_snapshot_plan_info module – Query the snapshot plans for a storage box" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="v_switch_module.html" class="btn btn-neutral float-right" title="community.hrobot.v_switch module – Manage Hetzner’s vSwitch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
