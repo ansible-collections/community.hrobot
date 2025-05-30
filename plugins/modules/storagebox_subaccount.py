@@ -37,6 +37,16 @@ options:
       - The ID of the storage box to query.
     type: int
     required: true
+  password_mode:
+    description:
+      - Controls how password updates are handled.
+      - If C(update-if-provided), the password is updated only if provided (default).
+      - If C(ignore-if-exists), password is only used during creation.
+      - If C(set-to-random), password is reset to a randomly generated one.
+    type: str
+    choices: [update-if-provided, ignore-if-exists, set-to-random]
+    default: update-if-provided
+    required: false
   subaccount:
     description:
       - The subaccount configuration.
@@ -379,6 +389,11 @@ def main():
                 idempotence=dict(type="str", choices=["username", "comment"], default="username"),
             ),
         ),
+        password_mode=dict(
+            type="str",
+            choices=["update-if-provided", "ignore-if-exists", "set-to-random"],
+            default="update-if-provided",
+        ),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
     module = AnsibleModule(
@@ -389,6 +404,7 @@ def main():
     check_mode = module.check_mode
     storagebox_id = module.params["storagebox_id"]
     subaccount = module.params["subaccount"]
+    password_mode = module.params['password_mode']
 
     account_identifier = subaccount[subaccount["idempotence"]]
 
@@ -412,7 +428,10 @@ def main():
                 existing.delete(module)
             deleted = True
     elif subaccount["state"] == "present" and existing:
-        if subaccount["password"]:
+        if password_mode == "set-to-random":
+            subaccount["password"] = None
+        if password_mode == "set-to-random" \
+           or (password_mode == "update-if-provided" and subaccount["password"]):
             if not check_mode:
                 existing.update_password(module, subaccount["password"])
             password_updated = True
@@ -422,11 +441,14 @@ def main():
             if not check_mode:
                 wanted_subaccount.update(module)
             updated = True
-    else:
+    else:  # state 'present' without pre-existing account
         if not subaccount["homedirectory"]:
             module.fail_json(
                 msg="homedirectory is required when creating a new subaccount"
             )
+        if password_mode == "set-to-random":
+            subaccount["password"] = None
+
         if not check_mode:
             created_subaccount = create_subaccount(module, storagebox_id, subaccount)
         else:
