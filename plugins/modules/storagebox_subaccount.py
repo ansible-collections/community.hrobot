@@ -198,11 +198,6 @@ password_updated:
   type: bool
   returned: always
 
-untouched:
-  description: Whether the subaccount required no changes.
-  type: bool
-  returned: always
-
 created_subaccount:
   description: The created subaccount object returned from the API.
   type: raw
