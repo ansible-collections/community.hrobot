@@ -113,6 +113,14 @@ options:
         type: str
         default: ""
         required: false
+      idempotence:
+        description:
+          - Select which attribute to use to check subaccount existence.
+          - C(username) or C(comment).
+        type: str
+        choices: [username, comment]
+        default: username
+        required: false
 
 notes:
   - The module is fully idempotent and supports check mode.
@@ -373,6 +381,7 @@ def main():
                 webdav=dict(type="bool", default=False),
                 readonly=dict(type="bool", default=False),
                 comment=dict(type="str", default=""),
+                idempotence=dict(type="str", choices=["username", "comment"], default="username"),
             ),
         ),
     )
@@ -386,11 +395,15 @@ def main():
     storagebox_id = module.params["storagebox_id"]
     subaccount = module.params["subaccount"]
 
+    account_identifier = subaccount[subaccount["idempotence"]]
+
     existing_subaccounts = get_subaccounts(module, storagebox_id)
-    existing = (
-        next((sa for sa in existing_subaccounts if sa.username == subaccount['username']), None)
-        if subaccount["username"]
-        else None
+    existing = next(
+        (
+            sa for sa in existing_subaccounts
+            if getattr(sa, subaccount["idempotence"], None) == account_identifier
+        ),
+        None,
     )
 
     created = deleted = updated = password_updated = False
