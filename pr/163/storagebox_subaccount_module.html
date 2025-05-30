@@ -269,6 +269,22 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-subaccount/password_mode"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-password-mode"><strong>password_mode</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/password_mode" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Controls how password updates are handled.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">update-if-provided</span></code>, the password is updated only if provided (default).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ignore-if-exists</span></code>, password is only used during creation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">set-to-random</span></code>, password is reset to a randomly generated one.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;update-if-provided&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;ignore-if-exists&quot;</span></code></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;set-to-random&quot;</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-subaccount/readonly"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-readonly"><strong>readonly</strong></p>
 <a class="ansibleOptionLink" href="#parameter-subaccount/readonly" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -280,7 +296,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-subaccount/samba"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-samba"><strong>samba</strong></p>
 <a class="ansibleOptionLink" href="#parameter-subaccount/samba" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -292,7 +308,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-subaccount/ssh"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-ssh"><strong>ssh</strong></p>
 <a class="ansibleOptionLink" href="#parameter-subaccount/ssh" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -304,7 +320,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-subaccount/state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-state"><strong>state</strong></p>
 <a class="ansibleOptionLink" href="#parameter-subaccount/state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -316,7 +332,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-subaccount/username"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-username"><strong>username</strong></p>
 <a class="ansibleOptionLink" href="#parameter-subaccount/username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -325,7 +341,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Omit to create a new subaccount (<code class="docutils literal notranslate"><span class="pre">state=present</span></code>).</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-subaccount/webdav"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-webdav"><strong>webdav</strong></p>
 <a class="ansibleOptionLink" href="#parameter-subaccount/webdav" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -491,14 +507,6 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-untouched"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-untouched"><strong>untouched</strong></p>
-<a class="ansibleOptionLink" href="#return-untouched" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Whether the subaccount required no changes.</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-updated"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-updated"><strong>updated</strong></p>
 <a class="ansibleOptionLink" href="#return-updated" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
