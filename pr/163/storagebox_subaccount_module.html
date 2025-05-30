@@ -7,7 +7,7 @@
 <meta content="2.16.3" name="antsibull-docs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>community.hrobot.storagebox_subaccount module – Create, update, or delete the subaccounts for a storage box &mdash; Community.Hrobot Collection  documentation</title>
+  <title>community.hrobot.storagebox_subaccount module – Create, update, or delete a subaccount for a storage box &mdash; Community.Hrobot Collection  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=41de9001" />
       <link rel="stylesheet" type="text/css" href="_static/css/ansible.css?v=c5b67dd2" />
       <link rel="stylesheet" type="text/css" href="_static/antsibull-minimal.css" />
@@ -96,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="storagebox_snapshot_info_module.html">community.hrobot.storagebox_snapshot_info module – Query the snapshots for a storage box</a></li>
 <li class="toctree-l1"><a class="reference internal" href="storagebox_snapshot_plan_module.html">community.hrobot.storagebox_snapshot_plan module – Modify a storage box’s snapshot plans</a></li>
 <li class="toctree-l1"><a class="reference internal" href="storagebox_snapshot_plan_info_module.html">community.hrobot.storagebox_snapshot_plan_info module – Query the snapshot plans for a storage box</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">community.hrobot.storagebox_subaccount module – Create, update, or delete the subaccounts for a storage box</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">community.hrobot.storagebox_subaccount module – Create, update, or delete a subaccount for a storage box</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a></li>
@@ -131,7 +131,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">community.hrobot.storagebox_subaccount module – Create, update, or delete the subaccounts for a storage box</li>
+      <li class="breadcrumb-item active">community.hrobot.storagebox_subaccount module – Create, update, or delete a subaccount for a storage box</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ansible-collections/community.hrobot/edit/main/plugins/modules/storagebox_subaccount.py?description=%23%23%23%23%23%20SUMMARY%0A%3C!—%20Your%20description%20here%20–%3E%0A%0A%0A%23%23%23%23%23%20ISSUE%20TYPE%0A-%20Docs%20Pull%20Request%0A%0A%2Blabel:%20docsite_pr" class="fa fa-github"> Edit on GitHub</a>
@@ -144,8 +144,8 @@
   
            <div itemprop="articleBody">
              
-  <span class="target" id="ansible-collections-community-hrobot-storagebox-subaccount-module"></span><section id="community-hrobot-storagebox-subaccount-module-create-update-or-delete-the-subaccounts-for-a-storage-box">
-<h1>community.hrobot.storagebox_subaccount module – Create, update, or delete the subaccounts for a storage box<a class="headerlink" href="#community-hrobot-storagebox-subaccount-module-create-update-or-delete-the-subaccounts-for-a-storage-box" title="Link to this heading"></a></h1>
+  <span class="target" id="ansible-collections-community-hrobot-storagebox-subaccount-module"></span><section id="community-hrobot-storagebox-subaccount-module-create-update-or-delete-a-subaccount-for-a-storage-box">
+<h1>community.hrobot.storagebox_subaccount module – Create, update, or delete a subaccount for a storage box<a class="headerlink" href="#community-hrobot-storagebox-subaccount-module-create-update-or-delete-a-subaccount-for-a-storage-box" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This module is part of the <a class="reference external" href="https://galaxy.ansible.com/ui/repo/published/community/hrobot/">community.hrobot collection</a> (version 2.4.0).</p>
@@ -168,7 +168,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <section id="synopsis">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Create, update, or delete the subaccounts for a storage box.</p></li>
+<li><p>Create, update, or delete a subaccount for a storage box.</p></li>
 </ul>
 </section>
 <section id="parameters">
@@ -213,23 +213,23 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts"><strong>subaccounts</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span> / <span class="ansible-option-required">required</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount"><strong>subaccount</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The subaccounts configurations.</p>
+<td><div class="ansible-option-cell"><p>The subaccount configuration.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/comment"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-comment"><strong>comment</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/comment" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/comment"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-comment"><strong>comment</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/comment" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>A custom comment for the subaccount.</p>
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/external_reachability"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-external-reachability"><strong>external_reachability</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/external_reachability" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/external_reachability"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-external-reachability"><strong>external_reachability</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/external_reachability" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable external reachability.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
@@ -240,24 +240,24 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/homedirectory"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-homedirectory"><strong>homedirectory</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/homedirectory" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/homedirectory"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-homedirectory"><strong>homedirectory</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/homedirectory" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Home directory of the subaccount.</p>
 <p>Required when creating or updating a subaccount (<code class="docutils literal notranslate"><span class="pre">state=present</span></code>).</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-password"><strong>password</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-password"><strong>password</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Password to use or change.</p>
-<p>If omitted and state is <code class="docutils literal notranslate"><span class="pre">present</span></code> or <code class="docutils literal notranslate"><span class="pre">password</span></code>, a random password is generated by hrobot.</p>
+<p>If omitted and state is <code class="docutils literal notranslate"><span class="pre">present</span></code>, a random password is generated by hrobot.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/readonly"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-readonly"><strong>readonly</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/readonly" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/readonly"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-readonly"><strong>readonly</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/readonly" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable read-only mode.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
@@ -268,8 +268,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/samba"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-samba"><strong>samba</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/samba" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/samba"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-samba"><strong>samba</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/samba" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable Samba.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
@@ -280,8 +280,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/ssh"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-ssh"><strong>ssh</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/ssh" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/ssh"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-ssh"><strong>ssh</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/ssh" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable SSH access.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
@@ -292,8 +292,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-state"><strong>state</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-state"><strong>state</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Desired state of this subaccount.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
@@ -304,8 +304,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/username"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-username"><strong>username</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/username"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-username"><strong>username</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Username of the subaccount.</p>
 <p>Required for updating or deleting a subaccount (<code class="docutils literal notranslate"><span class="pre">state=absent</span></code> or update with <code class="docutils literal notranslate"><span class="pre">state=present</span></code>).</p>
@@ -313,8 +313,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccounts/webdav"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccounts-webdav"><strong>webdav</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccounts/webdav" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<div class="ansibleOptionAnchor" id="parameter-subaccount/webdav"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-webdav"><strong>webdav</strong></p>
+<a class="ansibleOptionLink" href="#parameter-subaccount/webdav" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable WebDAV.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
@@ -390,54 +390,48 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a new subaccount with random password</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccounts</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/backups/project1&quot;</span>
-<span class="w">        </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">        </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">        </span><span class="nt">webdav</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">        </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">1&quot;</span>
+<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/backups/project1&quot;</span>
+<span class="w">      </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">webdav</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">1&quot;</span>
 
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create multiple subaccounts with custom passwords</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a subaccount with custom password</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccounts</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
-<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s3cretPass123&quot;</span>
-<span class="w">        </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup1&quot;</span>
-<span class="w">        </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">        </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">        </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup2&quot;</span>
-<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;an0therPass!&quot;</span>
-<span class="w">        </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup2&quot;</span>
-<span class="w">        </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">        </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">        </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Team</span><span class="nv"> </span><span class="s">B</span><span class="nv"> </span><span class="s">storage&quot;</span>
+<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s3cretPass123&quot;</span>
+<span class="w">      </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup1&quot;</span>
+<span class="w">      </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Update an existing subaccount</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccounts</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
-<span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
-<span class="w">        </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup1-updated&quot;</span>
-<span class="w">        </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">        </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Updated</span><span class="nv"> </span><span class="s">path</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">readonly</span><span class="nv"> </span><span class="s">mode&quot;</span>
+<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
+<span class="w">      </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup1-updated&quot;</span>
+<span class="w">      </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Updated</span><span class="nv"> </span><span class="s">path</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">readonly</span><span class="nv"> </span><span class="s">mode&quot;</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete a subaccount</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccounts</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
-<span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup2&quot;</span>
+<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
+<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Change password for a subaccount</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccounts</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span><span class="w"> </span><span class="c1"># TODO: state: password?</span>
-<span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
-<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;n3wSecur3Pass&quot;</span>
+<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;n3wSecur3Pass&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -452,48 +446,51 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-created_subaccounts"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-created-subaccounts"><strong>created_subaccounts</strong></p>
-<a class="ansibleOptionLink" href="#return-created_subaccounts" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=any</span></p>
+<div class="ansibleOptionAnchor" id="return-created"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-created"><strong>created</strong></p>
+<a class="ansibleOptionLink" href="#return-created" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>List of created subaccounts. Each item includes the full response from the API or a string if check mode was used.</p>
+<td><div class="ansible-option-cell"><p>Whether a new subaccount was created.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">[{&quot;homedirectory&quot;:</span> <span class="pre">&quot;/data/newuser&quot;,</span> <span class="pre">&quot;password&quot;:</span> <span class="pre">&quot;randomlyGeneratedPass123&quot;,</span> <span class="pre">&quot;username&quot;:</span> <span class="pre">&quot;newuser&quot;},</span> <span class="pre">&quot;&lt;new</span> <span class="pre">with</span> <span class="pre">homedirectory</span> <span class="pre">/backups/newproject&gt;&quot;]</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-deleted_subaccounts"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-deleted-subaccounts"><strong>deleted_subaccounts</strong></p>
-<a class="ansibleOptionLink" href="#return-deleted_subaccounts" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+<div class="ansibleOptionAnchor" id="return-created_subaccount"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-created-subaccount"><strong>created_subaccount</strong></p>
+<a class="ansibleOptionLink" href="#return-created_subaccount" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">any</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>List of usernames of subaccounts that were deleted.</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">[&quot;backup1&quot;,</span> <span class="pre">&quot;olduser&quot;]</span></code></p>
+<td><div class="ansible-option-cell"><p>The created subaccount object returned from the API.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> when created is true</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-password_updated_subaccounts"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-password-updated-subaccounts"><strong>password_updated_subaccounts</strong></p>
-<a class="ansibleOptionLink" href="#return-password_updated_subaccounts" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+<div class="ansibleOptionAnchor" id="return-deleted"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-deleted"><strong>deleted</strong></p>
+<a class="ansibleOptionLink" href="#return-deleted" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>List of usernames of subaccounts whose password was updated.</p>
+<td><div class="ansible-option-cell"><p>Whether the subaccount was deleted.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">[&quot;backup2&quot;]</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-untouched_subaccounts"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-untouched-subaccounts"><strong>untouched_subaccounts</strong></p>
-<a class="ansibleOptionLink" href="#return-untouched_subaccounts" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+<div class="ansibleOptionAnchor" id="return-password_updated"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-password-updated"><strong>password_updated</strong></p>
+<a class="ansibleOptionLink" href="#return-password_updated" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>List of usernames of subaccounts that required no changes.</p>
+<td><div class="ansible-option-cell"><p>Whether the subaccount’s password was updated.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">[&quot;team_a&quot;,</span> <span class="pre">&quot;shared_storage&quot;]</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-updated_subaccounts"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-updated-subaccounts"><strong>updated_subaccounts</strong></p>
-<a class="ansibleOptionLink" href="#return-updated_subaccounts" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+<div class="ansibleOptionAnchor" id="return-untouched"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-untouched"><strong>untouched</strong></p>
+<a class="ansibleOptionLink" href="#return-untouched" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>List of usernames of subaccounts whose configuration was updated (excluding password changes).</p>
+<td><div class="ansible-option-cell"><p>Whether the subaccount required no changes.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">[&quot;backup1&quot;,</span> <span class="pre">&quot;team_b&quot;]</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-updated"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-return-updated"><strong>updated</strong></p>
+<a class="ansibleOptionLink" href="#return-updated" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Whether the subaccount’s configuration was updated (excluding password changes).</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
 </div></td>
 </tr>
 </tbody>
