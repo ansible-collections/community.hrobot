@@ -242,8 +242,7 @@ def create_subaccount(module, storagebox_id, subaccount):
 
     if error == "STORAGEBOX_INVALID_PASSWORD":
         module.fail_json(
-            msg="Subaccount with username '{0}' and homedirectory '{1}' has an invalid password (says Hetzner)".format(
-                subaccount.get("username", "<missing>"),
+            msg="Creation of user with homedirectory '{0}' has an invalid password (says Hetzner)".format(
                 subaccount.get("homedirectory", "<missing>"),
             )
         )
@@ -338,8 +337,8 @@ class Subaccount:
         )
 
     def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return False
+        if not isinstance(other, self.__class__):  # pragma: no cover
+            return False  # pragma: no cover
         return self.__dict__ == other.__dict__
 
     # Python 2, I hate you
