@@ -421,13 +421,14 @@ def main():
     created_subaccount = None
 
     if subaccount["state"] == "absent":
-        if not subaccount["username"]:
-            module.fail_json(msg="username is required when state is 'absent'")
         if existing:
             if not check_mode:
                 existing.delete(module)
             deleted = True
     elif subaccount["state"] == "present" and existing:
+        # Set the found username in case user used comment as idempotence
+        subaccount['username'] = existing.__dict__['username']
+
         if password_mode == "set-to-random":
             subaccount["password"] = None
         if password_mode == "set-to-random" \
