@@ -391,6 +391,7 @@ def main():
         ),
         password_mode=dict(
             type="str",
+            no_log=True,
             choices=["update-if-provided", "ignore-if-exists", "set-to-random"],
             default="update-if-provided",
         ),
