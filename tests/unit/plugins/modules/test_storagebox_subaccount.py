@@ -60,7 +60,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             'hetzner_user': '',
             'hetzner_password': '',
             'storagebox_id': 23,
-            'subaccount': {}
         }, [
             FetchUrlCall('GET', 404)
             .result_json({
@@ -80,10 +79,8 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             'hetzner_user': '',
             'hetzner_password': '',
             'storagebox_id': 1234,
-            'subaccount': {
-                'state': 'absent',
-                'username': 'ghost_user',
-            },
+            'state': 'absent',
+            'username': 'ghost_user',
         }, [
             FetchUrlCall('GET', 200)
             .result_json(STORAGEBOX_SUBACCOUNTS)
@@ -103,10 +100,8 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             'hetzner_user': '',
             'hetzner_password': '',
             'storagebox_id': 1234,
-            'subaccount': {
-                'state': 'absent',
-                'username': 'u2342-sub2',
-            },
+            'state': 'absent',
+            'username': 'u2342-sub2',
         }, [
             FetchUrlCall('GET', 200)
             .result_json(STORAGEBOX_SUBACCOUNTS)
@@ -130,11 +125,9 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             'hetzner_user': '',
             'hetzner_password': '',
             'storagebox_id': 1234,
-            'subaccount': {
-                'state': 'absent',
-                'comment': 'Test account',
-                'idempotence': 'comment'
-            },
+            'state': 'absent',
+            'comment': 'Test account',
+            'idempotence': 'comment'
         }, [
             FetchUrlCall('GET', 200)
             .result_json(STORAGEBOX_SUBACCOUNTS)
@@ -153,15 +146,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] is None
 
     def test_create_subaccount(self, mocker):
-        new_subaccount = {
-            'homedirectory': '/data/newsub',
-            'samba': True,
-            'ssh': False,
-            'webdav': True,
-            'readonly': False,
-            'comment': 'My new subaccount'
-        }
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -169,7 +153,13 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': new_subaccount
+                # subaccount
+                'homedirectory': '/data/newsub',
+                'samba': True,
+                'ssh': False,
+                'webdav': True,
+                'readonly': False,
+                'comment': 'My new subaccount'
             },
             [
                 FetchUrlCall('GET', 200)
@@ -205,16 +195,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
 
     # Ensures providing a username doesn't trigger accidental update (if username isn't known)
     def test_create_subaccount_unknown_username(self, mocker):
-        new_subaccount = {
-            'homedirectory': '/data/newsub',
-            'samba': True,
-            'ssh': False,
-            'webdav': True,
-            'readonly': False,
-            'comment': 'My new subaccount',
-            'username': "I'll be ignored",
-        }
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -222,7 +202,14 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': new_subaccount
+                # subaccount data
+                'homedirectory': '/data/newsub',
+                'samba': True,
+                'ssh': False,
+                'webdav': True,
+                'readonly': False,
+                'comment': 'My new subaccount',
+                'username': "I'll be ignored"
             },
             [
                 FetchUrlCall('GET', 200)
@@ -258,16 +245,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         }
 
     def test_create_subaccount_set_to_random(self, mocker):
-        new_subaccount = {
-            'homedirectory': '/data/newsub',
-            'samba': True,
-            'ssh': False,
-            'webdav': True,
-            'readonly': False,
-            'comment': 'My new subaccount',
-            'password': 'toto'
-        }
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -275,8 +252,15 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': new_subaccount,
                 'password_mode': 'set-to-random',
+                # subaccount
+                'homedirectory': '/data/newsub',
+                'samba': True,
+                'ssh': False,
+                'webdav': True,
+                'readonly': False,
+                'comment': 'My new subaccount',
+                'password': 'toto'
             },
             [
                 FetchUrlCall('GET', 200)
@@ -312,15 +296,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         }
 
     def test_create_subaccount_limit_exceeded(self, mocker):
-        new_subaccount = {
-            'homedirectory': '/data/newsub',
-            'samba': True,
-            'ssh': False,
-            'webdav': True,
-            'readonly': False,
-            'comment': 'My new subaccount',
-        }
-
         result = self.run_module_failed(
             mocker,
             storagebox_subaccount,
@@ -328,7 +303,13 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': new_subaccount
+                # subaccount
+                'homedirectory': '/data/newsub',
+                'samba': True,
+                'ssh': False,
+                'webdav': True,
+                'readonly': False,
+                'comment': 'My new subaccount'
             },
             [
                 FetchUrlCall('GET', 200)
@@ -355,16 +336,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['msg'] == "Subaccount limit exceeded"
 
     def test_create_subaccount_invalid_password(self, mocker):
-        new_sub = {
-            'homedirectory': '/data/newsub',
-            'samba': True,
-            'ssh': False,
-            'webdav': True,
-            'readonly': False,
-            'comment': 'Invalid password attempt',
-            'password': '123'
-        }
-
         result = self.run_module_failed(
             mocker,
             storagebox_subaccount,
@@ -372,7 +343,14 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': new_sub
+                # subaccount
+                'homedirectory': '/data/newsub',
+                'samba': True,
+                'ssh': False,
+                'webdav': True,
+                'readonly': False,
+                'comment': 'Invalid password attempt',
+                'password': '123'
             },
             [
                 FetchUrlCall('GET', 200)
@@ -395,10 +373,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['msg'] == "Creation of user with homedirectory '/data/newsub' has an invalid password (says Hetzner)"
 
     def test_update_subaccount_noop(self, mocker):
-        import copy
-        updated_sub = copy.deepcopy(STORAGEBOX_SUBACCOUNTS[0]['subaccount'])
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -406,7 +380,15 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': updated_sub
+                # subaccount
+                "username": "u2342-sub1",
+                "homedirectory": "test",
+                "samba": True,
+                "ssh": True,
+                "external_reachability": True,
+                "webdav": False,
+                "readonly": False,
+                "comment": "Test account",
             },
             [
                 FetchUrlCall('GET', 200)
@@ -423,14 +405,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] is None
 
     def test_update_subaccount_noop_idempotence_by_comment(self, mocker):
-        import copy
-        updated_sub = copy.deepcopy(STORAGEBOX_SUBACCOUNTS[0]['subaccount'])
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-
-        # Deleted username would mean creation if idempotence isn't set to 'comment'
-        del updated_sub['username']
-        updated_sub['idempotence'] = 'comment'
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -438,7 +412,15 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': updated_sub
+                # subaccount
+                'idempotence': 'comment',
+                "homedirectory": "test",
+                "samba": True,
+                "ssh": True,
+                "external_reachability": True,
+                "webdav": False,
+                "readonly": False,
+                "comment": "Test account",
             },
             [
                 FetchUrlCall('GET', 200)
@@ -455,34 +437,38 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] is None
 
     def test_update_subaccount(self, mocker):
-        import copy
-        updated_sub = copy.deepcopy(STORAGEBOX_SUBACCOUNTS[0]['subaccount'])
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-        updated_sub['comment'] = 'new comment'
-
+        input = {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'storagebox_id': 1234,
+            # subaccount
+            "username": "u2342-sub1",
+            "homedirectory": "test",
+            "samba": True,
+            "ssh": True,
+            "external_reachability": True,
+            "webdav": False,
+            "readonly": False,
+            "comment": "new comment",
+        }
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
-            {
-                'hetzner_user': '',
-                'hetzner_password': '',
-                'storagebox_id': 1234,
-                'subaccount': updated_sub
-            },
+            input,
             [
                 FetchUrlCall('GET', 200)
                 .result_json(STORAGEBOX_SUBACCOUNTS)
                 .expect_url(BASE_URL + '/storagebox/1234/subaccount'),
 
                 FetchUrlCall('PUT', 200)
-                .expect_url(BASE_URL + '/storagebox/1234/subaccount/' + updated_sub['username'])
-                .expect_form_value("homedirectory", updated_sub["homedirectory"])
-                .expect_form_value("samba", str(updated_sub["samba"]).lower())
-                .expect_form_value("ssh", str(updated_sub["ssh"]).lower())
-                .expect_form_value("external_reachability", str(updated_sub["external_reachability"]).lower())
-                .expect_form_value("webdav", str(updated_sub["webdav"]).lower())
-                .expect_form_value("readonly", str(updated_sub["readonly"]).lower())
-                .expect_form_value("comment", updated_sub["comment"])
+                .expect_url(BASE_URL + '/storagebox/1234/subaccount/' + input['username'])
+                .expect_form_value("homedirectory", input["homedirectory"])
+                .expect_form_value("samba", str(input["samba"]).lower())
+                .expect_form_value("ssh", str(input["ssh"]).lower())
+                .expect_form_value("external_reachability", str(input["external_reachability"]).lower())
+                .expect_form_value("webdav", str(input["webdav"]).lower())
+                .expect_form_value("readonly", str(input["readonly"]).lower())
+                .expect_form_value("comment", input["comment"])
                 .result_json({})
             ]
         )
@@ -495,25 +481,24 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] is None
 
     def test_update_subaccount_idempotence_by_comment(self, mocker):
-        import copy
-        updated_sub = copy.deepcopy(STORAGEBOX_SUBACCOUNTS[0]['subaccount'])
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-
-        # Deleted username would mean creation if idempotence isn't set to 'comment'
-        del updated_sub['username']
-        updated_sub['idempotence'] = 'comment'
-
-        updated_sub['homedirectory'] = '/new/homedir'
-
+        input = {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'storagebox_id': 1234,
+            # subaccount
+            'idempotence': 'comment',
+            "homedirectory": "/new/homedir",
+            "samba": True,
+            "ssh": True,
+            "external_reachability": True,
+            "webdav": False,
+            "readonly": False,
+            "comment": "Test account",
+        }
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
-            {
-                'hetzner_user': '',
-                'hetzner_password': '',
-                'storagebox_id': 1234,
-                'subaccount': updated_sub
-            },
+            input,
             [
                 FetchUrlCall('GET', 200)
                 .result_json(STORAGEBOX_SUBACCOUNTS)
@@ -521,13 +506,13 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
 
                 FetchUrlCall('PUT', 200)
                 .expect_url(BASE_URL + '/storagebox/1234/subaccount/' + STORAGEBOX_SUBACCOUNTS[0]['subaccount']['username'])
-                .expect_form_value("homedirectory", updated_sub["homedirectory"])
-                .expect_form_value("samba", str(updated_sub["samba"]).lower())
-                .expect_form_value("ssh", str(updated_sub["ssh"]).lower())
-                .expect_form_value("external_reachability", str(updated_sub["external_reachability"]).lower())
-                .expect_form_value("webdav", str(updated_sub["webdav"]).lower())
-                .expect_form_value("readonly", str(updated_sub["readonly"]).lower())
-                .expect_form_value("comment", updated_sub["comment"])
+                .expect_form_value("homedirectory", input["homedirectory"])
+                .expect_form_value("samba", str(input["samba"]).lower())
+                .expect_form_value("ssh", str(input["ssh"]).lower())
+                .expect_form_value("external_reachability", str(input["external_reachability"]).lower())
+                .expect_form_value("webdav", str(input["webdav"]).lower())
+                .expect_form_value("readonly", str(input["readonly"]).lower())
+                .expect_form_value("comment", input["comment"])
                 .result_json({})
             ]
         )
@@ -540,41 +525,45 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] is None
 
     def test_update_subaccount_set_to_random(self, mocker):
-        import copy
-        updated_sub = copy.deepcopy(STORAGEBOX_SUBACCOUNTS[0]['subaccount'])
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-        updated_sub['comment'] = 'new comment'
-        updated_sub['password'] = 'toto'
-
+        input = {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'storagebox_id': 1234,
+            # subaccount
+            "username": "u2342-sub1",
+            "homedirectory": "test",
+            "samba": True,
+            "ssh": True,
+            "external_reachability": True,
+            "webdav": False,
+            "readonly": False,
+            "comment": "new comment",
+            "password": "toto",
+            "password_mode": "set-to-random",
+        }
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
-            {
-                'hetzner_user': '',
-                'hetzner_password': '',
-                'storagebox_id': 1234,
-                'subaccount': updated_sub,
-                'password_mode': 'set-to-random',
-            },
+            input,
             [
                 FetchUrlCall('GET', 200)
                 .result_json(STORAGEBOX_SUBACCOUNTS)
                 .expect_url(BASE_URL + '/storagebox/1234/subaccount'),
 
                 FetchUrlCall('POST', 200)
-                .expect_url(BASE_URL + '/storagebox/1234/subaccount/' + updated_sub['username'] + '/password')
+                .expect_url(BASE_URL + '/storagebox/1234/subaccount/' + input['username'] + '/password')
                 .expect_form_value_absent("password")
                 .result_json({}),
 
                 FetchUrlCall('PUT', 200)
-                .expect_url(BASE_URL + '/storagebox/1234/subaccount/' + updated_sub['username'])
-                .expect_form_value("homedirectory", updated_sub["homedirectory"])
-                .expect_form_value("samba", str(updated_sub["samba"]).lower())
-                .expect_form_value("ssh", str(updated_sub["ssh"]).lower())
-                .expect_form_value("external_reachability", str(updated_sub["external_reachability"]).lower())
-                .expect_form_value("webdav", str(updated_sub["webdav"]).lower())
-                .expect_form_value("readonly", str(updated_sub["readonly"]).lower())
-                .expect_form_value("comment", updated_sub["comment"])
+                .expect_url(BASE_URL + '/storagebox/1234/subaccount/' + input['username'])
+                .expect_form_value("homedirectory", input["homedirectory"])
+                .expect_form_value("samba", str(input["samba"]).lower())
+                .expect_form_value("ssh", str(input["ssh"]).lower())
+                .expect_form_value("external_reachability", str(input["external_reachability"]).lower())
+                .expect_form_value("webdav", str(input["webdav"]).lower())
+                .expect_form_value("readonly", str(input["readonly"]).lower())
+                .expect_form_value("comment", input["comment"])
                 .result_json({})
             ]
         )
@@ -587,11 +576,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] is None
 
     def test_update_password_only(self, mocker):
-        import copy
-        updated_sub = copy.deepcopy(STORAGEBOX_SUBACCOUNTS[0]['subaccount'])
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-        updated_sub['password'] = 'newsecurepassword'
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -599,7 +583,16 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': updated_sub
+                # account
+                "password": "newsecurepassword",
+                "username": "u2342-sub1",
+                "homedirectory": "test",
+                "samba": True,
+                "ssh": True,
+                "external_reachability": True,
+                "webdav": False,
+                "readonly": False,
+                "comment": "Test account",
             },
             [
                 FetchUrlCall('GET', 200)
@@ -621,10 +614,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] is None
 
     def test_update_subaccount_invalid_password(self, mocker):
-        updated_sub = STORAGEBOX_SUBACCOUNTS[0]['subaccount']
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-        updated_sub['password'] = '123'
-
         result = self.run_module_failed(
             mocker,
             storagebox_subaccount,
@@ -632,7 +621,16 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': updated_sub
+                # subaccount
+                "password": "123",
+                "username": "u2342-sub1",
+                "homedirectory": "test",
+                "samba": True,
+                "ssh": True,
+                "external_reachability": True,
+                "webdav": False,
+                "readonly": False,
+                "comment": "Test account",
             },
             [
                 FetchUrlCall('GET', 200)
@@ -662,9 +660,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': {
-                    'state': 'present',
-                }
+                'state': 'present',
             },
             [
                 FetchUrlCall('GET', 200)
@@ -677,11 +673,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
 
     # Check mode tests
     def test_update_password_only_CHECK_MODE(self, mocker):
-        import copy
-        updated_sub = copy.deepcopy(STORAGEBOX_SUBACCOUNTS[0]['subaccount'])
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-        updated_sub['password'] = 'newsecurepassword'
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -689,8 +680,17 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': updated_sub,
                 '_ansible_check_mode': True,
+                # subaccount
+                "password": "newsecurepassword",
+                "username": "u2342-sub1",
+                "homedirectory": "test",
+                "samba": True,
+                "ssh": True,
+                "external_reachability": True,
+                "webdav": False,
+                "readonly": False,
+                "comment": "Test account",
             },
             [
                 FetchUrlCall('GET', 200)
@@ -707,15 +707,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] is None
 
     def test_create_subaccount_CHECK_MODE(self, mocker):
-        new_subaccount = {
-            'homedirectory': '/data/newsub',
-            'samba': True,
-            'ssh': False,
-            'webdav': True,
-            'readonly': False,
-            'comment': 'My new subaccount'
-        }
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -723,7 +714,13 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': new_subaccount,
+                # subaccount,
+                'homedirectory': '/data/newsub',
+                'samba': True,
+                'ssh': False,
+                'webdav': True,
+                'readonly': False,
+                'comment': 'My new subaccount',
                 '_ansible_check_mode': True,
             },
             [
@@ -741,11 +738,6 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['created_subaccount'] == '<new with homedirectory /data/newsub>'
 
     def test_update_subaccount_CHECK_MODE(self, mocker):
-        import copy
-        updated_sub = copy.deepcopy(STORAGEBOX_SUBACCOUNTS[0]['subaccount'])
-        del updated_sub['accountid'], updated_sub['createtime'], updated_sub['server']
-        updated_sub['comment'] = 'new comment'
-
         result = self.run_module_success(
             mocker,
             storagebox_subaccount,
@@ -753,8 +745,17 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 'hetzner_user': '',
                 'hetzner_password': '',
                 'storagebox_id': 1234,
-                'subaccount': updated_sub,
                 '_ansible_check_mode': True,
+                # subaccount
+                "username": "u2342-sub1",
+                "homedirectory": "test",
+                "samba": True,
+                "ssh": True,
+                "external_reachability": True,
+                "webdav": False,
+                "readonly": False,
+                "comment": "new comment",
+
             },
             [
                 FetchUrlCall('GET', 200)
@@ -776,10 +777,8 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             'hetzner_user': '',
             'hetzner_password': '',
             'storagebox_id': 1234,
-            'subaccount': {
-                'state': 'absent',
-                'username': 'u2342-sub2',
-            },
+            'state': 'absent',
+            'username': 'u2342-sub2',
             '_ansible_check_mode': True,
         }, [
             FetchUrlCall('GET', 200)
@@ -793,3 +792,16 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['updated'] is False
         assert result['password_updated'] is False
         assert result['created_subaccount'] is None
+
+    def test_broken_idempotence_same_comment_multiple_accounts(self, mocker):
+        result = self.run_module_success(mocker, storagebox_subaccount, {
+            'hetzner_user': '',
+            'hetzner_password': '',
+            'storagebox_id': 1234,
+        }, [
+            FetchUrlCall('GET', 200)
+            .result_json([STORAGEBOX_SUBACCOUNTS[0], STORAGEBOX_SUBACCOUNTS[0]])
+            .expect_url(BASE_URL + '/storagebox/1234/subaccount')
+        ])
+
+        assert result['msg'] == "More than one subaccount matched the idempotence criteria."

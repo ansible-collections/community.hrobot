@@ -115,8 +115,8 @@ def raw_plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, h
         if allow_empty_result and status in allowed_empty_result_status_codes:
             return None, None
         raise PluginException(
-            "Cannot retrieve content from {0} (Error msg: {1}), [{2}] HTTP status code {3}".format(
-                url, reason, method, status
+            "Cannot retrieve content from {0} {1}, HTTP status code {2} ({3})".format(
+                method, url, status, reason
             )
         )
 
@@ -157,8 +157,8 @@ def raw_fetch_url_json(module, url, method='GET', timeout=10, data=None, headers
         if allow_empty_result and info.get('status') in allowed_empty_result_status_codes:
             return None, None
         module.fail_json(
-            msg='Cannot retrieve content from {0} (Error msg: {1}), [{2}] HTTP status code {3}'.format(
-                url, info.get('msg'), method, info.get('status')
+            msg='Cannot retrieve content from {0} {1}, HTTP status code {2} ({3})'.format(
+                method, url, info.get('status'), info.get('msg')
             )
         )
 
