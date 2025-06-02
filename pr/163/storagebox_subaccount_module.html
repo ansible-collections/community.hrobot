@@ -181,6 +181,26 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-comment"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-comment"><strong>comment</strong></p>
+<a class="ansibleOptionLink" href="#parameter-comment" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A custom comment for the subaccount.</p>
+<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-external_reachability"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-external-reachability"><strong>external_reachability</strong></p>
+<a class="ansibleOptionLink" href="#parameter-external_reachability" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Enable or disable external reachability (from outside Hetzner’s networks).</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-hetzner_password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-hetzner-password"><strong>hetzner_password</strong></p>
 <a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -195,13 +215,44 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-homedirectory"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-homedirectory"><strong>homedirectory</strong></p>
+<a class="ansibleOptionLink" href="#parameter-homedirectory" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Home directory of the subaccount.</p>
+<p>Required when creating or updating a subaccount (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>).</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-idempotence"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-idempotence"><strong>idempotence</strong></p>
+<a class="ansibleOptionLink" href="#parameter-idempotence" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Select which attribute to use to check subaccount existence.</p>
+<p><code class="docutils literal notranslate"><span class="pre">username</span></code> or <code class="docutils literal notranslate"><span class="pre">comment</span></code>.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;username&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;comment&quot;</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password"><strong>password</strong></p>
+<a class="ansibleOptionLink" href="#parameter-password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Password to use or change.</p>
+<p>See <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password-mode"><span class="std std-ref"><span class="pre">password_mode</span></span></a></strong></code> for how and when this is used.</p>
+<p>Must not be provided if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password-mode"><span class="std std-ref"><span class="pre">password_mode=set-to-random</span></span></a></code>.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-password_mode"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password-mode"><strong>password_mode</strong></p>
 <a class="ansibleOptionLink" href="#parameter-password_mode" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Controls how password updates are handled.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">update-if-provided</span></code>, the password is updated only if provided (default).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">update-if-provided</span></code>, the password always updated if provided (default).</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">ignore-if-exists</span></code>, password is only used during creation.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">set-to-random</span></code>, password is reset to a randomly generated one.</p>
+<p>When a new subaccount is created, the password is set to the specified one if <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password"><span class="std std-ref"><span class="pre">password</span></span></a></strong></code> is provided, and a random password is set if <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password"><span class="std std-ref"><span class="pre">password</span></span></a></strong></code> is not provided.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;update-if-provided&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -210,7 +261,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 <p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
@@ -221,33 +272,35 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">-1</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-storagebox_id"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-storagebox-id"><strong>storagebox_id</strong></p>
-<a class="ansibleOptionLink" href="#parameter-storagebox_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-readonly"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-readonly"><strong>readonly</strong></p>
+<a class="ansibleOptionLink" href="#parameter-readonly" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The ID of the storage box to query.</p>
+<td><div class="ansible-option-cell"><p>Enable or disable read-only mode.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-samba"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-samba"><strong>samba</strong></p>
+<a class="ansibleOptionLink" href="#parameter-samba" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Enable or disable Samba.</p>
+<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
+<ul class="simple">
+<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
+</ul>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount"><strong>subaccount</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span> / <span class="ansible-option-required">required</span></p>
+<div class="ansibleOptionAnchor" id="parameter-ssh"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-ssh"><strong>ssh</strong></p>
+<a class="ansibleOptionLink" href="#parameter-ssh" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The subaccount configuration.</p>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/comment"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-comment"><strong>comment</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/comment" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>A custom comment for the subaccount.</p>
-<p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/external_reachability"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-external-reachability"><strong>external_reachability</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/external_reachability" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable external reachability.</p>
+<td><div class="ansible-option-cell"><p>Enable or disable SSH access.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -255,76 +308,11 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/homedirectory"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-homedirectory"><strong>homedirectory</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/homedirectory" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><strong>state</strong></p>
+<a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Home directory of the subaccount.</p>
-<p>Required when creating or updating a subaccount (<code class="docutils literal notranslate"><span class="pre">state=present</span></code>).</p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/idempotence"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-idempotence"><strong>idempotence</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/idempotence" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Select which attribute to use to check subaccount existence.</p>
-<p><code class="docutils literal notranslate"><span class="pre">username</span></code> or <code class="docutils literal notranslate"><span class="pre">comment</span></code>.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;username&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">&quot;comment&quot;</span></code></p></li>
-</ul>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-password"><strong>password</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Password to use or change.</p>
-<p>If omitted and state is <code class="docutils literal notranslate"><span class="pre">present</span></code>, a random password is generated by hrobot.</p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/readonly"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-readonly"><strong>readonly</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/readonly" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable read-only mode.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/samba"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-samba"><strong>samba</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/samba" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable Samba.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/ssh"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-ssh"><strong>ssh</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/ssh" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
-</div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable SSH access.</p>
-<p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
-<ul class="simple">
-<li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><code class="ansible-option-choices-entry docutils literal notranslate"><span class="pre">true</span></code></p></li>
-</ul>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/state"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-state"><strong>state</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Desired state of this subaccount.</p>
+<td><div class="ansible-option-cell"><p>Desired state of this subaccount.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">&quot;present&quot;</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -332,20 +320,27 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/username"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-username"><strong>username</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-storagebox_id"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-storagebox-id"><strong>storagebox_id</strong></p>
+<a class="ansibleOptionLink" href="#parameter-storagebox_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Username of the subaccount.</p>
-<p>Required for updating or deleting a subaccount (<code class="docutils literal notranslate"><span class="pre">state=absent</span></code> or update with <code class="docutils literal notranslate"><span class="pre">state=present</span></code>).</p>
-<p>Omit to create a new subaccount (<code class="docutils literal notranslate"><span class="pre">state=present</span></code>).</p>
+<td><div class="ansible-option-cell"><p>The ID of the storage box to query.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-subaccount/webdav"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-subaccount-webdav"><strong>webdav</strong></p>
-<a class="ansibleOptionLink" href="#parameter-subaccount/webdav" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-username"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-username"><strong>username</strong></p>
+<a class="ansibleOptionLink" href="#parameter-username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Enable or disable WebDAV.</p>
+<td><div class="ansible-option-cell"><p>Username of the subaccount.</p>
+<p>Required for updating or deleting a subaccount (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=absent</span></span></a></code> or update with <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>).</p>
+<p>Omit to create a new subaccount (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>).</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-webdav"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-webdav"><strong>webdav</strong></p>
+<a class="ansibleOptionLink" href="#parameter-webdav" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Enable or disable WebDAV.</p>
 <p class="ansible-option-line"><strong class="ansible-option-choices">Choices:</strong></p>
 <ul class="simple">
 <li><p><code class="ansible-option-default-bold docutils literal notranslate"><strong><span class="pre">false</span></strong></code> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
@@ -408,8 +403,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p>The module is fully idempotent and supports check mode.</p></li>
-<li><p>Passwords cannot be compared or diffed, so changes to passwords will always appear as changed in check mode and will not show diffs.</p></li>
-<li><p>When passwords are autogenerated by the API (by omitting the <code class="docutils literal notranslate"><span class="pre">password</span></code> field), the resulting password is returned.</p></li>
+<li><p>When passwords are autogenerated by the API (by omitting the <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password"><span class="std std-ref"><span class="pre">password</span></span></a></strong></code> field), the resulting password is returned.</p></li>
 </ul>
 </div>
 </section>
@@ -479,7 +473,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-created" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether a new subaccount was created.</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -495,7 +489,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-deleted" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether the subaccount was deleted.</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -503,7 +497,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-password_updated" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether the subaccount’s password was updated.</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -511,7 +505,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-updated" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Whether the subaccount’s configuration was updated (excluding password changes).</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> always</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
 </tbody>
