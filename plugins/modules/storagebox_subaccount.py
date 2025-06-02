@@ -442,12 +442,12 @@ def main():
         # Set the found username in case user used comment as idempotence
         subaccount['username'] = existing.__dict__['username']
 
-        if password_mode == "set-to-random":
-            subaccount["password"] = None
         if (
             password_mode == "set-to-random" or
             (password_mode == "update-if-provided" and subaccount["password"])
         ):
+            if password_mode == "set-to-random":
+                subaccount["password"] = None
             if not check_mode:
                 existing.update_password(module, subaccount["password"])
             password_updated = True
