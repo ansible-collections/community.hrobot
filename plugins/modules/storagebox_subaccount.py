@@ -402,16 +402,28 @@ def main():
 
     check_mode = module.check_mode
     storagebox_id = module.params["storagebox_id"]
-    subaccount = module.params
     password_mode = module.params['password_mode']
+    state = module.params['state']
+    idempotence = module.params['idempotence']
+    subaccount = {
+        'username': module.params['username'],
+        'password': module.params['password'],
+        'homedirectory': module.params['homedirectory'],
+        'samba': module.params['samba'],
+        'ssh': module.params['ssh'],
+        'external_reachability': module.params['external_reachability'],
+        'webdav': module.params['webdav'],
+        'readonly': module.params['readonly'],
+        'comment': module.params['comment'],
+    }
 
-    account_identifier = subaccount[subaccount["idempotence"]]
+    account_identifier = subaccount[idempotence]
 
     existing_subaccounts = get_subaccounts(module, storagebox_id)
 
     matches = [
         sa for sa in existing_subaccounts
-        if getattr(sa, subaccount["idempotence"], None) == account_identifier
+        if getattr(sa, idempotence, None) == account_identifier
     ]
     if len(matches) > 1:
         module.fail_json(msg="More than one subaccount matched the idempotence criteria.")
@@ -421,24 +433,26 @@ def main():
     created = deleted = updated = password_updated = False
     returned_subaccount = None
 
-    if subaccount["state"] == "absent":
+    if state == "absent":
         if existing:
             if not check_mode:
                 existing.delete(module)
             deleted = True
-    elif subaccount["state"] == "present" and existing:
+    elif state == "present" and existing:
         # Set the found username in case user used comment as idempotence
         subaccount['username'] = existing.__dict__['username']
 
         if password_mode == "set-to-random":
             subaccount["password"] = None
-        if password_mode == "set-to-random" \
-           or (password_mode == "update-if-provided" and subaccount["password"]):
+        if (
+            password_mode == "set-to-random" or
+            (password_mode == "update-if-provided" and subaccount["password"])
+        ):
             if not check_mode:
                 existing.update_password(module, subaccount["password"])
             password_updated = True
 
-        wanted_subaccount = Subaccount(**subaccount)
+        wanted_subaccount = Subaccount(storagebox_id, **subaccount)
         if wanted_subaccount != existing:
             if not check_mode:
                 wanted_subaccount.update(module)
