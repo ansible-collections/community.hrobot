@@ -209,10 +209,10 @@ password_updated:
   type: bool
   returned: success
 
-created_subaccount:
-  description: The created subaccount object returned from the API.
-  type: raw
-  returned: when created is true
+subaccount:
+  description: The subaccount object returned by the API.
+  type: dict
+  returned: if O(state=present)
 """
 
 from ansible.module_utils.basic import AnsibleModule
@@ -252,6 +252,7 @@ def create_subaccount(module, storagebox_id, subaccount):
         timeout=30000,  # this endpoint is stupidly slow
     )
     if not error:
+        # contains all subaccount infos
         return res
 
     if error == "STORAGEBOX_INVALID_PASSWORD":
@@ -287,7 +288,7 @@ class Subaccount(object):
         self.comment = comment
 
     def delete(self, module):
-        dummy, error = fetch_url_json(
+        empty, error = fetch_url_json(
             module,
             self.mgmt_url(),
             method="DELETE",
@@ -303,7 +304,7 @@ class Subaccount(object):
             raise AssertionError('Unhandled error happened during deletion of {0}'.format(self.username))  # pragma: no cover
 
     def update(self, module):
-        res, error = fetch_url_json(
+        empty, error = fetch_url_json(
             module,
             self.mgmt_url(),
             method="PUT",
@@ -319,10 +320,9 @@ class Subaccount(object):
         # function is only called when storagebox and subaccount were already verified
         if error is not None:  # pragma: no cover
             raise AssertionError('Unhandled error happened during update of {0}'.format(self.username))  # pragma: no cover
-        return res
 
     def update_password(self, module, password):
-        dummy, error = fetch_url_json(
+        new_password, error = fetch_url_json(
             module,
             "{0}/password".format(self.mgmt_url()),
             method="POST",
@@ -344,6 +344,9 @@ class Subaccount(object):
         # function is only called when storagebox and subaccount were already verified
         if error is not None:  # pragma: no cover
             raise AssertionError('Unhandled error happened during password update of {0}'.format(self.username))  # pragma: no cover
+
+        # { "password": <password> }
+        return new_password
 
     def mgmt_url(self):
         return "{0}/storagebox/{1}/subaccount/{2}".format(
@@ -416,7 +419,7 @@ def main():
     existing = matches[0] if matches else None
 
     created = deleted = updated = password_updated = False
-    created_subaccount = None
+    returned_subaccount = None
 
     if subaccount["state"] == "absent":
         if existing:
@@ -449,9 +452,9 @@ def main():
             subaccount["password"] = None
 
         if not check_mode:
-            created_subaccount = create_subaccount(module, storagebox_id, subaccount)
+            returned_subaccount = create_subaccount(module, storagebox_id, subaccount)
         else:
-            created_subaccount = "<new with homedirectory {0}>".format(
+            returned_subaccount = "<new with homedirectory {0}>".format(
                 subaccount["homedirectory"]
             )
         created = True
@@ -462,7 +465,7 @@ def main():
         deleted=deleted,
         updated=updated,
         password_updated=password_updated,
-        created_subaccount=created_subaccount if created else None,
+        subaccount=returned_subaccount if created else None,
     )
 
 
