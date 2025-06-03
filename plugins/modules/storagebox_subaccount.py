@@ -84,42 +84,36 @@ options:
     description:
       - Enable or disable Samba.
     type: bool
-    default: false
     required: false
 
   ssh:
     description:
       - Enable or disable SSH access.
     type: bool
-    default: false
     required: false
 
   external_reachability:
     description:
       - Enable or disable external reachability (from outside Hetzner's networks).
     type: bool
-    default: false
     required: false
 
   webdav:
     description:
       - Enable or disable WebDAV.
     type: bool
-    default: false
     required: false
 
   readonly:
     description:
       - Enable or disable read-only mode.
     type: bool
-    default: false
     required: false
 
   comment:
     description:
       - A custom comment for the subaccount.
     type: str
-    default: ""
     required: false
 
   idempotence:
@@ -245,15 +239,11 @@ def create_subaccount(module, storagebox_id, subaccount):
         data=encode_data(subaccount),
         headers={"Content-type": "application/x-www-form-urlencoded"},
         accept_errors=[
-            "STORAGEBOX_NOT_FOUND",
             "STORAGEBOX_SUBACCOUNT_LIMIT_EXCEEDED",
             "STORAGEBOX_INVALID_PASSWORD",
         ],
         timeout=30000,  # this endpoint is stupidly slow
     )
-    if not error:
-        # contains all subaccount infos
-        return res
 
     if error == "STORAGEBOX_INVALID_PASSWORD":
         module.fail_json(
@@ -264,103 +254,85 @@ def create_subaccount(module, storagebox_id, subaccount):
     if error == "STORAGEBOX_SUBACCOUNT_LIMIT_EXCEEDED":
         module.fail_json(msg="Subaccount limit exceeded")
 
-    module.fail_json(
-        msg="Unknown error: {0} for username '{1}' and homedirectory '{2}'".format(
-            error,
-            subaccount.get("username", "<missing>"),
-            subaccount.get("homedirectory", "<missing>"),
-        )
-    )  # pragma: no cover
+    # Contains all subaccount informations
+    # { "subaccount": <data> }
+    return res
 
 
-class Subaccount(object):
-    def __init__(self, storagebox_id, username=None, homedirectory="",
-                 samba=False, ssh=False, external_reachability=False, webdav=False, readonly=False,
-                 comment="", **dummy):
-        self.storagebox_id = storagebox_id
-        self.username = username
-        self.homedirectory = homedirectory
-        self.samba = samba
-        self.ssh = ssh
-        self.external_reachability = external_reachability
-        self.webdav = webdav
-        self.readonly = readonly
-        self.comment = comment
+def merge_subaccounts_infos(original, updates):
+    # None values aren't updated
+    result = original.copy()
+    for key, value in updates.items():
+        if value is not None:
+            result[key] = value
+    return result
 
-    def delete(self, module):
-        empty, error = fetch_url_json(
-            module,
-            self.mgmt_url(),
-            method="DELETE",
-            allow_empty_result=True,
-            headers={"Content-type": "application/x-www-form-urlencoded"},
-            accept_errors=[
-                "STORAGEBOX_NOT_FOUND",
-                "STORAGEBOX_SUBACCOUNT_NOT_FOUND",
-            ],
-        )
-        # function is only called when storagebox and subaccount were already verified
-        if error is not None:  # pragma: no cover
-            raise AssertionError('Unhandled error happened during deletion of {0}'.format(self.username))  # pragma: no cover
 
-    def update(self, module):
-        empty, error = fetch_url_json(
-            module,
-            self.mgmt_url(),
-            method="PUT",
-            data=encode_data(self.__dict__),
-            headers={"Content-type": "application/x-www-form-urlencoded"},
-            accept_errors=[
-                "STORAGEBOX_NOT_FOUND",
-                # TODO: no error on unknown username?
-            ],
-            allow_empty_result=True,
-            timeout=30000,  # this endpoint is stupidly slow
-        )
-        # function is only called when storagebox and subaccount were already verified
-        if error is not None:  # pragma: no cover
-            raise AssertionError('Unhandled error happened during update of {0}'.format(self.username))  # pragma: no cover
+def is_subaccount_updated(before, after):
+    for key, value in after.items():
+        # Means user didn't provide a value
+        # we assume we don't want to update that field
+        if value is None:
+            continue
+        # password aren't considered part of update check
+        # due to being a different API call
+        if key == "password":
+            continue
+        if before.get(key) != value:
+            return True
+    return False
 
-    def update_password(self, module, password):
-        new_password, error = fetch_url_json(
-            module,
-            "{0}/password".format(self.mgmt_url()),
-            method="POST",
-            data=encode_data({"password": password}),
-            headers={"Content-type": "application/x-www-form-urlencoded"},
-            accept_errors=[
-                "STORAGEBOX_NOT_FOUND",
-                "STORAGEBOX_SUBACCOUNT_NOT_FOUND",
-                "STORAGEBOX_INVALID_PASSWORD",
-            ],
-            timeout=30000,  # this endpoint is stupidly slow
-        )
-        if error == "STORAGEBOX_INVALID_PASSWORD":
-            module.fail_json(
-                msg="Subaccount with username '{0}' and homedirectory '{1}' has an invalid password (says Hetzner)".format(
-                    self.username or "<missing>", self.homedirectory or "<missing>"
-                )
+
+def delete_subaccount(module, storagebox_id, subaccount):
+    empty, error = fetch_url_json(
+        module,
+        "{0}/storagebox/{1}/subaccount/{2}".format(
+            BASE_URL, storagebox_id, subaccount["username"]
+        ),
+        method="DELETE",
+        allow_empty_result=True,
+        headers={"Content-type": "application/x-www-form-urlencoded"},
+    )
+
+
+def update_subaccount(module, storagebox_id, subaccount):
+    empty, error = fetch_url_json(
+        module,
+        "{0}/storagebox/{1}/subaccount/{2}".format(
+            BASE_URL, storagebox_id, subaccount["username"]
+        ),
+        method="PUT",
+        data=encode_data(subaccount),
+        headers={"Content-type": "application/x-www-form-urlencoded"},
+        allow_empty_result=True,
+        timeout=30000,  # this endpoint is stupidly slow
+    )
+
+
+def update_subaccount_password(module, storagebox_id, subaccount):
+    new_password, error = fetch_url_json(
+        module,
+        "{0}/storagebox/{1}/subaccount/{2}/password".format(
+            BASE_URL, storagebox_id, subaccount["username"]
+        ),
+        method="POST",
+        data=encode_data({"password": subaccount["password"]}),
+        headers={"Content-type": "application/x-www-form-urlencoded"},
+        accept_errors=[
+            "STORAGEBOX_INVALID_PASSWORD",
+        ],
+        timeout=30000,  # this endpoint is stupidly slow
+    )
+    if error == "STORAGEBOX_INVALID_PASSWORD":
+        module.fail_json(
+            msg="Subaccount with username '{0}' and homedirectory '{1}' has an invalid password (says Hetzner)".format(
+                subaccount["username"] or "<missing>",
+                subaccount["homedirectory"] or "<missing>",
             )
-        # function is only called when storagebox and subaccount were already verified
-        if error is not None:  # pragma: no cover
-            raise AssertionError('Unhandled error happened during password update of {0}'.format(self.username))  # pragma: no cover
-
-        # { "password": <password> }
-        return new_password
-
-    def mgmt_url(self):
-        return "{0}/storagebox/{1}/subaccount/{2}".format(
-            BASE_URL, self.storagebox_id, self.username
         )
 
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):  # pragma: no cover
-            return False  # pragma: no cover
-        return self.__dict__ == other.__dict__
-
-    # Python 2, I hate you
-    def __ne__(self, other):
-        return not self.__eq__(other)
+    # { "password": <password> }
+    return new_password
 
 
 def get_subaccounts(module, storagebox_id):
@@ -370,7 +342,8 @@ def get_subaccounts(module, storagebox_id):
         module.fail_json(
             msg="Storagebox with ID {0} does not exist".format(storagebox_id)
         )
-    return [Subaccount(storagebox_id, **item["subaccount"]) for item in result]
+    # Hetzner's response [ { "subaccount": <data> }, ... ]
+    return [item["subaccount"] for item in result]
 
 
 def main():
@@ -386,12 +359,12 @@ def main():
         username=dict(type="str"),
         password=dict(type="str", no_log=True),
         homedirectory=dict(type="str"),
-        samba=dict(type="bool", default=False),
-        ssh=dict(type="bool", default=False),
-        external_reachability=dict(type="bool", default=False),
-        webdav=dict(type="bool", default=False),
-        readonly=dict(type="bool", default=False),
-        comment=dict(type="str", default=""),
+        samba=dict(type="bool"),
+        ssh=dict(type="bool"),
+        external_reachability=dict(type="bool"),
+        webdav=dict(type="bool"),
+        readonly=dict(type="bool"),
+        comment=dict(type="str"),
         idempotence=dict(type="str", choices=["username", "comment"], default="username"),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
@@ -402,28 +375,27 @@ def main():
 
     check_mode = module.check_mode
     storagebox_id = module.params["storagebox_id"]
-    password_mode = module.params['password_mode']
-    state = module.params['state']
-    idempotence = module.params['idempotence']
+    password_mode = module.params["password_mode"]
+    state = module.params["state"]
+    idempotence = module.params["idempotence"]
     subaccount = {
-        'username': module.params['username'],
-        'password': module.params['password'],
-        'homedirectory': module.params['homedirectory'],
-        'samba': module.params['samba'],
-        'ssh': module.params['ssh'],
-        'external_reachability': module.params['external_reachability'],
-        'webdav': module.params['webdav'],
-        'readonly': module.params['readonly'],
-        'comment': module.params['comment'],
+        "username": module.params["username"],
+        "password": module.params["password"],
+        "homedirectory": module.params["homedirectory"],
+        "samba": module.params["samba"],
+        "ssh": module.params["ssh"],
+        "external_reachability": module.params["external_reachability"],
+        "webdav": module.params["webdav"],
+        "readonly": module.params["readonly"],
+        "comment": module.params["comment"],
     }
-
     account_identifier = subaccount[idempotence]
 
     existing_subaccounts = get_subaccounts(module, storagebox_id)
 
     matches = [
         sa for sa in existing_subaccounts
-        if getattr(sa, idempotence, None) == account_identifier
+        if sa[idempotence] == account_identifier
     ]
     if len(matches) > 1:
         module.fail_json(msg="More than one subaccount matched the idempotence criteria.")
@@ -431,16 +403,15 @@ def main():
     existing = matches[0] if matches else None
 
     created = deleted = updated = password_updated = False
-    returned_subaccount = None
 
     if state == "absent":
         if existing:
             if not check_mode:
-                existing.delete(module)
+                delete_subaccount(module, storagebox_id, existing)
             deleted = True
     elif state == "present" and existing:
         # Set the found username in case user used comment as idempotence
-        subaccount['username'] = existing.__dict__['username']
+        subaccount["username"] = existing["username"]
 
         if (
             password_mode == "set-to-random" or
@@ -449,29 +420,27 @@ def main():
             if password_mode == "set-to-random":
                 subaccount["password"] = None
             if not check_mode:
-                existing.update_password(module, subaccount["password"])
+                new_password = update_subaccount_password(module, storagebox_id, subaccount)
+                subaccount["password"] = new_password["password"]
             password_updated = True
 
-        wanted_subaccount = Subaccount(storagebox_id, **subaccount)
-        if wanted_subaccount != existing:
+        if is_subaccount_updated(existing, subaccount):
             if not check_mode:
-                wanted_subaccount.update(module)
+                update_subaccount(module, storagebox_id, subaccount)
             updated = True
     else:  # state 'present' without pre-existing account
         if not subaccount["homedirectory"]:
-            module.fail_json(
-                msg="homedirectory is required when creating a new subaccount"
-            )
+            module.fail_json(msg="homedirectory is required when creating a new subaccount")
         if password_mode == "set-to-random":
             subaccount["password"] = None
 
         if not check_mode:
-            returned_subaccount = create_subaccount(module, storagebox_id, subaccount)
-        else:
-            returned_subaccount = "<new with homedirectory {0}>".format(
-                subaccount["homedirectory"]
-            )
+            del subaccount["username"]  # username cannot be choosen
+            # not necessary, allows us to get additional infos (created time etc...)
+            existing = create_subaccount(module, storagebox_id, subaccount)
         created = True
+
+    return_data = merge_subaccounts_infos(existing or {}, subaccount)
 
     module.exit_json(
         changed=any([created, deleted, updated, password_updated]),
@@ -479,7 +448,7 @@ def main():
         deleted=deleted,
         updated=updated,
         password_updated=password_updated,
-        subaccount=returned_subaccount if created else None,
+        subaccount=return_data if state != "absent" else None,
     )
 
 
