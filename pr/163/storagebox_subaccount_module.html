@@ -185,6 +185,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-comment" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>A custom comment for the subaccount.</p>
+<p>Is required when using <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-idempotence"><span class="std std-ref"><span class="pre">idempotence=comment</span></span></a></code> for updates or deletion of a subaccount.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -218,7 +219,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-homedirectory" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Home directory of the subaccount.</p>
-<p>Required when creating or updating a subaccount (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>).</p>
+<p>Required only when creating a subaccount (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>).</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -241,7 +242,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-cell"><p>Password to use or change.</p>
 <p>See <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password-mode"><span class="std std-ref"><span class="pre">password_mode</span></span></a></strong></code> for how and when this is used.</p>
-<p>Must not be provided if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password-mode"><span class="std std-ref"><span class="pre">password_mode=set-to-random</span></span></a></code>.</p>
+<p>Will be ignored if <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-password-mode"><span class="std std-ref"><span class="pre">password_mode=set-to-random</span></span></a></code>.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -332,7 +333,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#parameter-username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Username of the subaccount.</p>
-<p>Required for updating or deleting a subaccount (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=absent</span></span></a></code> or update with <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>).</p>
+<p>Required when using <code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-idempotence"><span class="std std-ref"><span class="pre">idempotence=username</span></span></a></code> for updates or deletion of a subaccount.</p>
 <p>Omit to create a new subaccount (<code class="ansible-option-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-module-parameter-state"><span class="std std-ref"><span class="pre">state=present</span></span></a></code>).</p>
 </div></td>
 </tr>
