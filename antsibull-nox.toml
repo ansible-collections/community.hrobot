@@ -29,13 +29,13 @@ run_no_unwanted_files = true
 no_unwanted_files_module_extensions = [".py"]
 no_unwanted_files_yaml_extensions = [".yml"]
 run_action_groups = true
+run_no_trailing_whitespace = true
 
 [[sessions.extra_checks.action_groups_config]]
 name = "robot"
 pattern = "^.*$"
 exclusions = []
 doc_fragment = "community.hrobot.attributes.actiongroup_robot"
-run_no_trailing_whitespace = true
 
 [sessions.build_import_check]
 run_galaxy_importer = true
