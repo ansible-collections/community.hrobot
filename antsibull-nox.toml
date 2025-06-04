@@ -35,6 +35,7 @@ name = "robot"
 pattern = "^.*$"
 exclusions = []
 doc_fragment = "community.hrobot.attributes.actiongroup_robot"
+run_no_trailing_whitespace = true
 
 [sessions.build_import_check]
 run_galaxy_importer = true
