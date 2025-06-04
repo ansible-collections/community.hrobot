@@ -60,7 +60,7 @@ options:
   username:
     description:
       - Username of the subaccount.
-      - Required for updating or deleting a subaccount (O(state=absent) or update with O(state=present)).
+      - Required when using O(idempotence=username) for updates or deletion of a subaccount.
       - Omit to create a new subaccount (O(state=present)).
     type: str
     required: false
@@ -69,14 +69,14 @@ options:
     description:
       - Password to use or change.
       - See O(password_mode) for how and when this is used.
-      - Must not be provided if O(password_mode=set-to-random).
+      - Will be ignored if O(password_mode=set-to-random).
     type: str
     required: false
 
   homedirectory:
     description:
       - Home directory of the subaccount.
-      - Required when creating or updating a subaccount (O(state=present)).
+      - Required only when creating a subaccount (O(state=present)).
     type: str
     required: false
 
@@ -113,6 +113,7 @@ options:
   comment:
     description:
       - A custom comment for the subaccount.
+      - Is required when using O(idempotence=comment) for updates or deletion of a subaccount.
     type: str
     required: false
 
@@ -246,17 +247,13 @@ def create_subaccount(module, storagebox_id, subaccount):
     )
 
     if error == "STORAGEBOX_INVALID_PASSWORD":
-        module.fail_json(
-            msg="Creation of user with homedirectory '{0}' has an invalid password (says Hetzner)".format(
-                subaccount.get("homedirectory", "<missing>"),
-            )
-        )
+        module.fail_json(msg="Invalid password (says Hetzner)")
     if error == "STORAGEBOX_SUBACCOUNT_LIMIT_EXCEEDED":
         module.fail_json(msg="Subaccount limit exceeded")
 
     # Contains all subaccount informations
     # { "subaccount": <data> }
-    return res
+    return res["subaccount"]
 
 
 def merge_subaccounts_infos(original, updates):
@@ -324,15 +321,10 @@ def update_subaccount_password(module, storagebox_id, subaccount):
         timeout=30000,  # this endpoint is stupidly slow
     )
     if error == "STORAGEBOX_INVALID_PASSWORD":
-        module.fail_json(
-            msg="Subaccount with username '{0}' and homedirectory '{1}' has an invalid password (says Hetzner)".format(
-                subaccount["username"] or "<missing>",
-                subaccount["homedirectory"] or "<missing>",
-            )
-        )
+        module.fail_json(msg="Invalid password (says Hetzner)")
 
     # { "password": <password> }
-    return new_password
+    return new_password["password"]
 
 
 def get_subaccounts(module, storagebox_id):
@@ -421,7 +413,7 @@ def main():
                 subaccount["password"] = None
             if not check_mode:
                 new_password = update_subaccount_password(module, storagebox_id, subaccount)
-                subaccount["password"] = new_password["password"]
+                subaccount["password"] = new_password
             password_updated = True
 
         if is_subaccount_updated(existing, subaccount):
@@ -434,8 +426,8 @@ def main():
         if password_mode == "set-to-random":
             subaccount["password"] = None
 
+        del subaccount["username"]  # username cannot be choosen
         if not check_mode:
-            del subaccount["username"]  # username cannot be choosen
             # not necessary, allows us to get additional infos (created time etc...)
             existing = create_subaccount(module, storagebox_id, subaccount)
         created = True
