@@ -415,48 +415,77 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a new subaccount with random password</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/backups/project1&quot;</span>
-<span class="w">      </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">webdav</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">      </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">1&quot;</span>
+<span class="w">    </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/backups/project1&quot;</span>
+<span class="w">    </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">webdav</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">1&quot;</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a subaccount with custom password</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
-<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s3cretPass123&quot;</span>
-<span class="w">      </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup1&quot;</span>
-<span class="w">      </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">      </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s3cretPass123&quot;</span>
+<span class="w">    </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup1&quot;</span>
+<span class="w">    </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Update an existing subaccount</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
-<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
-<span class="w">      </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup1-updated&quot;</span>
-<span class="w">      </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Updated</span><span class="nv"> </span><span class="s">path</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">readonly</span><span class="nv"> </span><span class="s">mode&quot;</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
+<span class="w">    </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/data/backup1-updated&quot;</span>
+<span class="w">    </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Updated</span><span class="nv"> </span><span class="s">path</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">readonly</span><span class="nv"> </span><span class="s">mode&quot;</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete a subaccount</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
-<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Change password for a subaccount</span>
 <span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
-<span class="w">    </span><span class="nt">subaccount</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
-<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
-<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;n3wSecur3Pass&quot;</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backup1&quot;</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;n3wSecur3Pass&quot;</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create subaccount using comment for idempotence</span>
+<span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
+<span class="w">    </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/projects/backup1&quot;</span>
+<span class="w">    </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">webdav</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup1</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">Foo&quot;</span>
+<span class="w">    </span><span class="nt">idempotence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Update subaccount identified by comment</span>
+<span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
+<span class="w">    </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/projects/backup1-updated&quot;</span>
+<span class="w">    </span><span class="nt">readonly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup1</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">Foo&quot;</span>
+<span class="w">    </span><span class="nt">idempotence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Update password for subaccount using comment idempotence</span>
+<span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Sup3rSecur3!&quot;</span>
+<span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup1</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">Foo&quot;</span>
+<span class="w">    </span><span class="nt">idempotence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">    </span><span class="nt">password_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update-if-provided</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete subaccount identified by comment</span>
+<span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
+<span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup1</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">Foo&quot;</span>
+<span class="w">    </span><span class="nt">idempotence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
 </pre></div>
 </div>
 </section>
