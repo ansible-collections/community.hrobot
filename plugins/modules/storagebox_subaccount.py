@@ -61,7 +61,8 @@ options:
     description:
       - Username of the subaccount.
       - Required when using O(idempotence=username) for updates or deletion of a subaccount.
-      - Omit to create a new subaccount (O(state=present)).
+      - If O(idempotence=username) and this is not specified, a new subaccount will always be created.
+        If O(idempotence=comment), this option is ignored, as the Hetzner API does not allow to chose or modify the username.
     type: str
     required: false
 
