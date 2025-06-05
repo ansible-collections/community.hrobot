@@ -29,7 +29,15 @@ attributes:
   diff_mode:
     support: none
   idempotent:
-    support: full
+    support: partial
+    details:
+      - The Hetzner API does not allow to create subaccounts with specific usernames.
+        You can instead use O(comment) to identify accounts by setting O(idempotence=comment),
+        that way creation is idempotent.
+      - The module is never idempotent if O(password_mode=set-to-random), or if O(password_mode=update-if-provided) and O(password) is specified.
+        Set O(password_mode=ignore-if-exists) if you want to provide O(password) on every invocation
+        and do not want the module to always change it. Due to how Hetzner's API works, it is not possible
+        to query the current password for a subaccount, or check whether a given password is set.
 
 options:
   storagebox_id:
