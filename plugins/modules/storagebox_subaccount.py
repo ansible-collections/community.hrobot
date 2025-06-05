@@ -308,7 +308,7 @@ def update_subaccount(module, storagebox_id, subaccount):
             BASE_URL, storagebox_id, subaccount["username"]
         ),
         method="PUT",
-        data=encode_data(subaccount),
+        data=encode_data({key: value for key, value in subaccount.items() if key != "password"}),
         headers={"Content-type": "application/x-www-form-urlencoded"},
         allow_empty_result=True,
         timeout=30000,  # this endpoint is stupidly slow
