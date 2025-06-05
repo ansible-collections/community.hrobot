@@ -486,6 +486,24 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
 <span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Backup1</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Project</span><span class="nv"> </span><span class="s">Foo&quot;</span>
 <span class="w">    </span><span class="nt">idempotence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Use password only during creation</span>
+<span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;InitPass$42&quot;</span>
+<span class="w">    </span><span class="nt">homedirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mnt/init&quot;</span>
+<span class="w">    </span><span class="nt">samba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">ssh</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Init</span><span class="nv"> </span><span class="s">Subaccount&quot;</span>
+<span class="w">    </span><span class="nt">idempotence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">    </span><span class="nt">password_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ignore-if-exists</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Always reset to a random password</span>
+<span class="w">  </span><span class="nt">community.hrobot.storagebox_subaccount</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">storagebox_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
+<span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Temp</span><span class="nv"> </span><span class="s">Access</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">CI/CD&quot;</span>
+<span class="w">    </span><span class="nt">idempotence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">    </span><span class="nt">password_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">set-to-random</span>
 </pre></div>
 </div>
 </section>
