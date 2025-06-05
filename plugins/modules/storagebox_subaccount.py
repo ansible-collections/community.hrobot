@@ -148,48 +148,95 @@ EXAMPLES = r"""
 - name: Create a new subaccount with random password
   community.hrobot.storagebox_subaccount:
     storagebox_id: 123456
-    subaccount:
-      homedirectory: "/backups/project1"
-      samba: true
-      ssh: true
-      webdav: false
-      comment: "Backup for Project 1"
+    homedirectory: "/backups/project1"
+    samba: true
+    ssh: true
+    webdav: false
+    comment: "Backup for Project 1"
 
 - name: Create a subaccount with custom password
   community.hrobot.storagebox_subaccount:
     storagebox_id: 123456
-    subaccount:
-      username: "backup1"
-      password: "s3cretPass123"
-      homedirectory: "/data/backup1"
-      readonly: false
-      samba: true
-      ssh: false
+    username: "backup1"
+    password: "s3cretPass123"
+    homedirectory: "/data/backup1"
+    readonly: false
+    samba: true
+    ssh: false
 
 - name: Update an existing subaccount
   community.hrobot.storagebox_subaccount:
     storagebox_id: 123456
-    subaccount:
-      state: present
-      username: "backup1"
-      homedirectory: "/data/backup1-updated"
-      readonly: true
-      comment: "Updated path and readonly mode"
+    state: present
+    username: "backup1"
+    homedirectory: "/data/backup1-updated"
+    readonly: true
+    comment: "Updated path and readonly mode"
 
 - name: Delete a subaccount
   community.hrobot.storagebox_subaccount:
     storagebox_id: 123456
-    subaccount:
-      state: absent
-      username: "backup1"
+    state: absent
+    username: "backup1"
 
 - name: Change password for a subaccount
   community.hrobot.storagebox_subaccount:
     storagebox_id: 123456
-    subaccount:
-      state: present
-      username: "backup1"
-      password: "n3wSecur3Pass"
+    state: present
+    username: "backup1"
+    password: "n3wSecur3Pass"
+
+- name: Create subaccount using comment for idempotence
+  community.hrobot.storagebox_subaccount:
+    storagebox_id: 123456
+    homedirectory: "/projects/backup1"
+    samba: true
+    ssh: true
+    webdav: false
+    readonly: false
+    comment: "Backup1 - Project Foo"
+    idempotence: comment
+
+- name: Update subaccount identified by comment
+  community.hrobot.storagebox_subaccount:
+    storagebox_id: 123456
+    homedirectory: "/projects/backup1-updated"
+    readonly: true
+    comment: "Backup1 - Project Foo"
+    idempotence: comment
+
+- name: Update password for subaccount using comment idempotence
+  community.hrobot.storagebox_subaccount:
+    storagebox_id: 123456
+    password: "Sup3rSecur3!"
+    comment: "Backup1 - Project Foo"
+    idempotence: comment
+    password_mode: update-if-provided
+
+- name: Delete subaccount identified by comment
+  community.hrobot.storagebox_subaccount:
+    storagebox_id: 123456
+    state: absent
+    comment: "Backup1 - Project Foo"
+    idempotence: comment
+
+- name: Use password only during creation
+  community.hrobot.storagebox_subaccount:
+    storagebox_id: 123456
+    password: "InitPass$42"
+    homedirectory: "/mnt/init"
+    samba: true
+    ssh: false
+    comment: "Init Subaccount"
+    idempotence: comment
+    password_mode: ignore-if-exists
+
+- name: Always reset to a random password
+  community.hrobot.storagebox_subaccount:
+    storagebox_id: 123456
+    comment: "Temp Access - CI/CD"
+    idempotence: comment
+    password_mode: set-to-random
 """
 
 RETURN = r"""
