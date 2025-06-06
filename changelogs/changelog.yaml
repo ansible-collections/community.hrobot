@@ -403,3 +403,29 @@ releases:
         name: storagebox_snapshot
         namespace: ''
     release_date: '2025-05-02'
+  2.4.0:
+    changes:
+      bugfixes:
+        - storagebox - make sure that changes of boolean parameters are sent correctly
+          to the Robot service (https://github.com/ansible-collections/community.hrobot/issues/160,
+          https://github.com/ansible-collections/community.hrobot/pull/161).
+      release_summary: 'Bugfix and feature release.
+
+        This release contains three new modules that support the remaining aspects
+        of Hetzner Storage Boxes that were not covered so far.
+
+        '
+    fragments:
+      - 161-storagebox-edit.yml
+      - 2.4.0.yml
+    modules:
+      - description: Query the snapshots for a storage box.
+        name: storagebox_snapshot_info
+        namespace: ''
+      - description: Create, update, or delete a subaccount for a storage box.
+        name: storagebox_subaccount
+        namespace: ''
+      - description: Query the subaccounts for a storage box.
+        name: storagebox_subaccount_info
+        namespace: ''
+    release_date: '2025-06-06'

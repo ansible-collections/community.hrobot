@@ -4,6 +4,27 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v2.4.0
+======
+
+Release Summary
+---------------
+
+Bugfix and feature release.
+This release contains three new modules that support the remaining aspects of Hetzner Storage Boxes that were not covered so far.
+
+Bugfixes
+--------
+
+- storagebox - make sure that changes of boolean parameters are sent correctly to the Robot service (https://github.com/ansible-collections/community.hrobot/issues/160, https://github.com/ansible-collections/community.hrobot/pull/161).
+
+New Modules
+-----------
+
+- community.hrobot.storagebox_snapshot_info - Query the snapshots for a storage box.
+- community.hrobot.storagebox_subaccount - Create, update, or delete a subaccount for a storage box.
+- community.hrobot.storagebox_subaccount_info - Query the subaccounts for a storage box.
+
 v2.3.0
 ======
 
