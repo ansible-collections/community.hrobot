@@ -153,9 +153,9 @@ FETCH_URL_JSON_FAIL = [
         {},
     ),
     (
-        (None, dict(status=400)),
+        (None, dict(status=400, msg="Error!")),
         [],
-        'Cannot retrieve content from https://foo/bar, HTTP status code 400',
+        'Cannot retrieve content from GET https://foo/bar, HTTP status code 400 (Error!)',
         {},
     ),
 ]
@@ -189,14 +189,14 @@ def test_fetch_url_json_empty(monkeypatch):
 
     assert robot.fetch_url_json(module, 'https://foo/bar', allow_empty_result=True) == (None, None)
 
-    robot.fetch_url = MagicMock(return_value=(None, dict(status=400, body='')))
+    robot.fetch_url = MagicMock(return_value=(None, dict(status=400, body='', msg='Error!')))
 
     with pytest.raises(ModuleFailException) as exc:
         robot.fetch_url_json(module, 'https://foo/bar', allow_empty_result=True)
 
     print(exc.value.fail_msg)
     print(exc.value.fail_kwargs)
-    assert exc.value.fail_msg == 'Cannot retrieve content from https://foo/bar, HTTP status code 400'
+    assert exc.value.fail_msg == 'Cannot retrieve content from GET https://foo/bar, HTTP status code 400 (Error!)'
     assert exc.value.fail_kwargs == dict()
 
 
@@ -243,7 +243,7 @@ def test_plugin_open_url_json_fail_other_2(monkeypatch):
     with pytest.raises(robot.PluginException) as exc:
         robot.plugin_open_url_json(plugin, 'https://foo/bar')
 
-    assert exc.value.error_message == 'Cannot retrieve content from https://foo/bar, HTTP status code 400'
+    assert exc.value.error_message == 'Cannot retrieve content from GET https://foo/bar, HTTP status code 400 (Error!)'
 
 
 def test_plugin_open_url_json_empty_result(monkeypatch):
@@ -262,4 +262,4 @@ def test_plugin_open_url_json_empty_result(monkeypatch):
     with pytest.raises(robot.PluginException) as exc:
         robot.plugin_open_url_json(plugin, 'https://foo/bar')
 
-    assert exc.value.error_message == 'Cannot retrieve content from https://foo/bar, HTTP status code 400'
+    assert exc.value.error_message == 'Cannot retrieve content from GET https://foo/bar, HTTP status code 400 (Error!)'

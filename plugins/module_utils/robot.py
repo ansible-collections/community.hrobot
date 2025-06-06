@@ -100,8 +100,10 @@ def raw_plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, h
         )
         status = response.code
         content = response.read()
+        reason = response.reason
     except HTTPError as e:
         status = e.code
+        reason = e.reason
         try:
             content = e.read()
         except AttributeError:
@@ -112,7 +114,11 @@ def raw_plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, h
     if not content:
         if allow_empty_result and status in allowed_empty_result_status_codes:
             return None, None
-        raise PluginException('Cannot retrieve content from {0}, HTTP status code {1}'.format(url, status))
+        raise PluginException(
+            "Cannot retrieve content from {0} {1}, HTTP status code {2} ({3})".format(
+                method, url, status, reason
+            )
+        )
 
     try:
         result = json.loads(content.decode('utf-8'))
@@ -150,7 +156,11 @@ def raw_fetch_url_json(module, url, method='GET', timeout=10, data=None, headers
     if not content:
         if allow_empty_result and info.get('status') in allowed_empty_result_status_codes:
             return None, None
-        module.fail_json(msg='Cannot retrieve content from {0}, HTTP status code {1}'.format(url, info.get('status')))
+        module.fail_json(
+            msg='Cannot retrieve content from {0} {1}, HTTP status code {2} ({3})'.format(
+                method, url, info.get('status'), info.get('msg')
+            )
+        )
 
     try:
         result = module.from_json(content.decode('utf8'))
