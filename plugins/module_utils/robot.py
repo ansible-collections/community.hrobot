@@ -84,9 +84,9 @@ def raw_plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, h
     password = plugin.get_option('hetzner_password')
     if templar is not None:
         if templar.is_template(user):
-            user = templar.template(variable=user, disable_lookups=False)
+            user = templar.template(variable=user)
         if templar.is_template(password):
-            password = templar.template(variable=password, disable_lookups=False)
+            password = templar.template(variable=password)
     try:
         response = open_url(
             url,
