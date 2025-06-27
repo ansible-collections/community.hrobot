@@ -58,6 +58,28 @@ attributes:
       - community.hrobot.robot
 '''
 
+    ACTIONGROUP_API = r'''
+options: {}
+attributes:
+  action_group:
+    description: Use C(group/community.hrobot.api) in C(module_defaults) to set defaults for this module.
+    support: full
+    membership:
+      - community.hrobot.api
+'''
+
+    # Only for transition period
+    _ACTIONGROUP_ROBOT_AND_API = r'''
+options: {}
+attributes:
+  action_group:
+    description: Use C(group/community.hrobot.robot) or C(group/community.hrobot.api) in C(module_defaults) to set defaults for this module.
+    support: full
+    membership:
+      - community.hrobot.api
+      - community.hrobot.robot
+'''
+
     CONN = r"""
 options: {}
 attributes:

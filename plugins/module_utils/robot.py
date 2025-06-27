@@ -16,11 +16,21 @@ from ansible.module_utils.urls import fetch_url, open_url
 import json
 import time
 
+from ansible_collections.community.hrobot.plugins.module_utils.common import (
+    PluginException,
+    CheckDoneTimeoutException,
+)
+
 
 ROBOT_DEFAULT_ARGUMENT_SPEC = dict(
     hetzner_user=dict(type='str', required=True),
     hetzner_password=dict(type='str', required=True, no_log=True),
     rate_limit_retry_timeout=dict(type='int', default=-1),
+)
+
+_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT = dict(
+    hetzner_user=dict(type='str', required=False),
+    hetzner_password=dict(type='str', required=False, no_log=True),
 )
 
 # The API endpoint is fixed.
@@ -63,12 +73,6 @@ def format_error_msg(error, rate_limit_timeout=None):
     if rate_limit_timeout is not None and rate_limit_timeout > 0 and error['code'] == _RATE_LIMITING_ERROR:
         msg += '. Waited a total of {0:.1f} seconds for rate limit errors to go away'.format(rate_limit_timeout)
     return msg
-
-
-class PluginException(Exception):
-    def __init__(self, message):
-        super(PluginException, self).__init__(message)
-        self.error_message = message
 
 
 def raw_plugin_open_url_json(plugin, url, method='GET', timeout=10, data=None, headers=None,
@@ -262,13 +266,6 @@ def fetch_url_json(module, url, method='GET', timeout=10, data=None, headers=Non
         module.params['rate_limit_retry_timeout'],
         call,
     )
-
-
-class CheckDoneTimeoutException(Exception):
-    def __init__(self, result, error):
-        super(CheckDoneTimeoutException, self).__init__()
-        self.result = result
-        self.error = error
 
 
 def fetch_url_json_with_retries(module, url, check_done_callback, check_done_delay=10, check_done_timeout=180, skip_first=False, **kwargs):

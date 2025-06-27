@@ -45,6 +45,21 @@ pattern = "^.*$"
 exclusions = []
 doc_fragment = "community.hrobot.attributes.actiongroup_robot"
 
+[[sessions.extra_checks.action_groups_config]]
+name = "api"
+pattern = "^storagebox.*$"
+exclusions = [
+    "storagebox",
+    "storagebox_set_password",
+    "storagebox_snapshot_info",
+    "storagebox_snapshot_plan_info",
+    "storagebox_snapshot_plan",
+    "storagebox_snapshot",
+    "storagebox_subaccount_info",
+    "storagebox_subaccount",
+]
+doc_fragment = "community.hrobot.attributes.actiongroup_api"
+
 [sessions.build_import_check]
 run_galaxy_importer = true
 
