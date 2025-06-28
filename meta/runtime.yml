@@ -29,4 +29,5 @@ action_groups:
     - storagebox_subaccount_info
     - v_switch
   api:
+    - storagebox
     - storagebox_info

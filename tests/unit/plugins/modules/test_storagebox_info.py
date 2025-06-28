@@ -456,6 +456,7 @@ class TestHetznerStorageboxInfo(BaseTestModule):
             'rate_limit_retry_timeout': 1,
         }, [
             FetchUrlCall('GET', 429)
+            .expect_header("Authorization", "Bearer asdf")
             .result_error_json('Not found', {
                 'error': {
                     'code': 'rate_limit_exceeded',
@@ -497,8 +498,7 @@ class TestHetznerStorageboxInfo(BaseTestModule):
             .expect_url('{0}/v1/storage_boxes/23'.format(API_BASE_URL)),
         ])
         assert result['msg'] == 'Request failed: [rate_limit_exceeded] Rate limit exceeded'
-        # TODO: only works with Python 3+
-        # sleep_mock.assert_not_called()
+        sleep_mock.assert_has_calls([])
 
     def test_bad_json(self, mocker):
         result = self.run_module_failed(mocker, storagebox_info, {

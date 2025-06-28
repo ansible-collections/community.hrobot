@@ -7,4 +7,5 @@ known_issues:
      For the new API, an API token needs to be registered and provided as ``hetzner_token``
      (https://github.com/ansible-collections/community.hrobot/pull/166)."
 minor_changes:
+  - "storagebox - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/166)."
   - "storagebox_info - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/166)."

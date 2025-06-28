@@ -53,7 +53,7 @@ def raw_api_fetch_url_json(
     method='GET',
     timeout=10,
     data=None,
-    # headers=None,
+    headers=None,
     accept_errors=None,
     # allow_empty_result=False,
     # allowed_empty_result_status_codes=(),
@@ -66,8 +66,8 @@ def raw_api_fetch_url_json(
     actual_headers = {
         "Authorization": "Bearer {0}".format(module.params['hetzner_token']),
     }
-    # if headers:
-    #     actual_headers.update(headers)
+    if headers:
+        actual_headers.update(headers)
     accept_errors = accept_errors or ()
 
     resp, info = fetch_url(module, url, method=method, timeout=timeout, data=data, headers=actual_headers)
@@ -142,7 +142,7 @@ def api_fetch_url_json(
     method='GET',
     timeout=10,
     data=None,
-    # headers=None,
+    headers=None,
     accept_errors=None,
     # allow_empty_result=False,
     # allowed_empty_result_status_codes=(),
@@ -157,7 +157,7 @@ def api_fetch_url_json(
             method=method,
             timeout=timeout,
             data=data,
-            # headers=headers,
+            headers=headers,
             accept_errors=accept_errors_,
             # allow_empty_result=allow_empty_result,
             # allowed_empty_result_status_codes=allowed_empty_result_status_codes,
@@ -187,7 +187,7 @@ def api_fetch_url_json_list(
     data_key,
     method='GET',
     timeout=10,
-    # headers=None,
+    headers=None,
     page_size=100,
 ):
     '''
@@ -203,7 +203,7 @@ def api_fetch_url_json_list(
             page_url,
             method=method,
             timeout=timeout,
-            # headers=headers,
+            headers=headers,
         )
         if isinstance(result.get(data_key), list):
             result_list += result[data_key]
@@ -222,28 +222,28 @@ def api_fetch_url_json_list(
     return result_list
 
 
-# def api_fetch_url_json_with_retries(module, url, check_done_callback, check_done_delay=10, check_done_timeout=180, skip_first=False, **kwargs):
-#     '''
-#     Make general request to Hetzner's API, with retries until a condition is satisfied.
-#
-#     The condition is tested by calling ``check_done_callback(result, error)``. If it is not satisfied,
-#     it will be retried with delays ``check_done_delay`` (in seconds) until a total timeout of
-#     ``check_done_timeout`` (in seconds) since the time the first request is started is reached.
-#
-#     If ``skip_first`` is specified, will assume that a first call has already been made and will
-#     directly start with waiting.
-#     '''
-#     start_time = time.time()
-#     if not skip_first:
-#         result, error = api_fetch_url_json(module, url, **kwargs)
-#         if check_done_callback(result, error):
-#             return result, error
-#     while True:
-#         elapsed = (time.time() - start_time)
-#         left_time = check_done_timeout - elapsed
-#         time.sleep(max(min(check_done_delay, left_time), 0))
-#         result, error = api_fetch_url_json(module, url, **kwargs)
-#         if check_done_callback(result, error):
-#             return result, error
-#         if left_time < check_done_delay:
-#             raise CheckDoneTimeoutException(result, error)
+def api_fetch_url_json_with_retries(module, url, check_done_callback, check_done_delay=10, check_done_timeout=180, skip_first=False, **kwargs):
+    '''
+    Make general request to Hetzner's API, with retries until a condition is satisfied.
+
+    The condition is tested by calling ``check_done_callback(result, error)``. If it is not satisfied,
+    it will be retried with delays ``check_done_delay`` (in seconds) until a total timeout of
+    ``check_done_timeout`` (in seconds) since the time the first request is started is reached.
+
+    If ``skip_first`` is specified, will assume that a first call has already been made and will
+    directly start with waiting.
+    '''
+    start_time = time.time()
+    if not skip_first:
+        result, error = api_fetch_url_json(module, url, **kwargs)
+        if check_done_callback(result, error):
+            return result, error
+    while True:
+        elapsed = (time.time() - start_time)
+        left_time = check_done_timeout - elapsed
+        time.sleep(max(min(check_done_delay, left_time), 0))
+        result, info, error = api_fetch_url_json(module, url, **kwargs)
+        if check_done_callback(result, info, error):
+            return result, info, error
+        if left_time < check_done_delay:
+            raise CheckDoneTimeoutException(result, error)

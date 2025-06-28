@@ -18,8 +18,12 @@ author:
 description:
   - Modify a storage box's basic configuration.
 extends_documentation_fragment:
+  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
+  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
 attributes:
   check_mode:
@@ -115,16 +119,29 @@ zfs:
 """
 
 from ansible.module_utils.basic import AnsibleModule
+from ansible.module_utils.common.text.converters import to_native
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
+from ansible_collections.community.hrobot.plugins.module_utils.common import (
+    CheckDoneTimeoutException,
+)
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
     fetch_url_json,
 )
 
+from ansible_collections.community.hrobot.plugins.module_utils.api import (
+    API_BASE_URL,
+    API_DEFAULT_ARGUMENT_SPEC,
+    _API_DEFAULT_ARGUMENT_SPEC_COMPAT,
+    api_fetch_url_json_with_retries,
+    api_fetch_url_json,
+)
 
-PARAMETERS = {
+
+PARAMETERS_LEGACY = {
     'name': ('name', 'storagebox_name'),
     'webdav': ('webdav', 'webdav'),
     'samba': ('samba', 'samba'),
@@ -133,10 +150,37 @@ PARAMETERS = {
     'zfs': ('zfs', 'zfs'),
 }
 
+UPDATE_PARAMETERS = {
+    'name': ('name', ['name'], 'name'),
+}
+
+ACTION_PARAMETERS = {
+    'webdav': ('webdav', ['access_settings', 'webdav_enabled'], 'webdav_enabled'),
+    'samba': ('samba', ['access_settings', 'samba_enabled'], 'samba_enabled'),
+    'ssh': ('ssh', ['access_settings', 'ssh_enabled'], 'ssh_enabled'),
+    'external_reachability': ('external_reachability', ['access_settings', 'reachable_externally'], 'reachable_externally'),
+    'zfs': ('zfs', ['access_settings', 'zfs_enabled'], 'zfs_enabled'),
+}
+
+PARAMETERS = dict(UPDATE_PARAMETERS)
+PARAMETERS.update(ACTION_PARAMETERS)
+
+
+def extract_legacy(result):
+    sb = result['storagebox']
+    return {key: sb.get(key) for key, dummy in PARAMETERS_LEGACY.values()}
+
 
 def extract(result):
-    sb = result['storagebox']
-    return {key: sb.get(key) for key, dummy in PARAMETERS.values()}
+    sb = result['storage_box']
+
+    def get(keys):
+        value = sb
+        for key in keys:
+            value = value[key]
+        return value
+
+    return {data_key: get(keys) for data_key, keys, dummy2 in PARAMETERS.values()}
 
 
 def main():
@@ -150,45 +194,135 @@ def main():
         zfs=dict(type='bool'),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
+    argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
         argument_spec=argument_spec,
         supports_check_mode=True,
+        required_together=[("hetzner_user", "hetzner_password")],
+        required_one_of=[("hetzner_user", "hetzner_token")],
+        mutually_exclusive=[("hetzner_user", "hetzner_token")],
     )
 
     storagebox_id = module.params['id']
-    url = "{0}/storagebox/{1}".format(BASE_URL, storagebox_id)
-    result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
-    if error:
-        module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
-
-    before = extract(result)
-    after = dict(before)
+    before = {}
+    after = {}
     changes = {}
 
-    for option_name, (data_name, change_name) in PARAMETERS.items():
-        value = module.params[option_name]
-        if value is not None:
-            if before[data_name] != value:
-                after[data_name] = value
-                if isinstance(value, bool):
-                    changes[change_name] = str(value).lower()
-                else:
-                    changes[change_name] = value
-
-    if changes and not module.check_mode:
-        headers = {"Content-type": "application/x-www-form-urlencoded"}
-        result, error = fetch_url_json(
-            module,
-            url,
-            data=urlencode(changes),
-            headers=headers,
-            method='POST',
-            accept_errors=['INVALID_INPUT'],
-        )
+    if module.params["hetzner_user"] is not None:
+        # DEPRECATED: old API
+        url = "{0}/storagebox/{1}".format(BASE_URL, storagebox_id)
+        result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
         if error:
-            invalid = result['error'].get('invalid') or []
-            module.fail_json(msg='The values to update were invalid ({0})'.format(', '.join(invalid)))
-        after = extract(result)
+            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
+
+        before = extract_legacy(result)
+        after = dict(before)
+
+        for option_name, (data_name, change_name) in PARAMETERS_LEGACY.items():
+            value = module.params[option_name]
+            if value is not None:
+                if before[data_name] != value:
+                    after[data_name] = value
+                    if isinstance(value, bool):
+                        changes[change_name] = str(value).lower()
+                    else:
+                        changes[change_name] = value
+
+        if changes and not module.check_mode:
+            headers = {"Content-type": "application/x-www-form-urlencoded"}
+            result, error = fetch_url_json(
+                module,
+                url,
+                data=urlencode(changes),
+                headers=headers,
+                method='POST',
+                accept_errors=['INVALID_INPUT'],
+            )
+            if error:
+                invalid = result['error'].get('invalid') or []
+                module.fail_json(msg='The values to update were invalid ({0})'.format(', '.join(invalid)))
+            after = extract_legacy(result)
+
+    else:
+        # NEW API!
+        url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
+        result, dummy, error = api_fetch_url_json(module, url, accept_errors=['not_found'])
+        if error:
+            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
+
+        before = extract(result)
+        after = dict(before)
+
+        update = {}
+        for option_name, (data_name, dummy, change_name) in UPDATE_PARAMETERS.items():
+            value = module.params[option_name]
+            if value is not None:
+                if before[data_name] != value:
+                    after[data_name] = value
+                    changes[change_name] = value
+                    update[change_name] = value
+
+        action = {}
+        update_after_update = {}
+        for option_name, (data_name, dummy, change_name) in ACTION_PARAMETERS.items():
+            value = module.params[option_name]
+            if value is not None:
+                if before[data_name] != value:
+                    after[data_name] = value
+                    update_after_update[data_name] = value
+                    changes[change_name] = value
+                    action[change_name] = value
+
+        if update and not module.check_mode:
+            headers = {"Content-type": "application/json"}
+            result, dummy, error = api_fetch_url_json(
+                module,
+                url,
+                data=module.jsonify(update),
+                headers=headers,
+                method='PUT',
+                accept_errors=['invalid_input'],
+            )
+            if error:
+                details = result['error'].get('details') or {}
+                fields = details.get("fields") or []
+                details_str = ", ".join(['{0}: {1}'.format(to_native(field["name"]), to_native(field["message"])) for field in fields])
+                module.fail_json(msg='The values to update were invalid ({0})'.format(details_str or "no details"))
+            after = extract(result)
+
+        if action and not module.check_mode:
+            after.update(update_after_update)
+            action_url = "{0}/actions/update_access_settings".format(url)
+            headers = {"Content-type": "application/json"}
+            result, dummy, dummy2 = api_fetch_url_json(
+                module,
+                action_url,
+                data=module.jsonify(action),
+                headers=headers,
+                method='POST',
+            )
+            action_id = result["action"]["id"]
+            if result["action"]["status"] == "running":
+                this_action_url = "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id)
+
+                def action_done_callback(result_, info_, error_):
+                    if error_ is not None:  # pragma: no cover
+                        return True  # pragma: no cover
+                    return result_["action"]["status"] != "running"
+
+                try:
+                    result, dummy, dummy2 = api_fetch_url_json_with_retries(
+                        module, this_action_url, action_done_callback, check_done_delay=1, check_done_timeout=60, skip_first=True,
+                    )
+                except CheckDoneTimeoutException as dummy:
+                    module.fail_json(msg='Timeout while waiting for access settings to be configured.')
+            error = result["action"].get("error")
+            if isinstance(error, dict):
+                module.fail_json(msg='Error while updating access settings: [{0}] {1}'.format(error.get("code"), error.get("message")))
+            elif result["action"]["status"] == "error":
+                module.fail_json(msg='Error while updating access settings (unknown error)')
 
     result = dict(after)
     result['changed'] = bool(changes)
