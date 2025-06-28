@@ -433,12 +433,14 @@ firewall:
 import traceback
 
 from ansible.module_utils.basic import AnsibleModule, missing_required_lib
+from ansible_collections.community.hrobot.plugins.module_utils.common import (
+    CheckDoneTimeoutException,
+)
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     ROBOT_DEFAULT_ARGUMENT_SPEC,
     BASE_URL,
     fetch_url_json,
     fetch_url_json_with_retries,
-    CheckDoneTimeoutException,
 )
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 from ansible.module_utils.common.text.converters import to_native, to_text

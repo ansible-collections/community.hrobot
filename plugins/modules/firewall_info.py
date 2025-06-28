@@ -253,12 +253,14 @@ firewall:
 """
 
 from ansible.module_utils.basic import AnsibleModule
+from ansible_collections.community.hrobot.plugins.module_utils.common import (
+    CheckDoneTimeoutException,
+)
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     ROBOT_DEFAULT_ARGUMENT_SPEC,
     BASE_URL,
     fetch_url_json,
     fetch_url_json_with_retries,
-    CheckDoneTimeoutException,
 )
 
 

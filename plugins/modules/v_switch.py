@@ -242,13 +242,15 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.common.text.converters import to_native
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
+from ansible_collections.community.hrobot.plugins.module_utils.common import (
+    CheckDoneTimeoutException,
+)
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
     get_x_www_form_urlenconded_dict_from_list,
     fetch_url_json,
     fetch_url_json_with_retries,
-    CheckDoneTimeoutException,
 )
 
 V_SWITCH_BASE_URL = '{0}/vswitch'.format(BASE_URL)
