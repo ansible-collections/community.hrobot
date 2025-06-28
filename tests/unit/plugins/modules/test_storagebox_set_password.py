@@ -17,7 +17,7 @@ from ansible_collections.community.hrobot.plugins.modules import storagebox_set_
 RANDOM_PASSWORD = 'randompassword'
 
 
-class TestStorageboxSetPassword(BaseTestModule):
+class TestStorageboxSetPasswordLegacy(BaseTestModule):
 
     MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox_set_password.AnsibleModule'
     MOCK_ANSIBLE_MODULEUTILS_URLS_FETCH_URL = 'ansible_collections.community.hrobot.plugins.module_utils.robot.fetch_url'

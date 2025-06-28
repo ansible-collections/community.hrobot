@@ -44,7 +44,7 @@ STORAGEBOX_PLAN_DISABLED = [
 ]
 
 
-class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
+class TestHetznerStorageboxSnapshotPlanInfoLegacy(BaseTestModule):
     MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox_snapshot_plan_info.AnsibleModule'
     MOCK_ANSIBLE_MODULEUTILS_URLS_FETCH_URL = 'ansible_collections.community.hrobot.plugins.module_utils.robot.fetch_url'
 

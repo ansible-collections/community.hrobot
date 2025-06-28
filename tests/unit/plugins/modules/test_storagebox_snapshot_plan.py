@@ -53,7 +53,7 @@ def update_plan(plan, **values):
     return [update(p) for p in plan]
 
 
-class TestHetznerStorageboxSnapshotPlan(BaseTestModule):
+class TestHetznerStorageboxSnapshotPlanLegacy(BaseTestModule):
     MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox_snapshot_plan.AnsibleModule'
     MOCK_ANSIBLE_MODULEUTILS_URLS_FETCH_URL = 'ansible_collections.community.hrobot.plugins.module_utils.robot.fetch_url'
 

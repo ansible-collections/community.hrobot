@@ -79,7 +79,7 @@ def update_info(id, **updates):
     return result
 
 
-class TestHetznerStoragebox(BaseTestModule):
+class TestHetznerStorageboxLegacy(BaseTestModule):
     MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox.AnsibleModule'
     MOCK_ANSIBLE_MODULEUTILS_URLS_FETCH_URL = 'ansible_collections.community.hrobot.plugins.module_utils.robot.fetch_url'
 
