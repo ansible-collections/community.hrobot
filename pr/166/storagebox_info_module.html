@@ -604,7 +604,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-storageboxes/snapshot_plan/day_of_month" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Day of the month the snapshot plan is executed.</p>
-<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> (JSON <code class="ansible-value docutils literal notranslate"><span class="pre">null</span></code>) if no plan is active, or this restriction is not set.</p>
+<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> (JSON <code class="ansible-value docutils literal notranslate"><span class="pre">null</span></code>) if this restriction is not set (that is, create a snapshot every day unless the day of week is specified).</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
@@ -613,7 +613,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-storageboxes/snapshot_plan/day_of_week" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Day of the week the snapshot plan is executed.</p>
-<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> (JSON <code class="ansible-value docutils literal notranslate"><span class="pre">null</span></code>) if no plan is active, or this restriction is not set.</p>
+<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> (JSON <code class="ansible-value docutils literal notranslate"><span class="pre">null</span></code>) if this restriction is not set (that is, create a snapshot every day unless the day of month is specified).</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
@@ -622,7 +622,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-storageboxes/snapshot_plan/hour" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Hour the snapshot plan is executed (in UTC).</p>
-<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> (JSON <code class="ansible-value docutils literal notranslate"><span class="pre">null</span></code>) if no plan is active, or this restriction is not set.</p>
+<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> (JSON <code class="ansible-value docutils literal notranslate"><span class="pre">null</span></code>) if this restriction is not set (that is, create a snapshot every hour).</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
@@ -632,7 +632,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Maximum number of automatic snapshots to be kept.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
-<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">0</span></code></p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">10</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -640,7 +640,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-storageboxes/snapshot_plan/minute" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Minute the snapshot plan is executed (in UTC).</p>
-<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> (JSON <code class="ansible-value docutils literal notranslate"><span class="pre">null</span></code>) if no plan is active, or this restriction is not set.</p>
+<p>Will be <code class="ansible-value docutils literal notranslate"><span class="pre">none</span></code> (JSON <code class="ansible-value docutils literal notranslate"><span class="pre">null</span></code>) if this restriction is not set (that is, create a snapshot every minute).</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 </div></td>
 </tr>
