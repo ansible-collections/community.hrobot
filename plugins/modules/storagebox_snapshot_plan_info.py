@@ -18,13 +18,19 @@ author:
 description:
   - Query the snapshot plans for a storage box.
 extends_documentation_fragment:
+  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
+  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
   - community.hrobot.attributes.idempotent_not_modify_state
   - community.hrobot.attributes.info_module
 
 options:
+  hetzner_token:
+    version_added: 2.5.0
   storagebox_id:
     description:
       - The ID of the storage box to query.
@@ -94,6 +100,7 @@ plans:
       description:
         - The month of execution of the plan. V(1) is January, V(12) is December.
         - If set to V(null), the plan is run every month.
+        - Always V(null) if O(hetzner_token) is provided.
       type: int
       sample: null
       returned: success
@@ -110,11 +117,19 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
     fetch_url_json,
 )
 
+from ansible_collections.community.hrobot.plugins.module_utils.api import (
+    API_BASE_URL,
+    API_DEFAULT_ARGUMENT_SPEC,
+    _API_DEFAULT_ARGUMENT_SPEC_COMPAT,
+    api_fetch_url_json,
+)
 
-def extract(result):
+
+def extract_legacy(result):
     sb = result['snapshotplan']
     return {
         'status': sb['status'],
@@ -127,11 +142,39 @@ def extract(result):
     }
 
 
+def extract(result):
+    sb = result['storage_box']
+    sp = sb.get('snapshot_plan')
+    if not sp:
+        return {
+            'status': 'disabled',
+            'minute': None,
+            'hour': None,
+            'day_of_week': None,
+            'day_of_month': None,
+            'month': None,
+            'max_snapshots': None,
+        }
+
+    return {
+        'status': 'enabled',
+        'minute': sp['minute'],
+        'hour': sp['hour'],
+        'day_of_week': sp['day_of_week'],
+        'day_of_month': sp['day_of_month'],
+        'month': None,
+        'max_snapshots': sp['max_snapshots'],
+    }
+
+
 def main():
     argument_spec = dict(
         storagebox_id=dict(type='int', required=True),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
+    argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
         argument_spec=argument_spec,
         supports_check_mode=True,
@@ -139,19 +182,32 @@ def main():
 
     storagebox_id = module.params['storagebox_id']
 
-    url = "{0}/storagebox/{1}/snapshotplan".format(BASE_URL, storagebox_id)
-    result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
-    if error:
-        module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
+    if module.params["hetzner_user"] is not None:
+        # DEPRECATED: old API
+        url = "{0}/storagebox/{1}/snapshotplan".format(BASE_URL, storagebox_id)
+        result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
+        if error:
+            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
 
-    # The documentation (https://robot.hetzner.com/doc/webservice/en.html#get-storagebox-storagebox-id-snapshotplan)
-    # claims that the result is a list, but actually it is a dictionary. Convert it to a list of dicts if that's the case.
-    if isinstance(result, dict):
-        result = [result]
+        # The documentation (https://robot.hetzner.com/doc/webservice/en.html#get-storagebox-storagebox-id-snapshotplan)
+        # claims that the result is a list, but actually it is a dictionary. Convert it to a list of dicts if that's the case.
+        if isinstance(result, dict):
+            result = [result]
+
+        plans = [extract_legacy(plan) for plan in result]
+
+    else:
+        # NEW API!
+        url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
+        result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
+        if error:
+            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
+
+        plans = [extract(result)]
 
     module.exit_json(
         changed=False,
-        plans=[extract(plan) for plan in result],
+        plans=plans,
     )
 
 

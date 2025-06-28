@@ -31,3 +31,5 @@ action_groups:
   api:
     - storagebox
     - storagebox_info
+    - storagebox_snapshot_plan
+    - storagebox_snapshot_plan_info
