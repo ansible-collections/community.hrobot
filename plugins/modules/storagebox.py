@@ -124,9 +124,6 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.common.text.converters import to_native
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
-from ansible_collections.community.hrobot.plugins.module_utils.common import (
-    CheckDoneTimeoutException,
-)
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
@@ -138,7 +135,8 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     API_BASE_URL,
     API_DEFAULT_ARGUMENT_SPEC,
     _API_DEFAULT_ARGUMENT_SPEC_COMPAT,
-    api_fetch_url_json_with_retries,
+    ApplyActionError,
+    api_apply_action,
     api_fetch_url_json,
 )
 
@@ -297,34 +295,17 @@ def main():
         if action and not module.check_mode:
             after.update(update_after_update)
             action_url = "{0}/actions/update_access_settings".format(url)
-            headers = {"Content-type": "application/json"}
-            result, dummy, dummy2 = api_fetch_url_json(
-                module,
-                action_url,
-                data=module.jsonify(action),
-                headers=headers,
-                method='POST',
-            )
-            action_id = result["action"]["id"]
-            if result["action"]["status"] == "running":
-                this_action_url = "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id)
-
-                def action_done_callback(result_, info_, error_):
-                    if error_ is not None:  # pragma: no cover
-                        return True  # pragma: no cover
-                    return result_["action"]["status"] != "running"
-
-                try:
-                    result, dummy, dummy2 = api_fetch_url_json_with_retries(
-                        module, this_action_url, action_done_callback, check_done_delay=1, check_done_timeout=60, skip_first=True,
-                    )
-                except CheckDoneTimeoutException as dummy:
-                    module.fail_json(msg='Timeout while waiting for access settings to be configured.')
-            error = result["action"].get("error")
-            if isinstance(error, dict):
-                module.fail_json(msg='Error while updating access settings: [{0}] {1}'.format(error.get("code"), error.get("message")))
-            elif result["action"]["status"] == "error":
-                module.fail_json(msg='Error while updating access settings (unknown error)')
+            try:
+                api_apply_action(
+                    module,
+                    action_url,
+                    action,
+                    lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
+                    check_done_delay=1,
+                    check_done_timeout=60,
+                )
+            except ApplyActionError as exc:
+                module.fail_json(msg='Error while updating access settings: {0}'.format(exc))
 
     result = dict(after)
     result['changed'] = bool(changes)

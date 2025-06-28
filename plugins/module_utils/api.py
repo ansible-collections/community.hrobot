@@ -8,6 +8,7 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 
+from ansible.module_utils.common.text.converters import to_native
 from ansible.module_utils.six import PY3
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 from ansible.module_utils.urls import fetch_url
@@ -248,3 +249,38 @@ def api_fetch_url_json_with_retries(module, url, check_done_callback, check_done
             return result, info, error
         if left_time < check_done_delay:
             raise CheckDoneTimeoutException(result, error)
+
+
+class ApplyActionError(Exception):
+    pass
+
+
+def api_apply_action(module, action_url, action_data, action_check_url_provider, check_done_delay=10, check_done_timeout=180):
+    headers = {"Content-type": "application/json"} if action_data is not None else {}
+    result, dummy, dummy2 = api_fetch_url_json(
+        module,
+        action_url,
+        data=module.jsonify(action_data) if action_data is not None else None,
+        headers=headers,
+        method='POST',
+    )
+    action_id = result["action"]["id"]
+    if result["action"]["status"] == "running":
+        this_action_url = action_check_url_provider(action_id)
+
+        def action_done_callback(result_, info_, error_):
+            if error_ is not None:  # pragma: no cover
+                return True  # pragma: no cover
+            return result_["action"]["status"] != "running"
+
+        try:
+            result, dummy, dummy2 = api_fetch_url_json_with_retries(
+                module, this_action_url, action_done_callback, check_done_delay=1, check_done_timeout=60, skip_first=True,
+            )
+        except CheckDoneTimeoutException as dummy:
+            raise ApplyActionError("Timeout")
+    error = result["action"].get("error")
+    if isinstance(error, dict):
+        raise ApplyActionError('[{0}] {1}'.format(to_native(error.get("code")), to_native(error.get("message"))))
+    elif result["action"]["status"] == "error":
+        raise ApplyActionError('Unknown error')

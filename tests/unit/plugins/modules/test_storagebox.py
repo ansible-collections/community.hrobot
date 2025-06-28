@@ -1084,7 +1084,7 @@ class TestHetznerStoragebox(BaseTestModule):
             .expect_json_value_absent(['zfs_enabled'])
             .expect_url('{0}/v1/storage_boxes/23/actions/update_access_settings'.format(API_BASE_URL)),
         ])
-        assert result['msg'] == 'Error while updating access settings (unknown error)'
+        assert result['msg'] == 'Error while updating access settings: Unknown error'
         sleep_mock.assert_has_calls([])
 
     def test_change_ssh_timeout(self, mocker):
@@ -1144,7 +1144,7 @@ class TestHetznerStoragebox(BaseTestModule):
             'id': 23,
             'ssh': False,
         }, http_calls)
-        assert result['msg'] == 'Timeout while waiting for access settings to be configured.'
+        assert result['msg'] == 'Error while updating access settings: Timeout'
 
     def test_change_name_and_ssh(self, mocker):
         sleep_mock = MagicMock()
