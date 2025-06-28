@@ -51,7 +51,7 @@ STORAGEBOX_SUBACCOUNTS = [
 ]
 
 
-class TestHetznerStorageboxSubbacount(BaseTestModule):
+class TestHetznerStorageboxSubbacountLegacy(BaseTestModule):
     MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox_subaccount.AnsibleModule'
     MOCK_ANSIBLE_MODULEUTILS_URLS_FETCH_URL = 'ansible_collections.community.hrobot.plugins.module_utils.robot.fetch_url'
 

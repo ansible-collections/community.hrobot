@@ -99,9 +99,11 @@ from ansible.utils.display import Display
 
 from ansible_collections.community.library_inventory_filtering_v1.plugins.plugin_utils.inventory_filter import parse_filters, filter_host
 
+from ansible_collections.community.hrobot.plugins.module_utils.common import (
+    PluginException,
+)
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
-    PluginException,
     plugin_open_url_json,
 )
 from ansible_collections.community.hrobot.plugins.plugin_utils.unsafe import make_unsafe
