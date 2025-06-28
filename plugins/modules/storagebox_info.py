@@ -29,6 +29,8 @@ extends_documentation_fragment:
   - community.hrobot.attributes.info_module
 
 options:
+  hetzner_token:
+    version_added: 2.5.0
   storagebox_id:
     description:
       - Limit result list to storage boxes with this ID.
@@ -487,29 +489,29 @@ storageboxes:
           description:
             - Maximum number of automatic snapshots to be kept.
           type: int
-          sample: 0
+          sample: 10
         minute:
           description:
             - Minute the snapshot plan is executed (in UTC).
-            - Will be V(none) (JSON V(null)) if no plan is active, or this restriction is not set.
+            - Will be V(none) (JSON V(null)) if this restriction is not set (that is, create a snapshot every minute).
           type: int
           sample: null
         hour:
           description:
             - Hour the snapshot plan is executed (in UTC).
-            - Will be V(none) (JSON V(null)) if no plan is active, or this restriction is not set.
+            - Will be V(none) (JSON V(null)) if this restriction is not set (that is, create a snapshot every hour).
           type: int
           sample: null
         day_of_week:
           description:
             - Day of the week the snapshot plan is executed.
-            - Will be V(none) (JSON V(null)) if no plan is active, or this restriction is not set.
+            - Will be V(none) (JSON V(null)) if this restriction is not set (that is, create a snapshot every day unless the day of month is specified).
           type: int
           sample: null
         day_of_month:
           description:
             - Day of the month the snapshot plan is executed.
-            - Will be V(none) (JSON V(null)) if no plan is active, or this restriction is not set.
+            - Will be V(none) (JSON V(null)) if this restriction is not set (that is, create a snapshot every day unless the day of week is specified).
           type: int
           sample: null
 """

@@ -34,6 +34,8 @@ attributes:
     support: full
 
 options:
+  hetzner_token:
+    version_added: 2.5.0
   id:
     description:
       - The ID of the storage box to modify.
