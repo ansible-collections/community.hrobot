@@ -192,33 +192,44 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-hetzner_password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-password"><strong>hetzner_password</strong></p>
-<a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The password for the Robot web-service user.</p>
+<p>If <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-password"><span class="std std-ref"><span class="pre">hetzner_password</span></span></a></strong></code> is specified, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must also be specified, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> must not be specified.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-user"><strong>hetzner_user</strong></p>
-<a class="ansibleOptionLink" href="#parameter-hetzner_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<div class="ansibleOptionAnchor" id="parameter-hetzner_token"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-token"><strong>hetzner_token</strong></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The username for the Robot web-service user.</p>
+<td><div class="ansible-option-cell"><p>The API token for the Robot web-service user.</p>
+<p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-user"><strong>hetzner_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The username for the Robot web-service user.</p>
+<p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must be specified.</p>
+<p>If <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> is specified, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-password"><span class="std std-ref"><span class="pre">hetzner_password</span></span></a></strong></code> must also be specified, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> must not be specified.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-id"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-id"><strong>id</strong></p>
 <a class="ansibleOptionLink" href="#parameter-id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The ID of the storage box to modify.</p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-name"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-name"><strong>name</strong></p>
 <a class="ansibleOptionLink" href="#parameter-name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The name of the storage box.</p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 <p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
@@ -229,7 +240,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">-1</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-samba"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-samba"><strong>samba</strong></p>
 <a class="ansibleOptionLink" href="#parameter-samba" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -241,7 +252,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-ssh"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-ssh"><strong>ssh</strong></p>
 <a class="ansibleOptionLink" href="#parameter-ssh" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -253,7 +264,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-webdav"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-webdav"><strong>webdav</strong></p>
 <a class="ansibleOptionLink" href="#parameter-webdav" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -265,7 +276,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </ul>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-zfs"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-parameter-zfs"><strong>zfs</strong></p>
 <a class="ansibleOptionLink" href="#parameter-zfs" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
@@ -293,9 +304,9 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="attribute-action_group"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-module-attribute-action-group"><strong>action_group</strong></p>
 <a class="ansibleOptionLink" href="#attribute-action_group" title="Permalink to this attribute"></a></div></td>
-<td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-property">Action group:</strong> <strong class="ansible-attribute-support-full">community.hrobot.robot</strong></p>
+<td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-property">Action groups:</strong> <strong class="ansible-attribute-support-full">community.hrobot.api</strong>, <strong class="ansible-attribute-support-full">community.hrobot.robot</strong></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Use <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> in <code class="docutils literal notranslate"><span class="pre">module_defaults</span></code> to set defaults for this module.</p>
+<td><div class="ansible-option-cell"><p>Use <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> or <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.api</span></code> in <code class="docutils literal notranslate"><span class="pre">module_defaults</span></code> to set defaults for this module.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
