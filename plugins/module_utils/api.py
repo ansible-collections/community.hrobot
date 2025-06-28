@@ -234,10 +234,11 @@ def api_fetch_url_json_with_retries(module, url, check_done_callback, check_done
     directly start with waiting.
     '''
     start_time = time.time()
-    if not skip_first:
-        result, error = api_fetch_url_json(module, url, **kwargs)
-        if check_done_callback(result, error):
-            return result, error
+    if not skip_first:  # pragma: no cover
+        raise AssertionError("Code path not yet available")  # pragma: no cover
+        # result, error = api_fetch_url_json(module, url, **kwargs)
+        # if check_done_callback(result, error):
+        #     return result, error
     while True:
         elapsed = (time.time() - start_time)
         left_time = check_done_timeout - elapsed
