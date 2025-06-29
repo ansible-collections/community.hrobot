@@ -255,15 +255,18 @@ class ApplyActionError(Exception):
     pass
 
 
-def api_apply_action(module, action_url, action_data, action_check_url_provider, check_done_delay=10, check_done_timeout=180):
+def api_apply_action(module, action_url, action_data, action_check_url_provider, check_done_delay=10, check_done_timeout=180, accept_errors=None):
     headers = {"Content-type": "application/json"} if action_data is not None else {}
-    result, dummy, dummy2 = api_fetch_url_json(
+    result, dummy, error = api_fetch_url_json(
         module,
         action_url,
         data=module.jsonify(action_data) if action_data is not None else None,
         headers=headers,
         method='POST',
+        accept_errors=accept_errors,
     )
+    if error:
+        return error
     action_id = result["action"]["id"]
     if result["action"]["status"] == "running":
         this_action_url = action_check_url_provider(action_id)
@@ -284,3 +287,4 @@ def api_apply_action(module, action_url, action_data, action_check_url_provider,
         raise ApplyActionError('[{0}] {1}'.format(to_native(error.get("code")), to_native(error.get("message"))))
     elif result["action"]["status"] == "error":
         raise ApplyActionError('Unknown error')
+    return None
