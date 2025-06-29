@@ -189,6 +189,7 @@ def api_fetch_url_json_list(
     method='GET',
     timeout=10,
     headers=None,
+    accept_errors=None,
     page_size=100,
 ):
     '''
@@ -199,13 +200,17 @@ def api_fetch_url_json_list(
     result_list = []
     while page is not None and (last_page is None or last_page >= page):
         page_url = '{0}{1}{2}'.format(url, '&' if '?' in url else '?', deterministic_urlencode({"page": str(page), "per_page": page_size}))
-        result, dummy, dummy2 = api_fetch_url_json(
+        result, dummy, error = api_fetch_url_json(
             module,
             page_url,
             method=method,
             timeout=timeout,
             headers=headers,
+            accept_errors=accept_errors,
         )
+        # TODO: add coverage!
+        if error:  # pragma: no cover
+            return result_list, error  # pragma: no cover
         if isinstance(result.get(data_key), list):
             result_list += result[data_key]
         if isinstance(result.get("meta"), dict) and isinstance(result["meta"].get("pagination"), dict):
@@ -220,7 +225,7 @@ def api_fetch_url_json_list(
             break
         else:
             page += 1
-    return result_list
+    return result_list, None
 
 
 def api_fetch_url_json_with_retries(module, url, check_done_callback, check_done_delay=10, check_done_timeout=180, skip_first=False, **kwargs):
@@ -255,15 +260,27 @@ class ApplyActionError(Exception):
     pass
 
 
-def api_apply_action(module, action_url, action_data, action_check_url_provider, check_done_delay=10, check_done_timeout=180):
+def api_apply_action(
+    module,
+    action_url,
+    action_data,
+    action_check_url_provider,
+    method='POST',
+    check_done_delay=10,
+    check_done_timeout=180,
+    accept_errors=None,
+):
     headers = {"Content-type": "application/json"} if action_data is not None else {}
-    result, dummy, dummy2 = api_fetch_url_json(
+    result, dummy, error = api_fetch_url_json(
         module,
         action_url,
         data=module.jsonify(action_data) if action_data is not None else None,
         headers=headers,
-        method='POST',
+        method=method,
+        accept_errors=accept_errors,
     )
+    if error:
+        return error
     action_id = result["action"]["id"]
     if result["action"]["status"] == "running":
         this_action_url = action_check_url_provider(action_id)
@@ -284,3 +301,4 @@ def api_apply_action(module, action_url, action_data, action_check_url_provider,
         raise ApplyActionError('[{0}] {1}'.format(to_native(error.get("code")), to_native(error.get("message"))))
     elif result["action"]["status"] == "error":
         raise ApplyActionError('Unknown error')
+    return None
