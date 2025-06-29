@@ -180,19 +180,31 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-hetzner_password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-password"><strong>hetzner_password</strong></p>
-<a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The password for the Robot web-service user.</p>
+<p>If <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-password"><span class="std std-ref"><span class="pre">hetzner_password</span></span></a></strong></code> is specified, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must also be specified, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> must not be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><strong>hetzner_user</strong></p>
-<a class="ansibleOptionLink" href="#parameter-hetzner_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<div class="ansibleOptionAnchor" id="parameter-hetzner_token"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><strong>hetzner_token</strong></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The username for the Robot web-service user.</p>
+<td><div class="ansible-option-cell"><p>The API token for the Robot web-service user.</p>
+<p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><strong>hetzner_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The username for the Robot web-service user.</p>
+<p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must be specified.</p>
+<p>If <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> is specified, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-password"><span class="std std-ref"><span class="pre">hetzner_password</span></span></a></strong></code> must also be specified, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> must not be specified.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 <p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
@@ -203,7 +215,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">-1</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-storagebox_id"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-storagebox-id"><strong>storagebox_id</strong></p>
 <a class="ansibleOptionLink" href="#parameter-storagebox_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -226,9 +238,9 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="attribute-action_group"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-attribute-action-group"><strong>action_group</strong></p>
 <a class="ansibleOptionLink" href="#attribute-action_group" title="Permalink to this attribute"></a></div></td>
-<td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-property">Action group:</strong> <strong class="ansible-attribute-support-full">community.hrobot.robot</strong></p>
+<td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-property">Action groups:</strong> <strong class="ansible-attribute-support-full">community.hrobot.api</strong>, <strong class="ansible-attribute-support-full">community.hrobot.robot</strong></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Use <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> in <code class="docutils literal notranslate"><span class="pre">module_defaults</span></code> to set defaults for this module.</p>
+<td><div class="ansible-option-cell"><p>Use <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> or <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.api</span></code> in <code class="docutils literal notranslate"><span class="pre">module_defaults</span></code> to set defaults for this module.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -302,6 +314,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-snapshots/automatic" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the snapshot was created automatically.</p>
+<p>Note that this is computed from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-is-automatic"><span class="std std-ref"><span class="pre">snapshots[].is_automatic</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
 </div></td>
@@ -311,8 +324,29 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-snapshots/comment" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The comment for the snapshot.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-description"><span class="std std-ref"><span class="pre">snapshots[].description</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">snapshot&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/created"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-created"><strong>created</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/created" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The creation timestamp of snapshot in UTC, in ISO-8601 format.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2016-01-30T23:55:00+00:00&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/description"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-description"><strong>description</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/description" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The snapshot’s description (used to be called comment in the Robot API).</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;my-description&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -320,11 +354,41 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-snapshots/filesystem_size" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The size of the Storage Box at creation time of the snapshot in MB.</p>
+<p>Note that this is computed from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-stats-size-filesystem"><span class="std std-ref"><span class="pre">snapshots[].stats.size_filesystem</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">12345</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/id"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-id"><strong>id</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/id" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The snapshot’s ID.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">1</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/is_automatic"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-is-automatic"><strong>is_automatic</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/is_automatic" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the snapshot was created automatically.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/labels"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-labels"><strong>labels</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/labels" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>User-defined labels for the snapshot.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-snapshots/name"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-name"><strong>name</strong></p>
 <a class="ansibleOptionLink" href="#return-snapshots/name" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -333,20 +397,59 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2025-01-21T12-40-38&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-snapshots/size"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-size"><strong>size</strong></p>
 <a class="ansibleOptionLink" href="#return-snapshots/size" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The Snapshot size in MB.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-stats-size"><span class="std std-ref"><span class="pre">snapshots[].stats.size</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">400</span></code></p>
 </div></td>
 </tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/stats"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-stats"><strong>stats</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/stats" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Statistics about the snapshot.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/stats/size"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-stats-size"><strong>size</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/stats/size" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Total size of the snapshot in bytes.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">2097152</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/stats/size_filesystem"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-stats-size-filesystem"><strong>size_filesystem</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/stats/size_filesystem" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Actual size of the snapshot on the filesystem in bytes (after deduplication).</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">1048576</span></code></p>
+</div></td>
+</tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-snapshots/storage_box"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-storage-box"><strong>storage_box</strong></p>
+<a class="ansibleOptionLink" href="#return-snapshots/storage_box" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>ID of the associated storage box.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">42</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-snapshots/timestamp"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-timestamp"><strong>timestamp</strong></p>
 <a class="ansibleOptionLink" href="#return-snapshots/timestamp" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The timestamp of snapshot in UTC.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-created"><span class="std std-ref"><span class="pre">snapshots[].created</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2025-01-21T13:40:38+00:00&quot;</span></code></p>
 </div></td>
