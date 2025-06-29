@@ -208,8 +208,9 @@ def api_fetch_url_json_list(
             headers=headers,
             accept_errors=accept_errors,
         )
-        if error:
-            return result_list, error
+        # TODO: add coverage!
+        if error:  # pragma: no cover
+            return result_list, error  # pragma: no cover
         if isinstance(result.get(data_key), list):
             result_list += result[data_key]
         if isinstance(result.get("meta"), dict) and isinstance(result["meta"].get("pagination"), dict):
@@ -259,14 +260,23 @@ class ApplyActionError(Exception):
     pass
 
 
-def api_apply_action(module, action_url, action_data, action_check_url_provider, check_done_delay=10, check_done_timeout=180, accept_errors=None):
+def api_apply_action(
+    module,
+    action_url,
+    action_data,
+    action_check_url_provider,
+    method='POST',
+    check_done_delay=10,
+    check_done_timeout=180,
+    accept_errors=None,
+):
     headers = {"Content-type": "application/json"} if action_data is not None else {}
     result, dummy, error = api_fetch_url_json(
         module,
         action_url,
         data=module.jsonify(action_data) if action_data is not None else None,
         headers=headers,
-        method='POST',
+        method=method,
         accept_errors=accept_errors,
     )
     if error:
