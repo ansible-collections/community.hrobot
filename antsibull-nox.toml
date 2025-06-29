@@ -49,7 +49,6 @@ doc_fragment = "community.hrobot.attributes.actiongroup_robot"
 name = "api"
 pattern = "^storagebox.*$"
 exclusions = [
-    "storagebox_snapshot",
     "storagebox_subaccount_info",
     "storagebox_subaccount",
 ]

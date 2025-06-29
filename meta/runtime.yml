@@ -32,6 +32,7 @@ action_groups:
     - storagebox
     - storagebox_info
     - storagebox_set_password
+    - storagebox_snapshot
     - storagebox_snapshot_info
     - storagebox_snapshot_plan
     - storagebox_snapshot_plan_info
