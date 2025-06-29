@@ -624,7 +624,7 @@ def main():
                 storageboxes = [result["storage_box"]]
         else:
             url = "{0}/v1/storage_boxes".format(API_BASE_URL)
-            storageboxes = api_fetch_url_json_list(module, url, data_key="storage_boxes")
+            storageboxes, dummy = api_fetch_url_json_list(module, url, data_key="storage_boxes")
         storageboxes = [add_hrobot_compat_shim(storagebox) for storagebox in storageboxes]
 
     module.exit_json(
