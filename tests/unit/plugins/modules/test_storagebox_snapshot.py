@@ -416,6 +416,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                             "id": 23,
                             "type": "storage_box",
                         },
+                        {
+                            "id": 42,
+                            "type": "storage_box_snapshot",
+                        },
                     ],
                     "error": None,
                 }
@@ -434,6 +438,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                         {
                             "id": 23,
                             "type": "storage_box",
+                        },
+                        {
+                            "id": 42,
+                            "type": "storage_box_snapshot",
                         },
                     ],
                     "error": None,
@@ -484,6 +492,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                         {
                             "id": 23,
                             "type": "storage_box",
+                        },
+                        {
+                            "id": 42,
+                            "type": "storage_box_snapshot",
                         },
                     ],
                     "error": {
@@ -603,6 +615,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                             "id": 23,
                             "type": "storage_box",
                         },
+                        {
+                            "id": 2,
+                            "type": "storage_box_snapshot",
+                        },
                     ],
                     "error": None,
                 }
@@ -621,6 +637,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                         {
                             "id": 23,
                             "type": "storage_box",
+                        },
+                        {
+                            "id": 2,
+                            "type": "storage_box_snapshot",
                         },
                     ],
                     "error": None,
@@ -677,6 +697,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                             "id": 23,
                             "type": "storage_box",
                         },
+                        {
+                            "id": 2,
+                            "type": "storage_box_snapshot",
+                        },
                     ],
                     "error": None,
                 }
@@ -695,6 +719,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                         {
                             "id": 23,
                             "type": "storage_box",
+                        },
+                        {
+                            "id": 2,
+                            "type": "storage_box_snapshot",
                         },
                     ],
                     "error": {
