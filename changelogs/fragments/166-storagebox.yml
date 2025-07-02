@@ -16,4 +16,5 @@ minor_changes:
     the Robot API for storage boxes is removed by Hetzner
     (https://github.com/ansible-collections/community.hrobot/pull/166,
      https://github.com/ansible-collections/community.hrobot/pull/167,
-     https://github.com/ansible-collections/community.hrobot/pull/168).
+     https://github.com/ansible-collections/community.hrobot/pull/168,
+     https://github.com/ansible-collections/community.hrobot/pull/169).
