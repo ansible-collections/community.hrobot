@@ -399,7 +399,7 @@ def main():
         storagebox_id=dict(type="int", required=True),
         password_mode=dict(
             type="str",
-            no_log=True,
+            no_log=False,
             choices=["update-if-provided", "ignore-if-exists", "set-to-random"],
             default="update-if-provided",
         ),
