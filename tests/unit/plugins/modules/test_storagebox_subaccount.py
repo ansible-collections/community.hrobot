@@ -1278,7 +1278,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                                 "type": "storage_box",
                             },
                             {
-                                "id": 42,
+                                "id": 1,
                                 "type": "storage_box_subaccount"
                             },
                         ],
@@ -1300,7 +1300,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                                 "type": "storage_box",
                             },
                             {
-                                "id": 42,
+                                "id": 1,
                                 "type": "storage_box_subaccount"
                             },
                         ],
@@ -1308,6 +1308,11 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                     }
                 })
                 .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .result_json({
+                    "subaccount": STORAGEBOX_SUBACCOUNTS[0],
+                })
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts/1'.format(API_BASE_URL)),
             ]
         )
 
@@ -1319,19 +1324,28 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['subaccount'] == {
             'access_settings': {
                 'readonly': False,
+                'reachable_externally': True,
                 'samba_enabled': True,
                 'ssh_enabled': False,
                 'webdav_enabled': True,
             },
-            'homedirectory': '/data/newsub',
-            'home_directory': '/data/newsub',
-            'password': 'toto',
-            'samba': True,
-            'ssh': False,
-            'webdav': True,
-            'readonly': False,
+            'created': '2017-05-24 00:00:00',
+            'createtime': '2017-05-24 00:00:00',
             'comment': 'My new subaccount',
             'description': 'My new subaccount',
+            'external_reachability': True,
+            'home_directory': '/data/newsub',
+            'homedirectory': '/data/newsub',
+            'id': 1,
+            'labels': {},
+            'password': 'toto',
+            'readonly': False,
+            'samba': True,
+            'server': 'u12345-sub1.your-storagebox.de',
+            'ssh': False,
+            'storage_box': 2342,
+            'username': 'u2342-sub1',
+            'webdav': True,
         }
 
     # Ensures providing a username doesn't trigger accidental update (if username isn't known)
@@ -1385,7 +1399,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                                 "type": "storage_box",
                             },
                             {
-                                "id": 42,
+                                "id": 2,
                                 "type": "storage_box_subaccount"
                             },
                         ],
@@ -1407,7 +1421,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                                 "type": "storage_box",
                             },
                             {
-                                "id": 42,
+                                "id": 2,
                                 "type": "storage_box_subaccount"
                             },
                         ],
@@ -1415,6 +1429,11 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                     }
                 })
                 .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                FetchUrlCall('GET', 200)
+                .result_json({
+                    "subaccount": STORAGEBOX_SUBACCOUNTS[1],
+                })
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts/2'.format(API_BASE_URL)),
             ]
         )
 
@@ -1425,20 +1444,29 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         assert result['password_updated'] is False
         assert result['subaccount'] == {
             'access_settings': {
+                'reachable_externally': True,
                 'readonly': False,
                 'samba_enabled': True,
                 'ssh_enabled': False,
                 'webdav_enabled': True,
             },
-            'homedirectory': '/data/newsub',
-            'home_directory': '/data/newsub',
-            'password': 'toto',
-            'samba': True,
-            'ssh': False,
-            'webdav': True,
-            'readonly': False,
             'comment': 'My new subaccount',
+            'created': '2025-01-24 00:00:00',
+            'createtime': '2025-01-24 00:00:00',
             'description': 'My new subaccount',
+            'external_reachability': True,
+            'home_directory': '/data/newsub',
+            'homedirectory': '/data/newsub',
+            'id': 2,
+            'labels': {},
+            'password': 'toto',
+            'readonly': False,
+            'samba': True,
+            'server': 'u12345-sub2.your-storagebox.de',
+            'ssh': False,
+            'storage_box': 2342,
+            'username': 'u2342-sub2',
+            'webdav': True,
         }
 
     def test_create_subaccount_set_to_random(self, mocker):

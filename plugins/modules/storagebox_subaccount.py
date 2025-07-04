@@ -267,7 +267,9 @@ password_updated:
   returned: success
 
 subaccount:
-  description: The subaccount object returned by the API.
+  description:
+    - The subaccount object returned by the API.
+    - If O(hetzner_token) is provided, some extra fields are added to make this more compatible with the format returned by O(hetzner_user).
   type: dict
   returned: if O(state=present)
 """
@@ -431,7 +433,7 @@ def create_subaccount(module, storagebox_id, subaccount):
         'access_settings': {k: v for k, v in access_settings.items() if v is not None},
     }
     try:
-        api_apply_action(
+        extracted_ids, dummy = api_apply_action(
             module,
             action_url,
             {k: v for k, v in action.items() if v is not None},
@@ -440,6 +442,7 @@ def create_subaccount(module, storagebox_id, subaccount):
             check_done_delay=1,
             check_done_timeout=120,
         )
+        return extracted_ids["storage_box_subaccount"]
     except ApplyActionError as exc:
         module.fail_json(msg='Error while creating subaccount: {0}'.format(exc))
 
@@ -495,7 +498,11 @@ def get_subaccount_updates(before, after):
         if key == "password":
             continue
         path, update_key, access_settings_key = FIELDS[key]
-        if get_value(before, path) != value:
+        current_value = get_value(before, path)
+        # Hetzner likes to strip leading '/' from the home directory
+        if key == "homedirectory" and current_value is not None and value.lstrip('/') == current_value.lstrip('/'):
+            continue
+        if current_value != value:
             if update_key is not None:
                 update[update_key] = value
             if access_settings_key is not None:
@@ -769,8 +776,11 @@ def main():
 
             del subaccount["username"]  # username cannot be choosen
             if not check_mode:
-                # not necessary, allows us to get additional infos (created time etc...)
-                existing = create_subaccount(module, storagebox_id, subaccount)
+                new_subaccount_id = create_subaccount(module, storagebox_id, subaccount)
+                # Retrieve created subaccount
+                # (not necessary, allows us to get additional infos (created time etc...))
+                url = "{0}/v1/storage_boxes/{1}/subaccounts/{2}".format(API_BASE_URL, storagebox_id, new_subaccount_id)
+                existing = api_fetch_url_json(module, url, method='GET')[0]["subaccount"]
             created = True
 
         return_data = merge_subaccounts_infos(existing or {}, subaccount)

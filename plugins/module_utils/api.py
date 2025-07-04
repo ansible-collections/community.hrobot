@@ -257,7 +257,9 @@ def api_fetch_url_json_with_retries(module, url, check_done_callback, check_done
 
 
 class ApplyActionError(Exception):
-    pass
+    def __init__(self, msg, extracted_ids=None):
+        super(ApplyActionError, self).__init__(msg)
+        self.extracted_ids = extracted_ids or {}
 
 
 def api_apply_action(
@@ -280,8 +282,11 @@ def api_apply_action(
         accept_errors=accept_errors,
     )
     if error:
-        return error
+        return None, error
     action_id = result["action"]["id"]
+    extracted_ids = {
+        res["type"]: res["id"] for res in result["action"]["resources"] or [] if res.get("id") is not None and res.get("type")
+    }
     if result["action"]["status"] == "running":
         this_action_url = action_check_url_provider(action_id)
 
@@ -295,10 +300,10 @@ def api_apply_action(
                 module, this_action_url, action_done_callback, check_done_delay=1, check_done_timeout=60, skip_first=True,
             )
         except CheckDoneTimeoutException as dummy:
-            raise ApplyActionError("Timeout")
+            raise ApplyActionError("Timeout", extracted_ids=extracted_ids)
     error = result["action"].get("error")
     if isinstance(error, dict):
-        raise ApplyActionError('[{0}] {1}'.format(to_native(error.get("code")), to_native(error.get("message"))))
+        raise ApplyActionError('[{0}] {1}'.format(to_native(error.get("code")), to_native(error.get("message"))), extracted_ids=extracted_ids)
     elif result["action"]["status"] == "error":
-        raise ApplyActionError('Unknown error')
-    return None
+        raise ApplyActionError('Unknown error', extracted_ids=extracted_ids)
+    return extracted_ids, None

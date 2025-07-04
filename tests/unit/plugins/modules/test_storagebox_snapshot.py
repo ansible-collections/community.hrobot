@@ -357,6 +357,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                             "id": 23,
                             "type": "storage_box",
                         },
+                        {
+                            "id": 2,
+                            "type": "storage_box_snapshot",
+                        },
                     ],
                     "error": None,
                 }
@@ -376,14 +380,30 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                             "id": 23,
                             "type": "storage_box",
                         },
+                        {
+                            "id": 2,
+                            "type": "storage_box_snapshot",
+                        },
                     ],
                     "error": None,
                 }
             })
             .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            FetchUrlCall('GET', 200)
+            .result_json({
+                "snapshot": STORAGEBOX_SNAPSHOTS[2],
+            })
+            .expect_url('{0}/v1/storage_boxes/23/snapshots/2'.format(API_BASE_URL)),
         ])
         assert result['changed'] is True
-        assert 'snapshot' not in result
+        assert result['snapshot'] == {
+            'comment': 'Test-Snapshot 2',
+            'filesystem_size': 1,
+            'id': 2,
+            'name': '2025-03-28T15-20-51',
+            'size': 2,
+            'timestamp': '2025-02-22:00:02.000Z',
+        }
 
     def test_create_snapshot_check_mode(self, mocker):
         result = self.run_module_success(mocker, storagebox_snapshot, {
@@ -417,7 +437,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                             "type": "storage_box",
                         },
                         {
-                            "id": 42,
+                            "id": 1,
                             "type": "storage_box_snapshot",
                         },
                     ],
@@ -440,7 +460,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                             "type": "storage_box",
                         },
                         {
-                            "id": 42,
+                            "id": 1,
                             "type": "storage_box_snapshot",
                         },
                     ],
@@ -448,9 +468,21 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                 }
             })
             .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            FetchUrlCall('GET', 200)
+            .result_json({
+                "snapshot": STORAGEBOX_SNAPSHOTS[1],
+            })
+            .expect_url('{0}/v1/storage_boxes/23/snapshots/1'.format(API_BASE_URL)),
         ])
         assert result['changed'] is True
-        assert 'snapshot' not in result
+        assert result['snapshot'] == {
+            'comment': 'Test-Snapshot 1',
+            'filesystem_size': 1,
+            'id': 1,
+            'name': '2015-12-21T12-40-38',
+            'size': 2,
+            'timestamp': '2025-02-12T11:35:19.000Z',
+        }
 
     def test_create_snapshot_failed(self, mocker):
         sleep_mock = MagicMock()

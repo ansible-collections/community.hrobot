@@ -85,9 +85,8 @@ EXAMPLES = r"""
 RETURN = r"""
 snapshot:
   description:
-    - The snapshot that was created if O(hetzner_user) is provided.
-    - The snapshot that was updated if O(hetzner_token) is provided.
-  returned: success and O(state=present); if O(hetzner_token) is provided and O(snapshot_name) not, this will not be returned
+    - The snapshot that was created or updated.
+  returned: success and O(state=present)
   type: dict
   contains:
     name:
@@ -224,7 +223,7 @@ def main():
             if snapshot_comment:
                 action["description"] = snapshot_comment
             try:
-                error = api_apply_action(
+                extracted_ids, error = api_apply_action(
                     module,
                     action_url,
                     action,
@@ -239,7 +238,12 @@ def main():
             if error == "not_found":
                 module.fail_json(msg="Storagebox with ID {0} does not exist".format(storagebox_id))
 
-            module.exit_json(changed=True)
+            new_snapshot_id = extracted_ids["storage_box_snapshot"]
+            # Retrieve created snapshot
+            url = "{0}/v1/storage_boxes/{1}/snapshots/{2}".format(API_BASE_URL, storagebox_id, new_snapshot_id)
+            snapshot = api_fetch_url_json(module, url, method='GET')[0]["snapshot"]
+
+            module.exit_json(changed=True, snapshot=extract_legacy(snapshot))
 
         # Update snapshot comment
         elif state == 'present' and snapshot_name:
