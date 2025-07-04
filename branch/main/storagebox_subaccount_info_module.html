@@ -180,19 +180,31 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-hetzner_password"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-password"><strong>hetzner_password</strong></p>
-<a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>The password for the Robot web-service user.</p>
+<p>If <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-password"><span class="std std-ref"><span class="pre">hetzner_password</span></span></a></strong></code> is specified, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must also be specified, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> must not be specified.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-user"><strong>hetzner_user</strong></p>
-<a class="ansibleOptionLink" href="#parameter-hetzner_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<div class="ansibleOptionAnchor" id="parameter-hetzner_token"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><strong>hetzner_token</strong></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_token" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The username for the Robot web-service user.</p>
+<td><div class="ansible-option-cell"><p>The API token for the Robot web-service user.</p>
+<p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must be specified.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-hetzner_user"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-user"><strong>hetzner_user</strong></p>
+<a class="ansibleOptionLink" href="#parameter-hetzner_user" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The username for the Robot web-service user.</p>
+<p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must be specified.</p>
+<p>If <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> is specified, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-password"><span class="std std-ref"><span class="pre">hetzner_password</span></span></a></strong></code> must also be specified, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> must not be specified.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-rate_limit_retry_timeout"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-rate-limit-retry-timeout"><strong>rate_limit_retry_timeout</strong></p>
 <a class="ansibleOptionLink" href="#parameter-rate_limit_retry_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 <p><em class="ansible-option-versionadded">added in community.hrobot 2.1.0</em></p>
@@ -203,7 +215,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line"><strong class="ansible-option-default-bold">Default:</strong> <code class="ansible-option-default docutils literal notranslate"><span class="pre">-1</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-storagebox_id"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-storagebox-id"><strong>storagebox_id</strong></p>
 <a class="ansibleOptionLink" href="#parameter-storagebox_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
@@ -226,9 +238,9 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <tr class="row-even"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="attribute-action_group"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-attribute-action-group"><strong>action_group</strong></p>
 <a class="ansibleOptionLink" href="#attribute-action_group" title="Permalink to this attribute"></a></div></td>
-<td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-property">Action group:</strong> <strong class="ansible-attribute-support-full">community.hrobot.robot</strong></p>
+<td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-property">Action groups:</strong> <strong class="ansible-attribute-support-full">community.hrobot.api</strong>, <strong class="ansible-attribute-support-full">community.hrobot.robot</strong></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Use <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> in <code class="docutils literal notranslate"><span class="pre">module_defaults</span></code> to set defaults for this module.</p>
+<td><div class="ansible-option-cell"><p>Use <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> or <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.api</span></code> in <code class="docutils literal notranslate"><span class="pre">module_defaults</span></code> to set defaults for this module.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -298,11 +310,66 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/access_settings"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings"><strong>access_settings</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/access_settings" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Access settings of the subaccount.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/access_settings/reachable_externally"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-reachable-externally"><strong>reachable_externally</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/access_settings/reachable_externally" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the subaccount is reachable from outside Hetzner’s network.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/access_settings/readonly"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-readonly"><strong>readonly</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/access_settings/readonly" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the subaccount is read-only.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/access_settings/samba_enabled"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-samba-enabled"><strong>samba_enabled</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/access_settings/samba_enabled" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the subaccount can be accessed through SAMBA.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/access_settings/ssh_enabled"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-ssh-enabled"><strong>ssh_enabled</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/access_settings/ssh_enabled" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the subaccount can be accessed through SSH.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/access_settings/webdav_enabled"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-webdav-enabled"><strong>webdav_enabled</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/access_settings/webdav_enabled" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the subaccount can be accessed through WebDAV.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-subaccounts/accountid"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-accountid"><strong>accountid</strong></p>
 <a class="ansibleOptionLink" href="#return-subaccounts/accountid" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Username of the main user.</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p>Not supported by the new Hetzner API.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success if <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is not specified</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;u2342&quot;</span></code></p>
 </div></td>
 </tr>
@@ -311,17 +378,39 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-subaccounts/comment" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Custom comment for the sub-account.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-description"><span class="std std-ref"><span class="pre">subaccounts[].description</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">subaccount&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/created"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-created"><strong>created</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/created" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Creation timestamp in ISO-8601 format.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2025-02-22:00:02.000Z&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-subaccounts/createtime"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-createtime"><strong>createtime</strong></p>
 <a class="ansibleOptionLink" href="#return-subaccounts/createtime" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Timestamp when the sub-account was created.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-created"><span class="std std-ref"><span class="pre">subaccounts[].created</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2023-08-25T14:23:05Z&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/description"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-description"><strong>description</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/description" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>A user-defined description for the subaccount.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;host01</span> <span class="pre">backup&quot;</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -329,38 +418,71 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-subaccounts/external_reachability" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of external reachability.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-reachable-externally"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.reachable_externally</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/home_directory"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-home-directory"><strong>home_directory</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/home_directory" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Home directory of the subaccount.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;my_backups/host01.my.company&quot;</span></code></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-subaccounts/homedirectory"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-homedirectory"><strong>homedirectory</strong></p>
 <a class="ansibleOptionLink" href="#return-subaccounts/homedirectory" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Homedirectory of the sub-account.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-home-directory"><span class="std std-ref"><span class="pre">subaccounts[].home_directory</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;/home/u2342-sub1&quot;</span></code></p>
 </div></td>
 </tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/id"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-id"><strong>id</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/id" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The subaccount’s ID.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">42</span></code></p>
+</div></td>
+</tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/labels"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-labels"><strong>labels</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/labels" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>User-defined labels for the subaccount.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-subaccounts/readonly"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-readonly"><strong>readonly</strong></p>
 <a class="ansibleOptionLink" href="#return-subaccounts/readonly" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Indicates if the sub-account is in readonly mode.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-readonly"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.readonly</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-subaccounts/samba"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-samba"><strong>samba</strong></p>
 <a class="ansibleOptionLink" href="#return-subaccounts/samba" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of Samba support.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-samba-enabled"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.samba_enabled</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-subaccounts/server"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-server"><strong>server</strong></p>
 <a class="ansibleOptionLink" href="#return-subaccounts/server" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
@@ -369,13 +491,24 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;sb1234.your-storagebox.de&quot;</span></code></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="return-subaccounts/ssh"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-ssh"><strong>ssh</strong></p>
 <a class="ansibleOptionLink" href="#return-subaccounts/ssh" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of SSH support.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-ssh-enabled"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.ssh_enabled</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-subaccounts/storage_box"></div><p class="ansible-option-title" id="ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-storage-box"><strong>storage_box</strong></p>
+<a class="ansibleOptionLink" href="#return-subaccounts/storage_box" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<p><em class="ansible-option-versionadded">added in community.hrobot 2.5.0</em></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The associated storage box’s ID.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
+<p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">42</span></code></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -392,6 +525,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <a class="ansibleOptionLink" href="#return-subaccounts/webdav" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of WebDAV support.</p>
+<p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-webdav-enabled"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.webdav_enabled</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
