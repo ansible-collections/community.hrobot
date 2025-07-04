@@ -1,0 +1,4 @@
+minor_changes:
+  - "storagebox_subaccount - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/168)."
+  - "storagebox_subaccount - no longer mark ``password_mode`` as ``no_log`` (https://github.com/ansible-collections/community.hrobot/pull/168)."
+  - "storagebox_subaccount_info - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/168)."

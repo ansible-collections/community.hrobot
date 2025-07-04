@@ -48,10 +48,7 @@ doc_fragment = "community.hrobot.attributes.actiongroup_robot"
 [[sessions.extra_checks.action_groups_config]]
 name = "api"
 pattern = "^storagebox.*$"
-exclusions = [
-    "storagebox_subaccount_info",
-    "storagebox_subaccount",
-]
+exclusions = []
 doc_fragment = "community.hrobot.attributes.actiongroup_api"
 
 [sessions.build_import_check]

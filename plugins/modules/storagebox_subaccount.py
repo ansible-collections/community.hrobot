@@ -19,8 +19,12 @@ author:
 description:
   - Create, update, or delete a subaccount for a storage box.
 extends_documentation_fragment:
+  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
+  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
 
 attributes:
@@ -40,6 +44,8 @@ attributes:
         to query the current password for a subaccount, or check whether a given password is set.
 
 options:
+  hetzner_token:
+    version_added: 2.5.0
   storagebox_id:
     description:
       - The ID of the storage box to query.
@@ -261,22 +267,35 @@ password_updated:
   returned: success
 
 subaccount:
-  description: The subaccount object returned by the API.
+  description:
+    - The subaccount object returned by the API.
+    - If O(hetzner_token) is provided, some extra fields are added to make this more compatible with the format returned by O(hetzner_user).
   type: dict
   returned: if O(state=present)
 """
 
+from copy import deepcopy
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
     fetch_url_json,
 )
 
+from ansible_collections.community.hrobot.plugins.module_utils.api import (
+    API_BASE_URL,
+    API_DEFAULT_ARGUMENT_SPEC,
+    _API_DEFAULT_ARGUMENT_SPEC_COMPAT,
+    ApplyActionError,
+    api_apply_action,
+    api_fetch_url_json,
+)
 
-def encode_data(data):
+
+def legacy_encode_data(data):
     """Converts booleans to lowercase strings and filters out None values."""
     return urlencode(
         {
@@ -287,13 +306,13 @@ def encode_data(data):
     )
 
 
-def create_subaccount(module, storagebox_id, subaccount):
+def legacy_create_subaccount(module, storagebox_id, subaccount):
     url = "{0}/storagebox/{1}/subaccount".format(BASE_URL, storagebox_id)
     res, error = fetch_url_json(
         module,
         url,
         method="POST",
-        data=encode_data(subaccount),
+        data=legacy_encode_data(subaccount),
         headers={"Content-type": "application/x-www-form-urlencoded"},
         accept_errors=[
             "STORAGEBOX_SUBACCOUNT_LIMIT_EXCEEDED",
@@ -312,7 +331,7 @@ def create_subaccount(module, storagebox_id, subaccount):
     return res["subaccount"]
 
 
-def merge_subaccounts_infos(original, updates):
+def legacy_merge_subaccounts_infos(original, updates):
     # None values aren't updated
     result = original.copy()
     for key, value in updates.items():
@@ -321,7 +340,7 @@ def merge_subaccounts_infos(original, updates):
     return result
 
 
-def is_subaccount_updated(before, after):
+def legacy_is_subaccount_updated(before, after):
     for key, value in after.items():
         # Means user didn't provide a value
         # we assume we don't want to update that field
@@ -336,7 +355,7 @@ def is_subaccount_updated(before, after):
     return False
 
 
-def delete_subaccount(module, storagebox_id, subaccount):
+def legacy_delete_subaccount(module, storagebox_id, subaccount):
     empty, error = fetch_url_json(
         module,
         "{0}/storagebox/{1}/subaccount/{2}".format(
@@ -348,28 +367,28 @@ def delete_subaccount(module, storagebox_id, subaccount):
     )
 
 
-def update_subaccount(module, storagebox_id, subaccount):
+def legacy_update_subaccount(module, storagebox_id, subaccount):
     empty, error = fetch_url_json(
         module,
         "{0}/storagebox/{1}/subaccount/{2}".format(
             BASE_URL, storagebox_id, subaccount["username"]
         ),
         method="PUT",
-        data=encode_data({key: value for key, value in subaccount.items() if key != "password"}),
+        data=legacy_encode_data({key: value for key, value in subaccount.items() if key != "password"}),
         headers={"Content-type": "application/x-www-form-urlencoded"},
         allow_empty_result=True,
         timeout=30000,  # this endpoint is stupidly slow
     )
 
 
-def update_subaccount_password(module, storagebox_id, subaccount):
+def legacy_update_subaccount_password(module, storagebox_id, subaccount):
     new_password, error = fetch_url_json(
         module,
         "{0}/storagebox/{1}/subaccount/{2}/password".format(
             BASE_URL, storagebox_id, subaccount["username"]
         ),
         method="POST",
-        data=encode_data({"password": subaccount["password"]}),
+        data=legacy_encode_data({"password": subaccount["password"]}),
         headers={"Content-type": "application/x-www-form-urlencoded"},
         accept_errors=[
             "STORAGEBOX_INVALID_PASSWORD",
@@ -383,7 +402,7 @@ def update_subaccount_password(module, storagebox_id, subaccount):
     return new_password["password"]
 
 
-def get_subaccounts(module, storagebox_id):
+def legacy_get_subaccounts(module, storagebox_id):
     url = "{0}/storagebox/{1}/subaccount".format(BASE_URL, storagebox_id)
     result, error = fetch_url_json(module, url, accept_errors=["STORAGEBOX_NOT_FOUND"])
     if error:
@@ -394,12 +413,210 @@ def get_subaccounts(module, storagebox_id):
     return [item["subaccount"] for item in result]
 
 
+# -----------------------------------------
+
+
+def create_subaccount(module, storagebox_id, subaccount):
+    action_url = "{0}/v1/storage_boxes/{1}/subaccounts".format(API_BASE_URL, storagebox_id)
+    access_settings = {
+        'samba_enabled': subaccount['samba'],
+        'ssh_enabled': subaccount['ssh'],
+        'webdav_enabled': subaccount['webdav'],
+        'readonly': subaccount['readonly'],
+        'reachable_externally': subaccount['external_reachability'],
+    }
+    action = {
+        'password': subaccount['password'],
+        # For some reason, the home directory must **not** start with a slash, despite being returned that way...
+        'home_directory': subaccount['homedirectory'].lstrip('/') if subaccount['homedirectory'] else subaccount['homedirectory'],
+        'description': subaccount['comment'],
+        'access_settings': {k: v for k, v in access_settings.items() if v is not None},
+    }
+    try:
+        extracted_ids, dummy = api_apply_action(
+            module,
+            action_url,
+            {k: v for k, v in action.items() if v is not None},
+            lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
+            method='POST',
+            check_done_delay=1,
+            check_done_timeout=120,
+        )
+        return extracted_ids["storage_box_subaccount"]
+    except ApplyActionError as exc:
+        module.fail_json(msg='Error while creating subaccount: {0}'.format(exc))
+
+
+FIELDS = {
+    "username": (["username"], None, None),
+    "homedirectory": (["home_directory"], None, "home_directory"),
+    "samba": (["access_settings", "samba_enabled"], None, "samba_enabled"),
+    "ssh": (["access_settings", "ssh_enabled"], None, "ssh_enabled"),
+    "external_reachability": (["access_settings", "reachable_externally"], None, "reachable_externally"),
+    "webdav": (["access_settings", "webdav_enabled"], None, "webdav_enabled"),
+    "readonly": (["access_settings", "readonly"], None, "readonly"),
+    "comment": (["description"], "description", None),
+}
+
+
+def set_value(dictionary, path, value):
+    for key in path[:-1]:
+        if key not in dictionary:
+            dictionary[key] = {}
+        dictionary = dictionary[key]
+    dictionary[path[-1]] = value
+
+
+def merge_subaccounts_infos(original, updates):
+    # None values aren't updated
+    result = deepcopy(original)
+    for key, value in updates.items():
+        if value is not None:
+            if key == 'password':
+                result[key] = value
+            else:
+                set_value(result, FIELDS[key][0], value)
+    return result
+
+
+def get_value(dictionary, path):
+    for key in path[:-1]:
+        dictionary = dictionary[key]
+    return dictionary.get(path[-1])
+
+
+def get_subaccount_updates(before, after):
+    update = {}
+    access_settings = {}
+    for key, value in after.items():
+        # Means user didn't provide a value
+        # we assume we don't want to update that field
+        if value is None:
+            continue
+        # password aren't considered part of update check
+        # due to being a different API call
+        if key == "password":
+            continue
+        path, update_key, access_settings_key = FIELDS[key]
+        current_value = get_value(before, path)
+        # Hetzner likes to strip leading '/' from the home directory
+        if key == "homedirectory" and current_value is not None and value.lstrip('/') == current_value.lstrip('/'):
+            continue
+        if current_value != value:
+            if update_key is not None:
+                update[update_key] = value
+            if access_settings_key is not None:
+                if access_settings_key == 'home_directory':
+                    # For some reason, home_directory must not start with a slash
+                    value = value.lstrip('/')
+                access_settings[access_settings_key] = value
+    return update, access_settings
+
+
+def delete_subaccount(module, storagebox_id, subaccount):
+    action_url = "{0}/v1/storage_boxes/{1}/subaccounts/{2}".format(API_BASE_URL, storagebox_id, subaccount['id'])
+    try:
+        api_apply_action(
+            module,
+            action_url,
+            None,
+            lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
+            method='DELETE',
+            check_done_delay=1,
+            check_done_timeout=120,
+        )
+    except ApplyActionError as exc:
+        module.fail_json(msg='Error while deleting subaccount: {0}'.format(exc))
+
+
+def update_subaccount(module, storagebox_id, subaccount, update):
+    url = "{0}/v1/storage_boxes/{1}/subaccounts/{2}".format(API_BASE_URL, storagebox_id, subaccount['id'])
+    headers = {"Content-type": "application/json"}
+    result, dummy, dummy2 = api_fetch_url_json(
+        module,
+        url,
+        method='PUT',
+        data=module.jsonify(update),
+        headers=headers,
+    )
+    return result['subaccount']
+
+
+def update_access_settings(module, storagebox_id, subaccount, access_settings):
+    action_url = "{0}/v1/storage_boxes/{1}/subaccounts/{2}/actions/update_access_settings".format(API_BASE_URL, storagebox_id, subaccount['id'])
+    try:
+        api_apply_action(
+            module,
+            action_url,
+            access_settings,
+            lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
+            check_done_delay=1,
+            check_done_timeout=120,
+        )
+    except ApplyActionError as exc:
+        module.fail_json(msg='Error while updating access settings: {0}'.format(exc))
+
+
+def update_subaccount_password(module, storagebox_id, subaccount, new_password):
+    action_url = "{0}/v1/storage_boxes/{1}/subaccounts/{2}/actions/reset_subaccount_password".format(API_BASE_URL, storagebox_id, subaccount['id'])
+    action = {
+        'password': new_password,
+    }
+    try:
+        api_apply_action(
+            module,
+            action_url,
+            action,
+            lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
+            check_done_delay=1,
+            check_done_timeout=120,
+        )
+    except ApplyActionError as exc:
+        module.fail_json(msg='Error while updating password: {0}'.format(exc))
+
+
+def get_subaccounts(module, storagebox_id):
+    url = "{0}/v1/storage_boxes/{1}/subaccounts".format(API_BASE_URL, storagebox_id)
+    result, dummy, error = api_fetch_url_json(module, url, accept_errors=['not_found'])
+    if error:
+        module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
+    return result['subaccounts']
+
+
+def get_value_opt(dictionary, path):
+    for key in path[:-1]:
+        if key not in dictionary:
+            return None, False
+        dictionary = dictionary[key]
+    if path[-1] not in dictionary:
+        return None, False
+    return dictionary.get(path[-1]), True
+
+
+def adjust_legacy(subaccount):
+    result = dict(subaccount)
+    for key, path in {
+        'homedirectory': ['home_directory'],
+        'samba': ['access_settings', 'samba_enabled'],
+        'ssh': ['access_settings', 'ssh_enabled'],
+        'webdav': ['access_settings', 'webdav_enabled'],
+        'external_reachability': ['access_settings', 'reachable_externally'],
+        'readonly': ['access_settings', 'readonly'],
+        'createtime': ['created'],
+        'comment': ['description'],
+    }.items():
+        value, exists = get_value_opt(subaccount, path)
+        if exists:
+            result[key] = value
+    return result
+
+
 def main():
     argument_spec = dict(
         storagebox_id=dict(type="int", required=True),
         password_mode=dict(
             type="str",
-            no_log=True,
+            no_log=False,
             choices=["update-if-provided", "ignore-if-exists", "set-to-random"],
             default="update-if-provided",
         ),
@@ -416,6 +633,9 @@ def main():
         idempotence=dict(type="str", choices=["username", "comment"], default="username"),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
+    argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
         argument_spec=argument_spec,
         supports_check_mode=True,
@@ -439,65 +659,140 @@ def main():
     }
     account_identifier = subaccount[idempotence]
 
-    existing_subaccounts = get_subaccounts(module, storagebox_id)
+    if module.params["hetzner_user"] is not None:
+        # DEPRECATED: old API
 
-    matches = [
-        sa for sa in existing_subaccounts
-        if sa[idempotence] == account_identifier
-    ]
-    if len(matches) > 1:
-        module.fail_json(msg="More than one subaccount matched the idempotence criteria.")
+        existing_subaccounts = legacy_get_subaccounts(module, storagebox_id)
 
-    existing = matches[0] if matches else None
+        matches = [
+            sa for sa in existing_subaccounts
+            if sa[idempotence] == account_identifier
+        ]
+        if len(matches) > 1:
+            module.fail_json(msg="More than one subaccount matched the idempotence criteria.")
 
-    created = deleted = updated = password_updated = False
+        existing = matches[0] if matches else None
 
-    if state == "absent":
-        if existing:
-            if not check_mode:
-                delete_subaccount(module, storagebox_id, existing)
-            deleted = True
-    elif state == "present" and existing:
-        # Set the found username in case user used comment as idempotence
-        subaccount["username"] = existing["username"]
+        created = deleted = updated = password_updated = False
 
-        if (
-            password_mode == "set-to-random" or
-            (password_mode == "update-if-provided" and subaccount["password"])
-        ):
+        if state == "absent":
+            if existing:
+                if not check_mode:
+                    legacy_delete_subaccount(module, storagebox_id, existing)
+                deleted = True
+        elif state == "present" and existing:
+            # Set the found username in case user used comment as idempotence
+            subaccount["username"] = existing["username"]
+
+            if (
+                password_mode == "set-to-random" or
+                (password_mode == "update-if-provided" and subaccount["password"])
+            ):
+                if password_mode == "set-to-random":
+                    subaccount["password"] = None
+                if not check_mode:
+                    new_password = legacy_update_subaccount_password(module, storagebox_id, subaccount)
+                    subaccount["password"] = new_password
+                password_updated = True
+
+            if legacy_is_subaccount_updated(existing, subaccount):
+                if not check_mode:
+                    legacy_update_subaccount(module, storagebox_id, subaccount)
+                updated = True
+        else:  # state 'present' without pre-existing account
+            if not subaccount["homedirectory"]:
+                module.fail_json(msg="homedirectory is required when creating a new subaccount")
             if password_mode == "set-to-random":
                 subaccount["password"] = None
+
+            del subaccount["username"]  # username cannot be choosen
             if not check_mode:
-                new_password = update_subaccount_password(module, storagebox_id, subaccount)
-                subaccount["password"] = new_password
-            password_updated = True
+                # not necessary, allows us to get additional infos (created time etc...)
+                existing = legacy_create_subaccount(module, storagebox_id, subaccount)
+            created = True
 
-        if is_subaccount_updated(existing, subaccount):
+        return_data = legacy_merge_subaccounts_infos(existing or {}, subaccount)
+
+        module.exit_json(
+            changed=any([created, deleted, updated, password_updated]),
+            created=created,
+            deleted=deleted,
+            updated=updated,
+            password_updated=password_updated,
+            subaccount=return_data if state != "absent" else None,
+        )
+
+    else:
+        # NEW API!
+
+        if password_mode == 'set-to-random':
+            module.fail_json(msg="The new Hetzner API does not support password_mode=set-to-random")
+        if idempotence == 'comment':
+            idempotence = 'description'
+
+        existing_subaccounts = get_subaccounts(module, storagebox_id)
+
+        matches = [
+            sa for sa in existing_subaccounts
+            if sa[idempotence] == account_identifier
+        ]
+        if len(matches) > 1:
+            module.fail_json(msg="More than one subaccount matched the idempotence criteria.")
+
+        existing = matches[0] if matches else None
+
+        created = deleted = updated = password_updated = False
+
+        if state == "absent":
+            if existing:
+                if not check_mode:
+                    delete_subaccount(module, storagebox_id, existing)
+                deleted = True
+        elif state == "present" and existing:
+            # Set the found username in case user used comment as idempotence
+            subaccount["username"] = existing["username"]
+
+            if (
+                password_mode == "update-if-provided" and subaccount["password"]
+            ):
+                if not check_mode:
+                    update_subaccount_password(module, storagebox_id, existing, subaccount["password"])
+                password_updated = True
+
+            update, access_settings = get_subaccount_updates(existing, subaccount)
+            if update:
+                if not check_mode:
+                    update_subaccount(module, storagebox_id, existing, update)
+                updated = True
+            if access_settings:
+                if not check_mode:
+                    update_access_settings(module, storagebox_id, existing, access_settings)
+                updated = True
+        else:  # state 'present' without pre-existing account
+            if not subaccount["homedirectory"]:
+                module.fail_json(msg="homedirectory is required when creating a new subaccount")
+            if not subaccount["password"]:
+                module.fail_json(msg="password is required when creating a new subaccount")
+
+            del subaccount["username"]  # username cannot be choosen
             if not check_mode:
-                update_subaccount(module, storagebox_id, subaccount)
-            updated = True
-    else:  # state 'present' without pre-existing account
-        if not subaccount["homedirectory"]:
-            module.fail_json(msg="homedirectory is required when creating a new subaccount")
-        if password_mode == "set-to-random":
-            subaccount["password"] = None
+                new_subaccount_id = create_subaccount(module, storagebox_id, subaccount)
+                # Retrieve created subaccount
+                # (not necessary, allows us to get additional infos (created time etc...))
+                url = "{0}/v1/storage_boxes/{1}/subaccounts/{2}".format(API_BASE_URL, storagebox_id, new_subaccount_id)
+                existing = api_fetch_url_json(module, url, method='GET')[0]["subaccount"]
+            created = True
 
-        del subaccount["username"]  # username cannot be choosen
-        if not check_mode:
-            # not necessary, allows us to get additional infos (created time etc...)
-            existing = create_subaccount(module, storagebox_id, subaccount)
-        created = True
+        return_data = merge_subaccounts_infos(existing or {}, subaccount)
 
-    return_data = merge_subaccounts_infos(existing or {}, subaccount)
-
-    module.exit_json(
-        changed=any([created, deleted, updated, password_updated]),
-        created=created,
-        deleted=deleted,
-        updated=updated,
-        password_updated=password_updated,
-        subaccount=return_data if state != "absent" else None,
-    )
+        module.exit_json(
+            changed=any([created, deleted, updated, password_updated]),
+            created=created,
+            deleted=deleted,
+            updated=updated,
+            password_updated=password_updated,
+            subaccount=adjust_legacy(return_data) if state != "absent" else None,
+        )
 
 
 if __name__ == "__main__":  # pragma: no cover

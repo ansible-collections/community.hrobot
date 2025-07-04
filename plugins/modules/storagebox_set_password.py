@@ -147,7 +147,7 @@ def main():
             "password": password,
         }
         try:
-            error = api_apply_action(
+            dummy, error = api_apply_action(
                 module,
                 action_url,
                 action,
