@@ -429,3 +429,64 @@ releases:
         name: storagebox_subaccount_info
         namespace: ''
     release_date: '2025-06-06'
+  2.5.0:
+    changes:
+      bugfixes:
+        - robot inventory plugin - avoid using deprecated option when templating options
+          (https://github.com/ansible-collections/community.hrobot/pull/165).
+      known_issues:
+        - 'storagebox* modules - the Hetzner Robot API for storage boxes is `deprecated
+          and will be sunset on July 30, 2025 <https://docs.hetzner.cloud/changelog#2025-06-25-new-api-for-storage-boxes>`__.
+          The modules are currently not compatible with the new API. We will try to
+          adjust them until then, but usage and return values might change slightly
+          due to differences in the APIs.
+
+          For the new API, an API token needs to be registered and provided as ``hetzner_token``
+          (https://github.com/ansible-collections/community.hrobot/pull/166).'
+      minor_changes:
+        - Introduced a new action group (module defaults group) ``community.hrobot.api``
+          that includes all modules that support the new Hetzner API. This is currently
+          limited to a subset of the storage box modules; these currently support
+          both the ``community.hrobot.robot`` and the new ``community.hrobot.api``
+          action group, and will eventually drop the ``community.hrobot.robot`` action
+          group once the Robot API for storage boxes is removed by Hetzner (https://github.com/ansible-collections/community.hrobot/pull/166,
+          https://github.com/ansible-collections/community.hrobot/pull/167, https://github.com/ansible-collections/community.hrobot/pull/168,
+          https://github.com/ansible-collections/community.hrobot/pull/169).
+        - storagebox - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/166).
+        - storagebox_info - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/166).
+        - storagebox_set_password - support the new Hetzner API. Note that the new
+          API does not support setting a random password; you must always provide
+          a password when using the new API (https://github.com/ansible-collections/community.hrobot/pull/168).
+        - storagebox_snapshot - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/168).
+        - storagebox_snapshot_info - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/168).
+        - storagebox_snapshot_plan - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/167).
+        - storagebox_snapshot_plan_info - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/167).
+        - storagebox_subaccount - no longer mark ``password_mode`` as ``no_log`` (https://github.com/ansible-collections/community.hrobot/pull/168).
+        - storagebox_subaccount - support the new Hetzner API. Note that the new API
+          does not support setting a random password; you must always provide a password
+          when using the new API to create a storagebox (https://github.com/ansible-collections/community.hrobot/pull/168).
+        - storagebox_subaccount_info - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/168).
+      release_summary: 'Feature and bugfix release.
+
+
+        This release adds support for the `new Hetzner API for the storage box modules
+
+        <https://docs.hetzner.cloud/changelog#2025-06-25-new-api-for-storage-boxes>`__.
+
+        You need to use ``hetzner_token`` instead of ``hetzner_user``/``hetzner_password``
+
+        to use the new API. Please note that the old API will be sunset on July 30th,
+        2025;
+
+        the modules will then stop working if you do not provide ``hetzner_token``
+        and stop
+
+        providing ``hetzner_user``/``hetzner_password``.'
+    fragments:
+      - 165--disable_lookups.yml
+      - 166-storagebox.yml
+      - 167-storagebox.yml
+      - 168-storagebox.yml
+      - 169-storagebox.yml
+      - 2.5.0.yml
+    release_date: '2025-07-07'

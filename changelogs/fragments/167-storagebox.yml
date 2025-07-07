@@ -1,3 +1,0 @@
-minor_changes:
-  - "storagebox_snapshot_plan - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/167)."
-  - "storagebox_snapshot_plan_info - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/167)."

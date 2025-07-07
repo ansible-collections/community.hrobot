@@ -1,5 +1,0 @@
-minor_changes:
-  - "storagebox_set_password - support the new Hetzner API. Note that the new API does not support setting a random password;
-     you must always provide a password when using the new API (https://github.com/ansible-collections/community.hrobot/pull/168)."
-  - "storagebox_snapshot - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/168)."
-  - "storagebox_snapshot_info - support the new Hetzner API (https://github.com/ansible-collections/community.hrobot/pull/168)."

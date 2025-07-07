@@ -1,9 +1,0 @@
-release_summary: |-
-  Feature and bugfix release.
-
-  This release adds support for the `new Hetzner API for the storage box modules
-  <https://docs.hetzner.cloud/changelog#2025-06-25-new-api-for-storage-boxes>`__.
-  You need to use ``hetzner_token`` instead of ``hetzner_user``/``hetzner_password``
-  to use the new API. Please note that the old API will be sunset on July 30th, 2025;
-  the modules will then stop working if you do not provide ``hetzner_token`` and stop
-  providing ``hetzner_user``/``hetzner_password``.
