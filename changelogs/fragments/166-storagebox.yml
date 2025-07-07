@@ -15,6 +15,6 @@ minor_changes:
     and the new ``community.hrobot.api`` action group, and will eventually drop the ``community.hrobot.robot`` action group once
     the Robot API for storage boxes is removed by Hetzner
     (https://github.com/ansible-collections/community.hrobot/pull/166,
-     https://github.com/ansible-collections/community.hrobot/pull/167,
-     https://github.com/ansible-collections/community.hrobot/pull/168,
-     https://github.com/ansible-collections/community.hrobot/pull/169).
+    https://github.com/ansible-collections/community.hrobot/pull/167,
+    https://github.com/ansible-collections/community.hrobot/pull/168,
+    https://github.com/ansible-collections/community.hrobot/pull/169).
