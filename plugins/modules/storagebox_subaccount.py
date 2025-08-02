@@ -19,11 +19,11 @@ author:
 description:
   - Create, update, or delete a subaccount for a storage box.
 extends_documentation_fragment:
-  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api._robot_compat_shim_deprecation  # must come before api and robot
   - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
-  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes._actiongroup_robot_and_api_deprecation  # must come before the other two!
   - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
 
@@ -280,7 +280,7 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
-    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
     fetch_url_json,
 )
 
@@ -638,7 +638,7 @@ def main():
         idempotence=dict(type="str", choices=["username", "comment"], default="username"),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
-    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED)
     argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
     argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
@@ -665,6 +665,11 @@ def main():
     account_identifier = subaccount[idempotence]
 
     if module.params["hetzner_user"] is not None:
+        module.deprecate(
+            "The hetzner_token parameter will be required from community.hrobot 3.0.0 on.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
         # DEPRECATED: old API
 
         existing_subaccounts = legacy_get_subaccounts(module, storagebox_id)

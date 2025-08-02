@@ -18,11 +18,11 @@ author:
 description:
   - Enable, modify, and disable the snapshot plans of a storage box.
 extends_documentation_fragment:
-  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api._robot_compat_shim_deprecation  # must come before api and robot
   - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
-  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes._actiongroup_robot_and_api_deprecation  # must come before the other two!
   - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
 attributes:
@@ -171,7 +171,7 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
-    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
     fetch_url_json,
 )
 
@@ -254,7 +254,7 @@ def main():
         ),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
-    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED)
     argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
     argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
@@ -271,6 +271,11 @@ def main():
     plan = plans[0]
 
     if module.params["hetzner_user"] is not None:
+        module.deprecate(
+            "The hetzner_token parameter will be required from community.hrobot 3.0.0 on.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
         # DEPRECATED: old API
         url = "{0}/storagebox/{1}/snapshotplan".format(BASE_URL, storagebox_id)
         result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])

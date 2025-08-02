@@ -80,6 +80,20 @@ attributes:
       - community.hrobot.robot
 '''
 
+    # Only for transition period
+    _ACTIONGROUP_ROBOT_AND_API_DEPRECATION = r'''
+options: {}
+attributes:
+  action_group:
+    description:
+      - Use C(group/community.hrobot.robot) or C(group/community.hrobot.api) in C(module_defaults) to set defaults for this module.
+      - The C(group/community.hrobot.robot) group is B(deprecated) for this module; the module will be removed from the group in community.hrobot 3.0.0.
+    support: full
+    membership:
+      - community.hrobot.api
+      - community.hrobot.robot
+'''
+
     CONN = r"""
 options: {}
 attributes:

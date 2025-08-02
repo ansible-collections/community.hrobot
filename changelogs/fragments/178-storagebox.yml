@@ -1,0 +1,4 @@
+deprecated_features:
+  - "storagebox\\* modules - the ``hetzner_user`` and ``hetzner_pass`` options for these modules are deprecated; support will be removed in community.hrobot 3.0.0. Use ``hetzner_token`` instead (https://github.com/ansible-collections/community.hrobot/pull/178)."
+  - "storagebox\\* modules - the ``hetzner_token`` option for these modules will be required from community.hrobot 3.0.0 on (https://github.com/ansible-collections/community.hrobot/pull/178)."
+  - "storagebox\\* modules - membership in the ``community.hrobot.robot`` action group (module defaults group) is deprecated; the modules will be removed from the group in community.hrobot 3.0.0. Use ``community.hrobot.api`` instead (https://github.com/ansible-collections/community.hrobot/pull/178)."
