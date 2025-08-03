@@ -373,7 +373,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Username of the main user.</p>
 <p>Not supported by the new Hetzner API.</p>
-<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success if <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is not specified</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
+<p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success and if <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is not specified</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;u2342&quot;</span></code></p>
 </div></td>
 </tr>
@@ -383,6 +384,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Custom comment for the sub-account.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-description"><span class="std std-ref"><span class="pre">subaccounts[].description</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">subaccount&quot;</span></code></p>
 </div></td>
@@ -403,6 +405,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Timestamp when the sub-account was created.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-created"><span class="std std-ref"><span class="pre">subaccounts[].created</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2023-08-25T14:23:05Z&quot;</span></code></p>
 </div></td>
@@ -423,6 +426,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of external reachability.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-reachable-externally"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.reachable_externally</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
 </div></td>
@@ -443,6 +447,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Homedirectory of the sub-account.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-home-directory"><span class="std std-ref"><span class="pre">subaccounts[].home_directory</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;/home/u2342-sub1&quot;</span></code></p>
 </div></td>
@@ -472,6 +477,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Indicates if the sub-account is in readonly mode.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-readonly"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.readonly</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
 </div></td>
@@ -482,6 +488,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of Samba support.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-samba-enabled"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.samba_enabled</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
@@ -501,6 +508,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of SSH support.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-ssh-enabled"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.ssh_enabled</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
@@ -530,6 +538,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Status of WebDAV support.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-return-subaccounts-access-settings-webdav-enabled"><span class="std std-ref"><span class="pre">subaccounts[].access_settings.webdav_enabled</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-subaccount-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">true</span></code></p>
 </div></td>
