@@ -1,1 +1,2 @@
+plugins/module_utils/_tagging.py pylint:collection-invalid-deprecated-version  # Bug in ansible-test: https://github.com/ansible/ansible/issues/85614
 tests/ee/roles/smoke/library/smoke_ipaddress.py shebang
