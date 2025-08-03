@@ -33,6 +33,12 @@ _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT = dict(
     hetzner_password=dict(type='str', required=False, no_log=True),
 )
 
+_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED = dict(
+    hetzner_user=dict(type='str', required=False, removed_in_version="3.0.0", removed_from_collection="community.hrobot"),
+    hetzner_password=dict(type='str', required=False, no_log=True, removed_in_version="3.0.0", removed_from_collection="community.hrobot"),
+)
+
+
 # The API endpoint is fixed.
 BASE_URL = "https://robot-ws.your-server.de"
 
