@@ -28,10 +28,12 @@ def deprecate_value(value, msg, version, help_text=None):
     """
     if not HAS_DEPRECATE_VALUE:
         return value
+    # Assign this to a variable to work around a bug in ansible-test's pylint check (https://github.com/ansible/ansible/issues/85614)
+    collection_name = "community.hrobot"
     return _deprecate_value(
         value,
         msg,
-        collection_name="community.hrobot",
+        collection_name=collection_name,
         version=version,
         help_text=help_text,
     )
