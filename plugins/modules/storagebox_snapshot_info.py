@@ -71,6 +71,8 @@ snapshots:
       description:
         - The timestamp of snapshot in UTC.
         - Note that this is copied from RV(snapshots[].created) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: str
       sample: "2025-01-21T13:40:38+00:00"
       returned: success
@@ -78,6 +80,8 @@ snapshots:
       description:
         - The Snapshot size in MB.
         - Note that this is copied from RV(snapshots[].stats.size) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: int
       sample: 400
       returned: success
@@ -85,6 +89,8 @@ snapshots:
       description:
         - The size of the Storage Box at creation time of the snapshot in MB.
         - Note that this is computed from RV(snapshots[].stats.size_filesystem) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: int
       sample: 12345
       returned: success
@@ -92,6 +98,8 @@ snapshots:
       description:
         - Whether the snapshot was created automatically.
         - Note that this is computed from RV(snapshots[].is_automatic) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: false
       returned: success
@@ -99,6 +107,8 @@ snapshots:
       description:
         - The comment for the snapshot.
         - Note that this is copied from RV(snapshots[].description) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: str
       sample: "This is a snapshot"
       returned: success
@@ -178,14 +188,38 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     api_fetch_url_json,
 )
 
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
+)
+
 
 def adjust_legacy(snapshot):
     result = dict(snapshot)
-    result["timestamp"] = result["created"]
-    result["size"] = result["stats"]["size"] // (1024 * 1024)
-    result["filesystem_size"] = result["stats"]["size_filesystem"] // (1024 * 1024)
-    result["automatic"] = result["is_automatic"]
-    result["comment"] = result["description"]
+    result["timestamp"] = deprecate_value(
+        result["created"],
+        "The return value `timestamp` is deprecated; use `created` instead.",
+        version="3.0.0",
+    )
+    result["size"] = deprecate_value(
+        result["stats"]["size"] // (1024 * 1024),
+        "The return value `size` is deprecated; use `stats.size / (1024*1024)` instead.",
+        version="3.0.0",
+    )
+    result["filesystem_size"] = deprecate_value(
+        result["stats"]["size_filesystem"] // (1024 * 1024),
+        "The return value `filesystem_size` is deprecated; use `stats.size_filesystem / (1024*1024)` instead.",
+        version="3.0.0",
+    )
+    result["automatic"] = deprecate_value(
+        result["is_automatic"],
+        "The return value `automatic` is deprecated; use `is_automatic` instead.",
+        version="3.0.0",
+    )
+    result["comment"] = deprecate_value(
+        result["description"],
+        "The return value `comment` is deprecated; use `description` instead.",
+        version="3.0.0",
+    )
     return result
 
 

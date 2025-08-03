@@ -155,6 +155,8 @@ plans:
         - The month of execution of the plan. V(1) is January, V(12) is December.
         - If set to V(null), the plan is run every month.
         - Always V(null) if O(hetzner_token) is provided.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: int
       sample: null
       returned: success
@@ -182,6 +184,10 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     ApplyActionError,
     api_apply_action,
     api_fetch_url_json,
+)
+
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
 )
 
 try:
@@ -217,7 +223,7 @@ def extract(result):
             'hour': None,
             'day_of_week': None,
             'day_of_month': None,
-            'month': None,
+            'month': deprecate_value(None, "The return value `month` is deprecated; it is always null.", version="3.0.0"),
             'max_snapshots': None,
         }
 
@@ -227,7 +233,7 @@ def extract(result):
         'hour': sp['hour'],
         'day_of_week': sp['day_of_week'],
         'day_of_month': sp['day_of_month'],
-        'month': None,
+        'month': deprecate_value(None, "The return value `month` is deprecated; it is always null.", version="3.0.0"),
         'max_snapshots': sp['max_snapshots'],
     }
 

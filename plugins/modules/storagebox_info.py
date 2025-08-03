@@ -88,6 +88,8 @@ storageboxes:
       description:
         - The storage box's login name.
         - Note that this is copied from RV(storageboxes[].username) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: str
       sample: u12345
       returned: success
@@ -200,6 +202,8 @@ storageboxes:
       description:
         - Total amount of MB available.
         - Note that this is copied from RV(storageboxes[].storage_box_type.size) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: int
       sample: 10240000
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -207,6 +211,8 @@ storageboxes:
       description:
         - The amount of MB in use.
         - Note that this is copied from RV(storageboxes[].stats.size) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: int
       sample: 900
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -214,6 +220,8 @@ storageboxes:
       description:
         - The amount of MB used by files.
         - Note that this is copied from RV(storageboxes[].stats.size_data) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: int
       sample: 500
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -221,6 +229,8 @@ storageboxes:
       description:
         - The amount of MB used by snapshots.
         - Note that this is copied from RV(storageboxes[].stats.size_snapshots) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: int
       sample: 400
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -228,6 +238,8 @@ storageboxes:
       description:
         - Whether WebDAV is active.
         - Note that this is copied from RV(storageboxes[].access_settings.webdav_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: true
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -235,6 +247,8 @@ storageboxes:
       description:
         - Whether SAMBA is active.
         - Note that this is copied from RV(storageboxes[].access_settings.samba_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: true
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -242,6 +256,8 @@ storageboxes:
       description:
         - Whether SSH is active.
         - Note that this is copied from RV(storageboxes[].access_settings.ssh_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: true
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -249,6 +265,8 @@ storageboxes:
       description:
         - Whether the storage box is reachable externally.
         - Note that this is copied from RV(storageboxes[].access_settings.reachable_externally) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: true
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -256,6 +274,8 @@ storageboxes:
       description:
         - Shows whether the ZFS directory is visible.
         - Note that this is copied from RV(storageboxes[].access_settings.zfs_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: false
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -533,6 +553,10 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     api_fetch_url_json_list,
 )
 
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
+)
+
 try:
     from urllib.parse import urlencode
 except ImportError:
@@ -560,7 +584,11 @@ def add_hrobot_compat_shim(storagebox):
         value = storagebox
         for src in source:
             value = value[src]
-        result[dest] = value
+        result[dest] = deprecate_value(
+            value,
+            "The return value `{0}` is deprecated; use `{1}` instead.".format(dest, ".".join(source)),
+            version="3.0.0",
+        )
     return result
 
 

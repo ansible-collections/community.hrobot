@@ -270,6 +270,10 @@ subaccount:
   description:
     - The subaccount object returned by the API.
     - If O(hetzner_token) is provided, some extra fields are added to make this more compatible with the format returned by O(hetzner_user).
+    - B(This extra return values are deprecated and will be removed from community.hrobot 3.0.0.)
+      If you are using ansible-core 2.19 or newer, you will see a deprecation message when using these return values.
+      These return values are RV(ignore:homedirectory), RV(ignore:samba), RV(ignore:ssh), RV(ignore:webdav), RV(ignore:external_reachability),
+      RV(ignore:readonly), RV(ignore:createtime), and RV(ignore:comment).
   type: dict
   returned: if O(state=present)
 """
@@ -291,6 +295,10 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     ApplyActionError,
     api_apply_action,
     api_fetch_url_json,
+)
+
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
 )
 
 try:
@@ -612,7 +620,11 @@ def adjust_legacy(subaccount):
     }.items():
         value, exists = get_value_opt(subaccount, path)
         if exists:
-            result[key] = value
+            result[key] = deprecate_value(
+                value,
+                "The return value `{0}` is deprecated; use `{1}` instead.".format(key, ".".join(path)),
+                version="3.0.0",
+            )
     return result
 
 
