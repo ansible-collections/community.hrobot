@@ -17,11 +17,11 @@ author:
 description:
   - (Re)set the password for a storage box.
 extends_documentation_fragment:
-  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api._robot_compat_shim_deprecation  # must come before api and robot
   - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
-  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes._actiongroup_robot_and_api_deprecation  # must come before the other two!
   - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
 
@@ -81,13 +81,10 @@ password:
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
-    BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
-    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
-    fetch_url_json,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
 )
 
 from ansible_collections.community.hrobot.plugins.module_utils.api import (
@@ -105,7 +102,7 @@ def main():
         password=dict(type="str", no_log=True),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
-    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED)
     argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
     argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
@@ -117,52 +114,37 @@ def main():
     id = module.params["id"]
     password = module.params.get("password")
 
+    if module.params["hetzner_token"] is None:
+        module.deprecate(
+            "The hetzner_token parameter will be required from community.hrobot 3.0.0 on.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
     if module.params["hetzner_user"] is not None:
-        # DEPRECATED: old API
-        url = "{0}/storagebox/{1}/password".format(BASE_URL, id)
-        accepted_errors = ["STORAGEBOX_NOT_FOUND", "STORAGEBOX_INVALID_PASSWORD"]
+        module.warn("The old storagebox API has been disabled by Hetzner. The supporting code has been removed.")
+        module.fail_json(msg='Storage Box with ID {0} not found'.format(id))
 
-        if password:
-            headers = {"Content-type": "application/x-www-form-urlencoded"}
-            result, error = fetch_url_json(
-                module, url, method="POST", accept_errors=accepted_errors, data=urlencode({"password": password}), headers=headers)
-        else:
-            result, error = fetch_url_json(
-                module, url, method="POST", accept_errors=accepted_errors)
+    action_url = "{0}/v1/storage_boxes/{1}/actions/reset_password".format(API_BASE_URL, id)
+    action = {
+        "password": password,
+    }
+    try:
+        dummy, error = api_apply_action(
+            module,
+            action_url,
+            action,
+            lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
+            check_done_delay=1,
+            check_done_timeout=60,
+            accept_errors=["not_found"],
+        )
+    except ApplyActionError as exc:
+        module.fail_json(msg='Error while resetting password: {0}'.format(exc))
 
-        if error == 'STORAGEBOX_NOT_FOUND':
-            module.fail_json(
-                msg='Storage Box with ID {0} not found'.format(id))
+    if error == "not_found":
+        module.fail_json(msg='Storage Box with ID {0} not found'.format(id))
 
-        if error == 'STORAGEBOX_INVALID_PASSWORD':
-            module.fail_json(
-                msg="The chosen password has been considered insecure or does not comply with Hetzner's password guideline")
-
-        module.exit_json(changed=True, password=result["password"])
-
-    else:
-        # NEW API!
-        action_url = "{0}/v1/storage_boxes/{1}/actions/reset_password".format(API_BASE_URL, id)
-        action = {
-            "password": password,
-        }
-        try:
-            dummy, error = api_apply_action(
-                module,
-                action_url,
-                action,
-                lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
-                check_done_delay=1,
-                check_done_timeout=60,
-                accept_errors=["not_found"],
-            )
-        except ApplyActionError as exc:
-            module.fail_json(msg='Error while resetting password: {0}'.format(exc))
-
-        if error == "not_found":
-            module.fail_json(msg='Storage Box with ID {0} not found'.format(id))
-
-        module.exit_json(changed=True, password=password)
+    module.exit_json(changed=True, password=password)
 
 
 if __name__ == '__main__':  # pragma: no cover

@@ -47,3 +47,27 @@ options:
       - If O(hetzner_password) is specified, O(hetzner_user) must also be specified, and O(hetzner_token) must not be specified.
     required: false
 """
+
+    # Only for transition period
+    _ROBOT_COMPAT_SHIM_DEPRECATION = r"""
+options:
+  hetzner_token:
+    description:
+      - The API token for the Robot web-service user.
+      - One of O(hetzner_token) and O(hetzner_user) must be specified.
+      - This option will be required from community.hrobot 3.0.0 on.
+    required: false
+  hetzner_user:
+    description:
+      - The username for the Robot web-service user.
+      - One of O(hetzner_token) and O(hetzner_user) must be specified.
+      - If O(hetzner_user) is specified, O(hetzner_password) must also be specified, and O(hetzner_token) must not be specified.
+      - This option is deprecated for this module, and support will be removed in community.hrobot 3.0.0.
+    required: false
+  hetzner_password:
+    description:
+      - The password for the Robot web-service user.
+      - If O(hetzner_password) is specified, O(hetzner_user) must also be specified, and O(hetzner_token) must not be specified.
+      - This option is deprecated for this module, and support will be removed in community.hrobot 3.0.0.
+    required: false
+"""
