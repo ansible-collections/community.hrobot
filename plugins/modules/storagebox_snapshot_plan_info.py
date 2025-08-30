@@ -18,11 +18,11 @@ author:
 description:
   - Query the snapshot plans for a storage box.
 extends_documentation_fragment:
-  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api._robot_compat_shim_deprecation  # must come before api and robot
   - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
-  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes._actiongroup_robot_and_api_deprecation  # must come before the other two!
   - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
   - community.hrobot.attributes.idempotent_not_modify_state
@@ -101,6 +101,8 @@ plans:
         - The month of execution of the plan. V(1) is January, V(12) is December.
         - If set to V(null), the plan is run every month.
         - Always V(null) if O(hetzner_token) is provided.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: int
       sample: null
       returned: success
@@ -115,10 +117,8 @@ plans:
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
-    BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
-    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
-    fetch_url_json,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
 )
 
 from ansible_collections.community.hrobot.plugins.module_utils.api import (
@@ -128,18 +128,9 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     api_fetch_url_json,
 )
 
-
-def extract_legacy(result):
-    sb = result['snapshotplan']
-    return {
-        'status': sb['status'],
-        'minute': sb['minute'],
-        'hour': sb['hour'],
-        'day_of_week': sb['day_of_week'],
-        'day_of_month': sb['day_of_month'],
-        'month': sb['month'],
-        'max_snapshots': sb['max_snapshots'],
-    }
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
+)
 
 
 def extract(result):
@@ -152,7 +143,7 @@ def extract(result):
             'hour': None,
             'day_of_week': None,
             'day_of_month': None,
-            'month': None,
+            'month': deprecate_value(None, "The return value `month` is deprecated; it is always null.", version="3.0.0"),
             'max_snapshots': None,
         }
 
@@ -162,7 +153,7 @@ def extract(result):
         'hour': sp['hour'],
         'day_of_week': sp['day_of_week'],
         'day_of_month': sp['day_of_month'],
-        'month': None,
+        'month': deprecate_value(None, "The return value `month` is deprecated; it is always null.", version="3.0.0"),
         'max_snapshots': sp['max_snapshots'],
     }
 
@@ -172,7 +163,7 @@ def main():
         storagebox_id=dict(type='int', required=True),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
-    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED)
     argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
     argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
@@ -182,28 +173,22 @@ def main():
 
     storagebox_id = module.params['storagebox_id']
 
+    if module.params["hetzner_token"] is None:
+        module.deprecate(
+            "The hetzner_token parameter will be required from community.hrobot 3.0.0 on.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
     if module.params["hetzner_user"] is not None:
-        # DEPRECATED: old API
-        url = "{0}/storagebox/{1}/snapshotplan".format(BASE_URL, storagebox_id)
-        result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
-        if error:
-            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
+        module.warn("The old storagebox API has been disabled by Hetzner. The supporting code has been removed.")
+        module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
 
-        # The documentation (https://robot.hetzner.com/doc/webservice/en.html#get-storagebox-storagebox-id-snapshotplan)
-        # claims that the result is a list, but actually it is a dictionary. Convert it to a list of dicts if that's the case.
-        if isinstance(result, dict):
-            result = [result]
+    url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
+    result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
+    if error:
+        module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
 
-        plans = [extract_legacy(plan) for plan in result]
-
-    else:
-        # NEW API!
-        url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
-        result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
-        if error:
-            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
-
-        plans = [extract(result)]
+    plans = [extract(result)]
 
     module.exit_json(
         changed=False,
