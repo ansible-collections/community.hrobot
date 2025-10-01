@@ -18,11 +18,11 @@ author:
 description:
   - Query information on one or more storage box.
 extends_documentation_fragment:
-  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api._robot_compat_shim_deprecation  # must come before api and robot
   - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
-  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes._actiongroup_robot_and_api_deprecation  # must come before the other two!
   - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
   - community.hrobot.attributes.idempotent_not_modify_state
@@ -88,6 +88,8 @@ storageboxes:
       description:
         - The storage box's login name.
         - Note that this is copied from RV(storageboxes[].username) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: str
       sample: u12345
       returned: success
@@ -200,6 +202,8 @@ storageboxes:
       description:
         - Total amount of MB available.
         - Note that this is copied from RV(storageboxes[].storage_box_type.size) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: int
       sample: 10240000
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -207,6 +211,8 @@ storageboxes:
       description:
         - The amount of MB in use.
         - Note that this is copied from RV(storageboxes[].stats.size) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: int
       sample: 900
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -214,6 +220,8 @@ storageboxes:
       description:
         - The amount of MB used by files.
         - Note that this is copied from RV(storageboxes[].stats.size_data) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: int
       sample: 500
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -221,6 +229,8 @@ storageboxes:
       description:
         - The amount of MB used by snapshots.
         - Note that this is copied from RV(storageboxes[].stats.size_snapshots) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: int
       sample: 400
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -228,6 +238,8 @@ storageboxes:
       description:
         - Whether WebDAV is active.
         - Note that this is copied from RV(storageboxes[].access_settings.webdav_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: bool
       sample: true
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -235,6 +247,8 @@ storageboxes:
       description:
         - Whether SAMBA is active.
         - Note that this is copied from RV(storageboxes[].access_settings.samba_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: bool
       sample: true
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -242,6 +256,8 @@ storageboxes:
       description:
         - Whether SSH is active.
         - Note that this is copied from RV(storageboxes[].access_settings.ssh_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: bool
       sample: true
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -249,6 +265,8 @@ storageboxes:
       description:
         - Whether the storage box is reachable externally.
         - Note that this is copied from RV(storageboxes[].access_settings.reachable_externally) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: bool
       sample: true
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -256,6 +274,8 @@ storageboxes:
       description:
         - Shows whether the ZFS directory is visible.
         - Note that this is copied from RV(storageboxes[].access_settings.zfs_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value.
       type: bool
       sample: false
       returned: when O(full_info=true), or O(hetzner_token) is specified
@@ -517,13 +537,10 @@ storageboxes:
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
-    BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
-    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
-    fetch_url_json,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
 )
 
 from ansible_collections.community.hrobot.plugins.module_utils.api import (
@@ -532,6 +549,10 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     _API_DEFAULT_ARGUMENT_SPEC_COMPAT,
     api_fetch_url_json,
     api_fetch_url_json_list,
+)
+
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
 )
 
 
@@ -555,7 +576,11 @@ def add_hrobot_compat_shim(storagebox):
         value = storagebox
         for src in source:
             value = value[src]
-        result[dest] = value
+        result[dest] = deprecate_value(
+            value,
+            "The return value `{0}` is deprecated; use `{1}` instead.".format(dest, ".".join(source)),
+            version="3.0.0",
+        )
     return result
 
 
@@ -566,7 +591,7 @@ def main():
         full_info=dict(type='bool', default=False),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
-    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED)
     argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
     argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
@@ -582,50 +607,25 @@ def main():
     full_info = module.params['full_info']
 
     storageboxes = []
+    if module.params["hetzner_token"] is None:
+        module.deprecate(
+            "The hetzner_token parameter will be required from community.hrobot 3.0.0 on.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
     if module.params["hetzner_user"] is not None:
-        # DEPRECATED: old API
-        if storagebox_id is not None:
-            storagebox_ids = [storagebox_id]
-        else:
-            url = "{0}/storagebox".format(BASE_URL)
-            data = None
-            headers = None
-            if linked_server_number is not None:
-                data = urlencode({
-                    "linked_server": linked_server_number,
-                })
-                headers = {
-                    "Content-type": "application/x-www-form-urlencoded",
-                }
-            result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'], data=data)
-            storagebox_ids = []
-            if not error:
-                # When filtering by linked_server, the result should be a dictionary
-                if isinstance(result, dict):
-                    result = [result]
-                for entry in result:
-                    if full_info:
-                        storagebox_ids.append(entry['storagebox']['id'])
-                    else:
-                        storageboxes.append(entry['storagebox'])
+        module.warn("The old storagebox API has been disabled by Hetzner. The supporting code has been removed.")
+        module.exit_json(changed=False, storageboxes=[])
 
-        for storagebox_id in storagebox_ids:
-            url = "{0}/storagebox/{1}".format(BASE_URL, storagebox_id)
-            result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
-            if not error:
-                storageboxes.append(result['storagebox'])
-
+    if storagebox_id is not None:
+        url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
+        result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
+        if error is None:
+            storageboxes = [result["storage_box"]]
     else:
-        # NEW API!
-        if storagebox_id is not None:
-            url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
-            result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
-            if error is None:
-                storageboxes = [result["storage_box"]]
-        else:
-            url = "{0}/v1/storage_boxes".format(API_BASE_URL)
-            storageboxes, dummy = api_fetch_url_json_list(module, url, data_key="storage_boxes")
-        storageboxes = [add_hrobot_compat_shim(storagebox) for storagebox in storageboxes]
+        url = "{0}/v1/storage_boxes".format(API_BASE_URL)
+        storageboxes, dummy = api_fetch_url_json_list(module, url, data_key="storage_boxes")
+    storageboxes = [add_hrobot_compat_shim(storagebox) for storagebox in storageboxes]
 
     module.exit_json(
         changed=False,
