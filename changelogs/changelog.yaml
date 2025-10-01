@@ -490,3 +490,12 @@ releases:
       - 169-storagebox.yml
       - 2.5.0.yml
     release_date: '2025-07-07'
+  2.5.1:
+    changes:
+      bugfixes:
+        - Avoid deprecated functionality in ansible-core 2.20 (https://github.com/ansible-collections/community.hrobot/pull/174).
+      release_summary: Maintenance release.
+    fragments:
+      - 174-deprecations.yml
+      - 2.5.1.yml
+    release_date: '2025-10-01'
