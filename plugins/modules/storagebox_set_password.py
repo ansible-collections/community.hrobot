@@ -81,7 +81,6 @@ password:
 """
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
@@ -97,6 +96,12 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     ApplyActionError,
     api_apply_action,
 )
+
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    # Python 2.x fallback:
+    from urllib import urlencode
 
 
 def main():

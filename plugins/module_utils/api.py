@@ -7,10 +7,9 @@
 from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
+import sys
 
 from ansible.module_utils.common.text.converters import to_native
-from ansible.module_utils.six import PY3
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 from ansible.module_utils.urls import fetch_url
 
 import time
@@ -18,6 +17,12 @@ import time
 from ansible_collections.community.hrobot.plugins.module_utils.common import (  # pylint: disable=unused-import
     CheckDoneTimeoutException,
 )
+
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    # Python 2.x fallback:
+    from urllib import urlencode
 
 
 API_DEFAULT_ARGUMENT_SPEC = dict(
@@ -75,7 +80,7 @@ def raw_api_fetch_url_json(
     try:
         # In Python 2, reading from a closed response yields a TypeError.
         # In Python 3, read() simply returns ''
-        if PY3 and resp.closed:
+        if sys.version_info[0] > 2 and resp.closed:
             raise TypeError
         content = resp.read()
     except (AttributeError, TypeError):

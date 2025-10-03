@@ -276,7 +276,6 @@ subaccount:
 
 from copy import deepcopy
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
@@ -293,6 +292,12 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     api_apply_action,
     api_fetch_url_json,
 )
+
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    # Python 2.x fallback:
+    from urllib import urlencode
 
 
 def legacy_encode_data(data):
