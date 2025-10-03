@@ -7,15 +7,18 @@
 from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
-
 import json
-
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     fetch_url_json,
 )
+
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    # Python 2.x fallback:
+    from urllib import urlencode
 
 
 def get_failover_record(module, ip):

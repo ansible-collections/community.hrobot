@@ -240,7 +240,6 @@ from datetime import datetime
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.common.text.converters import to_native
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 
 from ansible_collections.community.hrobot.plugins.module_utils.common import (
     CheckDoneTimeoutException,
@@ -252,6 +251,12 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     fetch_url_json,
     fetch_url_json_with_retries,
 )
+
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    # Python 2.x fallback:
+    from urllib import urlencode
 
 V_SWITCH_BASE_URL = '{0}/vswitch'.format(BASE_URL)
 

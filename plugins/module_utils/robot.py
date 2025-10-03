@@ -7,9 +7,9 @@
 from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
+import sys
 
 from ansible.module_utils.common.text.converters import to_native
-from ansible.module_utils.six import PY3
 from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.module_utils.urls import fetch_url, open_url
 
@@ -151,7 +151,7 @@ def raw_fetch_url_json(module, url, method='GET', timeout=10, data=None, headers
     try:
         # In Python 2, reading from a closed response yields a TypeError.
         # In Python 3, read() simply returns ''
-        if PY3 and resp.closed:
+        if sys.version_info[0] > 2 and resp.closed:
             raise TypeError
         content = resp.read()
     except (AttributeError, TypeError):

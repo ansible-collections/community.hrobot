@@ -442,7 +442,6 @@ from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     fetch_url_json,
     fetch_url_json_with_retries,
 )
-from ansible.module_utils.six.moves.urllib.parse import urlencode
 from ansible.module_utils.common.text.converters import to_native, to_text
 
 try:
@@ -452,6 +451,12 @@ try:
 except ImportError as exc:
     IPADDRESS_IMP_ERR = traceback.format_exc()
     HAS_IPADDRESS = False
+
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    # Python 2.x fallback:
+    from urllib import urlencode
 
 
 RULE_OPTION_NAMES = [
