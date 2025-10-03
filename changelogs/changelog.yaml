@@ -499,3 +499,13 @@ releases:
       - 174-deprecations.yml
       - 2.5.1.yml
     release_date: '2025-10-01'
+  2.5.2:
+    changes:
+      bugfixes:
+        - Avoid using ``ansible.module_utils.six`` to avoid deprecation warnings with
+          ansible-core 2.20 (https://github.com/ansible-collections/community.hrobot/pull/177).
+      release_summary: Maintenance release.
+    fragments:
+      - 177-six.yml
+      - 2.5.2.yml
+    release_date: '2025-10-03'
