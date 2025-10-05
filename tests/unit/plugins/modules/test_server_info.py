@@ -11,6 +11,8 @@ from ansible_collections.community.internal_test_tools.tests.unit.utils.fetch_ur
     BaseTestModule,
 )
 
+from ansible_collections.community.internal_test_tools.tests.unit.compat.mock import call, MagicMock
+
 from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE_URL
 from ansible_collections.community.hrobot.plugins.modules import server_info
 
@@ -295,3 +297,172 @@ class TestHetznerServerInfo(BaseTestModule):
         ])
         assert result['changed'] is False
         assert len(result['servers']) == 0
+
+    def test_server_number_rate_limit_fail(self, mocker):
+        result = self.run_module_failed(mocker, server_info, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'server_number': 23,
+            'rate_limit_retry_timeout': 0,
+        }, [
+            FetchUrlCall('GET', 403)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .expect_url('{0}/server/23'.format(BASE_URL))
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            }),
+        ])
+        assert result['msg'] == (
+            'Request failed: 403 RATE_LIMIT_EXCEEDED (Rate limit exceeded).'
+            ' Maximum allowed requests: 1. Time interval in seconds: 5'
+        )
+
+    def test_server_number_rate_limit(self, mocker):
+        sleep_mock = MagicMock()
+        mocker.patch('time.sleep', sleep_mock)
+        result = self.run_module_success(mocker, server_info, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'server_number': 23,
+            'rate_limit_retry_timeout': -1,
+        }, [
+            FetchUrlCall('GET', 403)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .expect_url('{0}/server/23'.format(BASE_URL))
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            }),
+            FetchUrlCall('GET', 403)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .expect_url('{0}/server/23'.format(BASE_URL))
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 3,
+                    'max_request': 1,
+                },
+            }),
+            FetchUrlCall('GET', 403)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .expect_url('{0}/server/23'.format(BASE_URL))
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 4,
+                    'max_request': 1,
+                },
+            }),
+            FetchUrlCall('GET', 403)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .expect_url('{0}/server/23'.format(BASE_URL))
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            }),
+            FetchUrlCall('GET', 200)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .result_json(SERVER_DETAIL_DATA[23])
+            .expect_url('{0}/server/23'.format(BASE_URL)),
+        ])
+        assert result['changed'] is False
+        assert len(result['servers']) == 1
+        assert result['servers'][0] == SERVER_DETAIL_DATA[23]['server']
+        sleep_mock.assert_has_calls([
+            call(5),
+            call(3),
+            call(3),
+            call(3),
+        ])
+
+    def test_server_number_rate_limit_timeout(self, mocker):
+        elapsed = [123.4]
+
+        def sleep(duration):
+            elapsed[0] += duration
+            print('sleep', duration, '->', elapsed[0])
+
+        def get_time():
+            elapsed[0] += 0.03
+            print('get', elapsed[0])
+            return elapsed[0]
+
+        mocker.patch('time.sleep', sleep)
+        mocker.patch('time.time', get_time)
+        result = self.run_module_failed(mocker, server_info, {
+            'hetzner_user': 'test',
+            'hetzner_password': 'hunter2',
+            'server_number': 23,
+            'rate_limit_retry_timeout': 7,
+        }, [
+            FetchUrlCall('GET', 403)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .expect_url('{0}/server/23'.format(BASE_URL))
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 5,
+                    'max_request': 1,
+                },
+            }),
+            FetchUrlCall('GET', 403)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .expect_url('{0}/server/23'.format(BASE_URL))
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 3,
+                    'max_request': 1,
+                },
+            }),
+            FetchUrlCall('GET', 403)
+            .expect_basic_auth('test', 'hunter2')
+            .expect_force_basic_auth(True)
+            .expect_url('{0}/server/23'.format(BASE_URL))
+            .result_json({
+                'error': {
+                    'status': 403,
+                    'code': 'RATE_LIMIT_EXCEEDED',
+                    'message': 'Rate limit exceeded',
+                    'interval': 4,
+                    'max_request': 1,
+                },
+            }),
+        ])
+        assert result['msg'] == (
+            'Request failed: 403 RATE_LIMIT_EXCEEDED (Rate limit exceeded).'
+            ' Maximum allowed requests: 1. Time interval in seconds: 4.'
+            ' Waited a total of 5.1 seconds for rate limit errors to go away'
+        )

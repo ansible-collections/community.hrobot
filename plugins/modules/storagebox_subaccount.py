@@ -19,11 +19,11 @@ author:
 description:
   - Create, update, or delete a subaccount for a storage box.
 extends_documentation_fragment:
-  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api._robot_compat_shim_deprecation  # must come before api and robot
   - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
-  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes._actiongroup_robot_and_api_deprecation  # must come before the other two!
   - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
 
@@ -270,6 +270,10 @@ subaccount:
   description:
     - The subaccount object returned by the API.
     - If O(hetzner_token) is provided, some extra fields are added to make this more compatible with the format returned by O(hetzner_user).
+    - B(This extra return values are deprecated and will be removed from community.hrobot 3.0.0.)
+      If you are using ansible-core 2.19 or newer, you will see a deprecation message when using these return values.
+      These return values are RV(ignore:homedirectory), RV(ignore:samba), RV(ignore:ssh), RV(ignore:webdav), RV(ignore:external_reachability),
+      RV(ignore:readonly), RV(ignore:createtime), and RV(ignore:comment).
   type: dict
   returned: if O(state=present)
 """
@@ -280,7 +284,7 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
-    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
     fetch_url_json,
 )
 
@@ -291,6 +295,10 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     ApplyActionError,
     api_apply_action,
     api_fetch_url_json,
+)
+
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
 )
 
 try:
@@ -612,7 +620,11 @@ def adjust_legacy(subaccount):
     }.items():
         value, exists = get_value_opt(subaccount, path)
         if exists:
-            result[key] = value
+            result[key] = deprecate_value(
+                value,
+                "The return value `{0}` is deprecated; use `{1}` instead.".format(key, ".".join(path)),
+                version="3.0.0",
+            )
     return result
 
 
@@ -638,7 +650,7 @@ def main():
         idempotence=dict(type="str", choices=["username", "comment"], default="username"),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
-    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED)
     argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
     argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
@@ -665,6 +677,11 @@ def main():
     account_identifier = subaccount[idempotence]
 
     if module.params["hetzner_user"] is not None:
+        module.deprecate(
+            "The hetzner_token parameter will be required from community.hrobot 3.0.0 on.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
         # DEPRECATED: old API
 
         existing_subaccounts = legacy_get_subaccounts(module, storagebox_id)

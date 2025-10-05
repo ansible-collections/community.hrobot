@@ -19,11 +19,11 @@ author:
 description:
   - Query the subaccounts for a storage box.
 extends_documentation_fragment:
-  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api._robot_compat_shim_deprecation  # must come before api and robot
   - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
-  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes._actiongroup_robot_and_api_deprecation  # must come before the other two!
   - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
   - community.hrobot.attributes.idempotent_not_modify_state
@@ -72,9 +72,11 @@ subaccounts:
       description:
         - Username of the main user.
         - Not supported by the new Hetzner API.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: str
       sample: "u2342"
-      returned: success if O(hetzner_token) is not specified
+      returned: success and if O(hetzner_token) is not specified
     server:
       description:
         - Server on which the sub-account resides.
@@ -85,6 +87,8 @@ subaccounts:
       description:
         - Homedirectory of the sub-account.
         - Note that this is copied from RV(subaccounts[].home_directory) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: str
       sample: "/home/u2342-sub1"
       returned: success
@@ -92,6 +96,8 @@ subaccounts:
       description:
         - Status of Samba support.
         - Note that this is copied from RV(subaccounts[].access_settings.samba_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: true
       returned: success
@@ -99,6 +105,8 @@ subaccounts:
       description:
         - Status of SSH support.
         - Note that this is copied from RV(subaccounts[].access_settings.ssh_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: true
       returned: success
@@ -106,6 +114,8 @@ subaccounts:
       description:
         - Status of external reachability.
         - Note that this is copied from RV(subaccounts[].access_settings.reachable_externally) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: false
       returned: success
@@ -113,6 +123,8 @@ subaccounts:
       description:
         - Status of WebDAV support.
         - Note that this is copied from RV(subaccounts[].access_settings.webdav_enabled) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: true
       returned: success
@@ -120,6 +132,8 @@ subaccounts:
       description:
         - Indicates if the sub-account is in readonly mode.
         - Note that this is copied from RV(subaccounts[].access_settings.readonly) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: bool
       sample: false
       returned: success
@@ -127,6 +141,8 @@ subaccounts:
       description:
         - Timestamp when the sub-account was created.
         - Note that this is copied from RV(subaccounts[].created) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: str
       sample: "2023-08-25T14:23:05Z"
       returned: success
@@ -134,6 +150,8 @@ subaccounts:
       description:
         - Custom comment for the sub-account.
         - Note that this is copied from RV(subaccounts[].description) in case O(hetzner_token) is specified.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: str
       sample: "This is a subaccount"
       returned: success
@@ -210,7 +228,7 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
-    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
     fetch_url_json,
 )
 
@@ -221,17 +239,53 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     api_fetch_url_json,
 )
 
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
+)
+
 
 def adjust_legacy(subaccount):
     result = dict(subaccount)
-    result['homedirectory'] = subaccount['home_directory']
-    result['samba'] = subaccount['access_settings']['samba_enabled']
-    result['ssh'] = subaccount['access_settings']['ssh_enabled']
-    result['webdav'] = subaccount['access_settings']['webdav_enabled']
-    result['external_reachability'] = subaccount['access_settings']['reachable_externally']
-    result['readonly'] = subaccount['access_settings']['readonly']
-    result['createtime'] = subaccount['created']
-    result['comment'] = subaccount['description']
+    result['homedirectory'] = deprecate_value(
+        subaccount['home_directory'],
+        "The return value `homedirectory` is deprecated; use `home_directory` instead.",
+        version="3.0.0",
+    )
+    result['samba'] = deprecate_value(
+        subaccount['access_settings']['samba_enabled'],
+        "The return value `samba` is deprecated; use `access_settings.samba_enabled` instead.",
+        version="3.0.0",
+    )
+    result['ssh'] = deprecate_value(
+        subaccount['access_settings']['ssh_enabled'],
+        "The return value `ssh` is deprecated; use `access_settings.ssh_enabled` instead.",
+        version="3.0.0",
+    )
+    result['webdav'] = deprecate_value(
+        subaccount['access_settings']['webdav_enabled'],
+        "The return value `webdav` is deprecated; use `access_settings.webdav_enabled` instead.",
+        version="3.0.0",
+    )
+    result['external_reachability'] = deprecate_value(
+        subaccount['access_settings']['reachable_externally'],
+        "The return value `external_reachability` is deprecated; use `access_settings.reachable_externally` instead.",
+        version="3.0.0",
+    )
+    result['readonly'] = deprecate_value(
+        subaccount['access_settings']['readonly'],
+        "The return value `readonly` is deprecated; use `access_settings.readonly` instead.",
+        version="3.0.0",
+    )
+    result['createtime'] = deprecate_value(
+        subaccount['created'],
+        "The return value `createtime` is deprecated; use `created` instead.",
+        version="3.0.0",
+    )
+    result['comment'] = deprecate_value(
+        subaccount['description'],
+        "The return value `comment` is deprecated; use `description` instead.",
+        version="3.0.0",
+    )
     return result
 
 
@@ -240,7 +294,7 @@ def main():
         storagebox_id=dict(type="int", required=True),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
-    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED)
     argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
     argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
@@ -251,6 +305,11 @@ def main():
     storagebox_id = module.params["storagebox_id"]
 
     if module.params["hetzner_user"] is not None:
+        module.deprecate(
+            "The hetzner_token parameter will be required from community.hrobot 3.0.0 on.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
         # DEPRECATED: old API
 
         url = "{0}/storagebox/{1}/subaccount".format(BASE_URL, storagebox_id)

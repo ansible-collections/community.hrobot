@@ -18,11 +18,11 @@ author:
 description:
   - Enable, modify, and disable the snapshot plans of a storage box.
 extends_documentation_fragment:
-  - community.hrobot.api._robot_compat_shim  # must come before api and robot
+  - community.hrobot.api._robot_compat_shim_deprecation  # must come before api and robot
   - community.hrobot.api
   - community.hrobot.robot
   - community.hrobot.attributes
-  - community.hrobot.attributes._actiongroup_robot_and_api  # must come before the other two!
+  - community.hrobot.attributes._actiongroup_robot_and_api_deprecation  # must come before the other two!
   - community.hrobot.attributes.actiongroup_api
   - community.hrobot.attributes.actiongroup_robot
 attributes:
@@ -155,6 +155,8 @@ plans:
         - The month of execution of the plan. V(1) is January, V(12) is December.
         - If set to V(null), the plan is run every month.
         - Always V(null) if O(hetzner_token) is provided.
+        - B(This return value is deprecated and will be removed from community.hrobot 3.0.0.)
+          If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using O(hetzner_token).
       type: int
       sample: null
       returned: success
@@ -171,7 +173,7 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
     BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
-    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT,
+    _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
     fetch_url_json,
 )
 
@@ -182,6 +184,10 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
     ApplyActionError,
     api_apply_action,
     api_fetch_url_json,
+)
+
+from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
+    deprecate_value,
 )
 
 try:
@@ -217,7 +223,7 @@ def extract(result):
             'hour': None,
             'day_of_week': None,
             'day_of_month': None,
-            'month': None,
+            'month': deprecate_value(None, "The return value `month` is deprecated; it is always null.", version="3.0.0"),
             'max_snapshots': None,
         }
 
@@ -227,7 +233,7 @@ def extract(result):
         'hour': sp['hour'],
         'day_of_week': sp['day_of_week'],
         'day_of_month': sp['day_of_month'],
-        'month': None,
+        'month': deprecate_value(None, "The return value `month` is deprecated; it is always null.", version="3.0.0"),
         'max_snapshots': sp['max_snapshots'],
     }
 
@@ -254,7 +260,7 @@ def main():
         ),
     )
     argument_spec.update(ROBOT_DEFAULT_ARGUMENT_SPEC)
-    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT)
+    argument_spec.update(_ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED)
     argument_spec.update(API_DEFAULT_ARGUMENT_SPEC)
     argument_spec.update(_API_DEFAULT_ARGUMENT_SPEC_COMPAT)
     module = AnsibleModule(
@@ -271,6 +277,11 @@ def main():
     plan = plans[0]
 
     if module.params["hetzner_user"] is not None:
+        module.deprecate(
+            "The hetzner_token parameter will be required from community.hrobot 3.0.0 on.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
         # DEPRECATED: old API
         url = "{0}/storagebox/{1}/snapshotplan".format(BASE_URL, storagebox_id)
         result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
