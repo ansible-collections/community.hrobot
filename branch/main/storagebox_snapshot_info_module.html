@@ -184,6 +184,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-cell"><p>The password for the Robot web-service user.</p>
 <p>If <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-password"><span class="std std-ref"><span class="pre">hetzner_password</span></span></a></strong></code> is specified, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must also be specified, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> must not be specified.</p>
+<p>This option is deprecated for this module, and support will be removed in community.hrobot 3.0.0.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -193,6 +194,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-cell"><p>The API token for the Robot web-service user.</p>
 <p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must be specified.</p>
+<p>This option will be required from community.hrobot 3.0.0 on.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
@@ -202,6 +204,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-cell"><p>The username for the Robot web-service user.</p>
 <p>One of <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> must be specified.</p>
 <p>If <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-user"><span class="std std-ref"><span class="pre">hetzner_user</span></span></a></strong></code> is specified, <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-password"><span class="std std-ref"><span class="pre">hetzner_password</span></span></a></strong></code> must also be specified, and <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> must not be specified.</p>
+<p>This option is deprecated for this module, and support will be removed in community.hrobot 3.0.0.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -241,6 +244,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-cell"><p><strong class="ansible-attribute-support-property">Action groups:</strong> <strong class="ansible-attribute-support-full">community.hrobot.api</strong>, <strong class="ansible-attribute-support-full">community.hrobot.robot</strong></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Use <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> or <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.api</span></code> in <code class="docutils literal notranslate"><span class="pre">module_defaults</span></code> to set defaults for this module.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">group/community.hrobot.robot</span></code> group is <strong>deprecated</strong> for this module; the module will be removed from the group in community.hrobot 3.0.0.</p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
@@ -315,6 +319,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the snapshot was created automatically.</p>
 <p>Note that this is computed from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-is-automatic"><span class="std std-ref"><span class="pre">snapshots[].is_automatic</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code>.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">false</span></code></p>
 </div></td>
@@ -325,6 +330,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The comment for the snapshot.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-description"><span class="std std-ref"><span class="pre">snapshots[].description</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code>.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">snapshot&quot;</span></code></p>
 </div></td>
@@ -355,6 +361,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The size of the Storage Box at creation time of the snapshot in MB.</p>
 <p>Note that this is computed from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-stats-size-filesystem"><span class="std std-ref"><span class="pre">snapshots[].stats.size_filesystem</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code>.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">12345</span></code></p>
 </div></td>
@@ -403,6 +410,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The Snapshot size in MB.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-stats-size"><span class="std std-ref"><span class="pre">snapshots[].stats.size</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code>.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">400</span></code></p>
 </div></td>
@@ -450,6 +458,7 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The timestamp of snapshot in UTC.</p>
 <p>Note that this is copied from <code class="ansible-return-value docutils literal notranslate"><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-return-snapshots-created"><span class="std std-ref"><span class="pre">snapshots[].created</span></span></a></code> in case <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code> is specified.</p>
+<p><strong>This return value is deprecated and will be removed from community.hrobot 3.0.0.</strong> If you are using ansible-core 2.19 or newer, you will see a deprecation message when using this return value when using <code class="ansible-option docutils literal notranslate"><strong><a class="reference internal" href="#ansible-collections-community-hrobot-storagebox-snapshot-info-module-parameter-hetzner-token"><span class="std std-ref"><span class="pre">hetzner_token</span></span></a></strong></code>.</p>
 <p class="ansible-option-line"><strong class="ansible-option-returned-bold">Returned:</strong> success</p>
 <p class="ansible-option-line ansible-option-sample"><strong class="ansible-option-sample-bold">Sample:</strong> <code class="ansible-option-sample docutils literal notranslate"><span class="pre">&quot;2025-01-21T13:40:38+00:00&quot;</span></code></p>
 </div></td>
