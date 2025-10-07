@@ -2,116 +2,140 @@
 
 **Topics**
 
-- <a href="#v2-5-2">v2\.5\.2</a>
+- <a href="#v2-6-0">v2\.6\.0</a>
     - <a href="#release-summary">Release Summary</a>
+    - <a href="#deprecated-features">Deprecated Features</a>
+- <a href="#v2-5-2">v2\.5\.2</a>
+    - <a href="#release-summary-1">Release Summary</a>
     - <a href="#bugfixes">Bugfixes</a>
 - <a href="#v2-5-1">v2\.5\.1</a>
-    - <a href="#release-summary-1">Release Summary</a>
+    - <a href="#release-summary-2">Release Summary</a>
     - <a href="#bugfixes-1">Bugfixes</a>
 - <a href="#v2-5-0">v2\.5\.0</a>
-    - <a href="#release-summary-2">Release Summary</a>
+    - <a href="#release-summary-3">Release Summary</a>
     - <a href="#minor-changes">Minor Changes</a>
     - <a href="#bugfixes-2">Bugfixes</a>
     - <a href="#known-issues">Known Issues</a>
 - <a href="#v2-4-0">v2\.4\.0</a>
-    - <a href="#release-summary-3">Release Summary</a>
+    - <a href="#release-summary-4">Release Summary</a>
     - <a href="#bugfixes-3">Bugfixes</a>
     - <a href="#new-modules">New Modules</a>
 - <a href="#v2-3-0">v2\.3\.0</a>
-    - <a href="#release-summary-4">Release Summary</a>
+    - <a href="#release-summary-5">Release Summary</a>
     - <a href="#new-modules-1">New Modules</a>
 - <a href="#v2-2-0">v2\.2\.0</a>
-    - <a href="#release-summary-5">Release Summary</a>
+    - <a href="#release-summary-6">Release Summary</a>
     - <a href="#new-modules-2">New Modules</a>
 - <a href="#v2-1-0">v2\.1\.0</a>
-    - <a href="#release-summary-6">Release Summary</a>
+    - <a href="#release-summary-7">Release Summary</a>
     - <a href="#minor-changes-1">Minor Changes</a>
-    - <a href="#deprecated-features">Deprecated Features</a>
+    - <a href="#deprecated-features-1">Deprecated Features</a>
     - <a href="#new-modules-3">New Modules</a>
 - <a href="#v2-0-3">v2\.0\.3</a>
-    - <a href="#release-summary-7">Release Summary</a>
-- <a href="#v2-0-2">v2\.0\.2</a>
     - <a href="#release-summary-8">Release Summary</a>
-- <a href="#v2-0-1">v2\.0\.1</a>
+- <a href="#v2-0-2">v2\.0\.2</a>
     - <a href="#release-summary-9">Release Summary</a>
+- <a href="#v2-0-1">v2\.0\.1</a>
+    - <a href="#release-summary-10">Release Summary</a>
     - <a href="#bugfixes-4">Bugfixes</a>
 - <a href="#v2-0-0">v2\.0\.0</a>
-    - <a href="#release-summary-10">Release Summary</a>
+    - <a href="#release-summary-11">Release Summary</a>
     - <a href="#major-changes">Major Changes</a>
     - <a href="#minor-changes-2">Minor Changes</a>
     - <a href="#breaking-changes--porting-guide">Breaking Changes / Porting Guide</a>
     - <a href="#removed-features-previously-deprecated">Removed Features \(previously deprecated\)</a>
 - <a href="#v1-9-2">v1\.9\.2</a>
-    - <a href="#release-summary-11">Release Summary</a>
+    - <a href="#release-summary-12">Release Summary</a>
     - <a href="#bugfixes-5">Bugfixes</a>
 - <a href="#v1-9-1">v1\.9\.1</a>
-    - <a href="#release-summary-12">Release Summary</a>
+    - <a href="#release-summary-13">Release Summary</a>
     - <a href="#security-fixes">Security Fixes</a>
 - <a href="#v1-9-0">v1\.9\.0</a>
-    - <a href="#release-summary-13">Release Summary</a>
-    - <a href="#minor-changes-3">Minor Changes</a>
-    - <a href="#deprecated-features-1">Deprecated Features</a>
-- <a href="#v1-8-2">v1\.8\.2</a>
     - <a href="#release-summary-14">Release Summary</a>
+    - <a href="#minor-changes-3">Minor Changes</a>
+    - <a href="#deprecated-features-2">Deprecated Features</a>
+- <a href="#v1-8-2">v1\.8\.2</a>
+    - <a href="#release-summary-15">Release Summary</a>
     - <a href="#bugfixes-6">Bugfixes</a>
 - <a href="#v1-8-1">v1\.8\.1</a>
-    - <a href="#release-summary-15">Release Summary</a>
+    - <a href="#release-summary-16">Release Summary</a>
     - <a href="#known-issues-1">Known Issues</a>
 - <a href="#v1-8-0">v1\.8\.0</a>
-    - <a href="#release-summary-16">Release Summary</a>
+    - <a href="#release-summary-17">Release Summary</a>
     - <a href="#major-changes-1">Major Changes</a>
     - <a href="#minor-changes-4">Minor Changes</a>
 - <a href="#v1-7-0">v1\.7\.0</a>
-    - <a href="#release-summary-17">Release Summary</a>
+    - <a href="#release-summary-18">Release Summary</a>
     - <a href="#new-modules-4">New Modules</a>
 - <a href="#v1-6-0">v1\.6\.0</a>
-    - <a href="#release-summary-18">Release Summary</a>
+    - <a href="#release-summary-19">Release Summary</a>
     - <a href="#minor-changes-5">Minor Changes</a>
 - <a href="#v1-5-2">v1\.5\.2</a>
-    - <a href="#release-summary-19">Release Summary</a>
+    - <a href="#release-summary-20">Release Summary</a>
     - <a href="#minor-changes-6">Minor Changes</a>
 - <a href="#v1-5-1">v1\.5\.1</a>
-    - <a href="#release-summary-20">Release Summary</a>
-- <a href="#v1-5-0">v1\.5\.0</a>
     - <a href="#release-summary-21">Release Summary</a>
+- <a href="#v1-5-0">v1\.5\.0</a>
+    - <a href="#release-summary-22">Release Summary</a>
     - <a href="#minor-changes-7">Minor Changes</a>
 - <a href="#v1-4-0">v1\.4\.0</a>
-    - <a href="#release-summary-22">Release Summary</a>
+    - <a href="#release-summary-23">Release Summary</a>
     - <a href="#minor-changes-8">Minor Changes</a>
 - <a href="#v1-3-1">v1\.3\.1</a>
-    - <a href="#release-summary-23">Release Summary</a>
+    - <a href="#release-summary-24">Release Summary</a>
     - <a href="#bugfixes-7">Bugfixes</a>
 - <a href="#v1-3-0">v1\.3\.0</a>
-    - <a href="#release-summary-24">Release Summary</a>
+    - <a href="#release-summary-25">Release Summary</a>
     - <a href="#minor-changes-9">Minor Changes</a>
     - <a href="#bugfixes-8">Bugfixes</a>
 - <a href="#v1-2-3">v1\.2\.3</a>
-    - <a href="#release-summary-25">Release Summary</a>
-- <a href="#v1-2-2">v1\.2\.2</a>
     - <a href="#release-summary-26">Release Summary</a>
+- <a href="#v1-2-2">v1\.2\.2</a>
+    - <a href="#release-summary-27">Release Summary</a>
     - <a href="#bugfixes-9">Bugfixes</a>
 - <a href="#v1-2-1">v1\.2\.1</a>
-    - <a href="#release-summary-27">Release Summary</a>
+    - <a href="#release-summary-28">Release Summary</a>
     - <a href="#minor-changes-10">Minor Changes</a>
 - <a href="#v1-2-0">v1\.2\.0</a>
-    - <a href="#release-summary-28">Release Summary</a>
+    - <a href="#release-summary-29">Release Summary</a>
     - <a href="#minor-changes-11">Minor Changes</a>
     - <a href="#new-modules-5">New Modules</a>
 - <a href="#v1-1-1">v1\.1\.1</a>
-    - <a href="#release-summary-29">Release Summary</a>
+    - <a href="#release-summary-30">Release Summary</a>
     - <a href="#bugfixes-10">Bugfixes</a>
 - <a href="#v1-1-0">v1\.1\.0</a>
-    - <a href="#release-summary-30">Release Summary</a>
+    - <a href="#release-summary-31">Release Summary</a>
     - <a href="#new-plugins">New Plugins</a>
         - <a href="#inventory">Inventory</a>
 - <a href="#v1-0-0">v1\.0\.0</a>
-    - <a href="#release-summary-31">Release Summary</a>
+    - <a href="#release-summary-32">Release Summary</a>
     - <a href="#breaking-changes--porting-guide-1">Breaking Changes / Porting Guide</a>
+
+<a id="v2-6-0"></a>
+## v2\.6\.0
+
+<a id="release-summary"></a>
+### Release Summary
+
+Maintenance release deprecating support the old storage box API\.
+
+<a id="deprecated-features"></a>
+### Deprecated Features
+
+* storagebox\* modules \- membership in the <code>community\.hrobot\.robot</code> action group \(module defaults group\) is deprecated\; the modules will be removed from the group in community\.hrobot 3\.0\.0\. Use <code>community\.hrobot\.api</code> instead \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
+* storagebox\* modules \- the <code>hetzner\_token</code> option for these modules will be required from community\.hrobot 3\.0\.0 on \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
+* storagebox\* modules \- the <code>hetzner\_user</code> and <code>hetzner\_pass</code> options for these modules are deprecated\; support will be removed in community\.hrobot 3\.0\.0\. Use <code>hetzner\_token</code> instead \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
+* storagebox\_info \- the <code>storageboxes\[\]\.login</code>\, <code>storageboxes\[\]\.disk\_quota</code>\, <code>storageboxes\[\]\.disk\_usage</code>\, <code>storageboxes\[\]\.disk\_usage\_data</code>\, <code>storageboxes\[\]\.disk\_usage\_snapshot</code>\, <code>storageboxes\[\]\.webdav</code>\, <code>storageboxes\[\]\.samba</code>\, <code>storageboxes\[\]\.ssh</code>\, <code>storageboxes\[\]\.external\_reachability</code>\, and <code>storageboxes\[\]\.zfs</code> return values are deprecated and will be removed from community\.routeros\. Check out the documentation to find out their new names according to the new API \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
+* storagebox\_snapshot\_info \- the <code>snapshots\[\]\.timestamp</code>\, <code>snapshots\[\]\.size</code>\, <code>snapshots\[\]\.filesystem\_size</code>\, <code>snapshots\[\]\.automatic</code>\, and <code>snapshots\[\]\.comment</code> return values are deprecated and will be removed from community\.routeros\. Check out the documentation to find out their new names according to the new API \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
+* storagebox\_snapshot\_plan \- the <code>plans\[\]\.month</code> return value is deprecated\, since it only returns <code>null</code> with the new API and cannot be set to any other value \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
+* storagebox\_snapshot\_plan\_info \- the <code>plans\[\]\.month</code> return value is deprecated\, since it only returns <code>null</code> with the new API and cannot be set to any other value \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
+* storagebox\_subaccount \- the <code>subaccount\.homedirectory</code>\, <code>subaccount\.samba</code>\, <code>subaccount\.ssh</code>\, <code>subaccount\.external\_reachability</code>\, <code>subaccount\.webdav</code>\, <code>subaccount\.readonly</code>\, <code>subaccount\.createtime</code>\, and <code>subaccount\.comment</code> return values are deprecated and will be removed from community\.routeros\. Check out the documentation to find out their new names according to the new API \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
+* storagebox\_subaccount\_info \- the <code>subaccounts\[\]\.accountid</code>\, <code>subaccounts\[\]\.homedirectory</code>\, <code>subaccounts\[\]\.samba</code>\, <code>subaccounts\[\]\.ssh</code>\, <code>subaccounts\[\]\.external\_reachability</code>\, <code>subaccounts\[\]\.webdav</code>\, <code>subaccounts\[\]\.readonly</code>\, <code>subaccounts\[\]\.createtime</code>\, and <code>subaccounts\[\]\.comment</code> return values are deprecated and will be removed from community\.routeros\. Check out the documentation to find out their new names according to the new API \([https\://github\.com/ansible\-collections/community\.hrobot/pull/178](https\://github\.com/ansible\-collections/community\.hrobot/pull/178)\)\.
 
 <a id="v2-5-2"></a>
 ## v2\.5\.2
 
-<a id="release-summary"></a>
+<a id="release-summary-1"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -124,7 +148,7 @@ Maintenance release\.
 <a id="v2-5-1"></a>
 ## v2\.5\.1
 
-<a id="release-summary-1"></a>
+<a id="release-summary-2"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -137,7 +161,7 @@ Maintenance release\.
 <a id="v2-5-0"></a>
 ## v2\.5\.0
 
-<a id="release-summary-2"></a>
+<a id="release-summary-3"></a>
 ### Release Summary
 
 Feature and bugfix release\.
@@ -177,7 +201,7 @@ providing <code>hetzner\_user</code>/<code>hetzner\_password</code>\.
 <a id="v2-4-0"></a>
 ## v2\.4\.0
 
-<a id="release-summary-3"></a>
+<a id="release-summary-4"></a>
 ### Release Summary
 
 Bugfix and feature release\.
@@ -198,7 +222,7 @@ This release contains three new modules that support the remaining aspects of He
 <a id="v2-3-0"></a>
 ## v2\.3\.0
 
-<a id="release-summary-4"></a>
+<a id="release-summary-5"></a>
 ### Release Summary
 
 Feature release\.
@@ -211,7 +235,7 @@ Feature release\.
 <a id="v2-2-0"></a>
 ## v2\.2\.0
 
-<a id="release-summary-5"></a>
+<a id="release-summary-6"></a>
 ### Release Summary
 
 Feature release\.
@@ -224,7 +248,7 @@ Feature release\.
 <a id="v2-1-0"></a>
 ## v2\.1\.0
 
-<a id="release-summary-6"></a>
+<a id="release-summary-7"></a>
 ### Release Summary
 
 Feature release with several new modules and a deprecation\.
@@ -236,7 +260,7 @@ Feature release with several new modules and a deprecation\.
 * boot \- it is now possible to specify SSH public keys in <code>authorized\_keys</code>\. The fingerprint needed by the Robot API will be extracted automatically \([https\://github\.com/ansible\-collections/community\.hrobot/pull/134](https\://github\.com/ansible\-collections/community\.hrobot/pull/134)\)\.
 * v\_switch \- the module is now part of the <code>community\.hrobot\.robot</code> action group\, despite already being documented as part of it \([https\://github\.com/ansible\-collections/community\.hrobot/pull/136](https\://github\.com/ansible\-collections/community\.hrobot/pull/136)\)\.
 
-<a id="deprecated-features"></a>
+<a id="deprecated-features-1"></a>
 ### Deprecated Features
 
 * boot \- the various <code>arch</code> suboptions have been deprecated and will be removed from community\.hrobot 3\.0\.0 \([https\://github\.com/ansible\-collections/community\.hrobot/pull/134](https\://github\.com/ansible\-collections/community\.hrobot/pull/134)\)\.
@@ -253,7 +277,7 @@ Feature release with several new modules and a deprecation\.
 <a id="v2-0-3"></a>
 ## v2\.0\.3
 
-<a id="release-summary-7"></a>
+<a id="release-summary-8"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -261,7 +285,7 @@ Maintenance release with updated documentation\.
 <a id="v2-0-2"></a>
 ## v2\.0\.2
 
-<a id="release-summary-8"></a>
+<a id="release-summary-9"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -269,7 +293,7 @@ Maintenance release with updated documentation\.
 <a id="v2-0-1"></a>
 ## v2\.0\.1
 
-<a id="release-summary-9"></a>
+<a id="release-summary-10"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -282,7 +306,7 @@ Bugfix release\.
 <a id="v2-0-0"></a>
 ## v2\.0\.0
 
-<a id="release-summary-10"></a>
+<a id="release-summary-11"></a>
 ### Release Summary
 
 New major release 2\.0\.0\.
@@ -310,7 +334,7 @@ New major release 2\.0\.0\.
 <a id="v1-9-2"></a>
 ## v1\.9\.2
 
-<a id="release-summary-11"></a>
+<a id="release-summary-12"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -323,7 +347,7 @@ Bugfix release\.
 <a id="v1-9-1"></a>
 ## v1\.9\.1
 
-<a id="release-summary-12"></a>
+<a id="release-summary-13"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -336,7 +360,7 @@ Bugfix release\.
 <a id="v1-9-0"></a>
 ## v1\.9\.0
 
-<a id="release-summary-13"></a>
+<a id="release-summary-14"></a>
 ### Release Summary
 
 Feature and maintenance release\.
@@ -346,7 +370,7 @@ Feature and maintenance release\.
 
 * robot inventory plugin \- the <code>filters</code> option has been renamed to <code>simple\_filters</code>\. The old name still works until community\.hrobot 2\.0\.0\. Then it will change to allow more complex filtering with the <code>community\.library\_inventory\_filtering\_v1</code> collection\'s functionality \([https\://github\.com/ansible\-collections/community\.hrobot/pull/94](https\://github\.com/ansible\-collections/community\.hrobot/pull/94)\)\.
 
-<a id="deprecated-features-1"></a>
+<a id="deprecated-features-2"></a>
 ### Deprecated Features
 
 * robot inventory plugin \- the <code>filters</code> option has been renamed to <code>simple\_filters</code>\. The old name will stop working in community\.hrobot 2\.0\.0 \([https\://github\.com/ansible\-collections/community\.hrobot/pull/94](https\://github\.com/ansible\-collections/community\.hrobot/pull/94)\)\.
@@ -354,7 +378,7 @@ Feature and maintenance release\.
 <a id="v1-8-2"></a>
 ## v1\.8\.2
 
-<a id="release-summary-14"></a>
+<a id="release-summary-15"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -367,7 +391,7 @@ Maintenance release with updated documentation\.
 <a id="v1-8-1"></a>
 ## v1\.8\.1
 
-<a id="release-summary-15"></a>
+<a id="release-summary-16"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -388,7 +412,7 @@ for the rendered HTML version of the documentation of the latest release\.
 <a id="v1-8-0"></a>
 ## v1\.8\.0
 
-<a id="release-summary-16"></a>
+<a id="release-summary-17"></a>
 ### Release Summary
 
 Feature release for the Hetzner firewall changes\.
@@ -407,7 +431,7 @@ Feature release for the Hetzner firewall changes\.
 <a id="v1-7-0"></a>
 ## v1\.7\.0
 
-<a id="release-summary-17"></a>
+<a id="release-summary-18"></a>
 ### Release Summary
 
 Feature release\.
@@ -420,7 +444,7 @@ Feature release\.
 <a id="v1-6-0"></a>
 ## v1\.6\.0
 
-<a id="release-summary-18"></a>
+<a id="release-summary-19"></a>
 ### Release Summary
 
 Feature release with improved documentation\.
@@ -433,7 +457,7 @@ Feature release with improved documentation\.
 <a id="v1-5-2"></a>
 ## v1\.5\.2
 
-<a id="release-summary-19"></a>
+<a id="release-summary-20"></a>
 ### Release Summary
 
 Maintenance release with a documentation improvement\.
@@ -446,7 +470,7 @@ Maintenance release with a documentation improvement\.
 <a id="v1-5-1"></a>
 ## v1\.5\.1
 
-<a id="release-summary-20"></a>
+<a id="release-summary-21"></a>
 ### Release Summary
 
 Maintenance release with small documentation fixes\.
@@ -454,7 +478,7 @@ Maintenance release with small documentation fixes\.
 <a id="v1-5-0"></a>
 ## v1\.5\.0
 
-<a id="release-summary-21"></a>
+<a id="release-summary-22"></a>
 ### Release Summary
 
 Maintenance release changing the way licenses are declared\. No functional changes\.
@@ -467,7 +491,7 @@ Maintenance release changing the way licenses are declared\. No functional chang
 <a id="v1-4-0"></a>
 ## v1\.4\.0
 
-<a id="release-summary-22"></a>
+<a id="release-summary-23"></a>
 ### Release Summary
 
 Feature release\.
@@ -480,7 +504,7 @@ Feature release\.
 <a id="v1-3-1"></a>
 ## v1\.3\.1
 
-<a id="release-summary-23"></a>
+<a id="release-summary-24"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -493,7 +517,7 @@ Maintenance release\.
 <a id="v1-3-0"></a>
 ## v1\.3\.0
 
-<a id="release-summary-24"></a>
+<a id="release-summary-25"></a>
 ### Release Summary
 
 Feature and bugfix release\.
@@ -511,7 +535,7 @@ Feature and bugfix release\.
 <a id="v1-2-3"></a>
 ## v1\.2\.3
 
-<a id="release-summary-25"></a>
+<a id="release-summary-26"></a>
 ### Release Summary
 
 Docs update release\.
@@ -519,7 +543,7 @@ Docs update release\.
 <a id="v1-2-2"></a>
 ## v1\.2\.2
 
-<a id="release-summary-26"></a>
+<a id="release-summary-27"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -532,7 +556,7 @@ Bugfix release\.
 <a id="v1-2-1"></a>
 ## v1\.2\.1
 
-<a id="release-summary-27"></a>
+<a id="release-summary-28"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -545,7 +569,7 @@ Maintenance release\.
 <a id="v1-2-0"></a>
 ## v1\.2\.0
 
-<a id="release-summary-28"></a>
+<a id="release-summary-29"></a>
 ### Release Summary
 
 Feature release with multiple new modules\.
@@ -572,7 +596,7 @@ Feature release with multiple new modules\.
 <a id="v1-1-1"></a>
 ## v1\.1\.1
 
-<a id="release-summary-29"></a>
+<a id="release-summary-30"></a>
 ### Release Summary
 
 Bugfix release which reduces the number of HTTPS queries for the modules and plugins\.
@@ -585,7 +609,7 @@ Bugfix release which reduces the number of HTTPS queries for the modules and plu
 <a id="v1-1-0"></a>
 ## v1\.1\.0
 
-<a id="release-summary-30"></a>
+<a id="release-summary-31"></a>
 ### Release Summary
 
 Release with a new inventory plugin\.
@@ -601,7 +625,7 @@ Release with a new inventory plugin\.
 <a id="v1-0-0"></a>
 ## v1\.0\.0
 
-<a id="release-summary-31"></a>
+<a id="release-summary-32"></a>
 ### Release Summary
 
 The <code>community\.hrobot</code> continues the work on the Hetzner Robot modules from their state in <code>community\.general</code> 1\.2\.0\. The changes listed here are thus relative to the modules <code>community\.general\.hetzner\_\*</code>\.
