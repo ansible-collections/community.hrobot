@@ -10,8 +10,13 @@ __metaclass__ = type
 import sys
 
 from ansible.module_utils.common.text.converters import to_native
-from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.module_utils.urls import fetch_url, open_url
+
+try:
+    from urllib.error import HTTPError
+except ImportError:
+    # Python 2.x fallback:
+    from urllib2 import HTTPError
 
 import json
 import time
