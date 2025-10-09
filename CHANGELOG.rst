@@ -4,6 +4,19 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v2.6.1
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Bugfixes
+--------
+
+- Avoid using ``ansible.module_utils.six`` in more places to avoid deprecation warnings with ansible-core 2.20 (https://github.com/ansible-collections/community.hrobot/pull/179).
+
 v2.6.0
 ======
 

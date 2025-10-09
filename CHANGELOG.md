@@ -2,119 +2,135 @@
 
 **Topics**
 
-- <a href="#v2-6-0">v2\.6\.0</a>
+- <a href="#v2-6-1">v2\.6\.1</a>
     - <a href="#release-summary">Release Summary</a>
+    - <a href="#bugfixes">Bugfixes</a>
+- <a href="#v2-6-0">v2\.6\.0</a>
+    - <a href="#release-summary-1">Release Summary</a>
     - <a href="#deprecated-features">Deprecated Features</a>
 - <a href="#v2-5-2">v2\.5\.2</a>
-    - <a href="#release-summary-1">Release Summary</a>
-    - <a href="#bugfixes">Bugfixes</a>
-- <a href="#v2-5-1">v2\.5\.1</a>
     - <a href="#release-summary-2">Release Summary</a>
     - <a href="#bugfixes-1">Bugfixes</a>
-- <a href="#v2-5-0">v2\.5\.0</a>
+- <a href="#v2-5-1">v2\.5\.1</a>
     - <a href="#release-summary-3">Release Summary</a>
-    - <a href="#minor-changes">Minor Changes</a>
     - <a href="#bugfixes-2">Bugfixes</a>
+- <a href="#v2-5-0">v2\.5\.0</a>
+    - <a href="#release-summary-4">Release Summary</a>
+    - <a href="#minor-changes">Minor Changes</a>
+    - <a href="#bugfixes-3">Bugfixes</a>
     - <a href="#known-issues">Known Issues</a>
 - <a href="#v2-4-0">v2\.4\.0</a>
-    - <a href="#release-summary-4">Release Summary</a>
-    - <a href="#bugfixes-3">Bugfixes</a>
+    - <a href="#release-summary-5">Release Summary</a>
+    - <a href="#bugfixes-4">Bugfixes</a>
     - <a href="#new-modules">New Modules</a>
 - <a href="#v2-3-0">v2\.3\.0</a>
-    - <a href="#release-summary-5">Release Summary</a>
+    - <a href="#release-summary-6">Release Summary</a>
     - <a href="#new-modules-1">New Modules</a>
 - <a href="#v2-2-0">v2\.2\.0</a>
-    - <a href="#release-summary-6">Release Summary</a>
+    - <a href="#release-summary-7">Release Summary</a>
     - <a href="#new-modules-2">New Modules</a>
 - <a href="#v2-1-0">v2\.1\.0</a>
-    - <a href="#release-summary-7">Release Summary</a>
+    - <a href="#release-summary-8">Release Summary</a>
     - <a href="#minor-changes-1">Minor Changes</a>
     - <a href="#deprecated-features-1">Deprecated Features</a>
     - <a href="#new-modules-3">New Modules</a>
 - <a href="#v2-0-3">v2\.0\.3</a>
-    - <a href="#release-summary-8">Release Summary</a>
-- <a href="#v2-0-2">v2\.0\.2</a>
     - <a href="#release-summary-9">Release Summary</a>
-- <a href="#v2-0-1">v2\.0\.1</a>
+- <a href="#v2-0-2">v2\.0\.2</a>
     - <a href="#release-summary-10">Release Summary</a>
-    - <a href="#bugfixes-4">Bugfixes</a>
-- <a href="#v2-0-0">v2\.0\.0</a>
+- <a href="#v2-0-1">v2\.0\.1</a>
     - <a href="#release-summary-11">Release Summary</a>
+    - <a href="#bugfixes-5">Bugfixes</a>
+- <a href="#v2-0-0">v2\.0\.0</a>
+    - <a href="#release-summary-12">Release Summary</a>
     - <a href="#major-changes">Major Changes</a>
     - <a href="#minor-changes-2">Minor Changes</a>
     - <a href="#breaking-changes--porting-guide">Breaking Changes / Porting Guide</a>
     - <a href="#removed-features-previously-deprecated">Removed Features \(previously deprecated\)</a>
 - <a href="#v1-9-2">v1\.9\.2</a>
-    - <a href="#release-summary-12">Release Summary</a>
-    - <a href="#bugfixes-5">Bugfixes</a>
-- <a href="#v1-9-1">v1\.9\.1</a>
     - <a href="#release-summary-13">Release Summary</a>
+    - <a href="#bugfixes-6">Bugfixes</a>
+- <a href="#v1-9-1">v1\.9\.1</a>
+    - <a href="#release-summary-14">Release Summary</a>
     - <a href="#security-fixes">Security Fixes</a>
 - <a href="#v1-9-0">v1\.9\.0</a>
-    - <a href="#release-summary-14">Release Summary</a>
+    - <a href="#release-summary-15">Release Summary</a>
     - <a href="#minor-changes-3">Minor Changes</a>
     - <a href="#deprecated-features-2">Deprecated Features</a>
 - <a href="#v1-8-2">v1\.8\.2</a>
-    - <a href="#release-summary-15">Release Summary</a>
-    - <a href="#bugfixes-6">Bugfixes</a>
-- <a href="#v1-8-1">v1\.8\.1</a>
     - <a href="#release-summary-16">Release Summary</a>
+    - <a href="#bugfixes-7">Bugfixes</a>
+- <a href="#v1-8-1">v1\.8\.1</a>
+    - <a href="#release-summary-17">Release Summary</a>
     - <a href="#known-issues-1">Known Issues</a>
 - <a href="#v1-8-0">v1\.8\.0</a>
-    - <a href="#release-summary-17">Release Summary</a>
+    - <a href="#release-summary-18">Release Summary</a>
     - <a href="#major-changes-1">Major Changes</a>
     - <a href="#minor-changes-4">Minor Changes</a>
 - <a href="#v1-7-0">v1\.7\.0</a>
-    - <a href="#release-summary-18">Release Summary</a>
+    - <a href="#release-summary-19">Release Summary</a>
     - <a href="#new-modules-4">New Modules</a>
 - <a href="#v1-6-0">v1\.6\.0</a>
-    - <a href="#release-summary-19">Release Summary</a>
+    - <a href="#release-summary-20">Release Summary</a>
     - <a href="#minor-changes-5">Minor Changes</a>
 - <a href="#v1-5-2">v1\.5\.2</a>
-    - <a href="#release-summary-20">Release Summary</a>
+    - <a href="#release-summary-21">Release Summary</a>
     - <a href="#minor-changes-6">Minor Changes</a>
 - <a href="#v1-5-1">v1\.5\.1</a>
-    - <a href="#release-summary-21">Release Summary</a>
-- <a href="#v1-5-0">v1\.5\.0</a>
     - <a href="#release-summary-22">Release Summary</a>
+- <a href="#v1-5-0">v1\.5\.0</a>
+    - <a href="#release-summary-23">Release Summary</a>
     - <a href="#minor-changes-7">Minor Changes</a>
 - <a href="#v1-4-0">v1\.4\.0</a>
-    - <a href="#release-summary-23">Release Summary</a>
+    - <a href="#release-summary-24">Release Summary</a>
     - <a href="#minor-changes-8">Minor Changes</a>
 - <a href="#v1-3-1">v1\.3\.1</a>
-    - <a href="#release-summary-24">Release Summary</a>
-    - <a href="#bugfixes-7">Bugfixes</a>
-- <a href="#v1-3-0">v1\.3\.0</a>
     - <a href="#release-summary-25">Release Summary</a>
-    - <a href="#minor-changes-9">Minor Changes</a>
     - <a href="#bugfixes-8">Bugfixes</a>
-- <a href="#v1-2-3">v1\.2\.3</a>
+- <a href="#v1-3-0">v1\.3\.0</a>
     - <a href="#release-summary-26">Release Summary</a>
-- <a href="#v1-2-2">v1\.2\.2</a>
-    - <a href="#release-summary-27">Release Summary</a>
+    - <a href="#minor-changes-9">Minor Changes</a>
     - <a href="#bugfixes-9">Bugfixes</a>
-- <a href="#v1-2-1">v1\.2\.1</a>
+- <a href="#v1-2-3">v1\.2\.3</a>
+    - <a href="#release-summary-27">Release Summary</a>
+- <a href="#v1-2-2">v1\.2\.2</a>
     - <a href="#release-summary-28">Release Summary</a>
+    - <a href="#bugfixes-10">Bugfixes</a>
+- <a href="#v1-2-1">v1\.2\.1</a>
+    - <a href="#release-summary-29">Release Summary</a>
     - <a href="#minor-changes-10">Minor Changes</a>
 - <a href="#v1-2-0">v1\.2\.0</a>
-    - <a href="#release-summary-29">Release Summary</a>
+    - <a href="#release-summary-30">Release Summary</a>
     - <a href="#minor-changes-11">Minor Changes</a>
     - <a href="#new-modules-5">New Modules</a>
 - <a href="#v1-1-1">v1\.1\.1</a>
-    - <a href="#release-summary-30">Release Summary</a>
-    - <a href="#bugfixes-10">Bugfixes</a>
-- <a href="#v1-1-0">v1\.1\.0</a>
     - <a href="#release-summary-31">Release Summary</a>
+    - <a href="#bugfixes-11">Bugfixes</a>
+- <a href="#v1-1-0">v1\.1\.0</a>
+    - <a href="#release-summary-32">Release Summary</a>
     - <a href="#new-plugins">New Plugins</a>
         - <a href="#inventory">Inventory</a>
 - <a href="#v1-0-0">v1\.0\.0</a>
-    - <a href="#release-summary-32">Release Summary</a>
+    - <a href="#release-summary-33">Release Summary</a>
     - <a href="#breaking-changes--porting-guide-1">Breaking Changes / Porting Guide</a>
+
+<a id="v2-6-1"></a>
+## v2\.6\.1
+
+<a id="release-summary"></a>
+### Release Summary
+
+Maintenance release\.
+
+<a id="bugfixes"></a>
+### Bugfixes
+
+* Avoid using <code>ansible\.module\_utils\.six</code> in more places to avoid deprecation warnings with ansible\-core 2\.20 \([https\://github\.com/ansible\-collections/community\.hrobot/pull/179](https\://github\.com/ansible\-collections/community\.hrobot/pull/179)\)\.
 
 <a id="v2-6-0"></a>
 ## v2\.6\.0
 
-<a id="release-summary"></a>
+<a id="release-summary-1"></a>
 ### Release Summary
 
 Maintenance release deprecating support the old storage box API\.
@@ -135,19 +151,6 @@ Maintenance release deprecating support the old storage box API\.
 <a id="v2-5-2"></a>
 ## v2\.5\.2
 
-<a id="release-summary-1"></a>
-### Release Summary
-
-Maintenance release\.
-
-<a id="bugfixes"></a>
-### Bugfixes
-
-* Avoid using <code>ansible\.module\_utils\.six</code> to avoid deprecation warnings with ansible\-core 2\.20 \([https\://github\.com/ansible\-collections/community\.hrobot/pull/177](https\://github\.com/ansible\-collections/community\.hrobot/pull/177)\)\.
-
-<a id="v2-5-1"></a>
-## v2\.5\.1
-
 <a id="release-summary-2"></a>
 ### Release Summary
 
@@ -156,12 +159,25 @@ Maintenance release\.
 <a id="bugfixes-1"></a>
 ### Bugfixes
 
+* Avoid using <code>ansible\.module\_utils\.six</code> to avoid deprecation warnings with ansible\-core 2\.20 \([https\://github\.com/ansible\-collections/community\.hrobot/pull/177](https\://github\.com/ansible\-collections/community\.hrobot/pull/177)\)\.
+
+<a id="v2-5-1"></a>
+## v2\.5\.1
+
+<a id="release-summary-3"></a>
+### Release Summary
+
+Maintenance release\.
+
+<a id="bugfixes-2"></a>
+### Bugfixes
+
 * Avoid deprecated functionality in ansible\-core 2\.20 \([https\://github\.com/ansible\-collections/community\.hrobot/pull/174](https\://github\.com/ansible\-collections/community\.hrobot/pull/174)\)\.
 
 <a id="v2-5-0"></a>
 ## v2\.5\.0
 
-<a id="release-summary-3"></a>
+<a id="release-summary-4"></a>
 ### Release Summary
 
 Feature and bugfix release\.
@@ -187,7 +203,7 @@ providing <code>hetzner\_user</code>/<code>hetzner\_password</code>\.
 * storagebox\_subaccount \- support the new Hetzner API\. Note that the new API does not support setting a random password\; you must always provide a password when using the new API to create a storagebox \([https\://github\.com/ansible\-collections/community\.hrobot/pull/168](https\://github\.com/ansible\-collections/community\.hrobot/pull/168)\)\.
 * storagebox\_subaccount\_info \- support the new Hetzner API \([https\://github\.com/ansible\-collections/community\.hrobot/pull/168](https\://github\.com/ansible\-collections/community\.hrobot/pull/168)\)\.
 
-<a id="bugfixes-2"></a>
+<a id="bugfixes-3"></a>
 ### Bugfixes
 
 * robot inventory plugin \- avoid using deprecated option when templating options \([https\://github\.com/ansible\-collections/community\.hrobot/pull/165](https\://github\.com/ansible\-collections/community\.hrobot/pull/165)\)\.
@@ -201,13 +217,13 @@ providing <code>hetzner\_user</code>/<code>hetzner\_password</code>\.
 <a id="v2-4-0"></a>
 ## v2\.4\.0
 
-<a id="release-summary-4"></a>
+<a id="release-summary-5"></a>
 ### Release Summary
 
 Bugfix and feature release\.
 This release contains three new modules that support the remaining aspects of Hetzner Storage Boxes that were not covered so far\.
 
-<a id="bugfixes-3"></a>
+<a id="bugfixes-4"></a>
 ### Bugfixes
 
 * storagebox \- make sure that changes of boolean parameters are sent correctly to the Robot service \([https\://github\.com/ansible\-collections/community\.hrobot/issues/160](https\://github\.com/ansible\-collections/community\.hrobot/issues/160)\, [https\://github\.com/ansible\-collections/community\.hrobot/pull/161](https\://github\.com/ansible\-collections/community\.hrobot/pull/161)\)\.
@@ -222,7 +238,7 @@ This release contains three new modules that support the remaining aspects of He
 <a id="v2-3-0"></a>
 ## v2\.3\.0
 
-<a id="release-summary-5"></a>
+<a id="release-summary-6"></a>
 ### Release Summary
 
 Feature release\.
@@ -235,7 +251,7 @@ Feature release\.
 <a id="v2-2-0"></a>
 ## v2\.2\.0
 
-<a id="release-summary-6"></a>
+<a id="release-summary-7"></a>
 ### Release Summary
 
 Feature release\.
@@ -248,7 +264,7 @@ Feature release\.
 <a id="v2-1-0"></a>
 ## v2\.1\.0
 
-<a id="release-summary-7"></a>
+<a id="release-summary-8"></a>
 ### Release Summary
 
 Feature release with several new modules and a deprecation\.
@@ -277,7 +293,7 @@ Feature release with several new modules and a deprecation\.
 <a id="v2-0-3"></a>
 ## v2\.0\.3
 
-<a id="release-summary-8"></a>
+<a id="release-summary-9"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -285,7 +301,7 @@ Maintenance release with updated documentation\.
 <a id="v2-0-2"></a>
 ## v2\.0\.2
 
-<a id="release-summary-9"></a>
+<a id="release-summary-10"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -293,12 +309,12 @@ Maintenance release with updated documentation\.
 <a id="v2-0-1"></a>
 ## v2\.0\.1
 
-<a id="release-summary-10"></a>
+<a id="release-summary-11"></a>
 ### Release Summary
 
 Bugfix release\.
 
-<a id="bugfixes-4"></a>
+<a id="bugfixes-5"></a>
 ### Bugfixes
 
 * boot \- use PHP array form encoding when sending multiple <code>authorized\_key</code> \([https\://github\.com/ansible\-collections/community\.hrobot/issues/112](https\://github\.com/ansible\-collections/community\.hrobot/issues/112)\, [https\://github\.com/ansible\-collections/community\.hrobot/pull/113](https\://github\.com/ansible\-collections/community\.hrobot/pull/113)\)\.
@@ -306,7 +322,7 @@ Bugfix release\.
 <a id="v2-0-0"></a>
 ## v2\.0\.0
 
-<a id="release-summary-11"></a>
+<a id="release-summary-12"></a>
 ### Release Summary
 
 New major release 2\.0\.0\.
@@ -334,12 +350,12 @@ New major release 2\.0\.0\.
 <a id="v1-9-2"></a>
 ## v1\.9\.2
 
-<a id="release-summary-12"></a>
+<a id="release-summary-13"></a>
 ### Release Summary
 
 Bugfix release\.
 
-<a id="bugfixes-5"></a>
+<a id="bugfixes-6"></a>
 ### Bugfixes
 
 * inventory plugins \- add unsafe wrapper to avoid marking strings that do not contain <code>\{</code> or <code>\}</code> as unsafe\, to work around a bug in AWX \([https\://github\.com/ansible\-collections/community\.hrobot/pull/102](https\://github\.com/ansible\-collections/community\.hrobot/pull/102)\)\.
@@ -347,7 +363,7 @@ Bugfix release\.
 <a id="v1-9-1"></a>
 ## v1\.9\.1
 
-<a id="release-summary-13"></a>
+<a id="release-summary-14"></a>
 ### Release Summary
 
 Bugfix release\.
@@ -360,7 +376,7 @@ Bugfix release\.
 <a id="v1-9-0"></a>
 ## v1\.9\.0
 
-<a id="release-summary-14"></a>
+<a id="release-summary-15"></a>
 ### Release Summary
 
 Feature and maintenance release\.
@@ -378,12 +394,12 @@ Feature and maintenance release\.
 <a id="v1-8-2"></a>
 ## v1\.8\.2
 
-<a id="release-summary-15"></a>
+<a id="release-summary-16"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
 
-<a id="bugfixes-6"></a>
+<a id="bugfixes-7"></a>
 ### Bugfixes
 
 * Show more information \(if available\) from error messages \([https\://github\.com/ansible\-collections/community\.hrobot/pull/89](https\://github\.com/ansible\-collections/community\.hrobot/pull/89)\)\.
@@ -391,7 +407,7 @@ Maintenance release with updated documentation\.
 <a id="v1-8-1"></a>
 ## v1\.8\.1
 
-<a id="release-summary-16"></a>
+<a id="release-summary-17"></a>
 ### Release Summary
 
 Maintenance release with updated documentation\.
@@ -412,7 +428,7 @@ for the rendered HTML version of the documentation of the latest release\.
 <a id="v1-8-0"></a>
 ## v1\.8\.0
 
-<a id="release-summary-17"></a>
+<a id="release-summary-18"></a>
 ### Release Summary
 
 Feature release for the Hetzner firewall changes\.
@@ -431,7 +447,7 @@ Feature release for the Hetzner firewall changes\.
 <a id="v1-7-0"></a>
 ## v1\.7\.0
 
-<a id="release-summary-18"></a>
+<a id="release-summary-19"></a>
 ### Release Summary
 
 Feature release\.
@@ -444,7 +460,7 @@ Feature release\.
 <a id="v1-6-0"></a>
 ## v1\.6\.0
 
-<a id="release-summary-19"></a>
+<a id="release-summary-20"></a>
 ### Release Summary
 
 Feature release with improved documentation\.
@@ -457,7 +473,7 @@ Feature release with improved documentation\.
 <a id="v1-5-2"></a>
 ## v1\.5\.2
 
-<a id="release-summary-20"></a>
+<a id="release-summary-21"></a>
 ### Release Summary
 
 Maintenance release with a documentation improvement\.
@@ -470,7 +486,7 @@ Maintenance release with a documentation improvement\.
 <a id="v1-5-1"></a>
 ## v1\.5\.1
 
-<a id="release-summary-21"></a>
+<a id="release-summary-22"></a>
 ### Release Summary
 
 Maintenance release with small documentation fixes\.
@@ -478,7 +494,7 @@ Maintenance release with small documentation fixes\.
 <a id="v1-5-0"></a>
 ## v1\.5\.0
 
-<a id="release-summary-22"></a>
+<a id="release-summary-23"></a>
 ### Release Summary
 
 Maintenance release changing the way licenses are declared\. No functional changes\.
@@ -491,7 +507,7 @@ Maintenance release changing the way licenses are declared\. No functional chang
 <a id="v1-4-0"></a>
 ## v1\.4\.0
 
-<a id="release-summary-23"></a>
+<a id="release-summary-24"></a>
 ### Release Summary
 
 Feature release\.
@@ -504,12 +520,12 @@ Feature release\.
 <a id="v1-3-1"></a>
 ## v1\.3\.1
 
-<a id="release-summary-24"></a>
+<a id="release-summary-25"></a>
 ### Release Summary
 
 Maintenance release\.
 
-<a id="bugfixes-7"></a>
+<a id="bugfixes-8"></a>
 ### Bugfixes
 
 * Include <code>simplified\_bsd\.txt</code> license file for the <code>robot</code> and <code>failover</code> module utils\.
@@ -517,7 +533,7 @@ Maintenance release\.
 <a id="v1-3-0"></a>
 ## v1\.3\.0
 
-<a id="release-summary-25"></a>
+<a id="release-summary-26"></a>
 ### Release Summary
 
 Feature and bugfix release\.
@@ -527,7 +543,7 @@ Feature and bugfix release\.
 
 * Prepare collection for inclusion in an Execution Environment by declaring its dependencies \([https\://github\.com/ansible\-collections/community\.hrobot/pull/45](https\://github\.com/ansible\-collections/community\.hrobot/pull/45)\)\.
 
-<a id="bugfixes-8"></a>
+<a id="bugfixes-9"></a>
 ### Bugfixes
 
 * robot inventory plugin \- do not crash if a server neither has name or primary IP set\. Instead\, fall back to using the server\'s number as the name\. This can happen if unnamed rack reservations show up in your server list \([https\://github\.com/ansible\-collections/community\.hrobot/issues/40](https\://github\.com/ansible\-collections/community\.hrobot/issues/40)\, [https\://github\.com/ansible\-collections/community\.hrobot/pull/47](https\://github\.com/ansible\-collections/community\.hrobot/pull/47)\)\.
@@ -535,7 +551,7 @@ Feature and bugfix release\.
 <a id="v1-2-3"></a>
 ## v1\.2\.3
 
-<a id="release-summary-26"></a>
+<a id="release-summary-27"></a>
 ### Release Summary
 
 Docs update release\.
@@ -543,12 +559,12 @@ Docs update release\.
 <a id="v1-2-2"></a>
 ## v1\.2\.2
 
-<a id="release-summary-27"></a>
+<a id="release-summary-28"></a>
 ### Release Summary
 
 Bugfix release\.
 
-<a id="bugfixes-9"></a>
+<a id="bugfixes-10"></a>
 ### Bugfixes
 
 * boot \- fix incorrect handling of SSH authorized keys \([https\://github\.com/ansible\-collections/community\.hrobot/issues/32](https\://github\.com/ansible\-collections/community\.hrobot/issues/32)\, [https\://github\.com/ansible\-collections/community\.hrobot/pull/33](https\://github\.com/ansible\-collections/community\.hrobot/pull/33)\)\.
@@ -556,7 +572,7 @@ Bugfix release\.
 <a id="v1-2-1"></a>
 ## v1\.2\.1
 
-<a id="release-summary-28"></a>
+<a id="release-summary-29"></a>
 ### Release Summary
 
 Maintenance release\.
@@ -569,7 +585,7 @@ Maintenance release\.
 <a id="v1-2-0"></a>
 ## v1\.2\.0
 
-<a id="release-summary-29"></a>
+<a id="release-summary-30"></a>
 ### Release Summary
 
 Feature release with multiple new modules\.
@@ -596,12 +612,12 @@ Feature release with multiple new modules\.
 <a id="v1-1-1"></a>
 ## v1\.1\.1
 
-<a id="release-summary-30"></a>
+<a id="release-summary-31"></a>
 ### Release Summary
 
 Bugfix release which reduces the number of HTTPS queries for the modules and plugins\.
 
-<a id="bugfixes-10"></a>
+<a id="bugfixes-11"></a>
 ### Bugfixes
 
 * robot \- force HTTP basic authentication to reduce number of HTTPS requests \([https\://github\.com/ansible\-collections/community\.hrobot/pull/9](https\://github\.com/ansible\-collections/community\.hrobot/pull/9)\)\.
@@ -609,7 +625,7 @@ Bugfix release which reduces the number of HTTPS queries for the modules and plu
 <a id="v1-1-0"></a>
 ## v1\.1\.0
 
-<a id="release-summary-31"></a>
+<a id="release-summary-32"></a>
 ### Release Summary
 
 Release with a new inventory plugin\.
@@ -625,7 +641,7 @@ Release with a new inventory plugin\.
 <a id="v1-0-0"></a>
 ## v1\.0\.0
 
-<a id="release-summary-32"></a>
+<a id="release-summary-33"></a>
 ### Release Summary
 
 The <code>community\.hrobot</code> continues the work on the Hetzner Robot modules from their state in <code>community\.general</code> 1\.2\.0\. The changes listed here are thus relative to the modules <code>community\.general\.hetzner\_\*</code>\.

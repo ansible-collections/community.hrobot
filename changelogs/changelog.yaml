@@ -557,3 +557,13 @@ releases:
       - 178-storagebox.yml
       - 2.6.0.yml
     release_date: '2025-10-07'
+  2.6.1:
+    changes:
+      bugfixes:
+        - Avoid using ``ansible.module_utils.six`` in more places to avoid deprecation
+          warnings with ansible-core 2.20 (https://github.com/ansible-collections/community.hrobot/pull/179).
+      release_summary: Maintenance release.
+    fragments:
+      - 179-six.yml
+      - 2.6.1.yml
+    release_date: '2025-10-09'
