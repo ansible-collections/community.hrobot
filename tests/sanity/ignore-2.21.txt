@@ -1,0 +1,2 @@
+plugins/module_utils/robot.py pylint:ansible-bad-import-from  # we should not use six, but we also shouldn't use the import from the Python std lib... please decide!
+tests/ee/roles/smoke/library/smoke_ipaddress.py shebang
