@@ -1,0 +1,2 @@
+minor_changes:
+  - "storagebox* modules - the code for the old API (that has been removed by Hetzner) has been replaced by hard-coding the result of the API, namely that no storagebox of this ID exists (https://github.com/ansible-collections/community.hrobot/pull/173)."

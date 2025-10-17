@@ -539,10 +539,8 @@ storageboxes:
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
-    BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
     _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
-    fetch_url_json,
 )
 
 from ansible_collections.community.hrobot.plugins.module_utils.api import (
@@ -556,12 +554,6 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
 from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
     deprecate_value,
 )
-
-try:
-    from urllib.parse import urlencode
-except ImportError:
-    # Python 2.x fallback:
-    from urllib import urlencode
 
 
 _CONVERT = {
@@ -621,49 +613,18 @@ def main():
             collection_name="community.hrobot",
             version="3.0.0",
         )
-        # DEPRECATED: old API
-        if storagebox_id is not None:
-            storagebox_ids = [storagebox_id]
-        else:
-            url = "{0}/storagebox".format(BASE_URL)
-            data = None
-            headers = None
-            if linked_server_number is not None:
-                data = urlencode({
-                    "linked_server": linked_server_number,
-                })
-                headers = {
-                    "Content-type": "application/x-www-form-urlencoded",
-                }
-            result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'], data=data)
-            storagebox_ids = []
-            if not error:
-                # When filtering by linked_server, the result should be a dictionary
-                if isinstance(result, dict):
-                    result = [result]
-                for entry in result:
-                    if full_info:
-                        storagebox_ids.append(entry['storagebox']['id'])
-                    else:
-                        storageboxes.append(entry['storagebox'])
+        module.warn("The old storagebox API has been disabled by Hetzner. The supporting code has been removed.")
+        module.exit_json(changed=False, storageboxes=[])
 
-        for storagebox_id in storagebox_ids:
-            url = "{0}/storagebox/{1}".format(BASE_URL, storagebox_id)
-            result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
-            if not error:
-                storageboxes.append(result['storagebox'])
-
+    if storagebox_id is not None:
+        url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
+        result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
+        if error is None:
+            storageboxes = [result["storage_box"]]
     else:
-        # NEW API!
-        if storagebox_id is not None:
-            url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
-            result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
-            if error is None:
-                storageboxes = [result["storage_box"]]
-        else:
-            url = "{0}/v1/storage_boxes".format(API_BASE_URL)
-            storageboxes, dummy = api_fetch_url_json_list(module, url, data_key="storage_boxes")
-        storageboxes = [add_hrobot_compat_shim(storagebox) for storagebox in storageboxes]
+        url = "{0}/v1/storage_boxes".format(API_BASE_URL)
+        storageboxes, dummy = api_fetch_url_json_list(module, url, data_key="storage_boxes")
+    storageboxes = [add_hrobot_compat_shim(storagebox) for storagebox in storageboxes]
 
     module.exit_json(
         changed=False,
