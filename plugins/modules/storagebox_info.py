@@ -513,13 +513,11 @@ storageboxes:
         minute:
           description:
             - Minute the snapshot plan is executed (in UTC).
-            - Will be V(none) (JSON V(null)) if this restriction is not set (that is, create a snapshot every minute).
           type: int
           sample: null
         hour:
           description:
             - Hour the snapshot plan is executed (in UTC).
-            - Will be V(none) (JSON V(null)) if this restriction is not set (that is, create a snapshot every hour).
           type: int
           sample: null
         day_of_week:
