@@ -4,6 +4,25 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v2.7.0
+======
+
+Release Summary
+---------------
+
+Feature release.
+
+Minor Changes
+-------------
+
+- storagebox_subaccount - filter by username when looking for existing accounts by username (https://github.com/ansible-collections/community.hrobot/pull/182).
+- storagebox_subaccount - use the new ``change_home_directory`` action to update a subaccount's home directory, instead of using the now deprecated way using the ``update_access_settings`` action (https://github.com/ansible-collections/community.hrobot/pull/181).
+
+Deprecated Features
+-------------------
+
+- storagebox_subaccount - ``password_mode=set-to-random`` is deprecated and will be removed from community.hrobot 3.0.0. Hetzner's new API does not support this anyway, it can only be used with the legacy API (https://github.com/ansible-collections/community.hrobot/pull/183).
+
 v2.6.1
 ======
 

@@ -1,3 +1,0 @@
-minor_changes:
-  - "storagebox_subaccount - use the new ``change_home_directory`` action to update a subaccount's home directory, instead of using the now deprecated way using the ``update_access_settings`` action
-     (https://github.com/ansible-collections/community.hrobot/pull/181)."

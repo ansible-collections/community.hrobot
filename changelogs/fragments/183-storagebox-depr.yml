@@ -1,4 +1,0 @@
-deprecated_features:
-  - "storagebox_subaccount - ``password_mode=set-to-random`` is deprecated and will be removed from community.hrobot 3.0.0.
-     Hetzner's new API does not support this anyway, it can only be used with the legacy API
-     (https://github.com/ansible-collections/community.hrobot/pull/183)."
