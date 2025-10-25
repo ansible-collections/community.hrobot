@@ -7,7 +7,7 @@
 
 namespace: community
 name: hrobot
-version: 2.6.1
+version: 2.7.0
 readme: README.md
 authors:
   - Felix Fontein (github.com/felixfontein)
