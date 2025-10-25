@@ -57,6 +57,8 @@ options:
       - If C(update-if-provided), the password always updated if provided (default).
       - If C(ignore-if-exists), password is only used during creation.
       - If C(set-to-random), password is reset to a randomly generated one.
+        Note that this is not supported by the new API (when O(hetzner_token) is set).
+        The value has been deprecated in community.hrobot 2.7.0 and will be removed from community.hrobot 3.0.0.
       - When a new subaccount is created, the password is set to the specified one if O(password) is provided,
         and a random password is set if O(password) is not provided.
     type: str
@@ -688,6 +690,13 @@ def main():
         "comment": module.params["comment"],
     }
     account_identifier = subaccount[idempotence]
+
+    if password_mode == 'set-to-random':
+        module.deprecate(
+            "password_mode=set-to-random is deprecated and will be removed in community.hrobot 3.0.0.",
+            collection_name="community.hrobot",
+            version="3.0.0",
+        )
 
     if module.params["hetzner_user"] is not None:
         module.deprecate(
