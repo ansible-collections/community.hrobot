@@ -1,4 +1,3 @@
 plugins/inventory/robot.py yamllint:unparsable-with-libyaml
 plugins/module_utils/robot.py pylint:ansible-bad-import-from
-plugins/modules/storagebox_snapshot_plan.py pylint:unbalanced-dict-unpacking  # only seems to be a problem with pylint included in ansible-core 2.15
 tests/ee/roles/smoke/library/smoke_ipaddress.py shebang
