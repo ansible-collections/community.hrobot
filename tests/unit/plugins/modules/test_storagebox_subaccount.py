@@ -1265,6 +1265,10 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .expect_json_value(['access_settings', 'readonly'], False)
                 .expect_json_value(['description'], 'My new subaccount')
                 .result_json({
+                    "subaccount": {
+                        "id": 1,
+                        "storage_box": 1234,
+                    },
                     "action": {
                         "id": 13,
                         "command": "create_subaccount",
@@ -1386,6 +1390,10 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .expect_json_value(['password'], 'toto')
                 .expect_json_value_absent(['username'])
                 .result_json({
+                    "subaccount": {
+                        "id": 2,
+                        "storage_box": 1234,
+                    },
                     "action": {
                         "id": 13,
                         "command": "create_subaccount",
@@ -1596,6 +1604,10 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .expect_json_value(['password'], '123')
                 .expect_json_value_absent(['username'])
                 .result_json({
+                    "subaccount": {
+                        "id": 42,
+                        "storage_box": 1234,
+                    },
                     "action": {
                         "id": 13,
                         "command": "create_subaccount",

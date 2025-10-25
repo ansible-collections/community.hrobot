@@ -345,6 +345,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             FetchUrlCall('POST', 200)
             .expect_json_value_absent(['description'])
             .result_json({
+                "snapshot": {
+                    "id": 2,
+                    "storage_box": 23,
+                },
                 "action": {
                     "id": 13,
                     "command": "create_snapshot",
@@ -424,6 +428,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             FetchUrlCall('POST', 200)
             .expect_json_value(['description'], 'On Creation Comment')
             .result_json({
+                "snapshot": {
+                    "id": 1,
+                    "storage_box": 23,
+                },
                 "action": {
                     "id": 13,
                     "command": "create_snapshot",
@@ -494,6 +502,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             FetchUrlCall('POST', 200)
             .expect_json_value_absent(['description'])
             .result_json({
+                "snapshot": {
+                    "id": 42,
+                    "storage_box": 23,
+                },
                 "action": {
                     "id": 13,
                     "command": "create_snapshot",
