@@ -462,7 +462,6 @@ def create_subaccount(module, storagebox_id, subaccount):
 
 FIELDS = {
     "username": (["username"], None, None),
-    "homedirectory": (["home_directory"], None, "home_directory"),
     "samba": (["access_settings", "samba_enabled"], None, "samba_enabled"),
     "ssh": (["access_settings", "ssh_enabled"], None, "ssh_enabled"),
     "external_reachability": (["access_settings", "reachable_externally"], None, "reachable_externally"),
@@ -487,6 +486,8 @@ def merge_subaccounts_infos(original, updates):
         if value is not None:
             if key == 'password':
                 result[key] = value
+            elif key == 'homedirectory':
+                result["home_directory"] = value
             else:
                 set_value(result, FIELDS[key][0], value)
     return result
@@ -506,22 +507,16 @@ def get_subaccount_updates(before, after):
         # we assume we don't want to update that field
         if value is None:
             continue
-        # password aren't considered part of update check
+        # password and home directory aren't considered part of update check
         # due to being a different API call
-        if key == "password":
+        if key == "password" or key == "homedirectory":
             continue
         path, update_key, access_settings_key = FIELDS[key]
         current_value = get_value(before, path)
-        # Hetzner likes to strip leading '/' from the home directory
-        if key == "homedirectory" and current_value is not None and value.lstrip('/') == current_value.lstrip('/'):
-            continue
         if current_value != value:
             if update_key is not None:
                 update[update_key] = value
             if access_settings_key is not None:
-                if access_settings_key == 'home_directory':
-                    # For some reason, home_directory must not start with a slash
-                    value = value.lstrip('/')
                 access_settings[access_settings_key] = value
     return update, access_settings
 
@@ -586,6 +581,24 @@ def update_subaccount_password(module, storagebox_id, subaccount, new_password):
         )
     except ApplyActionError as exc:
         module.fail_json(msg='Error while updating password: {0}'.format(exc))
+
+
+def update_subaccount_home_directory(module, storagebox_id, subaccount, new_home_directory):
+    action_url = "{0}/v1/storage_boxes/{1}/subaccounts/{2}/actions/change_home_directory".format(API_BASE_URL, storagebox_id, subaccount['id'])
+    action = {
+        'home_directory': new_home_directory,
+    }
+    try:
+        api_apply_action(
+            module,
+            action_url,
+            action,
+            lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
+            check_done_delay=1,
+            check_done_timeout=120,
+        )
+    except ApplyActionError as exc:
+        module.fail_json(msg='Error while updating home directory: {0}'.format(exc))
 
 
 def get_subaccounts(module, storagebox_id):
@@ -763,7 +776,7 @@ def main():
 
         existing = matches[0] if matches else None
 
-        created = deleted = updated = password_updated = False
+        created = deleted = updated = password_updated = homedir_updated = False
 
         if state == "absent":
             if existing:
@@ -780,6 +793,17 @@ def main():
                 if not check_mode:
                     update_subaccount_password(module, storagebox_id, existing, subaccount["password"])
                 password_updated = True
+
+            if subaccount["homedirectory"] is not None:
+                # Hetzner likes to strip leading '/' from the home directory
+                current_home_dir = existing["home_directory"]
+                if current_home_dir is not None:
+                    current_home_dir = current_home_dir.lstrip("/")
+                home_dir = subaccount["homedirectory"].lstrip("/")
+                if current_home_dir != home_dir:
+                    if not check_mode:
+                        update_subaccount_home_directory(module, storagebox_id, existing, home_dir)
+                    homedir_updated = True
 
             update, access_settings = get_subaccount_updates(existing, subaccount)
             if update:
@@ -808,10 +832,10 @@ def main():
         return_data = merge_subaccounts_infos(existing or {}, subaccount)
 
         module.exit_json(
-            changed=any([created, deleted, updated, password_updated]),
+            changed=any([created, deleted, updated, password_updated, homedir_updated]),
             created=created,
             deleted=deleted,
-            updated=updated,
+            updated=updated or homedir_updated,
             password_updated=password_updated,
             subaccount=adjust_legacy(return_data) if state != "absent" else None,
         )
