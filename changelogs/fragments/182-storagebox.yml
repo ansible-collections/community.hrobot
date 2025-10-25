@@ -1,0 +1,2 @@
+minor_changes:
+  - "storagebox_subaccount - filter by username when looking for existing accounts by username (https://github.com/ansible-collections/community.hrobot/pull/182)."

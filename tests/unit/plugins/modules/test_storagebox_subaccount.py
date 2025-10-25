@@ -1009,7 +1009,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             .result_json({
                 "subaccounts": STORAGEBOX_SUBACCOUNTS,
             })
-            .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL))
+            .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=ghost_user'.format(API_BASE_URL))
         ])
 
         assert result['changed'] is False
@@ -1033,7 +1033,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             .result_json({
                 "subaccounts": STORAGEBOX_SUBACCOUNTS,
             })
-            .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub2'.format(API_BASE_URL)),
 
             FetchUrlCall('DELETE', 200)
             .result_json({
@@ -1176,7 +1176,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             .result_json({
                 "subaccounts": STORAGEBOX_SUBACCOUNTS,
             })
-            .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub2'.format(API_BASE_URL)),
 
             FetchUrlCall('DELETE', 200)
             .result_json({
@@ -1265,6 +1265,10 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .expect_json_value(['access_settings', 'readonly'], False)
                 .expect_json_value(['description'], 'My new subaccount')
                 .result_json({
+                    "subaccount": {
+                        "id": 1,
+                        "storage_box": 1234,
+                    },
                     "action": {
                         "id": 13,
                         "command": "create_subaccount",
@@ -1373,7 +1377,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=I%27ll+be+ignored'.format(API_BASE_URL)),
 
                 FetchUrlCall('POST', 200)
                 .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL))
@@ -1386,6 +1390,10 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .expect_json_value(['password'], 'toto')
                 .expect_json_value_absent(['username'])
                 .result_json({
+                    "subaccount": {
+                        "id": 2,
+                        "storage_box": 1234,
+                    },
                     "action": {
                         "id": 13,
                         "command": "create_subaccount",
@@ -1596,6 +1604,10 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .expect_json_value(['password'], '123')
                 .expect_json_value_absent(['username'])
                 .result_json({
+                    "subaccount": {
+                        "id": 42,
+                        "storage_box": 1234,
+                    },
                     "action": {
                         "id": 13,
                         "command": "create_subaccount",
@@ -1669,7 +1681,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL)),
             ]
         )
 
@@ -1788,7 +1800,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL)),
 
                 FetchUrlCall('PUT', 200)
                 .expect_url('{0}/v1/storage_boxes/1234/subaccounts/1'.format(API_BASE_URL))
@@ -2289,7 +2301,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL)),
 
                 FetchUrlCall('POST', 200)
                 .expect_url('{0}/v1/storage_boxes/1234/subaccounts/1/actions/reset_subaccount_password'.format(API_BASE_URL))
@@ -2398,7 +2410,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL)),
 
                 FetchUrlCall('POST', 200)
                 .expect_url('{0}/v1/storage_boxes/1234/subaccounts/1/actions/reset_subaccount_password'.format(API_BASE_URL))
@@ -2478,7 +2490,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL)),
 
                 FetchUrlCall('POST', 400)
                 .expect_url('{0}/v1/storage_boxes/1234/subaccounts/1/actions/reset_subaccount_password'.format(API_BASE_URL))
@@ -2558,7 +2570,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL))
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL))
             ]
         )
 
@@ -2617,7 +2629,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL))
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL))
             ]
         )
 
@@ -2760,7 +2772,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                 .result_json({
                     "subaccounts": STORAGEBOX_SUBACCOUNTS,
                 })
-                .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL))
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL))
             ]
         )
 
@@ -2808,7 +2820,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             .result_json({
                 "subaccounts": STORAGEBOX_SUBACCOUNTS,
             })
-            .expect_url('{0}/v1/storage_boxes/1234/subaccounts'.format(API_BASE_URL))
+            .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub2'.format(API_BASE_URL))
         ])
 
         assert result['changed'] is True

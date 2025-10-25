@@ -601,8 +601,10 @@ def update_subaccount_home_directory(module, storagebox_id, subaccount, new_home
         module.fail_json(msg='Error while updating home directory: {0}'.format(exc))
 
 
-def get_subaccounts(module, storagebox_id):
+def get_subaccounts(module, storagebox_id, username=None):
     url = "{0}/v1/storage_boxes/{1}/subaccounts".format(API_BASE_URL, storagebox_id)
+    if username is not None:
+        url = "{0}?{1}".format(url, urlencode({'username': username}))
     result, dummy, error = api_fetch_url_json(module, url, accept_errors=['not_found'])
     if error:
         module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
@@ -765,7 +767,7 @@ def main():
         if idempotence == 'comment':
             idempotence = 'description'
 
-        existing_subaccounts = get_subaccounts(module, storagebox_id)
+        existing_subaccounts = get_subaccounts(module, storagebox_id, username=account_identifier if idempotence == "username" else None)
 
         matches = [
             sa for sa in existing_subaccounts
