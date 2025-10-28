@@ -929,7 +929,7 @@ class TestHetznerFirewall(BaseTestModule):
         assert result['firewall']['status'] == 'in process'
         assert result['firewall']['server_ip'] == '1.2.3.4'
         assert result['firewall']['server_number'] == 1
-        assert 'Timeout while waiting for firewall to be configured.' in extract_warnings_texts(result)
+        assert result['msg'] == 'Timeout while waiting for firewall to be configured.'
 
     def test_nowait_update(self, mocker):
         result = self.run_module_success(mocker, firewall, {
