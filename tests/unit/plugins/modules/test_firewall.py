@@ -863,7 +863,7 @@ class TestHetznerFirewall(BaseTestModule):
 
     def test_wait_update_timeout(self, mocker):
         mocker.patch('time.sleep', lambda duration: None)
-        result = self.run_module_success(mocker, firewall, {
+        result = self.run_module_failed(mocker, firewall, {
             'hetzner_user': '',
             'hetzner_password': '',
             'server_ip': '1.2.3.4',
