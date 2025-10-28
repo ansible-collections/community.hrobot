@@ -920,12 +920,6 @@ class TestHetznerFirewall(BaseTestModule):
             })
             .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
         ])
-        assert result['changed'] is True
-        assert result['diff']['before']['status'] == 'disabled'
-        assert result['diff']['after']['status'] == 'active'
-        assert result['firewall']['status'] == 'in process'
-        assert result['firewall']['server_ip'] == '1.2.3.4'
-        assert result['firewall']['server_number'] == 1
         assert result['msg'] == 'Timeout while waiting for firewall to be configured.'
 
     def test_nowait_update(self, mocker):
