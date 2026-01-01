@@ -6,7 +6,6 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import re
-import sys
 
 from collections.abc import Mapping, Set
 from ansible.module_utils.common.collections import is_sequence
