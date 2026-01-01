@@ -2807,6 +2807,59 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             'storage_box': 2342,
         }
 
+    def test_update_subaccount_CHECK_MODE_less_info(self, mocker):
+        result = self.run_module_success(
+            mocker,
+            storagebox_subaccount,
+            {
+                'hetzner_token': '',
+                'storagebox_id': 1234,
+                '_ansible_check_mode': True,
+                # subaccount
+                "username": "u2342-sub1",
+                "comment": "new comment",
+
+            },
+            [
+                FetchUrlCall('GET', 200)
+                .result_json({
+                    "subaccounts": STORAGEBOX_SUBACCOUNTS,
+                })
+                .expect_url('{0}/v1/storage_boxes/1234/subaccounts?username=u2342-sub1'.format(API_BASE_URL))
+            ]
+        )
+
+        assert result['changed'] is True
+        assert result['created'] is False
+        assert result['deleted'] is False
+        assert result['updated'] is True
+        assert result['password_updated'] is False
+        assert result['subaccount'] == {
+            'access_settings': {
+                'reachable_externally': True,
+                'readonly': False,
+                'samba_enabled': True,
+                'ssh_enabled': True,
+                'webdav_enabled': False,
+            },
+            'username': 'u2342-sub1',
+            'server': 'u12345-sub1.your-storagebox.de',
+            'homedirectory': 'test',
+            'home_directory': 'test',
+            'samba': True,
+            'ssh': True,
+            'external_reachability': True,
+            'webdav': False,
+            'readonly': False,
+            'created': '2017-05-24 00:00:00',
+            'createtime': '2017-05-24 00:00:00',
+            'comment': 'new comment',
+            'description': 'new comment',
+            'id': 1,
+            'labels': {},
+            'storage_box': 2342,
+        }
+
     def test_delete_existing_subaccount_CHECK_MODE(self, mocker):
         """Test successful deletion of an existing subaccount."""
         result = self.run_module_success(mocker, storagebox_subaccount, {

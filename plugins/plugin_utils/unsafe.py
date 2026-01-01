@@ -6,7 +6,6 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import re
-import sys
 
 from collections.abc import Mapping, Set
 from ansible.module_utils.common.collections import is_sequence
@@ -15,12 +14,8 @@ from ansible.utils.unsafe_proxy import (
     wrap_var as _make_unsafe,
 )
 
-if sys.version_info[0] == 2:
-    binary_type = str
-    text_type = unicode  # noqa: F821, pylint: disable=undefined-variable
-else:
-    binary_type = bytes
-    text_type = str
+binary_type = bytes
+text_type = str
 
 _RE_TEMPLATE_CHARS = re.compile(u'[{}]')
 _RE_TEMPLATE_CHARS_BYTES = re.compile(b'[{}]')
