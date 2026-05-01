@@ -802,8 +802,10 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
             .expect_url('{0}/v1/storage_boxes/23/snapshots'.format(API_BASE_URL)),
         ])
         assert result['msg'] in (
-            "Request failed: [resource_limit_exceeded] snapshot limit exceeded. Details: {'limits': [{'name': 'snapshot_limit'}]}",
-            "Request failed: [resource_limit_exceeded] snapshot limit exceeded. Details: {u'limits': [{u'name': u'snapshot_limit'}]}",
+            "Request POST https://api.hetzner.com/v1/storage_boxes/23/snapshots failed:"
+            " [resource_limit_exceeded] snapshot limit exceeded. Details: {'limits': [{'name': 'snapshot_limit'}]}",
+            "Request POST https://api.hetzner.com/v1/storage_boxes/23/snapshots failed:"
+            " [resource_limit_exceeded] snapshot limit exceeded. Details: {u'limits': [{u'name': u'snapshot_limit'}]}",
         )
 
     def test_delete_nonexistent_snapshot(self, mocker):

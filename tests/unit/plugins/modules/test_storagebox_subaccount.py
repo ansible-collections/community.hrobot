@@ -1564,8 +1564,10 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
             ]
         )
         assert result['msg'] in (
-            "Request failed: [resource_limit_exceeded] snapshot limit exceeded. Details: {'limits': [{'name': 'subaccount_limit'}]}",
-            "Request failed: [resource_limit_exceeded] snapshot limit exceeded. Details: {u'limits': [{u'name': u'subaccount_limit'}]}",
+            "Request POST https://api.hetzner.com/v1/storage_boxes/1234/subaccounts failed:"
+            " [resource_limit_exceeded] snapshot limit exceeded. Details: {'limits': [{'name': 'subaccount_limit'}]}",
+            "Request POST https://api.hetzner.com/v1/storage_boxes/1234/subaccounts failed:"
+            " [resource_limit_exceeded] snapshot limit exceeded. Details: {u'limits': [{u'name': u'subaccount_limit'}]}",
         )
 
     def test_create_subaccount_invalid_password(self, mocker):
@@ -2513,15 +2515,19 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
         )
 
         assert result['msg'] in (
-            "Request failed: [invalid_input] invalid input in field 'password': is too weak."
+            "Request POST https://api.hetzner.com/v1/storage_boxes/1234/subaccounts/1/actions/reset_subaccount_password"
+            " failed: [invalid_input] invalid input in field 'password': is too weak."
             " Details: {'fields': [{'name': 'password', 'message': 'is too weak'}]}",
             # Python 3.5:
-            "Request failed: [invalid_input] invalid input in field 'password': is too weak."
+            "Request POST https://api.hetzner.com/v1/storage_boxes/1234/subaccounts/1/actions/reset_subaccount_password"
+            " failed: [invalid_input] invalid input in field 'password': is too weak."
             " Details: {'fields': [{'message': 'is too weak', 'name': 'password'}]}",
             # Python 2.7:
-            "Request failed: [invalid_input] invalid input in field 'password': is too weak."
+            "Request POST https://api.hetzner.com/v1/storage_boxes/1234/subaccounts/1/actions/reset_subaccount_password"
+            " failed: [invalid_input] invalid input in field 'password': is too weak."
             " Details: {u'fields': [{u'name': u'password', u'message': u'is too weak'}]}",
-            "Request failed: [invalid_input] invalid input in field 'password': is too weak."
+            "Request POST https://api.hetzner.com/v1/storage_boxes/1234/subaccounts/1/actions/reset_subaccount_password"
+            " failed: [invalid_input] invalid input in field 'password': is too weak."
             " Details: {u'fields': [{u'message': u'is too weak', u'name': u'password'}]}",
         )
 

@@ -749,7 +749,7 @@ class TestHetznerStoragebox(BaseTestModule):
             .expect_json_value_absent(['zfs_enabled'])
             .expect_url('{0}/v1/storage_boxes/23'.format(API_BASE_URL)),
         ])
-        assert result['msg'] == 'Request failed: [rate_limit_exceeded] Rate limit exceeded'
+        assert result['msg'] == 'Request PUT https://api.hetzner.com/v1/storage_boxes/23 failed: [rate_limit_exceeded] Rate limit exceeded'
 
     def test_change_name_rate_limit(self, mocker):
         sleep_mock = MagicMock()
@@ -915,7 +915,7 @@ class TestHetznerStoragebox(BaseTestModule):
             .expect_json_value_absent(['zfs_enabled'])
             .expect_url('{0}/v1/storage_boxes/23'.format(API_BASE_URL)),
         ])
-        assert result['msg'] == 'Request failed: [rate_limit_exceeded] Rate limit exceeded'
+        assert result['msg'] == 'Request PUT https://api.hetzner.com/v1/storage_boxes/23 failed: [rate_limit_exceeded] Rate limit exceeded'
 
     def test_change_ssh(self, mocker):
         sleep_mock = MagicMock()

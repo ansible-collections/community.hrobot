@@ -551,15 +551,19 @@ class TestHetznerStorageboxSnapshotPlan(BaseTestModule):
         ])
         assert result['msg'] in (
             # Python 3.6+:
-            "Request failed: [invalid_input] invalid input in field hour. Details:"
+            "Request POST https://api.hetzner.com/v1/storage_boxes/23/actions/enable_snapshot_plan failed:"
+            " [invalid_input] invalid input in field hour. Details:"
             " {'fields': [{'name': 'hour', 'messages': ['This value should be between 0 and 23.']}]}",
             # Python 3.5 can have this too:
-            "Request failed: [invalid_input] invalid input in field hour. Details:"
+            "Request POST https://api.hetzner.com/v1/storage_boxes/23/actions/enable_snapshot_plan failed:"
+            " [invalid_input] invalid input in field hour. Details:"
             " {'fields': [{'messages': ['This value should be between 0 and 23.'], 'name': 'hour'}]}",
             # These are Python 2.7:
-            "Request failed: [invalid_input] invalid input in field hour. Details:"
+            "Request POST https://api.hetzner.com/v1/storage_boxes/23/actions/enable_snapshot_plan failed:"
+            " [invalid_input] invalid input in field hour. Details:"
             " {u'fields': [{u'name': u'hour', u'messages': [u'This value should be between 0 and 23.']}]}",
-            "Request failed: [invalid_input] invalid input in field hour. Details:"
+            "Request POST https://api.hetzner.com/v1/storage_boxes/23/actions/enable_snapshot_plan"
+            " failed: [invalid_input] invalid input in field hour. Details:"
             " {u'fields': [{u'messages': [u'This value should be between 0 and 23.'], u'name': u'hour'}]}",
         )
 

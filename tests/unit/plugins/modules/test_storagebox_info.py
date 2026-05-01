@@ -411,7 +411,7 @@ class TestHetznerStorageboxInfo(BaseTestModule):
             })
             .expect_url('{0}/v1/storage_boxes/23'.format(API_BASE_URL)),
         ])
-        assert result['msg'] == 'Request failed: [unauthorized] unable to authenticate'
+        assert result['msg'] == 'Request GET https://api.hetzner.com/v1/storage_boxes/23 failed: [unauthorized] unable to authenticate'
 
     def test_auth_error_w_details(self, mocker):
         result = self.run_module_failed(mocker, storagebox_info, {
@@ -432,8 +432,10 @@ class TestHetznerStorageboxInfo(BaseTestModule):
             .expect_url('{0}/v1/storage_boxes/23'.format(API_BASE_URL)),
         ])
         assert result['msg'] in (
-            "Request failed: [unauthorized] unable to authenticate. Details: {'username': 'invalid'}",
-            "Request failed: [unauthorized] unable to authenticate. Details: {u'username': u'invalid'}",
+            "Request GET https://api.hetzner.com/v1/storage_boxes/23 failed: [unauthorized]"
+            " unable to authenticate. Details: {'username': 'invalid'}",
+            "Request GET https://api.hetzner.com/v1/storage_boxes/23 failed: [unauthorized]"
+            " unable to authenticate. Details: {u'username': u'invalid'}",
         )
 
     def test_empty_result(self, mocker):
@@ -497,7 +499,7 @@ class TestHetznerStorageboxInfo(BaseTestModule):
             .return_header('RateLimit-Reset', '1234567890')
             .expect_url('{0}/v1/storage_boxes/23'.format(API_BASE_URL)),
         ])
-        assert result['msg'] == 'Request failed: [rate_limit_exceeded] Rate limit exceeded'
+        assert result['msg'] == 'Request GET https://api.hetzner.com/v1/storage_boxes/23 failed: [rate_limit_exceeded] Rate limit exceeded'
         sleep_mock.assert_has_calls([])
 
     def test_bad_json(self, mocker):
@@ -510,7 +512,7 @@ class TestHetznerStorageboxInfo(BaseTestModule):
             .result_str("{")
             .expect_url('{0}/v1/storage_boxes/23'.format(API_BASE_URL)),
         ])
-        assert result['msg'] == 'Cannot decode content retrieved from https://api.hetzner.com/v1/storage_boxes/23'
+        assert result['msg'] == 'Cannot decode content retrieved from GET https://api.hetzner.com/v1/storage_boxes/23'
 
     def test_storagebox_id(self, mocker):
         result = self.run_module_success(mocker, storagebox_info, {

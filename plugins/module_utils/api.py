@@ -42,9 +42,13 @@ _RATE_LIMITING_ERROR = 'rate_limit_exceeded'
 _RATE_LIMITING_START_DELAY = 5
 
 
-def format_api_error_msg(error, rate_limit_timeout=None):
+def format_api_error_msg(error, rate_limit_timeout=None, url=None, method=None):
     # Reference: https://docs.hetzner.cloud/reference/hetzner#errors
-    msg = 'Request failed: [{0}] {1}'.format(
+    prefix = 'Request failed'
+    if url is not None and method is not None:
+        prefix = 'Request {0} {1} failed'.format(method, url)
+    msg = '{0}: [{1}] {2}'.format(
+        prefix,
         error['code'],
         error['message'],
     )
@@ -101,12 +105,12 @@ def raw_api_fetch_url_json(
             if result['error']['code'] in accept_errors:
                 return result, info, result['error']['code']
             module.fail_json(
-                msg=format_api_error_msg(result['error'], rate_limit_timeout=rate_limit_timeout),
+                msg=format_api_error_msg(result['error'], rate_limit_timeout=rate_limit_timeout, url=url, method=method),
                 error=result['error'],
             )
         return result, info, None
     except ValueError:
-        module.fail_json(msg='Cannot decode content retrieved from {0}'.format(url))
+        module.fail_json(msg='Cannot decode content retrieved from {0} {1}'.format(method, url))
 
 
 def _handle_rate_limit(accept_errors, check_done_timeout, call):
