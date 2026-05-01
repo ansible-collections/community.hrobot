@@ -149,7 +149,7 @@ class TestStorageboxSetPassword(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
         assert result['changed'] is True
         assert result['password'] == 'newpassword'
@@ -203,7 +203,7 @@ class TestStorageboxSetPassword(BaseTestModule):
                     },
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
         assert result['msg'] == "Error while resetting password: [action_failed] Action failed"
 

@@ -972,7 +972,7 @@ class TestHetznerStoragebox(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
         assert result['changed'] is True
         for key, keys in STORAGEBOX_KEYS.items():
@@ -1039,7 +1039,7 @@ class TestHetznerStoragebox(BaseTestModule):
                     },
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
         assert result['msg'] == 'Error while updating access settings: [action_failed] Action failed'
         sleep_mock.assert_has_calls([
@@ -1137,7 +1137,7 @@ class TestHetznerStoragebox(BaseTestModule):
             http_calls.append(
                 FetchUrlCall('GET', 200)
                 .result_json(unfinished_action)
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL))
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL))
             )
         result = self.run_module_failed(mocker, storagebox, {
             'hetzner_token': '',
@@ -1212,7 +1212,7 @@ class TestHetznerStoragebox(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             FetchUrlCall('GET', 200)
             .result_json({
                 "action": {
@@ -1231,7 +1231,7 @@ class TestHetznerStoragebox(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
         assert result['changed'] is True
         for key, keys in STORAGEBOX_KEYS.items():

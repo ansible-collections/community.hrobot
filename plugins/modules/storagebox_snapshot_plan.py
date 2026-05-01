@@ -380,7 +380,7 @@ def main():
                     module,
                     action_url,
                     action if action_enable else None,
-                    lambda action_id: "{0}/v1/storage_boxes/actions/{1}".format(API_BASE_URL, action_id),
+                    lambda action_id: "{0}/v1/actions/{1}".format(API_BASE_URL, action_id),
                     check_done_delay=1,
                     check_done_timeout=60,
                 )

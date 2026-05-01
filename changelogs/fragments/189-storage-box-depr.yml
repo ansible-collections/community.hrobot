@@ -1,0 +1,2 @@
+bugfixes:
+  - "storagebox* modules - avoid `deprecated API endpoint <https://docs.hetzner.cloud/changelog#2026-04-30-deprecate-get-resource-action-endpoints>`__ (https://github.com/ansible-collections/community.hrobot/pull/189)."

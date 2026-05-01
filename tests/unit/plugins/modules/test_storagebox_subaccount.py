@@ -1080,7 +1080,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
 
         assert result['changed'] is True
@@ -1152,7 +1152,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
 
         assert result['changed'] is True
@@ -1226,7 +1226,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                     },
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
 
         assert result['msg'] == "Error while deleting subaccount: [action_failed] Action failed"
@@ -1311,7 +1311,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         "error": None,
                     }
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
                 FetchUrlCall('GET', 200)
                 .result_json({
                     "subaccount": STORAGEBOX_SUBACCOUNTS[0],
@@ -1436,7 +1436,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         "error": None,
                     }
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
                 FetchUrlCall('GET', 200)
                 .result_json({
                     "subaccount": STORAGEBOX_SUBACCOUNTS[1],
@@ -1655,7 +1655,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         },
                     },
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             ]
         )
 
@@ -1863,7 +1863,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         "error": None,
                     },
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             ]
         )
 
@@ -1971,7 +1971,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         "error": None,
                     },
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/12'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/12'.format(API_BASE_URL)),
 
                 FetchUrlCall('POST', 200)
                 .expect_url('{0}/v1/storage_boxes/1234/subaccounts/1/actions/update_access_settings'.format(API_BASE_URL))
@@ -2025,7 +2025,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         "error": None,
                     },
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             ]
         )
 
@@ -2133,7 +2133,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         "error": None,
                     },
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/12'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/12'.format(API_BASE_URL)),
 
                 FetchUrlCall('POST', 200)
                 .expect_url('{0}/v1/storage_boxes/1234/subaccounts/1/actions/update_access_settings'.format(API_BASE_URL))
@@ -2190,7 +2190,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         },
                     },
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             ]
         )
 
@@ -2272,7 +2272,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         },
                     },
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/12'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/12'.format(API_BASE_URL)),
             ]
         )
 
@@ -2351,7 +2351,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         "error": None,
                     }
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             ]
         )
 
@@ -2463,7 +2463,7 @@ class TestHetznerStorageboxSubbacount(BaseTestModule):
                         },
                     },
                 })
-                .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+                .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             ]
         )
 

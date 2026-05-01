@@ -392,7 +392,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             FetchUrlCall('GET', 200)
             .result_json({
                 "snapshot": STORAGEBOX_SNAPSHOTS[2],
@@ -475,7 +475,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
             FetchUrlCall('GET', 200)
             .result_json({
                 "snapshot": STORAGEBOX_SNAPSHOTS[1],
@@ -548,7 +548,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                     },
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
         assert result['msg'] == 'Error while creating snapshot: [action_failed] Action failed'
 
@@ -690,7 +690,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                     "error": None,
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
 
     def test_delete_snapshot_check_mode(self, mocker):
@@ -775,7 +775,7 @@ class TestHetznerStorageboxSnapshotPlanInfo(BaseTestModule):
                     },
                 }
             })
-            .expect_url('{0}/v1/storage_boxes/actions/13'.format(API_BASE_URL)),
+            .expect_url('{0}/v1/actions/13'.format(API_BASE_URL)),
         ])
         assert result['msg'] == 'Error while deleting snapshot: [action_failed] Action failed'
 
