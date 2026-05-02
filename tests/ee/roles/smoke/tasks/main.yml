@@ -8,7 +8,7 @@
   register: result
 
 - name: Validate result
-  assert:
+  ansible.builtin.assert:
     that:
       - result.msg == 'Everything is ok'
 
@@ -23,7 +23,7 @@
   register: result
 
 - name: Validate result
-  assert:
+  ansible.builtin.assert:
     that:
       - result is failed
       - "result.msg == 'Fingerprint must consist of 16 8-bit hex numbers: got 2 8-bit hex numbers instead'"
