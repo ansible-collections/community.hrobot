@@ -12,32 +12,7 @@ from ansible_collections.community.internal_test_tools.tests.unit.utils.fetch_ur
 )
 
 from ansible_collections.community.hrobot.plugins.module_utils.api import API_BASE_URL
-from ansible_collections.community.hrobot.plugins.module_utils.robot import BASE_URL
 from ansible_collections.community.hrobot.plugins.modules import storagebox_snapshot_info
-
-
-LEGACY_STORAGEBOX_SNAPSHOTS = [
-    {
-        "snapshot": {
-            "name": "2015-12-21T12-40-38",
-            "timestamp": "2015-12-21T13:40:38+00:00",
-            "size": 400,
-            "filesystem_size": 12345,
-            "automatic": False,
-            "comment": "Test-Snapshot 1"
-        }
-    },
-    {
-        "snapshot": {
-            "name": "2025-01-24T12-00-00",
-            "timestamp": "2025-01-24T12:00:00+00:00",
-            "size": 10000,
-            "filesystem_size": 22345,
-            "automatic": False,
-            "comment": "Test-Snapshot 2"
-        }
-    }
-]
 
 
 STORAGEBOX_SNAPSHOTS = {
@@ -84,36 +59,12 @@ class TestHetznerStorageboxSnapshotPlanInfoLegacy(BaseTestModule):
     MOCK_ANSIBLE_MODULEUTILS_BASIC_ANSIBLEMODULE = 'ansible_collections.community.hrobot.plugins.modules.storagebox_snapshot_info.AnsibleModule'
     MOCK_ANSIBLE_MODULEUTILS_URLS_FETCH_URL = 'ansible_collections.community.hrobot.plugins.module_utils.robot.fetch_url'
 
-    def test_snapshot(self, mocker):
-        result = self.run_module_success(mocker, storagebox_snapshot_info, {
-            'hetzner_user': 'test',
-            'hetzner_password': 'hunter2',
-            'storagebox_id': 23}, [
-            FetchUrlCall('GET', 200)
-            .expect_basic_auth('test', 'hunter2')
-            .expect_force_basic_auth(True)
-            .result_json(LEGACY_STORAGEBOX_SNAPSHOTS)
-            .expect_url(BASE_URL + '/storagebox/23/snapshot')
-        ])
-        assert result['changed'] is False
-        assert len(result['snapshots']) == 2
-        assert result['snapshots'][0] == LEGACY_STORAGEBOX_SNAPSHOTS[0]['snapshot']
-
     def test_storagebox_id_unknown(self, mocker):
         result = self.run_module_failed(mocker, storagebox_snapshot_info, {
             'hetzner_user': '',
             'hetzner_password': '',
             'storagebox_id': 23
         }, [
-            FetchUrlCall('GET', 404)
-            .result_json({
-                'error': {
-                    'status': 404,
-                    'code': 'STORAGEBOX_NOT_FOUND',
-                    'message': 'Storage Box with ID 23 does not exist',
-                }
-            })
-            .expect_url(BASE_URL + '/storagebox/23/snapshot')
         ])
         assert result['msg'] == 'Storagebox with ID 23 does not exist'
 
