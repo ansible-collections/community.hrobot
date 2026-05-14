@@ -595,3 +595,13 @@ releases:
       - 187.yml
       - 2.7.1.yml
     release_date: '2026-03-23'
+  2.7.2:
+    changes:
+      bugfixes:
+        - storagebox* modules - improve error reporting to ensure that method and
+          URL of the failed request are always mentioned (https://github.com/ansible-collections/community.hrobot/pull/190).
+      release_summary: Maintenance release.
+    fragments:
+      - 190-errors.yml
+      - 2.7.2.yml
+    release_date: '2026-05-14'

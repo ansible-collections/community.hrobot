@@ -4,6 +4,19 @@ Community Hetzner Robot Collection Release Notes
 
 .. contents:: Topics
 
+v2.7.2
+======
+
+Release Summary
+---------------
+
+Maintenance release.
+
+Bugfixes
+--------
+
+- storagebox* modules - improve error reporting to ensure that method and URL of the failed request are always mentioned (https://github.com/ansible-collections/community.hrobot/pull/190).
+
 v2.7.1
 ======
 
