@@ -534,12 +534,12 @@ For example, an ansible.cfg entry (further up in the list) is overwritten by an 
 <span class="c1"># (This assumes that Mozilla sops was used to encrypt keys/hetzner.sops.yaml, which contains two values</span>
 <span class="c1"># hetzner_username and hetzner_password. Needs the community.sops collection to decode that file.)</span>
 <span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">community.hrobot.robot</span>
-<span class="nt">hetzner_user</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;</span><span class="cp">{{</span> <span class="o">(</span><span class="nv">lookup</span><span class="o">(</span><span class="s2">&quot;community.sops.sops&quot;</span><span class="o">,</span> <span class="s2">&quot;keys/hetzner.sops.yaml&quot;</span><span class="o">)</span> <span class="o">|</span> <span class="nf">from_yaml</span><span class="o">)</span><span class="nv">.hetzner_username</span> <span class="cp">}}</span><span class="s">&#39;</span>
-<span class="nt">hetzner_password</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;</span><span class="cp">{{</span> <span class="o">(</span><span class="nv">lookup</span><span class="o">(</span><span class="s2">&quot;community.sops.sops&quot;</span><span class="o">,</span> <span class="s2">&quot;keys/hetzner.sops.yaml&quot;</span><span class="o">)</span> <span class="o">|</span> <span class="nf">from_yaml</span><span class="o">)</span><span class="nv">.hetzner_password</span> <span class="cp">}}</span><span class="s">&#39;</span>
+<span class="nt">hetzner_user</span><span class="p">:</span><span class="w"> </span><span class="s">'</span><span class="cp">{{</span> <span class="o">(</span><span class="nv">lookup</span><span class="o">(</span><span class="s2">"community.sops.sops"</span><span class="o">,</span> <span class="s2">"keys/hetzner.sops.yaml"</span><span class="o">)</span> <span class="o">|</span> <span class="nf">from_yaml</span><span class="o">)</span><span class="nv">.hetzner_username</span> <span class="cp">}}</span><span class="s">'</span>
+<span class="nt">hetzner_password</span><span class="p">:</span><span class="w"> </span><span class="s">'</span><span class="cp">{{</span> <span class="o">(</span><span class="nv">lookup</span><span class="o">(</span><span class="s2">"community.sops.sops"</span><span class="o">,</span> <span class="s2">"keys/hetzner.sops.yaml"</span><span class="o">)</span> <span class="o">|</span> <span class="nf">from_yaml</span><span class="o">)</span><span class="nv">.hetzner_password</span> <span class="cp">}}</span><span class="s">'</span>
 <span class="nt">filters</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># Accept all servers in FSN1-DC1 and FSN1-DC2</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
-<span class="w">      </span><span class="no">hrobot_dc in [&quot;FSN1-DC1&quot;, &quot;FSN1-DC2&quot;]</span>
+<span class="w">      </span><span class="no">hrobot_dc in ["FSN1-DC1", "FSN1-DC2"]</span>
 <span class="w">  </span><span class="c1"># Exclude all servers that did not match any of the above filters</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 
@@ -554,10 +554,10 @@ For example, an ansible.cfg entry (further up in the list) is overwritten by an 
 <span class="nt">keyed_groups</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># Add e.g. groups for every data center</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hrobot_dc</span>
-<span class="w">    </span><span class="nt">separator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="nt">separator</span><span class="p">:</span><span class="w"> </span><span class="s">""</span>
 <span class="c1"># Use the IP address to connect to the host</span>
 <span class="nt">compose</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">server_name_ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hrobot_server_name ~ &#39;-&#39; ~ hrobot_server_ip</span>
+<span class="w">  </span><span class="nt">server_name_ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hrobot_server_name ~ '-' ~ hrobot_server_ip</span>
 </pre></div>
 </div>
 <section id="authors">

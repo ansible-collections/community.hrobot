@@ -289,8 +289,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Print value of failover IP 1.2.3.4 in case it is routed</span>
 <span class="w">  </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.2.3.4</span><span class="nv"> </span><span class="s">routes</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">result.value</span> <span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result.state == &#39;routed&#39;</span>
+<span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">"1.2.3.4</span><span class="nv"> </span><span class="s">routes</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="cp">{{</span> <span class="nv">result.value</span> <span class="cp">}}</span><span class="s">"</span>
+<span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result.state == 'routed'</span>
 </pre></div>
 </div>
 </section>
