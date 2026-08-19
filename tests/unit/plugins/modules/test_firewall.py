@@ -8,9 +8,6 @@ __metaclass__ = type
 
 import pytest
 
-from ansible_collections.community.internal_test_tools.tests.unit.plugins.modules.utils import (
-    extract_warnings_texts,
-)
 from ansible_collections.community.internal_test_tools.tests.unit.utils.fetch_url_module_framework import (
     FetchUrlCall,
     BaseTestModule,
@@ -866,7 +863,7 @@ class TestHetznerFirewall(BaseTestModule):
 
     def test_wait_update_timeout(self, mocker):
         mocker.patch('time.sleep', lambda duration: None)
-        result = self.run_module_success(mocker, firewall, {
+        result = self.run_module_failed(mocker, firewall, {
             'hetzner_user': '',
             'hetzner_password': '',
             'server_ip': '1.2.3.4',
@@ -923,13 +920,7 @@ class TestHetznerFirewall(BaseTestModule):
             })
             .expect_url('{0}/firewall/1.2.3.4'.format(BASE_URL)),
         ])
-        assert result['changed'] is True
-        assert result['diff']['before']['status'] == 'disabled'
-        assert result['diff']['after']['status'] == 'active'
-        assert result['firewall']['status'] == 'in process'
-        assert result['firewall']['server_ip'] == '1.2.3.4'
-        assert result['firewall']['server_number'] == 1
-        assert 'Timeout while waiting for firewall to be configured.' in extract_warnings_texts(result)
+        assert result['msg'] == 'Timeout while waiting for firewall to be configured.'
 
     def test_nowait_update(self, mocker):
         result = self.run_module_success(mocker, firewall, {

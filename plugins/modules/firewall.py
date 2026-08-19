@@ -677,7 +677,7 @@ def main():
                 )
             except CheckDoneTimeoutException as e:
                 result, error = e.result, e.error
-                module.warn('Timeout while waiting for firewall to be configured.')
+                module.fail_json(msg='Timeout while waiting for firewall to be configured.')
 
         full_after = result['firewall']
         if not full_after.get('rules'):
