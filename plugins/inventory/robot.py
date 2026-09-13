@@ -39,6 +39,7 @@ options:
   hetzner_password:
     env:
       - name: HROBOT_API_PASSWORD
+    secret: true
   simple_filters:
     description:
       - A dictionary of filter value pairs.

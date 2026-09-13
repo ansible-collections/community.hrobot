@@ -1,3 +1,4 @@
+plugins/inventory/robot.py validate-modules:invalid-documentation  # secret not supported
 plugins/inventory/robot.py yamllint:unparsable-with-libyaml
 plugins/module_utils/robot.py pylint:ansible-bad-import-from
 tests/ee/roles/smoke/library/smoke_ipaddress.py shebang
