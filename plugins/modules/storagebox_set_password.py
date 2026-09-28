@@ -73,7 +73,7 @@ RETURN = r"""
 password:
   description:
     - The new password for the storage box.
-    - Note that if the password has been provided as O(password), Ansible will censor this return value to something
+    - Note that if the password has been provided as O(password), ansible-core before 2.22 will censor this return value to something
       like C(VALUE_SPECIFIED_IN_NO_LOG_PARAMETER).
   returned: success
   type: str
