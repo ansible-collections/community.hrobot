@@ -1,2 +1,1 @@
-plugins/inventory/robot.py validate-modules:invalid-documentation  # secret not supported
 tests/ee/roles/smoke/library/smoke_ipaddress.py shebang
