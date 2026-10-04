@@ -605,3 +605,13 @@ releases:
       - 190-errors.yml
       - 2.7.2.yml
     release_date: '2026-05-14'
+  2.8.0:
+    changes:
+      minor_changes:
+        - robot inventory plugin - the ``hetzner_password`` option is now marked as
+          ``secret=true`` for ansible-core 2.22+'s secret masking (https://github.com/ansible-collections/community.hrobot/pull/196).
+      release_summary: Feature release.
+    fragments:
+      - 196-secrets.yml
+      - 2.8.0.yml
+    release_date: '2026-10-04'
