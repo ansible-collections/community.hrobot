@@ -226,10 +226,8 @@ subaccounts:
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
-    BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
     _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
-    fetch_url_json,
 )
 
 from ansible_collections.community.hrobot.plugins.module_utils.api import (
@@ -310,32 +308,18 @@ def main():
             collection_name="community.hrobot",
             version="3.0.0",
         )
-        # DEPRECATED: old API
+        module.warn("The old storagebox API has been disabled by Hetzner. The supporting code has been removed.")
+        module.fail_json(msg="Storagebox with ID {0} does not exist".format(storagebox_id))
 
-        url = "{0}/storagebox/{1}/subaccount".format(BASE_URL, storagebox_id)
-        result, error = fetch_url_json(module, url, accept_errors=["STORAGEBOX_NOT_FOUND"])
-        if error:
-            module.fail_json(
-                msg="Storagebox with ID {0} does not exist".format(storagebox_id)
-            )
+    url = "{0}/v1/storage_boxes/{1}/subaccounts".format(API_BASE_URL, storagebox_id)
+    result, dummy, error = api_fetch_url_json(module, url, accept_errors=['not_found'])
+    if error:
+        module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
 
-        module.exit_json(
-            changed=False,
-            subaccounts=[item["subaccount"] for item in result],
-        )
-
-    else:
-        # NEW API!
-
-        url = "{0}/v1/storage_boxes/{1}/subaccounts".format(API_BASE_URL, storagebox_id)
-        result, dummy, error = api_fetch_url_json(module, url, accept_errors=['not_found'])
-        if error:
-            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
-
-        module.exit_json(
-            changed=False,
-            subaccounts=[adjust_legacy(item) for item in result['subaccounts']],
-        )
+    module.exit_json(
+        changed=False,
+        subaccounts=[adjust_legacy(item) for item in result['subaccounts']],
+    )
 
 
 if __name__ == "__main__":  # pragma: no cover
