@@ -117,10 +117,8 @@ plans:
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.community.hrobot.plugins.module_utils.robot import (
-    BASE_URL,
     ROBOT_DEFAULT_ARGUMENT_SPEC,
     _ROBOT_DEFAULT_ARGUMENT_SPEC_COMPAT_DEPRECATED,
-    fetch_url_json,
 )
 
 from ansible_collections.community.hrobot.plugins.module_utils.api import (
@@ -133,19 +131,6 @@ from ansible_collections.community.hrobot.plugins.module_utils.api import (
 from ansible_collections.community.hrobot.plugins.module_utils._tagging import (
     deprecate_value,
 )
-
-
-def extract_legacy(result):
-    sb = result['snapshotplan']
-    return {
-        'status': sb['status'],
-        'minute': sb['minute'],
-        'hour': sb['hour'],
-        'day_of_week': sb['day_of_week'],
-        'day_of_month': sb['day_of_month'],
-        'month': sb['month'],
-        'max_snapshots': sb['max_snapshots'],
-    }
 
 
 def extract(result):
@@ -194,27 +179,15 @@ def main():
             collection_name="community.hrobot",
             version="3.0.0",
         )
-        # DEPRECATED: old API
-        url = "{0}/storagebox/{1}/snapshotplan".format(BASE_URL, storagebox_id)
-        result, error = fetch_url_json(module, url, accept_errors=['STORAGEBOX_NOT_FOUND'])
-        if error:
-            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
+        module.warn("The old storagebox API has been disabled by Hetzner. The supporting code has been removed.")
+        module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
 
-        # The documentation (https://robot.hetzner.com/doc/webservice/en.html#get-storagebox-storagebox-id-snapshotplan)
-        # claims that the result is a list, but actually it is a dictionary. Convert it to a list of dicts if that's the case.
-        if isinstance(result, dict):
-            result = [result]
+    url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
+    result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
+    if error:
+        module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
 
-        plans = [extract_legacy(plan) for plan in result]
-
-    else:
-        # NEW API!
-        url = "{0}/v1/storage_boxes/{1}".format(API_BASE_URL, storagebox_id)
-        result, dummy, error = api_fetch_url_json(module, url, accept_errors=["not_found"])
-        if error:
-            module.fail_json(msg='Storagebox with ID {0} does not exist'.format(storagebox_id))
-
-        plans = [extract(result)]
+    plans = [extract(result)]
 
     module.exit_json(
         changed=False,
